@@ -56,7 +56,6 @@ namespace XLang.Runtime.Implementations
             if (value == null)
             {
                 throw new Exception("look at this");
-                instanceVars.Clear();
             }
 
             if (type.InheritsFrom(Type))

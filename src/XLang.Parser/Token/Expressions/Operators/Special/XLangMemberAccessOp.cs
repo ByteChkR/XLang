@@ -4,11 +4,9 @@ using System.Collections.Generic;
 using XLang.Queries;
 using XLang.Runtime.Implementations;
 using XLang.Runtime.Members;
-using XLang.Runtime.Members.Functions;
 using XLang.Runtime.Members.Properties;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
-using XLang.Shared.Enum;
 
 namespace XLang.Parser.Token.Expressions.Operators.Special
 {
