@@ -32,7 +32,6 @@
             this.panelSide = new System.Windows.Forms.Panel();
             this.gbContent = new System.Windows.Forms.GroupBox();
             this.panelSideTop = new System.Windows.Forms.Panel();
-            this.btnRun = new System.Windows.Forms.Button();
             this.panelCustomData = new System.Windows.Forms.Panel();
             this.rtbCustomData = new System.Windows.Forms.RichTextBox();
             this.lblName = new System.Windows.Forms.Label();
@@ -48,7 +47,7 @@
             this.tvNodeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvNodeView.Location = new System.Drawing.Point(0, 0);
             this.tvNodeView.Name = "tvNodeView";
-            this.tvNodeView.Size = new System.Drawing.Size(409, 517);
+            this.tvNodeView.Size = new System.Drawing.Size(346, 516);
             this.tvNodeView.TabIndex = 0;
             // 
             // panelSide
@@ -56,9 +55,9 @@
             this.panelSide.Controls.Add(this.gbContent);
             this.panelSide.Controls.Add(this.panelSideTop);
             this.panelSide.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelSide.Location = new System.Drawing.Point(409, 0);
+            this.panelSide.Location = new System.Drawing.Point(346, 0);
             this.panelSide.Name = "panelSide";
-            this.panelSide.Size = new System.Drawing.Size(405, 517);
+            this.panelSide.Size = new System.Drawing.Size(405, 516);
             this.panelSide.TabIndex = 1;
             // 
             // gbContent
@@ -66,14 +65,13 @@
             this.gbContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbContent.Location = new System.Drawing.Point(0, 226);
             this.gbContent.Name = "gbContent";
-            this.gbContent.Size = new System.Drawing.Size(405, 291);
+            this.gbContent.Size = new System.Drawing.Size(405, 290);
             this.gbContent.TabIndex = 3;
             this.gbContent.TabStop = false;
             this.gbContent.Text = "Content";
             // 
             // panelSideTop
             // 
-            this.panelSideTop.Controls.Add(this.btnRun);
             this.panelSideTop.Controls.Add(this.panelCustomData);
             this.panelSideTop.Controls.Add(this.lblName);
             this.panelSideTop.Dock = System.Windows.Forms.DockStyle.Top;
@@ -82,24 +80,13 @@
             this.panelSideTop.Size = new System.Drawing.Size(405, 226);
             this.panelSideTop.TabIndex = 2;
             // 
-            // btnRun
-            // 
-            this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRun.Location = new System.Drawing.Point(318, 104);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(75, 23);
-            this.btnRun.TabIndex = 2;
-            this.btnRun.Text = "button1";
-            this.btnRun.UseVisualStyleBackColor = true;
-            this.btnRun.Click += new System.EventHandler(this.button1_Click);
-            // 
             // panelCustomData
             // 
             this.panelCustomData.Controls.Add(this.rtbCustomData);
             this.panelCustomData.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelCustomData.Location = new System.Drawing.Point(0, 133);
+            this.panelCustomData.Location = new System.Drawing.Point(0, 35);
             this.panelCustomData.Name = "panelCustomData";
-            this.panelCustomData.Size = new System.Drawing.Size(405, 93);
+            this.panelCustomData.Size = new System.Drawing.Size(405, 191);
             this.panelCustomData.TabIndex = 1;
             // 
             // rtbCustomData
@@ -107,7 +94,7 @@
             this.rtbCustomData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbCustomData.Location = new System.Drawing.Point(0, 0);
             this.rtbCustomData.Name = "rtbCustomData";
-            this.rtbCustomData.Size = new System.Drawing.Size(405, 93);
+            this.rtbCustomData.Size = new System.Drawing.Size(405, 191);
             this.rtbCustomData.TabIndex = 0;
             this.rtbCustomData.Text = "";
             // 
@@ -127,14 +114,14 @@
             this.panelNodeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelNodeView.Location = new System.Drawing.Point(0, 0);
             this.panelNodeView.Name = "panelNodeView";
-            this.panelNodeView.Size = new System.Drawing.Size(409, 517);
+            this.panelNodeView.Size = new System.Drawing.Size(346, 516);
             this.panelNodeView.TabIndex = 2;
             // 
             // TokenExplorerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 517);
+            this.ClientSize = new System.Drawing.Size(751, 516);
             this.Controls.Add(this.panelNodeView);
             this.Controls.Add(this.panelSide);
             this.Name = "TokenExplorerForm";
@@ -158,7 +145,6 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Panel panelCustomData;
         private System.Windows.Forms.RichTextBox rtbCustomData;
-        private System.Windows.Forms.Button btnRun;
     }
 }
 

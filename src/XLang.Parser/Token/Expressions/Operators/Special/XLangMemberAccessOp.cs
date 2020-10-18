@@ -41,6 +41,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
             {
                 if (acI.Member is IXLangRuntimeProperty prop)
                 {
+
                     return new XLangFunctionAccessInstance(
                                                            prop.PropertyType.GetMember(MemberName),
                                                            acI.Instance,

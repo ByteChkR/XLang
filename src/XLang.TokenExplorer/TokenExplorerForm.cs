@@ -25,6 +25,8 @@ namespace XLang.TokenExplorer
     public partial class TokenExplorerForm : Form
     {
 
+        private Dictionary<string, IXLangRuntimeItem> itemMap = new Dictionary<string, IXLangRuntimeItem>();
+
         public TokenExplorerForm(string[] files)
         {
             InitializeComponent();
@@ -40,25 +42,12 @@ namespace XLang.TokenExplorer
                     {
                         parser.Parse(File.ReadAllText(s));
                         CreateView(c, Path.GetFileName(s), c);
-                        XLangRuntimeType ftype = c.GetType("DEFAULT.Program");
-                        if (ftype != null)
-                        {
-                            IXLangRuntimeFunction func = ftype.GetMember("Main") as IXLangRuntimeFunction;
-                            func.Invoke(null, new IXLangRuntimeTypeInstance[] { null });
-                        }
                     }
                 }
                 else
                 {
                     parser.Parse(File.ReadAllText(file));
                     CreateView(c, Path.GetFileName(file), c);
-                }
-
-                XLangRuntimeType type = c.GetType("DEFAULT.Program");
-                if (type != null)
-                {
-                    IXLangRuntimeFunction func = type.GetMember("Main") as IXLangRuntimeFunction;
-                    func.Invoke(null, new IXLangRuntimeTypeInstance[] { null });
                 }
             }
 
@@ -101,21 +90,19 @@ namespace XLang.TokenExplorer
 
         private void TvNodeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node.Level == 0)
-            {
-            }
+            PopulateInfo(e.Node.FullPath);
         }
 
 
         private void CreateView(XLangContext context, string name, XLangContext nsCollection)
         {
             TreeNode tn = new TreeNode(name);
+
+            tvNodeView.Nodes.Add(tn);
             foreach (XLangRuntimeNamespace xLangRuntimeNamespace in nsCollection.GetNamespaces())
             {
                 CreateView(context, tn, xLangRuntimeNamespace);
             }
-
-            tvNodeView.Nodes.Add(tn);
         }
 
         private void CreateView(XLangContext context, TreeNode parent, XLangRuntimeNamespace ns)
@@ -123,6 +110,8 @@ namespace XLang.TokenExplorer
             TreeNode tn = new TreeNode(ns.Name);
             TreeNode types = new TreeNode("Types");
             tn.Nodes.Add(types);
+            parent.Nodes.Add(tn);
+            itemMap[tn.FullPath] = ns;
             foreach (XLangRuntimeNamespace xLangRuntimeNamespace in ns.Children)
             {
                 CreateView(context, tn, xLangRuntimeNamespace);
@@ -133,12 +122,13 @@ namespace XLang.TokenExplorer
                 CreateView(context, types, xLangRuntimeType);
             }
 
-            parent.Nodes.Add(tn);
         }
 
         private void CreateView(XLangContext context, TreeNode parent, XLangRuntimeType type)
         {
             TreeNode tn = new TreeNode(type.Name);
+            parent.Nodes.Add(tn);
+            itemMap[tn.FullPath] = type;
             IXLangRuntimeMember[] members = type.GetAllMembers();
             foreach (IXLangRuntimeMember xLangRuntimeMember in members)
             {
@@ -152,36 +142,40 @@ namespace XLang.TokenExplorer
                 }
             }
 
-            parent.Nodes.Add(tn);
         }
 
         private void CreateView(XLangContext context, TreeNode parent, IXLangRuntimeProperty member)
         {
             TreeNode tn = new TreeNode($"Property '{member.Name}' of type '{member.PropertyType.FullName}'");
             parent.Nodes.Add(tn);
+            itemMap[tn.FullPath] = member;
         }
 
         private void CreateView(XLangContext context, TreeNode parent, IXLangRuntimeFunction member)
         {
             TreeNode tn = new TreeNode($"Function '{member.Name}'");
             TreeNode args = new TreeNode("Arguments");
+            TreeNode exprs = new TreeNode("Block");
+
+            tn.Nodes.Add(args);
+            tn.Nodes.Add(exprs);
+            parent.Nodes.Add(tn);
+            tn.Nodes.Add(new TreeNode($"Return '{member.ReturnType}'"));
+
+            itemMap[tn.FullPath] = member;
+
             foreach (IXLangRuntimeFunctionArgument xLangRuntimeFunctionArgument in member.ParameterList)
             {
                 CreateView(args, xLangRuntimeFunctionArgument);
             }
 
-            tn.Nodes.Add(new TreeNode($"Return '{member.ReturnType}'"));
 
-            TreeNode exprs = new TreeNode("Block");
 
             if (member is XLangFunction func)
             {
                 CreateView(context, exprs, func);
             }
 
-            tn.Nodes.Add(args);
-            tn.Nodes.Add(exprs);
-            parent.Nodes.Add(tn);
         }
 
 
@@ -197,6 +191,7 @@ namespace XLang.TokenExplorer
         private void CreateView(XLangContext context, TreeNode parent, XLangExpression expr)
         {
             TreeNode tn = new TreeNode($"Expr: {expr.Type}");
+            parent.Nodes.Add(tn);
             if (expr is XLangBinaryOp binOp)
             {
                 CreateView(context, tn, binOp.Left);
@@ -210,26 +205,25 @@ namespace XLang.TokenExplorer
             {
                 CreateView(context, tn, aacOp.Left);
                 TreeNode subn = new TreeNode("Params: ");
+                tn.Nodes.Add(subn);
                 foreach (XLangExpression xLangExpression in aacOp.ParameterList)
                 {
                     CreateView(context, subn, xLangExpression);
                 }
 
-                tn.Nodes.Add(subn);
             }
             else if (expr is XLangInvocationOp invOp)
             {
                 CreateView(context, tn, invOp.Left);
                 TreeNode subn = new TreeNode("Params: ");
+                tn.Nodes.Add(subn);
                 foreach (XLangExpression xLangExpression in invOp.ParameterList)
                 {
                     CreateView(context, subn, xLangExpression);
                 }
 
-                tn.Nodes.Add(subn);
             }
 
-            parent.Nodes.Add(tn);
         }
 
         private void CreateView(TreeNode parent, IXLangRuntimeFunctionArgument arg)
@@ -238,8 +232,87 @@ namespace XLang.TokenExplorer
             parent.Nodes.Add(tn);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void PopulateInfo(string path)
         {
+            string cData;
+            string cTitle;
+            IXLangRuntimeItem item = null;
+            if (itemMap.ContainsKey(path)) item = itemMap[path];
+
+            if (item is XLangRuntimeType type)
+            {
+                cTitle = $"Type: {type.Name}";
+                cData = $"Full Name: {type.FullName}\nBinding Flags: {type.BindingFlags}\nBase Type: {type.BaseType?.FullName}\nMembers: \n";
+                IXLangRuntimeMember[] members = type.GetAllMembers();
+                if (members.Length != 0)
+                {
+                    cData += "\t";
+                    for (int i = 0; i < members.Length; i++)
+                    {
+                        IXLangRuntimeMember xLangRuntimeMember = members[i];
+                        cData += xLangRuntimeMember.Name;
+                        if (i != members.Length - 1) cData += ", \n\t";
+                    }
+                }
+
+                cData += "\n";
+            }
+            else if (item is XLangRuntimeNamespace ns)
+            {
+                cTitle = $"Namespace: {ns.Name}";
+                cData = $"Full Name: {ns.FullName}\nNamespaces: \n";
+                if (ns.Children.Count != 0)
+                {
+                    cData += "\t";
+                    for (int i = 0; i < ns.Children.Count; i++)
+                    {
+                        XLangRuntimeNamespace cns = ns.Children[i];
+                        cData += cns.Name;
+                        if (i != ns.Children.Count - 1) cData += ", \n\t";
+                    }
+                }
+                cData += "\n";
+
+                cData += $"Types: \n\t";
+                if (ns.DefinedTypes.Count != 0)
+                    for (int i = 0; i < ns.DefinedTypes.Count; i++)
+                    {
+                        XLangRuntimeType langRuntimeType = ns.DefinedTypes[i];
+                        cData += langRuntimeType.Name;
+                        if (i != ns.DefinedTypes.Count - 1) cData += ", \n\t";
+                    }
+                cData += "\n";
+            }
+            else if (item is IXLangRuntimeFunction func)
+            {
+                cTitle = $"Function: {func.Name}";
+                cData = $"Full Name: {func.ImplementingClass}.{func.Name}\nBinding Flags: {func.BindingFlags}\nReturn Type: {func.ReturnType}\nArguments: \n";
+
+                if (func.ParameterList.Length != 0)
+                {
+                    cData += "\t";
+                    for (int i = 0; i < func.ParameterList.Length; i++)
+                    {
+                        IXLangRuntimeFunctionArgument fa = func.ParameterList[i];
+                        cData += fa.Name + $"(type:{fa.Type.FullName})";
+                        if (i != func.ParameterList.Length - 1) cData += ", \n\t";
+                    }
+                }
+                cData += "\n";
+            }
+            else if (item is IXLangRuntimeProperty prop)
+            {
+                cTitle = $"Function: {prop.Name}";
+                cData = $"Full Name: {prop.ImplementingClass}.{prop.Name}\nBinding Flags: {prop.BindingFlags}\nProperty Type: {prop.PropertyType}";
+            }
+            else
+            {
+                cData = "NO DATA";
+                cTitle = path;
+            }
+
+            lblName.Text = cTitle;
+            rtbCustomData.Text = cData;
         }
 
     }

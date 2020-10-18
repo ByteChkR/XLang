@@ -2,6 +2,7 @@
 using System.Linq;
 
 using XLang.Runtime;
+using XLang.Runtime.Binding;
 using XLang.Runtime.Members;
 using XLang.Runtime.Members.Functions;
 using XLang.Runtime.Members.Properties;
@@ -75,11 +76,22 @@ namespace XLang.Queries
             if (start == null)
             {
                 XLangRuntimeType type = GetType(scope, null, name);
-                if (type != null) return type;
+                
+                if (type != null)
+                {
+                    if ((type.BindingFlags & XLangBindingFlags.Private) != 0)
+                    {
+                        if (caller == type) return type;
+                        throw new Exception($"Type '{type}' is not accessible from caller '{caller}'");
+                    }
+
+                    return type;
+                }
 
                 XLangRuntimeNamespace ns = GetNamespace(scope.Context, null, name);
                 if (ns != null) return ns;
 
+                
                 IXLangRuntimeMember member = caller.GetMember(
                                                               name,
                                                               XLangBindingQuery.Static |
