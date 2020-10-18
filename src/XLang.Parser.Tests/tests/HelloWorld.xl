@@ -1,0 +1,24 @@
+//Hello World Example
+public class Program
+{
+	private number a = 2;
+
+	public Program(number aValue)
+	{
+		a = aValue;
+		Run();
+	}
+
+	private void Run()
+	{
+		MSG.Show("Hello World");
+		number b = 4*5;
+		number c = a*b;
+		MSG.Show(c.ToString());
+	}
+
+	public static void Main(Array args)
+	{
+		Program prog = new Program(1);
+	}
+}

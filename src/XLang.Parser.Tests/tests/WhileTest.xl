@@ -1,0 +1,49 @@
+//Hello World Example
+public class Program
+{
+	public static void Main(Array args)
+	{
+		Person student = new Student();
+		Person teacher = new Teacher();
+		MSG.Show(student.GetName());
+		MSG.Show(teacher.GetName());
+		for(number i = 0; i < 5; i = i + 1)
+			MSG.Show(i.ToString());
+	}
+}
+
+public abstract class Person : object
+{
+	public abstract string GetName()
+	{
+
+	}
+
+}
+
+public class Student : Person
+{
+	public Student()
+	{
+	}
+
+	public override string GetName()
+	{
+		string a= "Student";
+		return a;
+	}
+}
+public class Teacher : Person
+{
+
+	public Teacher()
+	{
+
+	}
+
+	public override string GetName()
+	{
+		string a= "Teacher";
+		return (a = "Why is this even possible");
+	}
+}

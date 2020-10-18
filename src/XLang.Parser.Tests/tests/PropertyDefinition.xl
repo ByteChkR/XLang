@@ -1,0 +1,15 @@
+//Property Definition Test
+public class Program
+{
+	number MyNumber;
+	public static number MyPubStatNumber;
+	string MyString;
+	abstract string MyAbstractString;
+
+	void MyFunction()
+	{
+
+	}
+
+
+}

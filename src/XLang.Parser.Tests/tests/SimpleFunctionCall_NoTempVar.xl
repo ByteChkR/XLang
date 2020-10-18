@@ -1,0 +1,13 @@
+//Simple Function Call no Temp Variable
+public class Program
+{
+	private static string Hello()
+	{
+		return "Hello World";
+	}
+
+	public static void Main(Array args)
+	{
+		Console.WriteLine(Hello());
+	}
+}

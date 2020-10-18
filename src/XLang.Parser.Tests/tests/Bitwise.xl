@@ -1,0 +1,23 @@
+//Hello World Example
+public class Program
+{
+	public static void Main(Array args)
+	{
+		number ret = 2 | 4;
+		MSG.Show("Outcome 2|4=6");
+		MSG.Show(ret.ToString());
+		
+		ret = ~ret;
+		MSG.Show("Outcome ~6=-7");
+		MSG.Show(ret.ToString());
+
+		number eq = ret == -7;
+		MSG.Show("Outcome (-7==-7)=1");
+		MSG.Show(eq.ToString());
+
+		number neq = !(ret == -7);
+		MSG.Show("Outcome !(-7==-7)=0");
+		MSG.Show(neq.ToString());
+
+	}
+}

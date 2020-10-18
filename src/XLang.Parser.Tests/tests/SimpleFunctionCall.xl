@@ -1,0 +1,13 @@
+//Simple Function Call
+public class Program
+{
+	private static void Hello()
+	{
+		Console.WriteLine("Hello World");
+	}
+
+	public static void Main(Array args)
+	{
+		HelloWorld();
+	}
+}
