@@ -22,7 +22,7 @@ namespace XLang.Console
 
         private static string InputFile;
         private static string FuncTarget;
-        private static string[] Imports = new[] { "XL" };
+        private static string[] Imports = new[] { "XL", "DEFAULT" };
 
         private static void PrintHelp()
         {

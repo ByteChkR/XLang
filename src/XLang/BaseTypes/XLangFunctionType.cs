@@ -57,12 +57,12 @@ namespace XLang.BaseTypes
             }
             if (ts.Member is XLangRuntimeType type)
             {
+                IXLangRuntimeTypeInstance newItem = type.CreateEmptyBase();
                 ((IXLangRuntimeFunction) type.GetMember(XLangBindingQuery.Constructor)).Invoke(
-                                                                                               ts.Type
-                                                                                                 .CreateEmptyBase(),
+                                                                                               newItem,
                                                                                                args
                                                                                               );
-                return ts.Instance;
+                return newItem;
             }
 
             throw new Exception("Invocation Failure");

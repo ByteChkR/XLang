@@ -8,6 +8,7 @@ using XLang.Parser.Token;
 using XLang.Parser.Token.Combined;
 using XLang.Parser.Token.Expressions;
 using XLang.Parser.Token.Expressions.Operands;
+using XLang.Parser.Token.Expressions.Operators;
 using XLang.Parser.Token.Expressions.Operators.Special;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
@@ -173,6 +174,13 @@ namespace XLang.Parser.Expressions
 
         public override XLangExpression CreateValue(XLangExpressionParser parser)
         {
+            if (parser.CurrentToken.Type == XLangTokenType.OpNew)
+            {
+                parser.Eat(parser.CurrentToken.Type);
+                XLangExpression token = new XLangUnaryOp(parser.Context, parser.ParseExpr(0), XLangTokenType.OpNew);
+                return token;
+            }
+
             if (parser.CurrentToken.Type == XLangTokenType.OpReturn)
             {
                 parser.Eat(XLangTokenType.OpReturn);

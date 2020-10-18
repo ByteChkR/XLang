@@ -19,8 +19,8 @@ namespace XLang.Parser.Expressions
 
         public override XLangExpression Create(XLangExpressionParser parser, XLangExpression currentNode)
         {
-            parser.Eat(parser.CurrentToken.Type);
             XLangExpression token = new XLangUnaryOp(parser.Context, parser.ParseExpr(0), parser.CurrentToken.Type);
+            parser.Eat(parser.CurrentToken.Type);
             return token;
         }
 
