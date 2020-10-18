@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using XLang.Runtime;
 using XLang.Runtime.Binding;
+using XLang.Runtime.Implementations;
 using XLang.Runtime.Members;
 using XLang.Runtime.Types;
+using XLang.Shared;
 
 namespace XLang.BaseTypes
 {
@@ -15,9 +18,12 @@ namespace XLang.BaseTypes
         }
 
 
+
         public static XLCoreNamespace CreateNamespace(XLangSettings settings)
         {
             XLCoreNamespace core = new XLCoreNamespace(settings);
+
+            
 
             XLangRuntimeType voidType = new XLangRuntimeType(
                                                              "void",
@@ -25,6 +31,8 @@ namespace XLang.BaseTypes
                                                              null,
                                                              XLangBindingFlags.Instance | XLangBindingFlags.Public
                                                             );
+
+            
 
             XLangRuntimeType objectType = new XLangObjectType(core).GetObject();
             XLangRuntimeType arrayType = new XLangRuntimeType(
@@ -47,6 +55,7 @@ namespace XLang.BaseTypes
             core.AddType(objectType);
             core.AddType(arrayType);
             core.AddType(functionType);
+            core.AddType(XLangStringType.CreateConsole(core, voidType, stringType));
             return core;
         }
 

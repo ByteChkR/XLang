@@ -1,4 +1,7 @@
-﻿using XLang.Runtime.Binding;
+﻿using System;
+
+using XLang.Runtime.Binding;
+using XLang.Runtime.Implementations;
 using XLang.Runtime.Members;
 using XLang.Runtime.Types;
 using XLang.Shared;
@@ -14,6 +17,34 @@ namespace XLang.BaseTypes
         public XLangStringType(XLCoreNamespace core)
         {
             containingNamespace = core;
+        }
+
+
+        public static XLangRuntimeType CreateConsole(XLCoreNamespace ns, XLangRuntimeType voidType, XLangRuntimeType stringType)
+        {
+            XLangRuntimeType cmdType = new XLangRuntimeType(
+                                                            "Console",
+                                                            ns,
+                                                           voidType,
+                                                            XLangBindingFlags.Static | XLangBindingFlags.Public
+                                                           );
+            DelegateXLFunction printLnFunc = new DelegateXLFunction("WriteLine", (x, y) => PrintLnImpl(ns, x, y), stringType, XLangMemberFlags.Public | XLangMemberFlags.Static, new XLangFunctionArgument("message", stringType));
+
+            cmdType.SetMembers(new[] { printLnFunc });
+            return cmdType;
+        }
+
+        private static IXLangRuntimeTypeInstance PrintLnImpl(XLCoreNamespace ns, IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] parameters)
+        {
+            Console.WriteLine("[println]" + parameters[0].GetRaw().ToString());
+            return new CSharpTypeInstance(
+                                          ns.GetType(
+                                                                      "string",
+                                                                      XLangBindingQuery.Public |
+                                                                      XLangBindingQuery.Instance
+                                                                     ),
+                                          parameters[0].GetRaw().ToString()
+                                         );
         }
 
         private IXLangRuntimeTypeInstance ObjectToString(
@@ -57,6 +88,10 @@ namespace XLang.BaseTypes
                                                                XLangBindingFlags.Instance | XLangBindingFlags.Public,
                                                                x => new CSharpTypeInstance(x, "")
                                                               );
+
+
+
+
             DelegateXLFunction stringLengthFunction =
                 new DelegateXLFunction(
                                        "GetLength",
