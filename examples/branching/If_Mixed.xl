@@ -1,0 +1,70 @@
+public static class Program
+{
+	
+	public static void Main(Array args)
+	{
+		number a = 10;
+		if(a > 0)
+		{
+			Console.WriteLine("More than 0");
+		}
+		Console.WriteLine("Back Test");
+
+		if(a > 10)
+		{
+			Console.WriteLine("More than 10");
+		}
+		Console.WriteLine("Back Test");
+
+		if(a > 0)
+			Console.WriteLine("More than 0");
+		Console.WriteLine("Back Test");
+
+		if(a > 10)
+			Console.WriteLine("More than 10");
+		Console.WriteLine("Back Test");
+
+		if(a > 0)
+		{
+			Console.WriteLine("More than 0");
+		}
+		else
+		{
+			Console.WriteLine("Less than 0");
+		}
+		Console.WriteLine("Back Test");
+
+		if(a > 10)
+		{
+			Console.WriteLine("More than 10");
+		}		
+		else
+		{
+			Console.WriteLine("Less than 10");
+		}
+		Console.WriteLine("Back Test");
+
+		if(a > 0)
+			Console.WriteLine("More than 0");
+		else if(a > 10)
+			Console.WriteLine("More than 10");
+		Console.WriteLine("Back Test");
+
+		if(a > 0)
+		{
+			Console.WriteLine("More than 0");
+		}
+		else if(a > 10)
+			Console.WriteLine("More than 10");
+		Console.WriteLine("Back Test");
+
+		if(a > 0)
+			Console.WriteLine("More than 0");
+		else if(a > 10)
+		{
+			Console.WriteLine("More than 10");
+		}
+		Console.WriteLine("Back Test");
+	}
+
+}

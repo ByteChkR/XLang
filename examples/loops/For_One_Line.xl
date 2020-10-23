@@ -1,0 +1,11 @@
+//While Example
+public class Program
+{
+	public static void Main(Array args)
+	{
+		number count = 100;
+
+		for(number i = 0; i < count; i = i + 1)
+			Console.WriteLine(i.ToString());
+	}
+}

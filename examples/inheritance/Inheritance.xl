@@ -1,0 +1,47 @@
+//Hello World Example
+public class Program
+{
+	public static void Main(Array args)
+	{
+		Person student = new Student();
+		Person teacher = new Teacher();
+		Console.WriteLine(student.GetName());
+		Console.WriteLine(teacher.GetName());
+	}
+}
+
+public abstract class Person : object
+{
+	public abstract string GetName()
+	{
+
+	}
+
+}
+
+public class Student : Person
+{
+	public Student()
+	{
+	}
+
+	public override string GetName()
+	{
+		string a= "Student";
+		return a;
+	}
+}
+public class Teacher : Person
+{
+
+	public Teacher()
+	{
+
+	}
+
+	public override string GetName()
+	{
+		string a= "Teacher";
+		return (a = "Why is this even possible");
+	}
+}

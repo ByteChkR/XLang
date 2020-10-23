@@ -1,0 +1,14 @@
+public static class Program
+{
+	
+	public static void Main(Array args)
+	{
+		number a = 10;
+		if(a > 0)
+			Console.WriteLine("More than 0");
+
+		if(a > 10)
+			Console.WriteLine("More than 10");
+	}
+
+}

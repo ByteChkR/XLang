@@ -1,0 +1,12 @@
+//While Example
+public class Program
+{
+	public static void Main(Array args)
+	{
+		number count = 100;
+		number current = 0;
+		while(current != count)
+			current = current + 1;
+		Console.WriteLine(current.ToString());
+	}
+}

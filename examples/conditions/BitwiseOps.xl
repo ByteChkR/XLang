@@ -1,0 +1,13 @@
+public static class Program
+{
+	public static void Main(Array args)
+	{
+		number a = 1;
+		number b = 2;
+		Console.WriteLine("A | B: 3");
+		Console.WriteLine((a | b).ToString());
+		Console.WriteLine("A * B: 2");
+		Console.WriteLine((a * b).ToString());
+
+	}
+}

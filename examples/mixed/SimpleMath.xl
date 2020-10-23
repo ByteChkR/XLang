@@ -1,0 +1,16 @@
+//Simple Math
+public class Program
+{
+	public static void Main(Array args)
+	{
+		number a = 123;
+		number c = GetValue(a);
+		Console.WriteLine(c);
+	}
+
+	public static number GetValue(number input)
+	{
+		number b = 123;
+		return ((input * 4) / 7 * b * 123);
+	}
+}

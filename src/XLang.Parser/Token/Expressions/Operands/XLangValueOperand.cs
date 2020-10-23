@@ -42,7 +42,7 @@ namespace XLang.Parser.Token.Expressions.Operands
             if (Value.Type == XLangTokenType.OpNumber)
             {
                 if (numTypeCache == null) numTypeCache = numberType;
-                if (valueCache != null) return new CSharpTypeInstance(numTypeCache, valueCache);
+                //if (valueCache != null) return new CSharpTypeInstance(numTypeCache, valueCache);
                 return new CSharpTypeInstance(numTypeCache, valueCache = decimal.Parse(Value.GetValue()));
             }
 

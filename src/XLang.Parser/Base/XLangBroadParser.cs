@@ -213,6 +213,8 @@ namespace XLang.Parser.Base
                                                                              -1,
                                                                              new[] { XLangTokenType.OpSemicolon }
                                                                             ).Reverse().ToList();
+                    if (found.FirstOrDefault()?.Type == XLangTokenType.OpUsing)
+                        continue;
                     int saveStart = tokens[i].StartIndex;
                     int start = end - found.Count;
                     tokens.RemoveRange(start, found.Count + 1);
@@ -313,7 +315,7 @@ namespace XLang.Parser.Base
                     IXLangToken newToken;
                     if (content.FirstOrDefault()?.Type == XLangTokenType.OpEquality)
                     {
-                        XLangExpressionParser exParser =XLangExpressionParser.Create(context, new XLangExpressionReader(content.Skip(1).ToList()));
+                        XLangExpressionParser exParser = XLangExpressionParser.Create(context, new XLangExpressionReader(content.Skip(1).ToList()));
                         newToken = new VariableDefinitionToken(
                                                                propertyName,
                                                                typeName,
@@ -553,8 +555,7 @@ namespace XLang.Parser.Base
             XLangBroadNameLookup<XLangRuntimeType> GetView(XLangRuntimeNamespace ns)
             {
                 XLangBroadNameLookup<XLangRuntimeType> typeNameLookup = new XLangBroadNameLookup<XLangRuntimeType>();
-                List<XLangRuntimeNamespace> close = new List<XLangRuntimeNamespace>();
-                close.Add(ns);
+                List<XLangRuntimeNamespace> close = new List<XLangRuntimeNamespace> {ns};
                 close.AddRange(
                                nsCollection.GetNamespaces().Where(
                                                                   x => nsCollection.DefaultImports.Contains(x.FullName) &&
@@ -581,7 +582,7 @@ namespace XLang.Parser.Base
                 for (int i = cDefMap.Count - 1; i >= 0; i--)
                 {
                     XLangBroadNameLookup<XLangRuntimeType> typeNameLookup = GetView(cDefMap[i].localNs);
-                    
+
                     if (cDefMap[i].cDefinition.BaseClass == null)
                     {
                         XLangRuntimeType newt = ElevateRuntimeType(
@@ -673,8 +674,9 @@ namespace XLang.Parser.Base
                                                                                                              XLangContext nsCollection,
                                                                                                              XLangRuntimeNamespace ns = null)
         {
-            List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)> cDefMap = new List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)>();
 
+            List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)> cDefMap = new List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)>();
+            ProcessUsings(nsCollection.DefaultNamespace, tokens);
             for (int i = 0; i < tokens.Count; i++)
             {
                 if (tokens[i] is NamespaceDefinitionToken nst)
@@ -682,6 +684,8 @@ namespace XLang.Parser.Base
                     XLangRuntimeNamespace ixLangNs = nsCollection.CreateOrGet(nst.Name.GetValue());
                     //List<IXLangRuntimeItem> children =
                     //    ElevateToRuntimeTokens(tokens[i].GetChildren(), nsCollection, ixLangNs);
+
+                    ProcessUsings(ixLangNs, tokens[i].GetChildren());
                     cDefMap.AddRange(CreateCdefMap(tokens[i].GetChildren(), nsCollection, ixLangNs));
                     //foreach (IXLangRuntimeItem xlRuntimeToken in children)
                     //{
@@ -710,6 +714,28 @@ namespace XLang.Parser.Base
             }
 
             return cDefMap;
+        }
+
+        private static void ProcessUsings(XLangRuntimeNamespace ns, List<IXLangToken> tokens)
+        {
+            for (int i = tokens.Count - 1; i >= 0; i--)
+            {
+                if (tokens[i].Type == XLangTokenType.OpUsing)
+                {
+                    int idx = tokens.FindIndex(i, x => x.Type == XLangTokenType.OpSemicolon);
+                    if (idx == -1) throw new Exception("Expected Semicolon after Using Directive.");
+                    IXLangToken[] name = tokens.GetRange(i + 1, idx - i-1).ToArray();
+
+                    tokens.RemoveRange(i, idx - i + 1);
+                    StringBuilder sb = new StringBuilder();
+                    foreach (IXLangToken xLangToken in name)
+                    {
+                        sb.Append(xLangToken.GetValue());
+                    }
+
+                    ns.AddUsing(sb.ToString());
+                }
+            }
         }
 
         public static XLangRuntimeType ElevateRuntimeType(

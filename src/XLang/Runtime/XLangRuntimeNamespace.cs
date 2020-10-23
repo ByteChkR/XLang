@@ -13,6 +13,7 @@ namespace XLang.Runtime
     {
 
         private readonly List<XLangRuntimeNamespace> children;
+        private List<string> usingDirectives = new List<string>();
         public readonly string Name;
 
         private readonly XLangRuntimeNamespace parent;
@@ -40,6 +41,11 @@ namespace XLang.Runtime
         public virtual bool HasType(string name, XLangBindingQuery query)
         {
             return this.GetTypes(name, query).Length != 0;
+        }
+
+        public void AddUsing(string nsName)
+        {
+            usingDirectives.Add(nsName);
         }
 
         public virtual bool HasType(XLangBindingQuery query)

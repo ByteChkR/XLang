@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 using XLang.Core;
@@ -26,7 +27,8 @@ namespace XLang.Parser.Expressions
                                                       new XLangBitAndOperators(),
                                                       new XLangBitOrOperators(),
                                                       new XLangBitXOrOperators(),
-                                                      new XLangEqualityInEqualityOperators(),
+                                                      new XLangInEqualityOperators(),
+                                                      new XLangEqualityOperators(),
                                                       new XLangInvocationSelectorOperator(),
                                                       new XLangLogicalAndOperators(),
                                                       new XLangLogicalOrOperators(),
@@ -57,9 +59,10 @@ namespace XLang.Parser.Expressions
         {
             if (CurrentToken.Type == XLangTokenType.EOF) return new XLangExpression[0];
             List<XLangExpression> ret = new List<XLangExpression> { ParseExpr(OpCollection.Lowest) };
-            while (CurrentToken.Type == XLangTokenType.OpSemicolon || CurrentToken.Type == XLangTokenType.OpBlockToken)
+            while (CurrentToken.Type == XLangTokenType.OpSemicolon || CurrentToken.Type == XLangTokenType.OpBlockToken || CurrentToken.Type == XLangTokenType.OpWord)
             {
-                Eat(CurrentToken.Type);
+                if (CurrentToken.Type == XLangTokenType.OpSemicolon || CurrentToken.Type == XLangTokenType.OpBlockToken)
+                    Eat(CurrentToken.Type);
                 if (CurrentToken.Type == XLangTokenType.EOF) break;
                 ret.Add(ParseExpr(OpCollection.Lowest));
             }

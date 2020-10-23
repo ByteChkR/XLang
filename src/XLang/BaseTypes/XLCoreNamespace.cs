@@ -13,8 +13,14 @@ namespace XLang.BaseTypes
     public class XLCoreNamespace : XLangRuntimeNamespace
     {
 
-        private XLCoreNamespace(XLangSettings settings) : base("XL", null, new List<XLangRuntimeType>(), settings)
+        public event Action<string> WriteLineImpl = null;
+
+        public void SetWritelineImpl(Action<string> impl) => WriteLineImpl = impl;
+        public void InvokeWriteLine(string line) => WriteLineImpl?.Invoke(line);
+
+        private XLCoreNamespace(XLangSettings settings, Action<string> writeLineImpl = null) : base("XL", null, new List<XLangRuntimeType>(), settings)
         {
+            WriteLineImpl = writeLineImpl ?? (x => Console.WriteLine("[println]" + x));
         }
 
 
@@ -23,7 +29,7 @@ namespace XLang.BaseTypes
         {
             XLCoreNamespace core = new XLCoreNamespace(settings);
 
-            
+
 
             XLangRuntimeType voidType = new XLangRuntimeType(
                                                              "void",
@@ -32,7 +38,7 @@ namespace XLang.BaseTypes
                                                              XLangBindingFlags.Instance | XLangBindingFlags.Public
                                                             );
 
-            
+
 
             XLangRuntimeType objectType = new XLangObjectType(core).GetObject();
             XLangRuntimeType arrayType = new XLangRuntimeType(

@@ -36,7 +36,7 @@ namespace XLang.BaseTypes
 
         private static IXLangRuntimeTypeInstance PrintLnImpl(XLCoreNamespace ns, IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] parameters)
         {
-            Console.WriteLine("[println]" + parameters[0].GetRaw().ToString());
+            ns.InvokeWriteLine(parameters[0].GetRaw().ToString());
             return new CSharpTypeInstance(
                                           ns.GetType(
                                                                       "string",

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-
+using XLang.BaseTypes;
 using XLang.Parser;
 using XLang.Parser.Runtime;
 using XLang.Parser.Token.Expressions;
@@ -30,19 +31,23 @@ namespace XLang.TokenExplorer
 
             foreach (string file in files)
             {
-                XLangContext c = new XLangContext(new XLangSettings(), "XL", "Test");
-                MakeMsgBoxInterface(c);
-                XLangParser parser = new XLangParser(c);
+
                 if (Directory.Exists(file))
                 {
                     foreach (string s in Directory.GetFiles(file, "*.xl", SearchOption.AllDirectories))
                     {
+                        XLangContext c = new XLangContext(new XLangSettings(), "XL", "Test");
+                        MakeMsgBoxInterface(c);
+                        XLangParser parser = new XLangParser(c);
                         parser.Parse(File.ReadAllText(s));
                         CreateView(c, Path.GetFileName(s), c);
                     }
                 }
                 else
                 {
+                    XLangContext c = new XLangContext(new XLangSettings(), "XL", "Test");
+                    MakeMsgBoxInterface(c);
+                    XLangParser parser = new XLangParser(c);
                     parser.Parse(File.ReadAllText(file));
                     CreateView(c, Path.GetFileName(file), c);
                 }
@@ -53,30 +58,10 @@ namespace XLang.TokenExplorer
 
         private void MakeMsgBoxInterface(XLangContext context)
         {
-            XLangRuntimeNamespace ns = new XLangRuntimeNamespace(
-                                                                 "Test",
-                                                                 null,
-                                                                 new List<XLangRuntimeType>(),
-                                                                 context.Settings
-                                                                );
-            XLangRuntimeType objectType = new XLangRuntimeType(
-                                                               "MSG",
-                                                               ns,
-                                                               null,
-                                                               XLangBindingFlags.Static | XLangBindingFlags.Public
-                                                              );
-            IXLangRuntimeFunctionArgument arg = new XLangFunctionArgument("inputStr", context.GetType("XL.string"));
-            IXLangRuntimeFunction show = new DelegateXLFunction(
-                                                                "Show",
-                                                                ShowMsgBox,
-                                                                context.GetType("XL.void"),
-                                                                XLangMemberFlags.Public |
-                                                                XLangMemberFlags.Static,
-                                                                arg
-                                                               );
-            objectType.SetMembers(new[] { show });
-            ns.AddType(objectType);
-            context.LoadNamespace(ns);
+            if (context.TryGet("XL", out XLangRuntimeNamespace coreNs) && coreNs is XLCoreNamespace cNs)
+            {
+                cNs.SetWritelineImpl(x => MessageBox.Show(x, "XL Write Line: ", MessageBoxButtons.OK));
+            }
         }
 
         private IXLangRuntimeTypeInstance ShowMsgBox(IXLangRuntimeTypeInstance arg1, IXLangRuntimeTypeInstance[] arg2)
@@ -312,5 +297,33 @@ namespace XLang.TokenExplorer
             rtbCustomData.Text = cData;
         }
 
+        private void btnOpenLiveEditor_Click(object sender, System.EventArgs e)
+        {
+            LiveEdit le = new LiveEdit();
+            le.ShowDialog();
+
+            try
+            {
+                XLangContext c = new XLangContext(new XLangSettings(), "XL", "Test");
+                MakeMsgBoxInterface(c);
+                XLangParser parser = new XLangParser(c);
+                parser.Parse(le.Code);
+                IXLangRuntimeFunction func = c.GetType("DEFAULT.Program")?.GetMember("Main") as IXLangRuntimeFunction;
+                if (func == null)
+                {
+                    MessageBox.Show("Could not Find Entry: DEFAULT.Program.Main()");
+                }
+                else
+                {
+                    func.Invoke(null, new IXLangRuntimeTypeInstance[0]);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error: " + exception);
+            }
+
+
+        }
     }
 }
