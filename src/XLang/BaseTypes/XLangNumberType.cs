@@ -204,17 +204,49 @@ namespace XLang.BaseTypes
             IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
         {
             XLangRuntimeType type = containingNamespace.GetType(
-                                                                "number",
-                                                                XLangBindingQuery.Public |
-                                                                XLangBindingQuery.Instance |
-                                                                XLangBindingQuery.Inclusive
-                                                               );
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
 
             return new CSharpTypeInstance(
-                                          type,
-                                          (decimal) ((int) (decimal) args[0].GetRaw() |
-                                                     (int) (decimal) args[1].GetRaw())
-                                         );
+                type,
+                (decimal)((int)(decimal)args[0].GetRaw() |
+                          (int)(decimal)args[1].GetRaw())
+            );
+        }
+
+        private IXLangRuntimeTypeInstance LogicalOrValue(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(
+                type,
+                (decimal)((int)(decimal)args[0].GetRaw() != 0 || ((int)(decimal)args[0].GetRaw()) != 0 ? 0 : 1)
+            );
+        }
+
+        private IXLangRuntimeTypeInstance LogicalAndValue(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(
+                type,
+                (decimal)((int)(decimal)args[0].GetRaw() != 0 && ((int)(decimal)args[0].GetRaw()) != 0 ? 0 : 1)
+            );
         }
 
         private IXLangRuntimeTypeInstance XOrValue(
@@ -427,16 +459,40 @@ namespace XLang.BaseTypes
 
             DelegateXLFunction xorFunc =
                 new DelegateXLFunction(
-                                       XLangTokenType.OpCap.ToString(),
-                                       XOrValue,
-                                       numberType,
-                                       XLangMemberFlags.Static |
-                                       XLangMemberFlags.Private |
-                                       XLangMemberFlags.Operator |
-                                       XLangMemberFlags.Override,
-                                       new XLangFunctionArgument("a", numberType),
-                                       new XLangFunctionArgument("b", numberType)
-                                      );
+                    XLangTokenType.OpCap.ToString(),
+                    XOrValue,
+                    numberType,
+                    XLangMemberFlags.Static |
+                    XLangMemberFlags.Private |
+                    XLangMemberFlags.Operator |
+                    XLangMemberFlags.Override,
+                    new XLangFunctionArgument("a", numberType),
+                    new XLangFunctionArgument("b", numberType)
+                );
+
+            DelegateXLFunction logicOrFunc =
+                new DelegateXLFunction(
+                    XLangTokenType.OpLogicalOr.ToString(),
+                    LogicalOrValue,
+                    numberType,
+                    XLangMemberFlags.Static |
+                    XLangMemberFlags.Private |
+                    XLangMemberFlags.Operator |
+                    XLangMemberFlags.Override,
+                    new XLangFunctionArgument("a", numberType),
+                    new XLangFunctionArgument("b", numberType)
+                ); DelegateXLFunction logicAndFunc =
+                new DelegateXLFunction(
+                    XLangTokenType.OpLogicalAnd.ToString(),
+                    LogicalAndValue,
+                    numberType,
+                    XLangMemberFlags.Static |
+                    XLangMemberFlags.Private |
+                    XLangMemberFlags.Operator |
+                    XLangMemberFlags.Override,
+                    new XLangFunctionArgument("a", numberType),
+                    new XLangFunctionArgument("b", numberType)
+                );
             DelegateXLFunction flipFunc =
                 new DelegateXLFunction(
                                        XLangTokenType.OpTilde.ToString(),
@@ -468,7 +524,9 @@ namespace XLang.BaseTypes
                                       ltNumFunc,
                                       geNumFunc,
                                       gtNumFunc,
-                                      modNumFunc
+                                      modNumFunc,
+                                      logicAndFunc,
+                                      logicOrFunc
                                   }
                                  );
             return numberType;

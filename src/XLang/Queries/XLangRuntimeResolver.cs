@@ -61,11 +61,12 @@ namespace XLang.Queries
             return start.Children.FirstOrDefault(x => x.Name == name);
         }
 
-        private static XLangRuntimeType GetType(XLangRuntimeScope scope, XLangRuntimeNamespace start, string name)
+        private static XLangRuntimeType GetType(XLangRuntimeScope scope, XLangRuntimeNamespace start, string name, XLangRuntimeType caller)
         {
             if (start == null)
             {
-                return scope.GetAllVisible().SelectMany(x => x.DefinedTypes).FirstOrDefault(x => x.Name == name);
+                return scope.GetAllVisible().Concat(new[] {caller.Namespace}).Distinct().SelectMany(x => x.DefinedTypes)
+                    .FirstOrDefault(x => x.Name == name);
             }
 
             return start.DefinedTypes.FirstOrDefault(x => x.Name == name);
@@ -75,7 +76,7 @@ namespace XLang.Queries
         {
             if (start == null)
             {
-                XLangRuntimeType type = GetType(scope, null, name);
+                XLangRuntimeType type = GetType(scope, null, name, caller);
                 
                 if (type != null)
                 {
@@ -109,7 +110,7 @@ namespace XLang.Queries
 
             if (start is XLangRuntimeNamespace nSpace)
             {
-                XLangRuntimeType type = GetType(scope, nSpace, name);
+                XLangRuntimeType type = GetType(scope, nSpace, name, caller);
                 if (type != null) return type;
 
                 XLangRuntimeNamespace ns = GetNamespace(scope.Context, nSpace, name);

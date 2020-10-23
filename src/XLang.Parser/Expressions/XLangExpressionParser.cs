@@ -59,9 +59,9 @@ namespace XLang.Parser.Expressions
         {
             if (CurrentToken.Type == XLangTokenType.EOF) return new XLangExpression[0];
             List<XLangExpression> ret = new List<XLangExpression> { ParseExpr(OpCollection.Lowest) };
-            while (CurrentToken.Type == XLangTokenType.OpSemicolon || CurrentToken.Type == XLangTokenType.OpBlockToken || CurrentToken.Type == XLangTokenType.OpWord)
+            while (CurrentToken.Type != XLangTokenType.EOF)
             {
-                if (CurrentToken.Type == XLangTokenType.OpSemicolon || CurrentToken.Type == XLangTokenType.OpBlockToken)
+                if (CurrentToken.Type == XLangTokenType.OpSemicolon || CurrentToken.Type==XLangTokenType.OpBlockToken)
                     Eat(CurrentToken.Type);
                 if (CurrentToken.Type == XLangTokenType.EOF) break;
                 ret.Add(ParseExpr(OpCollection.Lowest));

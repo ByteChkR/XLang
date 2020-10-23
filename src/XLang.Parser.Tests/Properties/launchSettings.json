@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "XLang.Parser.Tests": {
+      "commandName": "Project",
+      "workingDirectory": "."
+    }
+  }
+}

@@ -1,9 +1,0 @@
-//Hello World Example as return value
-public class Program
-{
-	//Return value has to be object or void.
-	public static object Main(Array args)
-	{
-		return "Hello World";
-	}
-}
