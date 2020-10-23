@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
 using XLang.Core;
 using XLang.Queries;
 using XLang.Runtime.Types;
@@ -11,13 +10,12 @@ namespace XLang.Runtime
 {
     public class XLangRuntimeNamespace : IXLangRuntimeItem
     {
-
         private readonly List<XLangRuntimeNamespace> children;
-        private List<string> usingDirectives = new List<string>();
         public readonly string Name;
 
         private readonly XLangRuntimeNamespace parent;
         private readonly XLangSettings settings;
+        private readonly List<string> usingDirectives = new List<string>();
 
         public XLangRuntimeNamespace(
             string name, XLangRuntimeNamespace parent, List<XLangRuntimeType> types, XLangSettings settings)
@@ -73,8 +71,8 @@ namespace XLang.Runtime
             if (DefinedTypes.Any(x => x.Name == typeDef.Name))
             {
                 throw new XLangRuntimeTypeException(
-                                                    $"A Type with the name '{typeDef.Name}' already exists in namespace '{FullName}'."
-                                                   );
+                    $"A Type with the name '{typeDef.Name}' already exists in namespace '{FullName}'."
+                );
             }
 
             Types.Add(typeDef);
@@ -82,7 +80,7 @@ namespace XLang.Runtime
 
         public XLangRuntimeNamespace[] GetAllNamespacesRecursive()
         {
-            List<XLangRuntimeNamespace> types = new List<XLangRuntimeNamespace> { this };
+            List<XLangRuntimeNamespace> types = new List<XLangRuntimeNamespace> {this};
             foreach (XLangRuntimeNamespace xLangRuntimeNamespace in Children)
             {
                 types.AddRange(xLangRuntimeNamespace.GetAllNamespacesRecursive());
@@ -90,6 +88,5 @@ namespace XLang.Runtime
 
             return types.ToArray();
         }
-
     }
 }

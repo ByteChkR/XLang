@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using XLang.Queries;
 using XLang.Runtime.Members;
 using XLang.Runtime.Members.Properties;
@@ -13,7 +12,6 @@ namespace XLang.Runtime.Implementations
 {
     public class XLangBaseObject : IXLangRuntimeTypeInstance
     {
-
         private Dictionary<IXLangRuntimeMember, IXLangRuntimeTypeInstance> instanceVars =
             new Dictionary<IXLangRuntimeMember, IXLangRuntimeTypeInstance>();
 
@@ -21,7 +19,7 @@ namespace XLang.Runtime.Implementations
         {
             Type = type;
             IXLangRuntimeProperty[] props = Type.GetMembers(XLangBindingQuery.Property | XLangBindingQuery.Instance)
-                                                .Cast<IXLangRuntimeProperty>().ToArray();
+                .Cast<IXLangRuntimeProperty>().ToArray();
             foreach (IXLangRuntimeProperty prop in props)
             {
                 instanceVars[prop] = prop.GetValue(this);
@@ -34,12 +32,12 @@ namespace XLang.Runtime.Implementations
         {
             scope.Declare("this", Type).SetValue(this);
             (IXLangRuntimeProperty, IXLangRuntimeTypeInstance)[] memberValues = Type
-                                                                                .GetMembers(
-                                                                                            XLangBindingQuery.Property |
-                                                                                            XLangBindingQuery.Instance
-                                                                                           ).Cast<IXLangRuntimeProperty
-                                                                                >().Select(x => (x, x.GetValue(this)))
-                                                                                .ToArray();
+                .GetMembers(
+                    XLangBindingQuery.Property |
+                    XLangBindingQuery.Instance
+                ).Cast<IXLangRuntimeProperty
+                >().Select(x => (x, x.GetValue(this)))
+                .ToArray();
             foreach ((IXLangRuntimeProperty prop, IXLangRuntimeTypeInstance value) in memberValues)
             {
                 scope.Declare(prop.Name, prop.PropertyType).SetValue(value);
@@ -60,14 +58,13 @@ namespace XLang.Runtime.Implementations
 
             if (type.InheritsFrom(Type))
             {
-                instanceVars = ((XLangBaseObject)value).instanceVars;
+                instanceVars = ((XLangBaseObject) value).instanceVars;
                 Type = type;
             }
-            else 
+            else
             {
                 throw new Exception("Type mismatch");
             }
         }
-
     }
 }

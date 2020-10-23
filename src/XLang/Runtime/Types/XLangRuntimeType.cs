@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using XLang.Queries;
 using XLang.Runtime.Binding;
 using XLang.Runtime.Implementations;
@@ -14,7 +13,6 @@ namespace XLang.Runtime.Types
 {
     public class XLangRuntimeType : IXLangScopeAccess
     {
-
         private readonly Func<XLangRuntimeType, IXLangRuntimeTypeInstance> createBase;
 
         private IXLangRuntimeMember[] members;
@@ -88,12 +86,12 @@ namespace XLang.Runtime.Types
 
             List<IXLangRuntimeMember> ret = new List<IXLangRuntimeMember>(members);
             ret.AddRange(
-                         BaseType.GetAllMembers().Where(
-                                                        x => ret.All(
-                                                                     y => x.Name != y.Name
-                                                                    )
-                                                       )
-                        );
+                BaseType.GetAllMembers().Where(
+                    x => ret.All(
+                        y => x.Name != y.Name
+                    )
+                )
+            );
             return ret.ToArray();
         }
 
@@ -115,9 +113,9 @@ namespace XLang.Runtime.Types
         public void AddStatics(XLangRuntimeScope scope)
         {
             foreach (IXLangRuntimeMember xLangRuntimeMember in this.GetMembers(
-                                                                               XLangBindingQuery.Static |
-                                                                               XLangBindingQuery.Property
-                                                                              ))
+                XLangBindingQuery.Static |
+                XLangBindingQuery.Property
+            ))
             {
                 IXLangRuntimeProperty prop = xLangRuntimeMember as IXLangRuntimeProperty;
                 scope.Declare(xLangRuntimeMember.Name, prop.PropertyType).SetValue(prop.GetValue(null));
@@ -126,8 +124,7 @@ namespace XLang.Runtime.Types
 
         internal void InjectMember(IXLangRuntimeMember member)
         {
-            members = members.Concat(new[] { member }).ToArray();
+            members = members.Concat(new[] {member}).ToArray();
         }
-
     }
 }

@@ -4,17 +4,16 @@ namespace XLang.Parser.Token.Combined
 {
     public class NamespaceDefinitionToken : CombinedToken
     {
-
         public readonly IXLangToken Name;
         public readonly IXLangToken NamespaceKey;
 
         public NamespaceDefinitionToken(IXLangToken nameSpace, IXLangToken name, IXLangToken[] subtokens) : base(
-                                                                                                                 XLangTokenType
-                                                                                                                     .OpNamespaceDefinition,
-                                                                                                                 subtokens,
-                                                                                                                 nameSpace
-                                                                                                                     .StartIndex
-                                                                                                                )
+            XLangTokenType
+                .OpNamespaceDefinition,
+            subtokens,
+            nameSpace
+                .StartIndex
+        )
         {
             Name = name;
             NamespaceKey = nameSpace;
@@ -24,6 +23,5 @@ namespace XLang.Parser.Token.Combined
         {
             return $"{NamespaceKey.GetValue()} {Name.GetValue()}";
         }
-
     }
 }

@@ -10,20 +10,16 @@ using XLang.Parser.Token.Expressions;
 using XLang.Parser.Token.Expressions.Operators;
 using XLang.Parser.Token.Expressions.Operators.Special;
 using XLang.Runtime;
-using XLang.Runtime.Binding;
-using XLang.Runtime.Implementations;
 using XLang.Runtime.Members;
 using XLang.Runtime.Members.Functions;
 using XLang.Runtime.Members.Properties;
 using XLang.Runtime.Types;
-using XLang.Shared;
 
 namespace XLang.TokenExplorer
 {
     public partial class TokenExplorerForm : Form
     {
-
-        private Dictionary<string, IXLangRuntimeItem> itemMap = new Dictionary<string, IXLangRuntimeItem>();
+        private readonly Dictionary<string, IXLangRuntimeItem> itemMap = new Dictionary<string, IXLangRuntimeItem>();
 
         public TokenExplorerForm(string[] files)
         {
@@ -152,7 +148,6 @@ namespace XLang.TokenExplorer
             }
 
 
-
             if (member is XLangFunction func)
             {
                 CreateView(context, exprs, func);
@@ -219,12 +214,16 @@ namespace XLang.TokenExplorer
             string cData;
             string cTitle;
             IXLangRuntimeItem item = null;
-            if (itemMap.ContainsKey(path)) item = itemMap[path];
+            if (itemMap.ContainsKey(path))
+            {
+                item = itemMap[path];
+            }
 
             if (item is XLangRuntimeType type)
             {
                 cTitle = $"Type: {type.Name}";
-                cData = $"Full Name: {type.FullName}\nBinding Flags: {type.BindingFlags}\nBase Type: {type.BaseType?.FullName}\nMembers: \n";
+                cData =
+                    $"Full Name: {type.FullName}\nBinding Flags: {type.BindingFlags}\nBase Type: {type.BaseType?.FullName}\nMembers: \n";
                 IXLangRuntimeMember[] members = type.GetAllMembers();
                 if (members.Length != 0)
                 {
@@ -233,7 +232,10 @@ namespace XLang.TokenExplorer
                     {
                         IXLangRuntimeMember xLangRuntimeMember = members[i];
                         cData += xLangRuntimeMember.Name;
-                        if (i != members.Length - 1) cData += ", \n\t";
+                        if (i != members.Length - 1)
+                        {
+                            cData += ", \n\t";
+                        }
                     }
                 }
 
@@ -250,25 +252,34 @@ namespace XLang.TokenExplorer
                     {
                         XLangRuntimeNamespace cns = ns.Children[i];
                         cData += cns.Name;
-                        if (i != ns.Children.Count - 1) cData += ", \n\t";
+                        if (i != ns.Children.Count - 1)
+                        {
+                            cData += ", \n\t";
+                        }
                     }
                 }
                 cData += "\n";
 
-                cData += $"Types: \n\t";
+                cData += "Types: \n\t";
                 if (ns.DefinedTypes.Count != 0)
+                {
                     for (int i = 0; i < ns.DefinedTypes.Count; i++)
                     {
                         XLangRuntimeType langRuntimeType = ns.DefinedTypes[i];
                         cData += langRuntimeType.Name;
-                        if (i != ns.DefinedTypes.Count - 1) cData += ", \n\t";
+                        if (i != ns.DefinedTypes.Count - 1)
+                        {
+                            cData += ", \n\t";
+                        }
                     }
+                }
                 cData += "\n";
             }
             else if (item is IXLangRuntimeFunction func)
             {
                 cTitle = $"Function: {func.Name}";
-                cData = $"Full Name: {func.ImplementingClass}.{func.Name}\nBinding Flags: {func.BindingFlags}\nReturn Type: {func.ReturnType}\nArguments: \n";
+                cData =
+                    $"Full Name: {func.ImplementingClass}.{func.Name}\nBinding Flags: {func.BindingFlags}\nReturn Type: {func.ReturnType}\nArguments: \n";
 
                 if (func.ParameterList.Length != 0)
                 {
@@ -277,7 +288,10 @@ namespace XLang.TokenExplorer
                     {
                         IXLangRuntimeFunctionArgument fa = func.ParameterList[i];
                         cData += fa.Name + $"(type:{fa.Type.FullName})";
-                        if (i != func.ParameterList.Length - 1) cData += ", \n\t";
+                        if (i != func.ParameterList.Length - 1)
+                        {
+                            cData += ", \n\t";
+                        }
                     }
                 }
                 cData += "\n";
@@ -285,7 +299,8 @@ namespace XLang.TokenExplorer
             else if (item is IXLangRuntimeProperty prop)
             {
                 cTitle = $"Function: {prop.Name}";
-                cData = $"Full Name: {prop.ImplementingClass}.{prop.Name}\nBinding Flags: {prop.BindingFlags}\nProperty Type: {prop.PropertyType}";
+                cData =
+                    $"Full Name: {prop.ImplementingClass}.{prop.Name}\nBinding Flags: {prop.BindingFlags}\nProperty Type: {prop.PropertyType}";
             }
             else
             {
@@ -297,7 +312,7 @@ namespace XLang.TokenExplorer
             rtbCustomData.Text = cData;
         }
 
-        private void btnOpenLiveEditor_Click(object sender, System.EventArgs e)
+        private void btnOpenLiveEditor_Click(object sender, EventArgs e)
         {
             LiveEdit le = new LiveEdit();
             le.ShowDialog();

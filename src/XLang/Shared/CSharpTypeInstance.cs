@@ -1,5 +1,4 @@
 ﻿using System;
-
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
 
@@ -7,7 +6,6 @@ namespace XLang.Shared
 {
     public class CSharpTypeInstance : IXLangRuntimeTypeInstance
     {
-
         private object value;
 
         public CSharpTypeInstance(XLangRuntimeType type, object value)
@@ -34,9 +32,9 @@ namespace XLang.Shared
                 this.value = value;
             }
             else
-            {throw new Exception("Type Mismatch");
+            {
+                throw new Exception("Type Mismatch");
             }
         }
-
     }
 }

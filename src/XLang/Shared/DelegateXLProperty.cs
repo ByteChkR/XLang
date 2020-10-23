@@ -1,5 +1,4 @@
 ﻿using System;
-
 using XLang.Runtime.Binding;
 using XLang.Runtime.Members;
 using XLang.Runtime.Members.Properties;
@@ -10,7 +9,6 @@ namespace XLang.Shared
 {
     public class DelegateXLProperty : IXLangRuntimeProperty
     {
-
         private readonly Func<IXLangRuntimeTypeInstance, IXLangRuntimeTypeInstance> onGet;
 
         public DelegateXLProperty(
@@ -62,6 +60,5 @@ namespace XLang.Shared
         {
             throw new XLangRuntimeTypeException($"Property: {ImplementingClass.FullName}.{Name} has no Setter");
         }
-
     }
 }

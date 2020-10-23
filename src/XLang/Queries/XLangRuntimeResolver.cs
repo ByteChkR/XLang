@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-
 using XLang.Runtime;
 using XLang.Runtime.Binding;
 using XLang.Runtime.Members;
@@ -14,7 +13,6 @@ namespace XLang.Queries
 {
     public static class XLangRuntimeResolver
     {
-
         public static IXLangRuntimeMember ResolveDynamicItem(XLangContext context, string name, XLangRuntimeType type)
         {
             string[] parts = name.Split('.');
@@ -25,13 +23,13 @@ namespace XLang.Queries
             do
             {
                 IXLangRuntimeMember member = currentItem.GetMember(
-                                                                   parts[current],
-                                                                   XLangBindingQuery.Public |
-                                                                   XLangBindingQuery.Private |
-                                                                   XLangBindingQuery.Instance |
-                                                                   XLangBindingQuery.Static |
-                                                                   XLangBindingQuery.Inclusive
-                                                                  );
+                    parts[current],
+                    XLangBindingQuery.Public |
+                    XLangBindingQuery.Private |
+                    XLangBindingQuery.Instance |
+                    XLangBindingQuery.Static |
+                    XLangBindingQuery.Inclusive
+                );
 
 
                 if (member is IXLangRuntimeProperty prop)
@@ -51,7 +49,8 @@ namespace XLang.Queries
             return currentMember;
         }
 
-        private static XLangRuntimeNamespace GetNamespace(XLangContext context, XLangRuntimeNamespace start, string name)
+        private static XLangRuntimeNamespace GetNamespace(XLangContext context, XLangRuntimeNamespace start,
+            string name)
         {
             if (start == null)
             {
@@ -61,7 +60,8 @@ namespace XLang.Queries
             return start.Children.FirstOrDefault(x => x.Name == name);
         }
 
-        private static XLangRuntimeType GetType(XLangRuntimeScope scope, XLangRuntimeNamespace start, string name, XLangRuntimeType caller)
+        private static XLangRuntimeType GetType(XLangRuntimeScope scope, XLangRuntimeNamespace start, string name,
+            XLangRuntimeType caller)
         {
             if (start == null)
             {
@@ -72,17 +72,21 @@ namespace XLang.Queries
             return start.DefinedTypes.FirstOrDefault(x => x.Name == name);
         }
 
-        public static IXLangRuntimeItem ResolveItem(XLangRuntimeScope scope, string name, IXLangRuntimeItem start, XLangRuntimeType caller)
+        public static IXLangRuntimeItem ResolveItem(XLangRuntimeScope scope, string name, IXLangRuntimeItem start,
+            XLangRuntimeType caller)
         {
             if (start == null)
             {
                 XLangRuntimeType type = GetType(scope, null, name, caller);
-                
+
                 if (type != null)
                 {
                     if ((type.BindingFlags & XLangBindingFlags.Private) != 0)
                     {
-                        if (caller == type) return type;
+                        if (caller == type)
+                        {
+                            return type;
+                        }
                         throw new Exception($"Type '{type}' is not accessible from caller '{caller}'");
                     }
 
@@ -90,20 +94,26 @@ namespace XLang.Queries
                 }
 
                 XLangRuntimeNamespace ns = GetNamespace(scope.Context, null, name);
-                if (ns != null) return ns;
+                if (ns != null)
+                {
+                    return ns;
+                }
 
-                
+
                 IXLangRuntimeMember member = caller.GetMember(
-                                                              name,
-                                                              XLangBindingQuery.Static |
-                                                              XLangBindingQuery.Private |
-                                                              XLangBindingQuery.Public |
-                                                              XLangBindingQuery.Protected |
-                                                              XLangBindingQuery.Function |
-                                                              XLangBindingQuery.Property |
-                                                              XLangBindingQuery.Inclusive
-                                                             );
-                if (member != null) return member;
+                    name,
+                    XLangBindingQuery.Static |
+                    XLangBindingQuery.Private |
+                    XLangBindingQuery.Public |
+                    XLangBindingQuery.Protected |
+                    XLangBindingQuery.Function |
+                    XLangBindingQuery.Property |
+                    XLangBindingQuery.Inclusive
+                );
+                if (member != null)
+                {
+                    return member;
+                }
 
                 throw new Exception("Can not find Type or namespace: " + name);
             }
@@ -111,10 +121,16 @@ namespace XLang.Queries
             if (start is XLangRuntimeNamespace nSpace)
             {
                 XLangRuntimeType type = GetType(scope, nSpace, name, caller);
-                if (type != null) return type;
+                if (type != null)
+                {
+                    return type;
+                }
 
                 XLangRuntimeNamespace ns = GetNamespace(scope.Context, nSpace, name);
-                if (ns != null) return ns;
+                if (ns != null)
+                {
+                    return ns;
+                }
 
                 throw new Exception("Can not find Type or namespace: " + name);
             }
@@ -122,27 +138,30 @@ namespace XLang.Queries
             if (start is XLangRuntimeType rType)
             {
                 XLangBindingQuery query = rType == caller
-                                              ? XLangBindingQuery.Private |
-                                                XLangBindingQuery.Public |
-                                                XLangBindingQuery.Protected |
-                                                XLangBindingQuery.Property |
-                                                XLangBindingQuery.Function |
-                                                XLangBindingQuery.Inclusive
-                                              : caller.InheritsFrom(rType)
-                                                  ? XLangBindingQuery.Protected |
-                                                    XLangBindingQuery.Public |
-                                                    XLangBindingQuery.Property |
-                                                    XLangBindingQuery.Function |
-                                                    XLangBindingQuery.Inclusive
-                                                  : XLangBindingQuery.Public |
-                                                    XLangBindingQuery.Property |
-                                                    XLangBindingQuery.Function |
-                                                    XLangBindingQuery.Inclusive;
+                    ? XLangBindingQuery.Private |
+                      XLangBindingQuery.Public |
+                      XLangBindingQuery.Protected |
+                      XLangBindingQuery.Property |
+                      XLangBindingQuery.Function |
+                      XLangBindingQuery.Inclusive
+                    : caller.InheritsFrom(rType)
+                        ? XLangBindingQuery.Protected |
+                          XLangBindingQuery.Public |
+                          XLangBindingQuery.Property |
+                          XLangBindingQuery.Function |
+                          XLangBindingQuery.Inclusive
+                        : XLangBindingQuery.Public |
+                          XLangBindingQuery.Property |
+                          XLangBindingQuery.Function |
+                          XLangBindingQuery.Inclusive;
                 IXLangRuntimeMember member = rType.GetMember(name, query);
-                if (member != null) return member;
+                if (member != null)
+                {
+                    return member;
+                }
                 throw new Exception(
-                                    $"Can not find Property or Function: {name} or it is not accessible from this scope"
-                                   );
+                    $"Can not find Property or Function: {name} or it is not accessible from this scope"
+                );
             }
 
             if (start is IXLangRuntimeFunction func)
@@ -155,8 +174,8 @@ namespace XLang.Queries
                 return ResolveItem(scope, name, prop.PropertyType, caller);
             }
             throw new Exception(
-                                $"Invalid Input: {name}"
-                               );
+                $"Invalid Input: {name}"
+            );
         }
 
 
@@ -184,7 +203,7 @@ namespace XLang.Queries
                 if (currentItem == null)
                 {
                     currentItem = context.GetVisibleTypes(visibleNamespaces)
-                                         .FirstOrDefault(x => x.Name == parts.First());
+                        .FirstOrDefault(x => x.Name == parts.First());
                 }
 
                 if (currentItem == null)
@@ -200,24 +219,24 @@ namespace XLang.Queries
                 if (currentItem == null)
                 {
                     currentItem = ns.GetType(
-                                             parts[current],
-                                             XLangBindingQuery.Public |
-                                             XLangBindingQuery.Private |
-                                             XLangBindingQuery.Instance |
-                                             XLangBindingQuery.Static |
-                                             XLangBindingQuery.Inclusive
-                                            );
+                        parts[current],
+                        XLangBindingQuery.Public |
+                        XLangBindingQuery.Private |
+                        XLangBindingQuery.Instance |
+                        XLangBindingQuery.Static |
+                        XLangBindingQuery.Inclusive
+                    );
                 }
                 else if (currentItem is XLangRuntimeType type)
                 {
                     currentItem = type.GetMember(
-                                                 parts[current],
-                                                 XLangBindingQuery.Public |
-                                                 XLangBindingQuery.Private |
-                                                 XLangBindingQuery.Instance |
-                                                 XLangBindingQuery.Static |
-                                                 XLangBindingQuery.Inclusive
-                                                );
+                        parts[current],
+                        XLangBindingQuery.Public |
+                        XLangBindingQuery.Private |
+                        XLangBindingQuery.Instance |
+                        XLangBindingQuery.Static |
+                        XLangBindingQuery.Inclusive
+                    );
                 }
                 else if (currentItem is IXLangRuntimeFunction func)
                 {
@@ -276,11 +295,11 @@ namespace XLang.Queries
             XLangRuntimeType type = nameSpace.GetAllTypes().FirstOrDefault(x => x.Name == parts.Last());
 
             return (type,
-                    type == null
-                        ? new Exception(
-                                        $"Could not find type '{parts.LastOrDefault()}' in namespace '{nameSpace.FullName}'"
-                                       )
-                        : null);
+                type == null
+                    ? new Exception(
+                        $"Could not find type '{parts.LastOrDefault()}' in namespace '{nameSpace.FullName}'"
+                    )
+                    : null);
         }
 
         private static (XLangRuntimeNamespace, Exception) GetClosestNamespace(XLangContext context, string[] parts)
@@ -314,6 +333,5 @@ namespace XLang.Queries
 
             return (current, null);
         }
-
     }
 }

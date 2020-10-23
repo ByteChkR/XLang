@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using XLang.Runtime.Members;
 using XLang.Runtime.Types;
 using XLang.Shared;
@@ -10,24 +9,19 @@ namespace XLang.Runtime.Scopes
 {
     public class XLangRuntimeScope
     {
-
         [Flags]
         public enum ScopeFlags
         {
-
             Return = 1,
             Continue = 2,
             Break = 4
-
         }
 
         public readonly XLangContext Context;
 
         private readonly List<XLangRuntimeScopedVar> localVars = new List<XLangRuntimeScopedVar>();
-        private readonly List<string> visibleList = new List<string>();
         private readonly IXLangRuntimeMember owner;
-
-        public XLangRuntimeType OwnerType => owner.ImplementingClass;
+        private readonly List<string> visibleList = new List<string>();
 
         public XLangRuntimeScope(XLangContext context, IXLangRuntimeMember owner)
         {
@@ -36,6 +30,8 @@ namespace XLang.Runtime.Scopes
             visibleList.AddRange(context.DefaultImports);
             Continue = true;
         }
+
+        public XLangRuntimeType OwnerType => owner.ImplementingClass;
 
         public bool Continue { get; }
 
@@ -63,7 +59,7 @@ namespace XLang.Runtime.Scopes
         public XLangRuntimeNamespace[] GetAllVisible()
         {
             return Context.GetNamespaces().SelectMany(x => x.GetAllNamespacesRecursive())
-                          .Where(x => visibleList.Contains(x.FullName)).ToArray();
+                .Where(x => visibleList.Contains(x.FullName)).ToArray();
         }
 
         public void Error(ScopeFlags errorMask)
@@ -74,15 +70,22 @@ namespace XLang.Runtime.Scopes
             }
         }
 
-        public void ClearFlag(ScopeFlags flag) => Flags &= ~flag;
+        public void ClearFlag(ScopeFlags flag)
+        {
+            Flags &= ~flag;
+        }
 
-        public void SetFlag(ScopeFlags flag) => Flags |= flag;
+        public void SetFlag(ScopeFlags flag)
+        {
+            Flags |= flag;
+        }
 
         public void SetReturn(IXLangRuntimeTypeInstance returnValue)
         {
             Return = returnValue;
             SetFlag(ScopeFlags.Return);
         }
+
         public bool Check(ScopeFlags checkMask)
         {
             return (Flags & checkMask) != 0;
@@ -90,7 +93,6 @@ namespace XLang.Runtime.Scopes
 
         public class XLangRuntimeScopedVar
         {
-
             public readonly string Name;
             private readonly XLangRuntimeType Types;
             private IXLangRuntimeTypeInstance Value;
@@ -110,8 +112,6 @@ namespace XLang.Runtime.Scopes
             {
                 return Value ?? (Value = Types.CreateEmptyBase());
             }
-
         }
-
     }
 }

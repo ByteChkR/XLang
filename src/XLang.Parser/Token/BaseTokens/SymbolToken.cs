@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-
 using XLang.Core;
 
 namespace XLang.Parser.Token.BaseTokens
 {
     public class SymbolToken : IXLangToken
     {
-
         private readonly XLangSettings settings;
 
         public SymbolToken(XLangSettings settings, XLangTokenType type, int startIndex)
@@ -34,6 +32,5 @@ namespace XLang.Parser.Token.BaseTokens
         {
             return GetValue();
         }
-
     }
 }

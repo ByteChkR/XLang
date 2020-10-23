@@ -5,7 +5,6 @@ namespace XLang.Runtime.Scopes
 {
     public interface IXLangScopeAccess : IXLangRuntimeItem
     {
-
         string Name { get; }
 
         XLangAccessibilityLevel AccessibilityLevel { get; }
@@ -13,6 +12,5 @@ namespace XLang.Runtime.Scopes
         XLangBindingFlags BindingFlags { get; }
 
         XLangMemberType ItemType { get; }
-
     }
 }

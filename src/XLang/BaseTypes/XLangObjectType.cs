@@ -9,7 +9,6 @@ namespace XLang.BaseTypes
 {
     public class XLangObjectType
     {
-
         private readonly XLCoreNamespace containingNamespace;
 
         public XLangObjectType(XLCoreNamespace core)
@@ -28,59 +27,58 @@ namespace XLang.BaseTypes
             IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
         {
             XLangRuntimeType type = containingNamespace.GetType(
-                                                                "number",
-                                                                XLangBindingQuery.Public |
-                                                                XLangBindingQuery.Instance |
-                                                                XLangBindingQuery.Inclusive
-                                                               );
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
 
             return new CSharpTypeInstance(
-                                          type,
-                                          (decimal) args[0].GetRaw() == (decimal) args[1].GetRaw()
-                                              ? (decimal) 1
-                                              : (decimal) 0
-                                         );
+                type,
+                (decimal) args[0].GetRaw() == (decimal) args[1].GetRaw()
+                    ? (decimal) 1
+                    : (decimal) 0
+            );
         }
 
 
         public XLangRuntimeType GetObject()
         {
             XLangRuntimeType objectType = new XLangRuntimeType(
-                                                               "object",
-                                                               containingNamespace,
-                                                               null,
-                                                               XLangBindingFlags.Instance | XLangBindingFlags.Public
-                                                              );
+                "object",
+                containingNamespace,
+                null,
+                XLangBindingFlags.Instance | XLangBindingFlags.Public
+            );
             DelegateXLFunction eqFunc =
                 new DelegateXLFunction(
-                                       XLangTokenType.OpEquality.ToString(),
-                                       EquValue,
-                                       objectType,
-                                       XLangMemberFlags.Static |
-                                       XLangMemberFlags.Private |
-                                       XLangMemberFlags.Operator |
-                                       XLangMemberFlags.Override,
-                                       new XLangFunctionArgument("a", objectType),
-                                       new XLangFunctionArgument("b", objectType)
-                                      );
+                    XLangTokenType.OpEquality.ToString(),
+                    EquValue,
+                    objectType,
+                    XLangMemberFlags.Static |
+                    XLangMemberFlags.Private |
+                    XLangMemberFlags.Operator |
+                    XLangMemberFlags.Override,
+                    new XLangFunctionArgument("a", objectType),
+                    new XLangFunctionArgument("b", objectType)
+                );
             DelegateXLFunction cmpFunc =
                 new DelegateXLFunction(
-                                       XLangTokenType.OpComparison.ToString(),
-                                       CmpValue,
-                                       objectType,
-                                       XLangMemberFlags.Static |
-                                       XLangMemberFlags.Private |
-                                       XLangMemberFlags.Operator |
-                                       XLangMemberFlags.Override,
-                                       new XLangFunctionArgument("a", objectType),
-                                       new XLangFunctionArgument("b", objectType)
-                                      );
+                    XLangTokenType.OpComparison.ToString(),
+                    CmpValue,
+                    objectType,
+                    XLangMemberFlags.Static |
+                    XLangMemberFlags.Private |
+                    XLangMemberFlags.Operator |
+                    XLangMemberFlags.Override,
+                    new XLangFunctionArgument("a", objectType),
+                    new XLangFunctionArgument("b", objectType)
+                );
 
 
-            objectType.SetMembers(new[] { eqFunc, cmpFunc });
+            objectType.SetMembers(new[] {eqFunc, cmpFunc});
 
             return objectType;
         }
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using XLang.Core;
 using XLang.Parser.Token;
 using XLang.Parser.Token.BaseTokens;
@@ -8,7 +7,6 @@ namespace XLang.Parser.Shared
 {
     public static class XLangParsingTools
     {
-
         public static IXLangToken ReadAny(List<IXLangToken> tokens, int start)
         {
             if (!ReadAnyOrNone(tokens, start, out IXLangToken ret))
@@ -65,7 +63,7 @@ namespace XLang.Parser.Shared
         public static IXLangToken[] ReadOneOrManyOf(
             List<IXLangToken> tokens, int start, int step, XLangTokenType[] type)
         {
-            List<IXLangToken> ret = new List<IXLangToken> { ReadOneOfAny(tokens, start, type) };
+            List<IXLangToken> ret = new List<IXLangToken> {ReadOneOfAny(tokens, start, type)};
             ret.AddRange(ReadNoneOrManyOf(tokens, start + step, step, type));
             return ret.ToArray();
         }
@@ -133,7 +131,7 @@ namespace XLang.Parser.Shared
 
         public static IXLangToken[] ReadOneOrMany(List<IXLangToken> tokens, int start, int step, XLangTokenType type)
         {
-            List<IXLangToken> ret = new List<IXLangToken> { ReadOne(tokens, start, type) };
+            List<IXLangToken> ret = new List<IXLangToken> {ReadOne(tokens, start, type)};
             ret.AddRange(ReadNoneOrMany(tokens, start + step, step, type));
             return ret.ToArray();
         }
@@ -141,7 +139,7 @@ namespace XLang.Parser.Shared
 
         public static IXLangToken[] ReadUntil(List<IXLangToken> tokens, int start, int step, XLangTokenType type)
         {
-            return ReadUntilAny(tokens, start, step, new[] { type });
+            return ReadUntilAny(tokens, start, step, new[] {type});
         }
 
         public static IXLangToken[] ReadUntilAny(List<IXLangToken> tokens, int start, int step, XLangTokenType[] type)
@@ -166,6 +164,5 @@ namespace XLang.Parser.Shared
                 }
             }
         }
-
     }
 }

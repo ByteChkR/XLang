@@ -7,7 +7,6 @@ namespace XLang.Parser.Runtime
 {
     public class XLangPropertyDefinitionToken : XLangMemberDefinitionToken
     {
-
         public readonly XLangRuntimeType TypeDefinition;
         public readonly string TypeName;
         public readonly XLangVarDefOperand VarInitializationExpression;
@@ -27,6 +26,5 @@ namespace XLang.Parser.Runtime
         {
             return $"{FullName} of Type '{TypeName}'";
         }
-
     }
 }

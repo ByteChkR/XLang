@@ -6,7 +6,6 @@ namespace XLang.Parser.Expressions
 {
     public class XLangRelationOperators : XLangExpressionOperator
     {
-
         public override int PrecedenceLevel => 10;
 
         public override bool CanCreate(XLangExpressionParser parser, XLangExpression currentNode)
@@ -26,7 +25,8 @@ namespace XLang.Parser.Expressions
                 if (parser.CurrentToken.Type == XLangTokenType.OpEquality)
                 {
                     parser.Eat(XLangTokenType.OpEquality);
-                    node = new XLangBinaryOp(parser.Context, currentNode, XLangTokenType.OpLessOrEqual, parser.ParseExpr(PrecedenceLevel));
+                    node = new XLangBinaryOp(parser.Context, currentNode, XLangTokenType.OpLessOrEqual,
+                        parser.ParseExpr(PrecedenceLevel));
                 }
                 else
                 {
@@ -38,7 +38,8 @@ namespace XLang.Parser.Expressions
                 if (parser.CurrentToken.Type == XLangTokenType.OpEquality)
                 {
                     parser.Eat(XLangTokenType.OpEquality);
-                    node = new XLangBinaryOp(parser.Context, currentNode, XLangTokenType.OpGreaterOrEqual, parser.ParseExpr(PrecedenceLevel));
+                    node = new XLangBinaryOp(parser.Context, currentNode, XLangTokenType.OpGreaterOrEqual,
+                        parser.ParseExpr(PrecedenceLevel));
                 }
                 else
                 {
@@ -48,6 +49,5 @@ namespace XLang.Parser.Expressions
 
             return node;
         }
-
     }
 }

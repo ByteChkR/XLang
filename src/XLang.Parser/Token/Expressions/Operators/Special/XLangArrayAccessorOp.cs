@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
 using XLang.Core;
 using XLang.Queries;
 using XLang.Runtime.Members.Functions;
@@ -12,7 +11,6 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
 {
     public class XLangArrayAccessorOp : XLangExpression
     {
-
         public readonly XLangExpression Left;
         public readonly XLangExpression[] ParameterList;
 
@@ -34,12 +32,12 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         private IXLangRuntimeFunction GetOperatorImpl(IXLangRuntimeTypeInstance left)
         {
             return left.Type.GetMembers(
-                                        XLangTokenType.OpInvocation.ToString(),
-                                        XLangBindingQuery.Public |
-                                        XLangBindingQuery.Override |
-                                        XLangBindingQuery.Operator
-                                       ).Cast<IXLangRuntimeFunction>()
-                       .FirstOrDefault();
+                    XLangTokenType.OpInvocation.ToString(),
+                    XLangBindingQuery.Public |
+                    XLangBindingQuery.Override |
+                    XLangBindingQuery.Operator
+                ).Cast<IXLangRuntimeFunction>()
+                .FirstOrDefault();
         }
 
         public override string GetValue()
@@ -52,6 +50,5 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
             IXLangRuntimeTypeInstance left = Left.Process(scope, instance);
             return GetOperatorImpl(left).Invoke(left, ParameterList.Select(x => x.Process(scope, instance)).ToArray());
         }
-
     }
 }

@@ -1,12 +1,10 @@
 ﻿using System.Text;
-
 using XLang.Core;
 
 namespace XLang.Parser.Token.Combined
 {
     public class FunctionDefinitionToken : CombinedToken
     {
-
         public readonly VariableDefinitionToken[] Arguments;
 
         public readonly bool IsConstructor;
@@ -17,10 +15,10 @@ namespace XLang.Parser.Token.Combined
         public FunctionDefinitionToken(
             IXLangToken name, IXLangToken typeName, VariableDefinitionToken[] arguments, IXLangToken[] modifiers,
             IXLangToken[] subtokens, bool isConstructor = false) : base(
-                                                                        XLangTokenType.OpFunctionDefinition,
-                                                                        subtokens,
-                                                                        name.StartIndex
-                                                                       )
+            XLangTokenType.OpFunctionDefinition,
+            subtokens,
+            name.StartIndex
+        )
         {
             Modifiers = modifiers;
             Name = name;
@@ -50,6 +48,5 @@ namespace XLang.Parser.Token.Combined
             sb.Append(")");
             return sb.ToString();
         }
-
     }
 }

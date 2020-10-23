@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
 using XLang.Parser.Shared;
 using XLang.Parser.Token;
 
@@ -8,7 +7,6 @@ namespace XLang.Parser.Reader
 {
     public class XLangExpressionReader
     {
-
         public readonly List<IXLangToken> tokens;
 
         private int currentIdx;
@@ -20,7 +18,7 @@ namespace XLang.Parser.Reader
 
         public IXLangToken PeekNext(int advance = 1)
         {
-            XLangParsingTools.ReadAnyOrNone(tokens, currentIdx + advance-1, out IXLangToken result);
+            XLangParsingTools.ReadAnyOrNone(tokens, currentIdx + advance - 1, out IXLangToken result);
             return result;
         }
 
@@ -30,6 +28,5 @@ namespace XLang.Parser.Reader
             currentIdx++;
             return result;
         }
-
     }
 }

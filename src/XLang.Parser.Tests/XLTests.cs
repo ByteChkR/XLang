@@ -15,10 +15,10 @@ namespace XLang.Parser.Tests
 {
     public class XLTests
     {
-
         private static string[] GetExampleFiles()
         {
-            return Directory.GetFiles("..\\..\\..\\..\\..\\examples", "*.xl", SearchOption.AllDirectories).Select(Path.GetFullPath).ToArray();
+            return Directory.GetFiles("..\\..\\..\\..\\..\\examples", "*.xl", SearchOption.AllDirectories)
+                .Select(Path.GetFullPath).ToArray();
         }
 
         [Test]
@@ -45,7 +45,6 @@ namespace XLang.Parser.Tests
         }
 
 
-
         [Test]
         [TestCaseSource("GetExampleFiles")]
         public void ExecutionTest(string file)
@@ -56,20 +55,19 @@ namespace XLang.Parser.Tests
             Assert.True(c.TryGet("XL", out XLangRuntimeNamespace cNs) && cNs is XLCoreNamespace);
             XLCoreNamespace coreNs = (XLCoreNamespace) cNs;
 
-            coreNs.SetWritelineImpl(x=>sb.AppendLine(x));
+            coreNs.SetWritelineImpl(x => sb.AppendLine(x));
 
             XLangParser parser = new XLangParser(c);
             parser.Parse(File.ReadAllText(file));
-            
+
             IXLangRuntimeFunction entry = c.GetType("DEFAULT.Program")?.GetMember("Main") as IXLangRuntimeFunction;
 
-            Assert.True( entry != null);
+            Assert.True(entry != null);
 
             entry.Invoke(null, new IXLangRuntimeTypeInstance[entry.ParameterList.Length]);
 
 
             Assert.Pass(sb.ToString());
         }
-
     }
 }

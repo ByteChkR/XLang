@@ -1,5 +1,4 @@
 ﻿using System;
-
 using XLang.Core;
 using XLang.Runtime.Binding;
 using XLang.Runtime.Implementations;
@@ -13,7 +12,6 @@ namespace XLang.BaseTypes
 {
     public class XLangFunctionType
     {
-
         private readonly XLCoreNamespace containingNamespace;
 
 
@@ -25,32 +23,32 @@ namespace XLang.BaseTypes
         public XLangRuntimeType GetObject(XLangRuntimeType objectType)
         {
             XLangRuntimeType functionType = new XLangRuntimeType(
-                                                                 "function",
-                                                                 containingNamespace,
-                                                                 objectType,
-                                                                 XLangBindingFlags.Instance | XLangBindingFlags.Public
-                                                                );
+                "function",
+                containingNamespace,
+                objectType,
+                XLangBindingFlags.Instance | XLangBindingFlags.Public
+            );
 
             DelegateXLFunction funcInvocation =
                 new DelegateXLFunction(
-                                       XLangTokenType.OpInvocation.ToString(),
-                                       InvokeFunction,
-                                       objectType,
-                                       XLangMemberFlags.Static |
-                                       XLangMemberFlags.Private |
-                                       XLangMemberFlags.Operator |
-                                       XLangMemberFlags.Override
-                                      );
+                    XLangTokenType.OpInvocation.ToString(),
+                    InvokeFunction,
+                    objectType,
+                    XLangMemberFlags.Static |
+                    XLangMemberFlags.Private |
+                    XLangMemberFlags.Operator |
+                    XLangMemberFlags.Override
+                );
 
 
-            functionType.SetMembers(new IXLangRuntimeMember[] { funcInvocation });
+            functionType.SetMembers(new IXLangRuntimeMember[] {funcInvocation});
             return functionType;
         }
 
         private IXLangRuntimeTypeInstance InvokeFunction(
             IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
         {
-            XLangFunctionAccessInstance ts = (XLangFunctionAccessInstance)instance;
+            XLangFunctionAccessInstance ts = (XLangFunctionAccessInstance) instance;
             if (ts.Member is IXLangRuntimeFunction func)
             {
                 return func.Invoke(ts.Instance, args);
@@ -59,14 +57,13 @@ namespace XLang.BaseTypes
             {
                 IXLangRuntimeTypeInstance newItem = type.CreateEmptyBase();
                 ((IXLangRuntimeFunction) type.GetMember(XLangBindingQuery.Constructor)).Invoke(
-                                                                                               newItem,
-                                                                                               args
-                                                                                              );
+                    newItem,
+                    args
+                );
                 return newItem;
             }
 
             throw new Exception("Invocation Failure");
         }
-
     }
 }

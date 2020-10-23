@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-
 using XLang.Core;
 using XLang.Parser.Token;
 
@@ -8,7 +7,6 @@ namespace XLang.Parser.Shared
 {
     public class XLangTokenReadException : XLangTokenParseException
     {
-
         public readonly XLangTokenType[] Expected;
         public readonly IEnumerable<IXLangToken> Sequence;
         public readonly XLangTokenType Unmatched;
@@ -25,11 +23,11 @@ namespace XLang.Parser.Shared
         public XLangTokenReadException(
             IEnumerable<IXLangToken> tokenSequence, XLangTokenType expected, XLangTokenType unmatched,
             int start) : this(
-                              tokenSequence,
-                              new[] { expected },
-                              unmatched,
-                              start
-                             )
+            tokenSequence,
+            new[] {expected},
+            unmatched,
+            start
+        )
         {
         }
 
@@ -47,6 +45,5 @@ namespace XLang.Parser.Shared
 
             return sb.ToString();
         }
-
     }
 }

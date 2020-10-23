@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-
 using XLang.Core;
 
 namespace XLang.Parser.Token
 {
     public interface IXLangToken
     {
-
         XLangTokenType Type { get; }
 
         int StartIndex { get; }
@@ -14,6 +12,5 @@ namespace XLang.Parser.Token
         List<IXLangToken> GetChildren();
 
         string GetValue();
-
     }
 }

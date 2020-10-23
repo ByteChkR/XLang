@@ -2,7 +2,6 @@
 {
     public enum XLangTokenType
     {
-
         Any,
         OpNone,
         OpNewLine,
@@ -91,6 +90,5 @@
 
         //End Of File
         EOF
-
     }
 }

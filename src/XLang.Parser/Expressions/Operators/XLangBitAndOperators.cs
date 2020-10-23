@@ -6,7 +6,6 @@ namespace XLang.Parser.Expressions
 {
     public class XLangBitAndOperators : XLangExpressionOperator
     {
-
         public override int PrecedenceLevel => 8;
 
         public override bool CanCreate(XLangExpressionParser parser, XLangExpression currentNode)
@@ -18,8 +17,8 @@ namespace XLang.Parser.Expressions
         public override XLangExpression Create(XLangExpressionParser parser, XLangExpression currentNode)
         {
             parser.Eat(XLangTokenType.OpAnd);
-            return new XLangBinaryOp(parser.Context, currentNode, XLangTokenType.OpAnd, parser.ParseExpr(PrecedenceLevel));
+            return new XLangBinaryOp(parser.Context, currentNode, XLangTokenType.OpAnd,
+                parser.ParseExpr(PrecedenceLevel));
         }
-
     }
 }

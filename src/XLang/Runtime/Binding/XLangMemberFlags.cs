@@ -1,5 +1,4 @@
 ﻿using System;
-
 using XLang.Shared.Enum;
 
 namespace XLang.Runtime.Binding
@@ -7,7 +6,6 @@ namespace XLang.Runtime.Binding
     [Flags]
     public enum XLangMemberFlags
     {
-
         Public = XLangBindingQuery.Public,
         Private = XLangBindingQuery.Private,
         Static = XLangBindingQuery.Static,
@@ -18,6 +16,5 @@ namespace XLang.Runtime.Binding
         Override = XLangBindingQuery.Override,
         Operator = XLangBindingQuery.Operator,
         Constructor = XLangBindingQuery.Constructor
-
     }
 }

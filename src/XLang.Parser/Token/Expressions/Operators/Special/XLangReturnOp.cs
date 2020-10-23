@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
 
@@ -7,8 +6,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
 {
     public class XLangReturnOp : XLangExpression
     {
-
-        private XLangExpression right;
+        private readonly XLangExpression right;
 
         public XLangReturnOp(XLangContext context, XLangExpression right) : base(context)
         {
@@ -17,7 +15,10 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
 
         public override int StartIndex { get; }
 
-        public override List<IXLangToken> GetChildren() => new List<IXLangToken>();
+        public override List<IXLangToken> GetChildren()
+        {
+            return new List<IXLangToken>();
+        }
 
         public override string GetValue()
         {
@@ -29,6 +30,5 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
             scope.SetReturn(right?.Process(scope, instance));
             return null;
         }
-
     }
 }

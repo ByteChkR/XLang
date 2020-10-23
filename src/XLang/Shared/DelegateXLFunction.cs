@@ -1,5 +1,4 @@
 ﻿using System;
-
 using XLang.Runtime.Binding;
 using XLang.Runtime.Members;
 using XLang.Runtime.Members.Functions;
@@ -10,7 +9,6 @@ namespace XLang.Shared
 {
     public class DelegateXLFunction : IXLangRuntimeFunction
     {
-
         private readonly Func<IXLangRuntimeTypeInstance, IXLangRuntimeTypeInstance[], IXLangRuntimeTypeInstance>
             onInvoke;
 
@@ -52,6 +50,5 @@ namespace XLang.Shared
         {
             return onInvoke(instance, arguments);
         }
-
     }
 }

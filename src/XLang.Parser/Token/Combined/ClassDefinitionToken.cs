@@ -4,20 +4,20 @@ namespace XLang.Parser.Token.Combined
 {
     public class ClassDefinitionToken : CombinedToken
     {
-
         public readonly IXLangToken BaseClass;
         public readonly IXLangToken ClassKey;
         public readonly IXLangToken[] Modifiers;
         public readonly IXLangToken Name;
 
         public ClassDefinitionToken(
-            IXLangToken classKey, IXLangToken name, IXLangToken baseClass, IXLangToken[] modifiers, IXLangToken[] subtokens) : base(
-                                                                                                             XLangTokenType
-                                                                                                                 .OpClassDefinition,
-                                                                                                             subtokens,
-                                                                                                             classKey
-                                                                                                                 .StartIndex
-                                                                                                            )
+            IXLangToken classKey, IXLangToken name, IXLangToken baseClass, IXLangToken[] modifiers,
+            IXLangToken[] subtokens) : base(
+            XLangTokenType
+                .OpClassDefinition,
+            subtokens,
+            classKey
+                .StartIndex
+        )
         {
             BaseClass = baseClass;
             Name = name;
@@ -29,6 +29,5 @@ namespace XLang.Parser.Token.Combined
         {
             return $"{Unpack(Modifiers)} {ClassKey.GetValue()} {Name.GetValue()}";
         }
-
     }
 }

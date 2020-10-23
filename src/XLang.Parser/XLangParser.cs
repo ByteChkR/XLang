@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
 using XLang.Core;
 using XLang.Parser.Base;
 using XLang.Parser.Reader;
@@ -10,7 +9,6 @@ namespace XLang.Parser
 {
     public class XLangParser
     {
-
         private readonly XLangContext Context;
 
         public XLangParser() : this(new XLangContext(new XLangSettings(), "XL"))
@@ -51,10 +49,9 @@ namespace XLang.Parser
             XLangBroadParser.ElevateExpressions(Context, tokenStream);
 
             XLangBroadParser.ElevateToRuntimeTokens(
-                                                    tokenStream,
-                                                    Context
-                                                   );
+                tokenStream,
+                Context
+            );
         }
-
     }
 }

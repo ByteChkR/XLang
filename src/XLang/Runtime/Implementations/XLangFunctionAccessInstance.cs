@@ -1,5 +1,4 @@
 ﻿using System;
-
 using XLang.Runtime.Members;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
@@ -8,7 +7,6 @@ namespace XLang.Runtime.Implementations
 {
     public class XLangFunctionAccessInstance : IXLangRuntimeTypeInstance
     {
-
         public readonly XLangRuntimeType FunctionType;
         public readonly IXLangRuntimeTypeInstance Instance;
 
@@ -42,7 +40,7 @@ namespace XLang.Runtime.Implementations
 
             if (type.InheritsFrom(Type))
             {
-                Member = (IXLangRuntimeMember)value;
+                Member = (IXLangRuntimeMember) value;
             }
             else
             {
@@ -50,6 +48,5 @@ namespace XLang.Runtime.Implementations
             }
 
         }
-
     }
 }

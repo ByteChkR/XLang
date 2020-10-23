@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using XLang.Core;
 using XLang.Queries;
 using XLang.Runtime.Members.Functions;
@@ -13,7 +12,6 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
 {
     public class XLangInvocationOp : XLangExpression
     {
-
         public readonly XLangExpression Left;
         public readonly XLangExpression[] ParameterList;
 
@@ -28,18 +26,18 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
 
         public override List<IXLangToken> GetChildren()
         {
-            return new List<IXLangToken> { Left };
+            return new List<IXLangToken> {Left};
         }
 
 
         private IXLangRuntimeFunction GetOperatorImpl(IXLangRuntimeTypeInstance left)
         {
             return left.Type.GetMembers(
-                                        XLangTokenType.OpInvocation.ToString(),
-                                        XLangBindingQuery.Override |
-                                        XLangBindingQuery.Operator
-                                       ).Cast<IXLangRuntimeFunction>()
-                       .FirstOrDefault();
+                    XLangTokenType.OpInvocation.ToString(),
+                    XLangBindingQuery.Override |
+                    XLangBindingQuery.Operator
+                ).Cast<IXLangRuntimeFunction>()
+                .FirstOrDefault();
         }
 
         public override string GetValue()
@@ -65,6 +63,5 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
             IXLangRuntimeTypeInstance[] parameter = ParameterList.Select(x => x.Process(scope, instance)).ToArray();
             return impl.Invoke(left, parameter);
         }
-
     }
 }

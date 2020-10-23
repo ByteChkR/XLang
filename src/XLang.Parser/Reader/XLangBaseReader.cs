@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-
 using XLang.Core;
 using XLang.Parser.Token;
 using XLang.Parser.Token.BaseTokens;
@@ -9,12 +8,11 @@ namespace XLang.Parser.Reader
 {
     public class XLangBaseReader
     {
-
         public readonly string Input;
+        private readonly XLangSettings settings;
 
         private int currentIndex;
         private IXLangToken currentToken;
-        private readonly XLangSettings settings;
 
         public XLangBaseReader(XLangSettings settings, string input)
         {
@@ -146,6 +144,5 @@ namespace XLang.Parser.Reader
         {
             return c == ' ' || c == '\t' || c == '\r';
         }
-
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using XLang.Core;
 
 namespace XLang.Parser.Token.Combined
 {
     public abstract class CombinedToken : IXLangToken
     {
-
         public readonly List<IXLangToken> SubTokens;
 
         protected CombinedToken(XLangTokenType type, IXLangToken[] subtokens, int start)
@@ -55,6 +53,5 @@ namespace XLang.Parser.Token.Combined
         {
             return GetValue();
         }
-
     }
 }

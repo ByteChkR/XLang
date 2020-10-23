@@ -7,7 +7,6 @@ namespace XLang.Parser.Runtime
 {
     public class XLangFunctionDefinitionToken : XLangMemberDefinitionToken
     {
-
         public readonly string ReturnType;
         public readonly XLangExpression[] Sequence;
 
@@ -23,6 +22,5 @@ namespace XLang.Parser.Runtime
         }
 
         public string Fullname => $"{TypeDefinition.FullName}.{Name}";
-
     }
 }

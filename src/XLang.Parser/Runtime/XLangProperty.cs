@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using XLang.Parser.Token.Expressions;
 using XLang.Runtime.Binding;
 using XLang.Runtime.Members;
@@ -11,7 +10,6 @@ namespace XLang.Parser.Runtime
 {
     public class XLangProperty : IXLangRuntimeProperty
     {
-
         private readonly XLangContext context;
 
         private readonly XLangExpression InitExpr;
@@ -101,8 +99,8 @@ namespace XLang.Parser.Runtime
             }
 
             return InstanceMap.ContainsKey(instance)
-                       ? InstanceMap[instance]
-                       : InstanceMap[instance] = InitExpr?.Process(scope, instance) ?? PropertyType.CreateEmptyBase();
+                ? InstanceMap[instance]
+                : InstanceMap[instance] = InitExpr?.Process(scope, instance) ?? PropertyType.CreateEmptyBase();
         }
 
         public void SetValue(IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance value)
@@ -115,6 +113,5 @@ namespace XLang.Parser.Runtime
 
             InstanceMap[instance] = value;
         }
-
     }
 }

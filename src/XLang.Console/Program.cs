@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
 using XLang.Parser;
-using XLang.Runtime;
 using XLang.Runtime.Binding;
 using XLang.Runtime.Members;
 using XLang.Runtime.Members.Functions;
@@ -19,25 +15,26 @@ namespace XLang.Console
 {
     internal class Program
     {
-
         private static string InputFile;
         private static string FuncTarget;
-        private static string[] Imports = new[] { "XL", "DEFAULT" };
+        private static string[] Imports = {"XL", "DEFAULT"};
 
         private static void PrintHelp()
         {
             string appName = Path.GetFileName(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath);
             System.Console.WriteLine("Commandline Argument Help:");
             System.Console.WriteLine($"Syntax\n\t {appName} <input-file> <flag> <data0> <...> <flag1> <data0> <...");
-            System.Console.WriteLine("Flags:\n\t--help\t\t\tDisplay this help text\n\t--target | -t\t\tSet Target start function. Default: \"DEFAULT.Program.Main\"\n\t--import | -i\t\tSet Imported Namespaces. Default \"XL\"");
+            System.Console.WriteLine(
+                "Flags:\n\t--help\t\t\tDisplay this help text\n\t--target | -t\t\tSet Target start function. Default: \"DEFAULT.Program.Main\"\n\t--import | -i\t\tSet Imported Namespaces. Default \"XL\"");
         }
 
 
         private static void PrintHeader()
         {
 
-            System.Console.WriteLine($"XLang Parser Console({Path.GetFileNameWithoutExtension(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath)}) Version: {Assembly.GetExecutingAssembly().GetName().Version}-prototype");
-            System.Console.WriteLine($"");
+            System.Console.WriteLine(
+                $"XLang Parser Console({Path.GetFileNameWithoutExtension(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath)}) Version: {Assembly.GetExecutingAssembly().GetName().Version}-prototype");
+            System.Console.WriteLine("");
 
         }
 
@@ -86,7 +83,8 @@ namespace XLang.Console
                         {
                             if (args[i + 1].StartsWith("--") || args[i + 1].StartsWith("-"))
                             {
-                                System.Console.WriteLine("[xlc]Expected One or more Namespace Imports on Function after flag: " + args[i]);
+                                System.Console.WriteLine(
+                                    "[xlc]Expected One or more Namespace Imports on Function after flag: " + args[i]);
                             }
                             else
                             {
@@ -97,13 +95,13 @@ namespace XLang.Console
                                     {
                                         break;
                                     }
-                                    else
-                                    {
-                                        imps.Add(args[j]);
-                                    }
+                                    imps.Add(args[j]);
                                 }
 
-                                if (imps.Count != 0) Imports = imps.ToArray();
+                                if (imps.Count != 0)
+                                {
+                                    Imports = imps.ToArray();
+                                }
                             }
                         }
                     }
@@ -135,15 +133,15 @@ namespace XLang.Console
                 }
 
                 IXLangRuntimeMember mbmr = target.GetMember(
-                                                            funcN,
-                                                            XLangBindingQuery.Function |
-                                                            XLangBindingQuery.Constructor |
-                                                            XLangBindingQuery.Property |
-                                                            XLangBindingQuery.Inclusive |
-                                                            XLangBindingQuery.Public |
-                                                            XLangBindingQuery.Private |
-                                                            XLangBindingQuery.Protected
-                                                           );
+                    funcN,
+                    XLangBindingQuery.Function |
+                    XLangBindingQuery.Constructor |
+                    XLangBindingQuery.Property |
+                    XLangBindingQuery.Inclusive |
+                    XLangBindingQuery.Public |
+                    XLangBindingQuery.Private |
+                    XLangBindingQuery.Protected
+                );
                 if (mbmr == null)
                 {
                     System.Console.WriteLine($"[xlc]Member: '{funcN}' does not exist.");
@@ -157,35 +155,40 @@ namespace XLang.Console
                         IXLangRuntimeTypeInstance inst = target.CreateEmptyBase();
                         func.Invoke(inst, func.ParameterList.Select(x => x.Type.CreateEmptyBase()).ToArray());
                     }
-                    else if( (func.BindingFlags & XLangBindingFlags.Static) != 0)
+                    else if ((func.BindingFlags & XLangBindingFlags.Static) != 0)
                     {
-                        System.Console.WriteLine($"[xlc]Invoking Function: {func.ImplementingClass.FullName}.{func.Name}");
+                        System.Console.WriteLine(
+                            $"[xlc]Invoking Function: {func.ImplementingClass.FullName}.{func.Name}");
                         func.Invoke(null, func.ParameterList.Select(x => x.Type.CreateEmptyBase()).ToArray());
-                        System.Console.WriteLine($"[xlc]Execution Ended.");
+                        System.Console.WriteLine("[xlc]Execution Ended.");
                     }
                     else
                     {
-                        System.Console.WriteLine($"[xlc]Function: '{funcN}' can not be invoked because it is no constructor nor static.");
-                        
+                        System.Console.WriteLine(
+                            $"[xlc]Function: '{funcN}' can not be invoked because it is no constructor nor static.");
+
                     }
-                }else if (mbmr is IXLangRuntimeProperty prop)
+                }
+                else if (mbmr is IXLangRuntimeProperty prop)
                 {
                     if ((prop.BindingFlags & XLangBindingFlags.Static) != 0)
                     {
-                        System.Console.WriteLine($"[xlc]Invoking Property: {prop.ImplementingClass.FullName}.{prop.Name}");
+                        System.Console.WriteLine(
+                            $"[xlc]Invoking Property: {prop.ImplementingClass.FullName}.{prop.Name}");
                         prop.GetValue(null);
-                        System.Console.WriteLine($"[xlc]Execution Ended.");
+                        System.Console.WriteLine("[xlc]Execution Ended.");
                     }
                     else
                     {
-                        System.Console.WriteLine($"[xlc]Property: '{funcN}' can not be invoked because it is not static.");
-                        
+                        System.Console.WriteLine(
+                            $"[xlc]Property: '{funcN}' can not be invoked because it is not static.");
+
                     }
                 }
                 else
                 {
                     System.Console.WriteLine($"[xlc]Member Type '{mbmr}' is not supported");
-                    
+
                 }
 
             }

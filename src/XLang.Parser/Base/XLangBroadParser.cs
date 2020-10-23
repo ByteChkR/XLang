@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using XLang.Core;
 using XLang.Parser.Expressions;
 using XLang.Parser.Reader;
@@ -26,7 +25,6 @@ namespace XLang.Parser.Base
 {
     public static class XLangBroadParser
     {
-
         //Step 1
         public static void ElevateOneLineComment(XLangSettings settings, List<IXLangToken> tokens)
         {
@@ -64,11 +62,11 @@ namespace XLang.Parser.Base
                     if (endQuote == -1 || endQuote > idx)
                     {
                         throw new XLangTokenReadException(
-                                                          tokens,
-                                                          XLangTokenType.OpDoubleQuote,
-                                                          XLangTokenType.OpNewLine,
-                                                          tokens[i].StartIndex
-                                                         );
+                            tokens,
+                            XLangTokenType.OpDoubleQuote,
+                            XLangTokenType.OpNewLine,
+                            tokens[i].StartIndex
+                        );
                     }
 
                     List<IXLangToken> content = tokens.GetRange(i + 1, endQuote - i - 1);
@@ -85,10 +83,10 @@ namespace XLang.Parser.Base
                     }
 
                     IXLangToken newToken = new TextToken(
-                                                         XLangTokenType.OpStringLiteral,
-                                                         ConcatContent(),
-                                                         tokens[i].StartIndex
-                                                        );
+                        XLangTokenType.OpStringLiteral,
+                        ConcatContent(),
+                        tokens[i].StartIndex
+                    );
                     tokens.RemoveRange(i, endQuote - i + 1);
                     tokens.Insert(i, newToken);
                 }
@@ -104,10 +102,10 @@ namespace XLang.Parser.Base
                 if (token.Type == XLangTokenType.OpWord && settings.ReservedKeys.ContainsKey(token.GetValue()))
                 {
                     tokens[i] = new TextToken(
-                                              settings.ReservedKeys[token.GetValue()],
-                                              token.GetValue(),
-                                              token.StartIndex
-                                             );
+                        settings.ReservedKeys[token.GetValue()],
+                        token.GetValue(),
+                        token.StartIndex
+                    );
                 }
             }
         }
@@ -127,7 +125,7 @@ namespace XLang.Parser.Base
                     IXLangToken namespaceKey = tokens[i];
                     IXLangToken name = XLangParsingTools.ReadOne(tokens, i + 1, XLangTokenType.OpWord);
                     tokens.RemoveRange(i, 2);
-                    tokens.Insert(i, new NamespaceDefinitionToken(namespaceKey, name, new[] { namespaceKey, name }));
+                    tokens.Insert(i, new NamespaceDefinitionToken(namespaceKey, name, new[] {namespaceKey, name}));
                 }
             }
         }
@@ -149,30 +147,30 @@ namespace XLang.Parser.Base
                     IXLangToken name = XLangParsingTools.ReadOne(tokens, i + 1, XLangTokenType.OpWord);
 
                     IXLangToken[] mods = XLangParsingTools.ReadNoneOrManyOf(
-                                                                            tokens,
-                                                                            i - 1,
-                                                                            -1,
-                                                                            settings.ClassModifiers.Values.ToArray()
-                                                                           ).Reverse().ToArray();
+                        tokens,
+                        i - 1,
+                        -1,
+                        settings.ClassModifiers.Values.ToArray()
+                    ).Reverse().ToArray();
 
 
                     IXLangToken baseClass = null;
                     int offset = 2;
                     if (XLangParsingTools.ReadOneOrNone(
-                                                        tokens,
-                                                        i + offset,
-                                                        XLangTokenType.OpColon,
-                                                        out IXLangToken inhColon
-                                                       ))
+                        tokens,
+                        i + offset,
+                        XLangTokenType.OpColon,
+                        out IXLangToken inhColon
+                    ))
                     {
                         baseClass = XLangParsingTools.ReadOne(tokens, i + offset + 1, XLangTokenType.OpWord);
                         offset += 2;
                     }
                     IXLangToken block = XLangParsingTools.ReadOne(
-                                                                  tokens,
-                                                                  i + offset,
-                                                                  XLangTokenType.OpBlockToken
-                                                                 );
+                        tokens,
+                        i + offset,
+                        XLangTokenType.OpBlockToken
+                    );
 
 
                     int start = i - mods.Length;
@@ -180,15 +178,15 @@ namespace XLang.Parser.Base
                     tokens.RemoveRange(start, end - start);
 
                     tokens.Insert(
-                                  start,
-                                  new ClassDefinitionToken(
-                                                           classKey,
-                                                           name,
-                                                           baseClass,
-                                                           mods,
-                                                           block.GetChildren().ToArray()
-                                                          )
-                                 );
+                        start,
+                        new ClassDefinitionToken(
+                            classKey,
+                            name,
+                            baseClass,
+                            mods,
+                            block.GetChildren().ToArray()
+                        )
+                    );
                     i = start - 1;
                 }
             }
@@ -208,18 +206,20 @@ namespace XLang.Parser.Base
                 {
                     int end = i;
                     List<IXLangToken> found = XLangParsingTools.ReadUntilAny(
-                                                                             tokens,
-                                                                             i - 1,
-                                                                             -1,
-                                                                             new[] { XLangTokenType.OpSemicolon }
-                                                                            ).Reverse().ToList();
+                        tokens,
+                        i - 1,
+                        -1,
+                        new[] {XLangTokenType.OpSemicolon}
+                    ).Reverse().ToList();
                     if (found.FirstOrDefault()?.Type == XLangTokenType.OpUsing)
+                    {
                         continue;
+                    }
                     int saveStart = tokens[i].StartIndex;
                     int start = end - found.Count;
                     tokens.RemoveRange(start, found.Count + 1);
                     found.Where(x => x.Type == XLangTokenType.OpBlockToken).ToList()
-                         .ForEach(x => ElevateStatements(settings, x.GetChildren()));
+                        .ForEach(x => ElevateStatements(settings, x.GetChildren()));
                     tokens.Insert(start, new StatementToken(saveStart, found.ToArray()));
                     i = start;
                 }
@@ -265,9 +265,6 @@ namespace XLang.Parser.Base
         }
 
 
-
-
-
         public static void ElevateTypeDef(XLangContext context, List<IXLangToken> tokens)
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
@@ -285,28 +282,28 @@ namespace XLang.Parser.Base
                     List<IXLangToken> content = tokens[i].GetChildren();
 
                     IXLangToken[] mods = XLangParsingTools.ReadNoneOrManyOf(
-                                                                            content,
-                                                                            0,
-                                                                            1,
-                                                                            context.Settings.MemberModifiers.Values
-                                                                                   .ToArray()
-                                                                           );
+                        content,
+                        0,
+                        1,
+                        context.Settings.MemberModifiers.Values
+                            .ToArray()
+                    );
                     if (!XLangParsingTools.ReadOneOrNone(
-                                                         content,
-                                                         mods.Length,
-                                                         XLangTokenType.OpWord,
-                                                         out IXLangToken typeName
-                                                        ))
+                        content,
+                        mods.Length,
+                        XLangTokenType.OpWord,
+                        out IXLangToken typeName
+                    ))
                     {
                         continue;
                     }
 
                     if (!XLangParsingTools.ReadOneOrNone(
-                                                         content,
-                                                         mods.Length + 1,
-                                                         XLangTokenType.OpWord,
-                                                         out IXLangToken propertyName
-                                                        ))
+                        content,
+                        mods.Length + 1,
+                        XLangTokenType.OpWord,
+                        out IXLangToken propertyName
+                    ))
                     {
                         continue;
                     }
@@ -315,26 +312,27 @@ namespace XLang.Parser.Base
                     IXLangToken newToken;
                     if (content.FirstOrDefault()?.Type == XLangTokenType.OpEquality)
                     {
-                        XLangExpressionParser exParser = XLangExpressionParser.Create(context, new XLangExpressionReader(content.Skip(1).ToList()));
+                        XLangExpressionParser exParser = XLangExpressionParser.Create(context,
+                            new XLangExpressionReader(content.Skip(1).ToList()));
                         newToken = new VariableDefinitionToken(
-                                                               propertyName,
-                                                               typeName,
-                                                               mods,
-                                                               mods.Concat(new[] { typeName, propertyName })
-                                                                   .Concat(content).ToArray(),
-                                                               exParser.Parse().First()
-                                                              );
+                            propertyName,
+                            typeName,
+                            mods,
+                            mods.Concat(new[] {typeName, propertyName})
+                                .Concat(content).ToArray(),
+                            exParser.Parse().First()
+                        );
                         content.Clear();
                     }
                     else
                     {
                         newToken = new VariableDefinitionToken(
-                                                               propertyName,
-                                                               typeName,
-                                                               mods,
-                                                               mods.Concat(new[] { typeName, propertyName }).ToArray(),
-                                                               null
-                                                              );
+                            propertyName,
+                            typeName,
+                            mods,
+                            mods.Concat(new[] {typeName, propertyName}).ToArray(),
+                            null
+                        );
                     }
 
 
@@ -356,14 +354,14 @@ namespace XLang.Parser.Base
                 {
                     IXLangToken argCloseBracket =
                         XLangParsingTools.ReadOne(tokens, i - 1, XLangTokenType.OpBracketClose);
-                    List<IXLangToken> argPart = new List<IXLangToken> { argCloseBracket };
+                    List<IXLangToken> argPart = new List<IXLangToken> {argCloseBracket};
                     IXLangToken[] args = XLangParsingTools.ReadUntil(tokens, i - 2, -1, XLangTokenType.OpBracketOpen);
                     argPart.AddRange(args);
                     IXLangToken argOpenBracket = XLangParsingTools.ReadOne(
-                                                                           tokens,
-                                                                           i - 2 - args.Length,
-                                                                           XLangTokenType.OpBracketOpen
-                                                                          );
+                        tokens,
+                        i - 2 - args.Length,
+                        XLangTokenType.OpBracketOpen
+                    );
                     argPart.Add(argOpenBracket);
                     argPart.Reverse();
 
@@ -377,35 +375,35 @@ namespace XLang.Parser.Base
                          tokens[funcIdx - 1].Type == XLangTokenType.OpTypeVoid))
                     {
                         typeName = XLangParsingTools.ReadOneOfAny(
-                                                                  tokens,
-                                                                  funcIdx - 1,
-                                                                  new[]
-                                                                  {
-                                                                      XLangTokenType.OpWord, XLangTokenType.OpTypeVoid
-                                                                  }
-                                                                 );
+                            tokens,
+                            funcIdx - 1,
+                            new[]
+                            {
+                                XLangTokenType.OpWord, XLangTokenType.OpTypeVoid
+                            }
+                        );
                         int modStart = funcIdx - 1 - 1;
                         IXLangToken[] mods = XLangParsingTools.ReadNoneOrManyOf(
-                                                                                tokens,
-                                                                                modStart,
-                                                                                -1,
-                                                                                settings.MemberModifiers.Values
-                                                                                        .ToArray()
-                                                                               ).Reverse().ToArray();
+                            tokens,
+                            modStart,
+                            -1,
+                            settings.MemberModifiers.Values
+                                .ToArray()
+                        ).Reverse().ToArray();
                         int start = modStart - mods.Length + 1;
                         int end = i;
                         IXLangToken block = tokens[i];
                         tokens.RemoveRange(start, end - start + 1);
                         tokens.Insert(
-                                      start,
-                                      new FunctionDefinitionToken(
-                                                                  funcName,
-                                                                  typeName,
-                                                                  ParseArgumentList(args.Reverse().ToList()),
-                                                                  mods,
-                                                                  block.GetChildren().ToArray()
-                                                                 )
-                                     );
+                            start,
+                            new FunctionDefinitionToken(
+                                funcName,
+                                typeName,
+                                ParseArgumentList(args.Reverse().ToList()),
+                                mods,
+                                block.GetChildren().ToArray()
+                            )
+                        );
                         i = start;
                     }
                     else
@@ -418,27 +416,27 @@ namespace XLang.Parser.Base
                         typeName = funcName;
                         int modStart = funcIdx - 1;
                         IXLangToken[] mods = XLangParsingTools.ReadNoneOrManyOf(
-                                                                                tokens,
-                                                                                modStart,
-                                                                                -1,
-                                                                                settings.MemberModifiers.Values
-                                                                                        .ToArray()
-                                                                               ).Reverse().ToArray();
+                            tokens,
+                            modStart,
+                            -1,
+                            settings.MemberModifiers.Values
+                                .ToArray()
+                        ).Reverse().ToArray();
                         int start = modStart - mods.Length + 1;
                         int end = i;
                         IXLangToken block = tokens[i];
                         tokens.RemoveRange(start, end - start + 1);
                         tokens.Insert(
-                                      start,
-                                      new FunctionDefinitionToken(
-                                                                  funcName,
-                                                                  typeName,
-                                                                  ParseArgumentList(args.Reverse().ToList()),
-                                                                  mods,
-                                                                  block.GetChildren().ToArray(),
-                                                                  true
-                                                                 )
-                                     );
+                            start,
+                            new FunctionDefinitionToken(
+                                funcName,
+                                typeName,
+                                ParseArgumentList(args.Reverse().ToList()),
+                                mods,
+                                block.GetChildren().ToArray(),
+                                true
+                            )
+                        );
                         i = start;
                     }
                 }
@@ -459,14 +457,14 @@ namespace XLang.Parser.Base
                 IXLangToken varName = current;
                 Eat(XLangTokenType.OpWord);
                 ret.Add(
-                        new VariableDefinitionToken(
-                                                    varName,
-                                                    typeName,
-                                                    new IXLangToken[0],
-                                                    new[] { typeName, varName },
-                                                    null
-                                                   )
-                       );
+                    new VariableDefinitionToken(
+                        varName,
+                        typeName,
+                        new IXLangToken[0],
+                        new[] {typeName, varName},
+                        null
+                    )
+                );
                 if (current.Type == XLangTokenType.EOF)
                 {
                     return ret.ToArray();
@@ -510,30 +508,24 @@ namespace XLang.Parser.Base
                 {
                     IXLangToken token = tokens[i];
                     XLangExpressionParser parser = XLangExpressionParser.Create(context,
-                                                                                new XLangExpressionReader(
-                                                                                                          tokens[i]
-                                                                                                              .GetChildren()
-                                                                                                              .ToList()
-                                                                                                         ));
+                        new XLangExpressionReader(
+                            tokens[i]
+                                .GetChildren()
+                                .ToList()
+                        ));
                     tokens[i] = parser.Parse().First();
                 }
             }
         }
 
-        private delegate XLangRuntimeType ElevateTypeDel(
-            ClassDefinitionToken input,
-            XLangSettings settings,
-            XLangRuntimeNamespace ns,
-            XLangContext nsCollection);
-
         private static void ElevateFunctionExpressions(XLangContext context, List<IXLangToken> tokens)
         {
             XLangExpressionParser parser = XLangExpressionParser.Create(
-                                                                                                  context,
-                                                                                                  new XLangExpressionReader(
-                                                                                                                            tokens.ToList()
-                                                                                                                           )
-                                                                                                 );
+                context,
+                new XLangExpressionReader(
+                    tokens.ToList()
+                )
+            );
             tokens.Clear();
             XLangExpression[] exprs = parser.Parse();
             tokens.AddRange(exprs);
@@ -547,7 +539,6 @@ namespace XLang.Parser.Base
             List<IXLangRuntimeItem> ret = new List<IXLangRuntimeItem>();
 
 
-
             List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)> cDefMap =
                 CreateCdefMap(tokens, nsCollection);
 
@@ -557,18 +548,21 @@ namespace XLang.Parser.Base
                 XLangBroadNameLookup<XLangRuntimeType> typeNameLookup = new XLangBroadNameLookup<XLangRuntimeType>();
                 List<XLangRuntimeNamespace> close = new List<XLangRuntimeNamespace> {ns};
                 close.AddRange(
-                               nsCollection.GetNamespaces().Where(
-                                                                  x => nsCollection.DefaultImports.Contains(x.FullName) &&
-                                                                       !close.Contains(x)
-                                                                 )
-                              );
-                foreach (XLangRuntimeNamespace xLangRuntimeNamespace in nsCollection.GetNamespaces().SelectMany(x => x.GetAllNamespacesRecursive()))
+                    nsCollection.GetNamespaces().Where(
+                        x => nsCollection.DefaultImports.Contains(x.FullName) &&
+                             !close.Contains(x)
+                    )
+                );
+                foreach (XLangRuntimeNamespace xLangRuntimeNamespace in nsCollection.GetNamespaces()
+                    .SelectMany(x => x.GetAllNamespacesRecursive()))
                 {
                     foreach (XLangRuntimeType xLangRuntimeType in xLangRuntimeNamespace.GetAllTypes())
                     {
                         typeNameLookup.AddResolved(xLangRuntimeType.FullName, xLangRuntimeType);
                         if (close.Contains(xLangRuntimeNamespace))
+                        {
                             typeNameLookup.AddResolved(xLangRuntimeType.Name, xLangRuntimeType);
+                        }
                     }
                 }
                 return typeNameLookup;
@@ -586,16 +580,16 @@ namespace XLang.Parser.Base
                     if (cDefMap[i].cDefinition.BaseClass == null)
                     {
                         XLangRuntimeType newt = ElevateRuntimeType(
-                                                                   cDefMap[i].cDefinition,
-                                                                   nsCollection.Settings,
-                                                                   cDefMap[i].localNs,
-                                                                   nsCollection,
-                                                                   null
-                                                                  );
+                            cDefMap[i].cDefinition,
+                            nsCollection.Settings,
+                            cDefMap[i].localNs,
+                            nsCollection,
+                            null
+                        );
                         typeNameLookup.AddResolved(
-                                                cDefMap[i].cDefinition.Name.GetValue(),
-                                                newt
-                                               );
+                            cDefMap[i].cDefinition.Name.GetValue(),
+                            newt
+                        );
                         ret.Add(newt);
                         cDefMap.RemoveAt(i);
 
@@ -604,25 +598,24 @@ namespace XLang.Parser.Base
                     else if (typeNameLookup.CanResolve(cDefMap[i].cDefinition.BaseClass.GetValue()))
                     {
                         XLangRuntimeType newt = ElevateRuntimeType(
-                                                                   cDefMap[i].cDefinition,
-                                                                   nsCollection.Settings,
-                                                                   cDefMap[i].localNs,
-                                                                   nsCollection,
-                                                                   typeNameLookup.Resolve(
-                                                                                          cDefMap[i]
-                                                                                              .cDefinition.BaseClass
-                                                                                              .GetValue()
-                                                                                         )
-                                                                  );
+                            cDefMap[i].cDefinition,
+                            nsCollection.Settings,
+                            cDefMap[i].localNs,
+                            nsCollection,
+                            typeNameLookup.Resolve(
+                                cDefMap[i]
+                                    .cDefinition.BaseClass
+                                    .GetValue()
+                            )
+                        );
                         typeNameLookup.AddResolved(
-                                                   cDefMap[i].cDefinition.Name.GetValue(),
-                                                   newt
-                                                  );
+                            cDefMap[i].cDefinition.Name.GetValue(),
+                            newt
+                        );
                         ret.Add(newt);
                         cDefMap.RemoveAt(i);
                         resolvedAny = true;
                     }
-
 
 
                 }
@@ -667,15 +660,16 @@ namespace XLang.Parser.Base
             //}
 
 
-
         }
 
-        private static List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)> CreateCdefMap(List<IXLangToken> tokens,
-                                                                                                             XLangContext nsCollection,
-                                                                                                             XLangRuntimeNamespace ns = null)
+        private static List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)> CreateCdefMap(
+            List<IXLangToken> tokens,
+            XLangContext nsCollection,
+            XLangRuntimeNamespace ns = null)
         {
 
-            List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)> cDefMap = new List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)>();
+            List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)> cDefMap =
+                new List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)>();
             ProcessUsings(nsCollection.DefaultNamespace, tokens);
             for (int i = 0; i < tokens.Count; i++)
             {
@@ -723,8 +717,11 @@ namespace XLang.Parser.Base
                 if (tokens[i].Type == XLangTokenType.OpUsing)
                 {
                     int idx = tokens.FindIndex(i, x => x.Type == XLangTokenType.OpSemicolon);
-                    if (idx == -1) throw new Exception("Expected Semicolon after Using Directive.");
-                    IXLangToken[] name = tokens.GetRange(i + 1, idx - i-1).ToArray();
+                    if (idx == -1)
+                    {
+                        throw new Exception("Expected Semicolon after Using Directive.");
+                    }
+                    IXLangToken[] name = tokens.GetRange(i + 1, idx - i - 1).ToArray();
 
                     tokens.RemoveRange(i, idx - i + 1);
                     StringBuilder sb = new StringBuilder();
@@ -745,7 +742,8 @@ namespace XLang.Parser.Base
             XLangContext nsCollection,
             XLangRuntimeType baseClass)
         {
-            XLangRuntimeType ret = new XLangRuntimeType(input.Name.GetValue(), ns, baseClass, ParseTypeBindingFlags(input));
+            XLangRuntimeType ret =
+                new XLangRuntimeType(input.Name.GetValue(), ns, baseClass, ParseTypeBindingFlags(input));
             ns.AddType(ret);
             ret.SetMembers(ElevateMembers(input.GetChildren(), ret, settings, ns, nsCollection).ToArray());
             return ret;
@@ -874,8 +872,8 @@ namespace XLang.Parser.Base
                 if (Contains(flag))
                 {
                     throw new XLangTokenParseException(
-                                                       $"Double Modifier '{flag}' on class '{input.value.Name.GetValue()}'"
-                                                      );
+                        $"Double Modifier '{flag}' on class '{input.value.Name.GetValue()}'"
+                    );
                 }
 
                 current |= flag;
@@ -953,16 +951,16 @@ namespace XLang.Parser.Base
             XLangContext nsCollection)
         {
             XLangProperty ret = new XLangProperty(
-                                                  pDef.value.Name.GetValue(),
-                                                  FindType(
-                                                           nsCollection.GetVisibleTypes(ns),
-                                                           pDef.value.TypeName.GetValue()
-                                                          ),
-                                                  tDef,
-                                                  ParsePropertyBindingFlags(pDef),
-                                                  nsCollection,
-                                                  pDef.value.InitializerExpression
-                                                 );
+                pDef.value.Name.GetValue(),
+                FindType(
+                    nsCollection.GetVisibleTypes(ns),
+                    pDef.value.TypeName.GetValue()
+                ),
+                tDef,
+                ParsePropertyBindingFlags(pDef),
+                nsCollection,
+                pDef.value.InitializerExpression
+            );
 
             return ret;
         }
@@ -992,27 +990,33 @@ namespace XLang.Parser.Base
             }
 
             return new XLangFunction(
-                                     fDef.Name.GetValue(),
-                                     FindType(nsCollection.GetVisibleTypes(ns), fDef.TypeName.GetValue()),
-                                     tDef,
-                                     fDef.Arguments.Select(
-                                                           x => new XLangFunctionArgument(
-                                                                                          x.Name.GetValue(),
-                                                                                          FindType(
-                                                                                                   nsCollection
-                                                                                                       .GetVisibleTypes(
-                                                                                                                        ns
-                                                                                                                       ),
-                                                                                                   x.TypeName
-                                                                                                    .GetValue()
-                                                                                                  )
-                                                                                         )
-                                                          ).Cast<IXLangRuntimeFunctionArgument>().ToArray(),
-                                     flags,
-                                     fDef.SubTokens.Cast<XLangExpression>().ToArray(),
-                                     nsCollection
-                                    );
+                fDef.Name.GetValue(),
+                FindType(nsCollection.GetVisibleTypes(ns), fDef.TypeName.GetValue()),
+                tDef,
+                fDef.Arguments.Select(
+                    x => new XLangFunctionArgument(
+                        x.Name.GetValue(),
+                        FindType(
+                            nsCollection
+                                .GetVisibleTypes(
+                                    ns
+                                ),
+                            x.TypeName
+                                .GetValue()
+                        )
+                    )
+                ).Cast<IXLangRuntimeFunctionArgument>().ToArray(),
+                flags,
+                fDef.SubTokens.Cast<XLangExpression>().ToArray(),
+                nsCollection
+            );
         }
+
+        private delegate XLangRuntimeType ElevateTypeDel(
+            ClassDefinitionToken input,
+            XLangSettings settings,
+            XLangRuntimeNamespace ns,
+            XLangContext nsCollection);
 
         //Step 6
         //Parse if/try/while/for/foreach definitions
@@ -1026,6 +1030,5 @@ namespace XLang.Parser.Base
         //
         //Add All tokens that are read to the parent.
         //When finding a Key that has a block => set all block content as child of current token.
-
     }
 }

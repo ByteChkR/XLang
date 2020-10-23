@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-
 using XLang.Parser.Token.Expressions;
 using XLang.Runtime.Binding;
 using XLang.Runtime.Members;
@@ -11,7 +10,6 @@ namespace XLang.Parser.Runtime
 {
     public class XLangFunction : IXLangRuntimeFunction
     {
-
         private readonly XLangExpression[] Block;
 
         private readonly XLangContext context;
@@ -63,7 +61,7 @@ namespace XLang.Parser.Runtime
             {
                 IXLangRuntimeFunctionArgument xLangRuntimeFunctionArgument = ParameterList[i];
                 scope.Declare(xLangRuntimeFunctionArgument.Name, xLangRuntimeFunctionArgument.Type)
-                     .SetValue(arguments[i]);
+                    .SetValue(arguments[i]);
             }
 
             ImplementingClass.AddStatics(scope);
@@ -74,7 +72,9 @@ namespace XLang.Parser.Runtime
             {
                 Block[i].Process(scope, instance);
                 if (scope.Check(XLangRuntimeScope.ScopeFlags.Return))
+                {
                     return scope.Return;
+                }
             }
 
             return scope.Return;
@@ -84,6 +84,5 @@ namespace XLang.Parser.Runtime
         {
             return Block.ToArray();
         }
-
     }
 }

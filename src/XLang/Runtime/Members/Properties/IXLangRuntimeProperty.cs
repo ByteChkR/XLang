@@ -4,7 +4,6 @@ namespace XLang.Runtime.Members.Properties
 {
     public interface IXLangRuntimeProperty : IXLangRuntimeMember
     {
-
         XLangRuntimeType PropertyType { get; }
 
         bool CanSet();
@@ -14,6 +13,5 @@ namespace XLang.Runtime.Members.Properties
         IXLangRuntimeTypeInstance GetValue(IXLangRuntimeTypeInstance instance);
 
         void SetValue(IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance value);
-
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using XLang.Core;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
@@ -9,10 +8,9 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
 {
     public class XLangWhileOp : XLangExpression
     {
-
         public readonly XLangExpression Condition;
-        public readonly XLangTokenType OperationType;
         private readonly Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> ExprBody;
+        public readonly XLangTokenType OperationType;
 
         public XLangWhileOp(
             XLangContext context, XLangExpression condition, XLangTokenType operationType,
@@ -38,12 +36,15 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         public override IXLangRuntimeTypeInstance Process(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
         {
             IXLangRuntimeTypeInstance condReturn = Condition.Process(scope, instance);
-            while ((decimal)condReturn.GetRaw() != 0)
+            while ((decimal) condReturn.GetRaw() != 0)
             {
                 if (!scope.Check(XLangRuntimeScope.ScopeFlags.Continue))
                 {
                     ExprBody(scope, instance);
-                    if (scope.Check(XLangRuntimeScope.ScopeFlags.Break | XLangRuntimeScope.ScopeFlags.Return)) break;
+                    if (scope.Check(XLangRuntimeScope.ScopeFlags.Break | XLangRuntimeScope.ScopeFlags.Return))
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -56,6 +57,5 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
             scope.ClearFlag(XLangRuntimeScope.ScopeFlags.Break);
             return null;
         }
-
     }
 }

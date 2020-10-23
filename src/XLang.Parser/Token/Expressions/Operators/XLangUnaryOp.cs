@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using XLang.Core;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
@@ -8,7 +7,6 @@ namespace XLang.Parser.Token.Expressions.Operators
 {
     public class XLangUnaryOp : XLangExpression
     {
-
         public readonly XLangExpression Left;
         public readonly XLangTokenType OperationType;
 
@@ -23,7 +21,7 @@ namespace XLang.Parser.Token.Expressions.Operators
 
         public override List<IXLangToken> GetChildren()
         {
-            return new List<IXLangToken> { Left };
+            return new List<IXLangToken> {Left};
         }
 
         public override string GetValue()
@@ -40,8 +38,7 @@ namespace XLang.Parser.Token.Expressions.Operators
                 return left;
             }
 
-            return Context.GetUnaryOperatorImplementation(left.Type, OperationType).Invoke(null, new[] { left });
+            return Context.GetUnaryOperatorImplementation(left.Type, OperationType).Invoke(null, new[] {left});
         }
-
     }
 }

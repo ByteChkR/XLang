@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using XLang.Queries;
 using XLang.Runtime;
 using XLang.Runtime.Implementations;
@@ -11,22 +10,23 @@ namespace XLang.Parser.Token.Expressions.Operands
 {
     public class XLangVarOperand : XLangExpression
     {
-
-        public virtual IXLangToken Value { get; }
-
-        protected XLangVarOperand(XLangContext context) : base(context) { }
+        protected XLangVarOperand(XLangContext context) : base(context)
+        {
+        }
 
         public XLangVarOperand(XLangContext context, IXLangToken value) : base(context)
         {
             Value = value;
         }
 
+        public virtual IXLangToken Value { get; }
+
 
         public override int StartIndex { get; }
 
         public override List<IXLangToken> GetChildren()
         {
-            return new List<IXLangToken> { Value };
+            return new List<IXLangToken> {Value};
         }
 
         public override string GetValue()
@@ -52,11 +52,13 @@ namespace XLang.Parser.Token.Expressions.Operands
             IXLangRuntimeItem ac =
                 XLangRuntimeResolver.ResolveItem(scope, Value.GetValue(), null, scope.OwnerType);
 
-            if(ac== null)throw new Exception("Can not find Item: "+ Value.GetValue());
+            if (ac == null)
+            {
+                throw new Exception("Can not find Item: " + Value.GetValue());
+            }
 
             return new XLangFunctionAccessInstance(ac, instance, Context.GetType("XL.function"));
 
         }
-
     }
 }

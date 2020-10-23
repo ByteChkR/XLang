@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using XLang.Runtime;
 using XLang.Runtime.Members;
 using XLang.Runtime.Scopes;
@@ -10,7 +9,6 @@ namespace XLang.Queries
 {
     public static class XLangBindingResolver
     {
-
         private static T[] Query<T>(IEnumerable<T> collection, string name, XLangBindingQuery query)
             where T : IXLangScopeAccess
         {
@@ -106,6 +104,5 @@ namespace XLang.Queries
         {
             return Query(nameSpace.GetAllTypes(), name, query);
         }
-
     }
 }

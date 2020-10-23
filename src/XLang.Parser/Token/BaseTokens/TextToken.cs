@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-
 using XLang.Core;
 
 namespace XLang.Parser.Token.BaseTokens
 {
     public class TextToken : IXLangToken
     {
-
         public TextToken(XLangTokenType type, string value, int startIndex)
         {
             Type = type;
@@ -35,6 +33,5 @@ namespace XLang.Parser.Token.BaseTokens
         {
             return GetValue();
         }
-
     }
 }

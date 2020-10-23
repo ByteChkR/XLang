@@ -1,34 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
 using XLang.Core;
-using XLang.Parser.Reader;
 using XLang.Parser.Token;
 using XLang.Parser.Token.Combined;
 using XLang.Parser.Token.Expressions;
 using XLang.Parser.Token.Expressions.Operands;
 using XLang.Parser.Token.Expressions.Operators;
 using XLang.Parser.Token.Expressions.Operators.Special;
-using XLang.Runtime.Scopes;
-using XLang.Runtime.Types;
 
 namespace XLang.Parser.Expressions
 {
     public class XLangExpressionValueCreator : AXLangExpressionValueCreator
     {
-
-        #region Specials
-
-        
-
-        
-
-
-
-        #endregion
-
-
         public override XLangExpression CreateValue(XLangExpressionParser parser)
         {
             if (parser.CurrentToken.Type == XLangTokenType.OpNew)
@@ -71,7 +53,7 @@ namespace XLang.Parser.Expressions
 
             if (parser.CurrentToken.Type == XLangTokenType.OpWhile)
             {
-                return XLangSpecialOps. ReadWhile(parser);
+                return XLangSpecialOps.ReadWhile(parser);
             }
 
             if (parser.CurrentToken.Type == XLangTokenType.OpBracketOpen)
@@ -99,15 +81,15 @@ namespace XLang.Parser.Expressions
                 if (parser.CurrentToken.Type == XLangTokenType.OpWord)
                 {
                     token = new XLangVarDefOperand(
-                                                   parser.Context,
-                                                   new VariableDefinitionToken(
-                                                                               parser.CurrentToken,
-                                                                               item,
-                                                                               new IXLangToken[0],
-                                                                               new IXLangToken[0],
-                                                                               null
-                                                                              )
-                                                  );
+                        parser.Context,
+                        new VariableDefinitionToken(
+                            parser.CurrentToken,
+                            item,
+                            new IXLangToken[0],
+                            new IXLangToken[0],
+                            null
+                        )
+                    );
                     parser.Eat(parser.CurrentToken.Type);
                 }
                 else
@@ -121,7 +103,8 @@ namespace XLang.Parser.Expressions
 
             if (parser.CurrentToken.Type == XLangTokenType.OpVariableDefinition)
             {
-                XLangExpression token = new XLangVarDefOperand(parser.Context, (VariableDefinitionToken)parser.CurrentToken);
+                XLangExpression token =
+                    new XLangVarDefOperand(parser.Context, (VariableDefinitionToken) parser.CurrentToken);
                 parser.Eat(XLangTokenType.OpVariableDefinition);
                 return token;
             }
@@ -137,5 +120,8 @@ namespace XLang.Parser.Expressions
             throw new Exception("Invalid Token: " + parser.CurrentToken.Type);
         }
 
+        #region Specials
+
+        #endregion
     }
 }

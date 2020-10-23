@@ -1,28 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using XLang.Runtime;
 using XLang.Runtime.Binding;
-using XLang.Runtime.Implementations;
 using XLang.Runtime.Members;
 using XLang.Runtime.Types;
-using XLang.Shared;
 
 namespace XLang.BaseTypes
 {
     public class XLCoreNamespace : XLangRuntimeNamespace
     {
-
-        public event Action<string> WriteLineImpl = null;
-
-        public void SetWritelineImpl(Action<string> impl) => WriteLineImpl = impl;
-        public void InvokeWriteLine(string line) => WriteLineImpl?.Invoke(line);
-
-        private XLCoreNamespace(XLangSettings settings, Action<string> writeLineImpl = null) : base("XL", null, new List<XLangRuntimeType>(), settings)
+        private XLCoreNamespace(XLangSettings settings, Action<string> writeLineImpl = null) : base("XL", null,
+            new List<XLangRuntimeType>(), settings)
         {
             WriteLineImpl = writeLineImpl ?? (x => Console.WriteLine("[println]" + x));
         }
 
+        public event Action<string> WriteLineImpl;
+
+        public void SetWritelineImpl(Action<string> impl)
+        {
+            WriteLineImpl = impl;
+        }
+
+        public void InvokeWriteLine(string line)
+        {
+            WriteLineImpl?.Invoke(line);
+        }
 
 
         public static XLCoreNamespace CreateNamespace(XLangSettings settings)
@@ -30,23 +33,21 @@ namespace XLang.BaseTypes
             XLCoreNamespace core = new XLCoreNamespace(settings);
 
 
-
             XLangRuntimeType voidType = new XLangRuntimeType(
-                                                             "void",
-                                                             core,
-                                                             null,
-                                                             XLangBindingFlags.Instance | XLangBindingFlags.Public
-                                                            );
-
+                "void",
+                core,
+                null,
+                XLangBindingFlags.Instance | XLangBindingFlags.Public
+            );
 
 
             XLangRuntimeType objectType = new XLangObjectType(core).GetObject();
             XLangRuntimeType arrayType = new XLangRuntimeType(
-                                                              "Array",
-                                                              core,
-                                                              objectType,
-                                                              XLangBindingFlags.Instance | XLangBindingFlags.Public
-                                                             );
+                "Array",
+                core,
+                objectType,
+                XLangBindingFlags.Instance | XLangBindingFlags.Public
+            );
 
             XLangRuntimeType functionType = new XLangFunctionType(core).GetObject(objectType);
             XLangRuntimeType numberType = new XLangNumberType(core).GetObject(objectType);
@@ -64,6 +65,5 @@ namespace XLang.BaseTypes
             core.AddType(XLangStringType.CreateConsole(core, voidType, stringType));
             return core;
         }
-
     }
 }

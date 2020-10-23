@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-
 using XLang.Core;
 using XLang.Parser.Reader;
 using XLang.Parser.Shared;
@@ -12,39 +10,13 @@ namespace XLang.Parser.Expressions
 {
     public class XLangExpressionParser
     {
-
         public readonly XLangContext Context;
+        public readonly XLangExpressionOperatorCollection OpCollection;
         public readonly XLangExpressionReader Reader;
         public readonly XLangExpressionValueCreator ValueCreator;
-        public readonly XLangExpressionOperatorCollection OpCollection;
 
-        public static XLangExpressionParser Create(XLangContext context, XLangExpressionReader reader)
-        {
-            XLangExpressionOperator[] operators = new XLangExpressionOperator[]
-                                                  {
-                                                      new XLangArraySubscriptOperator(),
-                                                      new XLangAssignmentOperators(),
-                                                      new XLangBitAndOperators(),
-                                                      new XLangBitOrOperators(),
-                                                      new XLangBitXOrOperators(),
-                                                      new XLangInEqualityOperators(),
-                                                      new XLangEqualityOperators(),
-                                                      new XLangInvocationSelectorOperator(),
-                                                      new XLangLogicalAndOperators(),
-                                                      new XLangLogicalOrOperators(),
-                                                      new XLangMemberSelectorOperator(),
-                                                      new XLangMulDivModOperators(),
-                                                      new XLangPlusMinusOperators(),
-                                                      new XLangRelationOperators(),
-                                                      new XLangUnaryOperators(),
-
-                                                  };
-            XLangExpressionValueCreator valueCreator = new XLangExpressionValueCreator();
-            return new XLangExpressionParser(context, reader, valueCreator, operators);
-
-        }
-
-        public XLangExpressionParser(XLangContext context, XLangExpressionReader reader, XLangExpressionValueCreator valueCreator, XLangExpressionOperator[] operators)
+        public XLangExpressionParser(XLangContext context, XLangExpressionReader reader,
+            XLangExpressionValueCreator valueCreator, XLangExpressionOperator[] operators)
         {
             OpCollection = new XLangExpressionOperatorCollection(operators);
             ValueCreator = valueCreator;
@@ -55,15 +27,49 @@ namespace XLang.Parser.Expressions
 
         public IXLangToken CurrentToken { get; private set; }
 
+        public static XLangExpressionParser Create(XLangContext context, XLangExpressionReader reader)
+        {
+            XLangExpressionOperator[] operators =
+            {
+                new XLangArraySubscriptOperator(),
+                new XLangAssignmentOperators(),
+                new XLangBitAndOperators(),
+                new XLangBitOrOperators(),
+                new XLangBitXOrOperators(),
+                new XLangInEqualityOperators(),
+                new XLangEqualityOperators(),
+                new XLangInvocationSelectorOperator(),
+                new XLangLogicalAndOperators(),
+                new XLangLogicalOrOperators(),
+                new XLangMemberSelectorOperator(),
+                new XLangMulDivModOperators(),
+                new XLangPlusMinusOperators(),
+                new XLangRelationOperators(),
+                new XLangUnaryOperators()
+
+            };
+            XLangExpressionValueCreator valueCreator = new XLangExpressionValueCreator();
+            return new XLangExpressionParser(context, reader, valueCreator, operators);
+
+        }
+
         public XLangExpression[] Parse()
         {
-            if (CurrentToken.Type == XLangTokenType.EOF) return new XLangExpression[0];
-            List<XLangExpression> ret = new List<XLangExpression> { ParseExpr(OpCollection.Lowest) };
+            if (CurrentToken.Type == XLangTokenType.EOF)
+            {
+                return new XLangExpression[0];
+            }
+            List<XLangExpression> ret = new List<XLangExpression> {ParseExpr(OpCollection.Lowest)};
             while (CurrentToken.Type != XLangTokenType.EOF)
             {
-                if (CurrentToken.Type == XLangTokenType.OpSemicolon || CurrentToken.Type==XLangTokenType.OpBlockToken)
+                if (CurrentToken.Type == XLangTokenType.OpSemicolon || CurrentToken.Type == XLangTokenType.OpBlockToken)
+                {
                     Eat(CurrentToken.Type);
-                if (CurrentToken.Type == XLangTokenType.EOF) break;
+                }
+                if (CurrentToken.Type == XLangTokenType.EOF)
+                {
+                    break;
+                }
                 ret.Add(ParseExpr(OpCollection.Lowest));
             }
             return ret.ToArray();
@@ -88,7 +94,10 @@ namespace XLang.Parser.Expressions
 
             for (int i = startAt; i <= OpCollection.Highest; i++)
             {
-                if (!OpCollection.HasLevel(i)) continue;
+                if (!OpCollection.HasLevel(i))
+                {
+                    continue;
+                }
 
                 List<XLangExpressionOperator> ops = OpCollection.GetLevel(i);
 
@@ -102,6 +111,5 @@ namespace XLang.Parser.Expressions
 
             return node;
         }
-
     }
 }

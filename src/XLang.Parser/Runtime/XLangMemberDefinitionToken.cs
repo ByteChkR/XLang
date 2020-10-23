@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using XLang.Core;
 using XLang.Parser.Token;
 using XLang.Runtime.Binding;
@@ -9,7 +8,6 @@ namespace XLang.Parser.Runtime
 {
     public abstract class XLangMemberDefinitionToken : IXLangToken
     {
-
         public readonly XLangMemberFlags BindingFlags;
         public readonly XLangMemberType MemberType;
 
@@ -37,6 +35,5 @@ namespace XLang.Parser.Runtime
         public XLangTokenType Type => XLangTokenType.OpRuntimeMember;
 
         public int StartIndex { get; }
-
     }
 }

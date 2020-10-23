@@ -8,7 +8,8 @@ namespace XLang.Parser.Token.Combined
         public readonly IXLangToken UsingKey;
         public readonly IXLangToken[] UsingParts;
 
-        public UsingDefinitionToken(XLangTokenType type, IXLangToken usingKey, IXLangToken[] usingParts, int start) : base(type, new []{usingKey}.Concat(usingParts).ToArray(), start)
+        public UsingDefinitionToken(XLangTokenType type, IXLangToken usingKey, IXLangToken[] usingParts, int start) :
+            base(type, new[] {usingKey}.Concat(usingParts).ToArray(), start)
         {
             UsingKey = usingKey;
             UsingParts = usingParts;

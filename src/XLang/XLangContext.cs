@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using XLang.BaseTypes;
 using XLang.Core;
 using XLang.Queries;
@@ -16,9 +15,7 @@ namespace XLang
 {
     public class XLangContext
     {
-
         private readonly List<string> defaultImports;
-        public IReadOnlyCollection<string> DefaultImports => defaultImports.AsReadOnly();
         public readonly XLangRuntimeNamespace DefaultNamespace;
 
         private readonly List<XLangRuntimeNamespace> loadedNamespaces = new List<XLangRuntimeNamespace>();
@@ -32,6 +29,8 @@ namespace XLang
             DefaultNamespace = new XLangRuntimeNamespace("DEFAULT", null, new List<XLangRuntimeType>(), settings);
             LoadNamespace(XLCoreNamespace.CreateNamespace(settings));
         }
+
+        public IReadOnlyCollection<string> DefaultImports => defaultImports.AsReadOnly();
 
         public void LoadType(XLangRuntimeType type)
         {
@@ -82,20 +81,20 @@ namespace XLang
             foreach (XLangRuntimeNamespace root in GetNamespaces())
             {
                 closest = VisitRecursive(
-                                         root,
-                                         ns =>
-                                         {
-                                             string nsn = ns.FullName;
-                                             return name.StartsWith(nsn + ".");
-                                         },
-                                         ns =>
-                                         {
-                                             string nsn = ns.FullName;
-                                             return name == nsn ||
-                                                    ns.Children.Count == 0 &&
-                                                    name.StartsWith(nsn + ".");
-                                         }
-                                        );
+                    root,
+                    ns =>
+                    {
+                        string nsn = ns.FullName;
+                        return name.StartsWith(nsn + ".");
+                    },
+                    ns =>
+                    {
+                        string nsn = ns.FullName;
+                        return name == nsn ||
+                               ns.Children.Count == 0 &&
+                               name.StartsWith(nsn + ".");
+                    }
+                );
                 if (closest != null)
                 {
                     break;
@@ -114,20 +113,20 @@ namespace XLang
             foreach (XLangRuntimeNamespace root in loadedNamespaces)
             {
                 closest = VisitRecursive(
-                                         root,
-                                         ns =>
-                                         {
-                                             string nsn = ns.FullName;
-                                             return name.StartsWith(nsn + ".");
-                                         },
-                                         ns =>
-                                         {
-                                             string nsn = ns.FullName;
-                                             return name == nsn ||
-                                                    ns.Children.Count == 0 &&
-                                                    name.StartsWith(nsn + ".");
-                                         }
-                                        );
+                    root,
+                    ns =>
+                    {
+                        string nsn = ns.FullName;
+                        return name.StartsWith(nsn + ".");
+                    },
+                    ns =>
+                    {
+                        string nsn = ns.FullName;
+                        return name == nsn ||
+                               ns.Children.Count == 0 &&
+                               name.StartsWith(nsn + ".");
+                    }
+                );
                 if (closest != null)
                 {
                     break;
@@ -181,7 +180,7 @@ namespace XLang
 
         public IEnumerable<XLangRuntimeNamespace> GetNamespaces()
         {
-            return loadedNamespaces.Concat(new[] { DefaultNamespace });
+            return loadedNamespaces.Concat(new[] {DefaultNamespace});
         }
 
         public IXLangRuntimeFunction GetUnaryOperatorImplementation(
@@ -193,8 +192,8 @@ namespace XLang
             }
 
             throw new XLangRuntimeTypeException(
-                                                $"No operator implementation for operator: '{type}' on type '{leftType.FullName}'"
-                                               );
+                $"No operator implementation for operator: '{type}' on type '{leftType.FullName}'"
+            );
         }
 
         public bool TryGetUnaryOperatorImplementation(
@@ -202,16 +201,16 @@ namespace XLang
             XLangTokenType type, out IXLangRuntimeFunction operatorImpl)
         {
             IEnumerable<IXLangScopeAccess> items = leftType.GetMembers(
-                                                                       type.ToString(),
-                                                                       XLangBindingQuery.Override |
-                                                                       XLangBindingQuery.Operator |
-                                                                       XLangBindingQuery.Static
-                                                                      );
+                type.ToString(),
+                XLangBindingQuery.Override |
+                XLangBindingQuery.Operator |
+                XLangBindingQuery.Static
+            );
             operatorImpl = items.Cast<IXLangRuntimeFunction>()
-                                .FirstOrDefault(
-                                                x => x.ParameterList.Length == 1 &&
-                                                     x.ParameterList.First().Type == leftType
-                                               );
+                .FirstOrDefault(
+                    x => x.ParameterList.Length == 1 &&
+                         x.ParameterList.First().Type == leftType
+                );
             return operatorImpl != null;
         }
 
@@ -224,8 +223,8 @@ namespace XLang
             }
 
             throw new XLangRuntimeTypeException(
-                                                $"No operator implementation for operator: '{type}' on types '{leftType.FullName}',  '{rightType.FullName}'"
-                                               );
+                $"No operator implementation for operator: '{type}' on types '{leftType.FullName}',  '{rightType.FullName}'"
+            );
         }
 
         public bool TryGetBinaryOperatorImplementation(
@@ -233,18 +232,17 @@ namespace XLang
             XLangTokenType type, out IXLangRuntimeFunction operatorImpl)
         {
             operatorImpl = leftType?.GetMembers(
-                                                type.ToString(),
-                                                XLangBindingQuery.Override |
-                                                XLangBindingQuery.Operator |
-                                                XLangBindingQuery.Static
-                                               ).Cast<IXLangRuntimeFunction>()
-                                   .FirstOrDefault(
-                                                   x => x.ParameterList.Length == 2 &&
-                                                        leftType.InheritsFrom(x.ParameterList.First().Type) &&
-                                                        rightType.InheritsFrom(x.ParameterList.Skip(1).First().Type)
-                                                  );
+                    type.ToString(),
+                    XLangBindingQuery.Override |
+                    XLangBindingQuery.Operator |
+                    XLangBindingQuery.Static
+                ).Cast<IXLangRuntimeFunction>()
+                .FirstOrDefault(
+                    x => x.ParameterList.Length == 2 &&
+                         leftType.InheritsFrom(x.ParameterList.First().Type) &&
+                         rightType.InheritsFrom(x.ParameterList.Skip(1).First().Type)
+                );
             return operatorImpl != null;
         }
-
     }
 }

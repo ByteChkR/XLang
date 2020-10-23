@@ -4,8 +4,6 @@ namespace XLang.Parser.Expressions
 {
     public abstract class AXLangExpressionValueCreator
     {
-
         public abstract XLangExpression CreateValue(XLangExpressionParser parser);
-
     }
 }

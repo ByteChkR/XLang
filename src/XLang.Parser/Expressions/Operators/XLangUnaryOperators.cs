@@ -6,7 +6,6 @@ namespace XLang.Parser.Expressions
 {
     public class XLangUnaryOperators : XLangExpressionOperator
     {
-
         public override int PrecedenceLevel => 14;
 
         public override bool CanCreate(XLangExpressionParser parser, XLangExpression currentNode)
@@ -23,6 +22,5 @@ namespace XLang.Parser.Expressions
             parser.Eat(parser.CurrentToken.Type);
             return token;
         }
-
     }
 }

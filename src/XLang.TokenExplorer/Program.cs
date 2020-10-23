@@ -5,7 +5,6 @@ namespace XLang.TokenExplorer
 {
     internal static class Program
     {
-
         /// <summary>
         ///     The main entry point for the application.
         /// </summary>
@@ -16,6 +15,5 @@ namespace XLang.TokenExplorer
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new TokenExplorerForm(args));
         }
-
     }
 }

@@ -6,7 +6,6 @@ namespace XLang.Parser.Expressions
 {
     public class XLangMulDivModOperators : XLangExpressionOperator
     {
-
         public override int PrecedenceLevel => 13;
 
         public override bool CanCreate(XLangExpressionParser parser, XLangExpression currentNode)
@@ -20,9 +19,9 @@ namespace XLang.Parser.Expressions
         {
             XLangTokenType type = parser.CurrentToken.Type;
             parser.Eat(parser.CurrentToken.Type);
-            XLangExpression token = new XLangBinaryOp(parser.Context, currentNode, type, parser.ParseExpr(PrecedenceLevel));
+            XLangExpression token =
+                new XLangBinaryOp(parser.Context, currentNode, type, parser.ParseExpr(PrecedenceLevel));
             return token;
         }
-
     }
 }

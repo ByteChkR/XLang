@@ -13,9 +13,7 @@ namespace XLang.Parser.Expressions
 {
     public static class XLangSpecialOps
     {
-
         #region For Parser
-
 
         public static XLangExpression ReadFor(XLangExpressionParser parser)
         {
@@ -32,25 +30,101 @@ namespace XLang.Parser.Expressions
             List<XLangExpression> block;
             if (parser.CurrentToken.Type != XLangTokenType.OpBlockToken)
             {
-                block = new List<XLangExpression> { parser.ParseExpr(0) };
+                block = new List<XLangExpression> {parser.ParseExpr(0)};
             }
             else
             {
-                block = XLangExpressionParser.Create(parser.Context, new XLangExpressionReader(parser.CurrentToken.GetChildren())).Parse().ToList();
+                block = XLangExpressionParser
+                    .Create(parser.Context, new XLangExpressionReader(parser.CurrentToken.GetChildren())).Parse()
+                    .ToList();
             }
-            token = new XLangForOp(parser.Context, vDecl, condition, vInc, XLangTokenType.OpFor, (x, y) => RunMulti(block, x, y));
+            token = new XLangForOp(parser.Context, vDecl, condition, vInc, XLangTokenType.OpFor,
+                (x, y) => RunMulti(block, x, y));
 
 
             return token;
         }
 
+        #endregion
+
+
+        #region While Parser
+
+        public static XLangExpression ReadWhile(XLangExpressionParser parser)
+        {
+            parser.Eat(XLangTokenType.OpWhile);
+            parser.Eat(XLangTokenType.OpBracketOpen);
+            XLangExpression condition = parser.ParseExpr(0);
+            parser.Eat(XLangTokenType.OpBracketClose);
+
+            XLangExpression token = null;
+            List<XLangExpression> block;
+            if (parser.CurrentToken.Type != XLangTokenType.OpBlockToken)
+            {
+                block = new List<XLangExpression> {parser.ParseExpr(0)};
+            }
+            else
+            {
+                block = XLangExpressionParser
+                    .Create(parser.Context, new XLangExpressionReader(parser.CurrentToken.GetChildren())).Parse()
+                    .ToList();
+            }
+            token = new XLangWhileOp(parser.Context, condition, XLangTokenType.OpWhile, RunMulti);
+
+            void RunMulti(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
+            {
+                foreach (XLangExpression xLangExpression in block)
+                {
+                    xLangExpression.Process(scope, instance);
+                    if (scope.Check(XLangRuntimeScope.ScopeFlags.Continue))
+                    {
+                        scope.ClearFlag(XLangRuntimeScope.ScopeFlags.Continue);
+                        return;
+                    }
+                    if (scope.Check(XLangRuntimeScope.ScopeFlags.Break | XLangRuntimeScope.ScopeFlags.Return))
+                    {
+                        return;
+                    }
+                }
+            }
+
+            return token;
+        }
+
+        #endregion
+
+
+        #region Utility
+
+        private static void RunMulti(
+            IEnumerable<XLangExpression> block, XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance,
+            bool clearContinue = true)
+        {
+            foreach (XLangExpression xLangExpression in block)
+            {
+                xLangExpression.Process(scope, instance);
+                if (scope.Check(XLangRuntimeScope.ScopeFlags.Continue))
+                {
+                    if (clearContinue)
+                    {
+                        scope.ClearFlag(XLangRuntimeScope.ScopeFlags.Continue);
+                    }
+                    return;
+                }
+                if (scope.Check(XLangRuntimeScope.ScopeFlags.Break | XLangRuntimeScope.ScopeFlags.Return))
+                {
+                    return;
+                }
+            }
+        }
 
         #endregion
 
 
         #region If Parser
 
-        private static (XLangExpression, Action<XLangRuntimeScope, IXLangRuntimeTypeInstance>) ReadIfStatement(XLangExpressionParser parser)
+        private static (XLangExpression, Action<XLangRuntimeScope, IXLangRuntimeTypeInstance>) ReadIfStatement(
+            XLangExpressionParser parser)
         {
             parser.Eat(XLangTokenType.OpIf);
             parser.Eat(XLangTokenType.OpBracketOpen);
@@ -67,7 +141,7 @@ namespace XLang.Parser.Expressions
             {
                 XLangExpression expr = parser.ParseExpr(0);
                 parser.Eat(XLangTokenType.OpSemicolon);
-                return new List<XLangExpression> { expr };
+                return new List<XLangExpression> {expr};
             }
 
             IXLangToken token = parser.CurrentToken;
@@ -119,79 +193,6 @@ namespace XLang.Parser.Expressions
             return new XLangIfOp(parser.Context, XLangTokenType.OpIf, conditions, elseBranch);
         }
 
-
         #endregion
-
-
-        #region While Parser
-
-
-        public static XLangExpression ReadWhile(XLangExpressionParser parser)
-        {
-            parser.Eat(XLangTokenType.OpWhile);
-            parser.Eat(XLangTokenType.OpBracketOpen);
-            XLangExpression condition = parser.ParseExpr(0);
-            parser.Eat(XLangTokenType.OpBracketClose);
-
-            XLangExpression token = null;
-            List<XLangExpression> block;
-            if (parser.CurrentToken.Type != XLangTokenType.OpBlockToken)
-            {
-                block = new List<XLangExpression> { parser.ParseExpr(0) };
-            }
-            else
-            {
-                block = XLangExpressionParser.Create(parser.Context, new XLangExpressionReader(parser.CurrentToken.GetChildren())).Parse().ToList();
-            }
-            token = new XLangWhileOp(parser.Context, condition, XLangTokenType.OpWhile, RunMulti);
-            void RunMulti(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
-            {
-                foreach (XLangExpression xLangExpression in block)
-                {
-                    xLangExpression.Process(scope, instance);
-                    if (scope.Check(XLangRuntimeScope.ScopeFlags.Continue))
-                    {
-                        scope.ClearFlag(XLangRuntimeScope.ScopeFlags.Continue);
-                        return;
-                    }
-                    if (scope.Check(XLangRuntimeScope.ScopeFlags.Break | XLangRuntimeScope.ScopeFlags.Return))
-                    {
-                        return;
-                    }
-                }
-            }
-
-            return token;
-        }
-
-        #endregion
-
-
-        #region Utility
-
-        
-        private static void RunMulti(
-            IEnumerable<XLangExpression> block, XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance,
-            bool clearContinue = true)
-        {
-            foreach (XLangExpression xLangExpression in block)
-            {
-                xLangExpression.Process(scope, instance);
-                if (scope.Check(XLangRuntimeScope.ScopeFlags.Continue))
-                {
-                    if (clearContinue)
-                        scope.ClearFlag(XLangRuntimeScope.ScopeFlags.Continue);
-                    return;
-                }
-                if (scope.Check(XLangRuntimeScope.ScopeFlags.Break | XLangRuntimeScope.ScopeFlags.Return))
-                {
-                    return;
-                }
-            }
-        }
-
-
-        #endregion
-
     }
 }

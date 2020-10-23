@@ -5,7 +5,6 @@ namespace XLang.Shared.Enum
     [Flags]
     public enum XLangBindingQuery
     {
-
         Public = 1,
         Protected = 2,
         Private = 4,
@@ -22,6 +21,5 @@ namespace XLang.Shared.Enum
         MatchType = 8192,
         Class = 16384,
         Constructor = 32768
-
     }
 }

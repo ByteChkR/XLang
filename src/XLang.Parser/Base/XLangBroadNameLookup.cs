@@ -4,16 +4,19 @@ namespace XLang.Parser.Base
 {
     public class XLangBroadNameLookup<T>
     {
-
         private readonly Dictionary<string, T> resolvables;
-        public int ResolvedCount { get; private set; }
 
         public XLangBroadNameLookup(Dictionary<string, T> resolvables)
         {
             this.resolvables = resolvables;
             EndRound();
         }
-        public XLangBroadNameLookup() : this(new Dictionary<string, T>()) { }
+
+        public XLangBroadNameLookup() : this(new Dictionary<string, T>())
+        {
+        }
+
+        public int ResolvedCount { get; private set; }
 
 
         public bool CanResolve(string name)
@@ -36,6 +39,5 @@ namespace XLang.Parser.Base
         {
             ResolvedCount = 0;
         }
-
     }
 }

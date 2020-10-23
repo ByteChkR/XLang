@@ -5,7 +5,6 @@ namespace XLang.Runtime.Implementations
 {
     public class XLangFunctionArgument : IXLangRuntimeFunctionArgument
     {
-
         public XLangFunctionArgument(string name, XLangRuntimeType type)
         {
             Name = name;
@@ -15,6 +14,5 @@ namespace XLang.Runtime.Implementations
         public string Name { get; }
 
         public XLangRuntimeType Type { get; }
-
     }
 }
