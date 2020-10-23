@@ -13,7 +13,7 @@ using XLang.Runtime.Types;
 
 namespace XLang.Parser.Tests
 {
-    public class NameTests
+    public class XLTests
     {
 
         private static string[] GetExampleFiles()
