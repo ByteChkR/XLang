@@ -65,8 +65,10 @@ namespace XLang.Queries
         {
             if (start == null)
             {
-                return scope.GetAllVisible().Concat(new[] {caller.Namespace}).Distinct().SelectMany(x => x.DefinedTypes)
+                return caller.Namespace.GetVisibleNamespaces(scope.Context).Distinct().SelectMany(x => x.DefinedTypes)
                     .FirstOrDefault(x => x.Name == name);
+                //return scope.GetAllVisible().Concat(new[] {caller.Namespace}).Distinct().SelectMany(x => x.DefinedTypes)
+                //    .FirstOrDefault(x => x.Name == name);
             }
 
             return start.DefinedTypes.FirstOrDefault(x => x.Name == name);

@@ -18,7 +18,8 @@ namespace XLang
         private readonly List<string> defaultImports;
         public readonly XLangRuntimeNamespace DefaultNamespace;
 
-        private readonly List<XLangRuntimeNamespace> loadedNamespaces = new List<XLangRuntimeNamespace>();
+        //private readonly List<XLangRuntimeNamespace> loadedNamespaces = new List<XLangRuntimeNamespace>();
+        private readonly List<XLangRuntimeNamespace> allNamespaces = new List<XLangRuntimeNamespace>();
 
         public readonly XLangSettings Settings;
 
@@ -27,7 +28,10 @@ namespace XLang
             this.defaultImports = defaultImports.ToList();
             Settings = settings;
             DefaultNamespace = new XLangRuntimeNamespace("DEFAULT", null, new List<XLangRuntimeType>(), settings);
-            LoadNamespace(XLCoreNamespace.CreateNamespace(settings));
+            LoadNamespace(DefaultNamespace);
+            XLangRuntimeNamespace coreNs = XLCoreNamespace.CreateNamespace(settings);
+            LoadNamespace(coreNs);
+
         }
 
         public IReadOnlyCollection<string> DefaultImports => defaultImports.AsReadOnly();
@@ -44,14 +48,19 @@ namespace XLang
 
         public void LoadNamespace(XLangRuntimeNamespace nameSpace)
         {
-            loadedNamespaces.Add(nameSpace);
+            if(!allNamespaces.Contains(nameSpace))
+            {
+                nameSpace.AddUsing(nameSpace.FullName);
+                allNamespaces.Add(nameSpace);
+                //loadedNamespaces.ForEach(x=>nameSpace.AddUsing(x.FullName));
+            }
         }
 
         public List<XLangRuntimeType> GetVisibleTypes(params XLangRuntimeNamespace[] visibleNamespaces)
         {
             List<XLangRuntimeType> ret = new List<XLangRuntimeType>();
             IEnumerable<XLangRuntimeNamespace> nss =
-                visibleNamespaces.Concat(loadedNamespaces.Where(x => DefaultImports.Contains(x.FullName)));
+                visibleNamespaces.Concat(allNamespaces.Where(x => DefaultImports.Contains(x.FullName)));
             foreach (XLangRuntimeNamespace ns in nss)
             {
                 ret.AddRange(ns.DefinedTypes);
@@ -110,7 +119,8 @@ namespace XLang
         public XLangRuntimeNamespace CreateOrGet(string name)
         {
             XLangRuntimeNamespace closest = null;
-            foreach (XLangRuntimeNamespace root in loadedNamespaces)
+            if (DefaultNamespace.Name == name) return DefaultNamespace;
+            foreach (XLangRuntimeNamespace root in allNamespaces)
             {
                 closest = VisitRecursive(
                     root,
@@ -141,13 +151,16 @@ namespace XLang
 
             string startName = closest?.FullName ?? "";
 
-            string[] parts = name.Remove(0, (startName + ".").Length).Split('.');
+            string[] parts = null;
+            if (startName == "") parts = name.Split('.');
+            else parts = name.Remove(0, (startName + ".").Length).Split('.');
 
             XLangRuntimeNamespace current = closest;
             for (int i = 0; i < parts.Length; i++)
             {
                 XLangRuntimeNamespace next =
                     new XLangRuntimeNamespace(parts[i], current, new List<XLangRuntimeType>(), Settings);
+                if(current == null) LoadNamespace(next);
                 current = next;
             }
 
@@ -180,7 +193,7 @@ namespace XLang
 
         public IEnumerable<XLangRuntimeNamespace> GetNamespaces()
         {
-            return loadedNamespaces.Concat(new[] {DefaultNamespace});
+            return allNamespaces;
         }
 
         public IXLangRuntimeFunction GetUnaryOperatorImplementation(

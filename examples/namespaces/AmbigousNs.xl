@@ -1,0 +1,33 @@
+namespace MyNs
+{
+	public static class C
+	{
+		public static string F()
+		{
+			return "YEET";
+		}
+	}
+}
+
+
+namespace MySecondNs
+{
+	public static class C
+	{
+		public static string F()
+		{
+			return "YOTE";
+		}
+	}
+}
+
+
+
+using MySecondNs;
+public static class Program
+{
+	public static void Main()
+	{
+		Console.WriteLine(C.F());
+	}
+}

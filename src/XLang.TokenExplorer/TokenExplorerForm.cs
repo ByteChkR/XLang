@@ -36,7 +36,7 @@ namespace XLang.TokenExplorer
                         MakeMsgBoxInterface(c);
                         XLangParser parser = new XLangParser(c);
                         parser.Parse(File.ReadAllText(s));
-                        CreateView(c, Path.GetFileName(s), c);
+                        CreateView(c, Path.GetFileName(s));
                     }
                 }
                 else
@@ -45,7 +45,7 @@ namespace XLang.TokenExplorer
                     MakeMsgBoxInterface(c);
                     XLangParser parser = new XLangParser(c);
                     parser.Parse(File.ReadAllText(file));
-                    CreateView(c, Path.GetFileName(file), c);
+                    CreateView(c, Path.GetFileName(file));
                 }
             }
 
@@ -72,12 +72,12 @@ namespace XLang.TokenExplorer
         }
 
 
-        private void CreateView(XLangContext context, string name, XLangContext nsCollection)
+        private void CreateView(XLangContext context, string name)
         {
             TreeNode tn = new TreeNode(name);
 
             tvNodeView.Nodes.Add(tn);
-            foreach (XLangRuntimeNamespace xLangRuntimeNamespace in nsCollection.GetNamespaces())
+            foreach (XLangRuntimeNamespace xLangRuntimeNamespace in context.GetNamespaces())
             {
                 CreateView(context, tn, xLangRuntimeNamespace);
             }
@@ -87,9 +87,17 @@ namespace XLang.TokenExplorer
         {
             TreeNode tn = new TreeNode(ns.Name);
             TreeNode types = new TreeNode("Types");
+            TreeNode usings = new TreeNode("Usings");
+            tn.Nodes.Add(usings);
             tn.Nodes.Add(types);
             parent.Nodes.Add(tn);
             itemMap[tn.FullPath] = ns;
+
+            foreach (XLangRuntimeNamespace xLangRuntimeNamespace in ns.GetVisibleNamespaces(context).Distinct())
+            {
+                usings.Nodes.Add(new TreeNode(xLangRuntimeNamespace.FullName));
+            }
+
             foreach (XLangRuntimeNamespace xLangRuntimeNamespace in ns.Children)
             {
                 CreateView(context, tn, xLangRuntimeNamespace);
@@ -279,7 +287,7 @@ namespace XLang.TokenExplorer
             {
                 cTitle = $"Function: {func.Name}";
                 cData =
-                    $"Full Name: {func.ImplementingClass}.{func.Name}\nBinding Flags: {func.BindingFlags}\nReturn Type: {func.ReturnType}\nArguments: \n";
+                    $"Full Name: {func.ImplementingClass.FullName}.{func.Name}\nBinding Flags: {func.BindingFlags}\nReturn Type: {func.ReturnType}\nArguments: \n";
 
                 if (func.ParameterList.Length != 0)
                 {
@@ -300,7 +308,7 @@ namespace XLang.TokenExplorer
             {
                 cTitle = $"Function: {prop.Name}";
                 cData =
-                    $"Full Name: {prop.ImplementingClass}.{prop.Name}\nBinding Flags: {prop.BindingFlags}\nProperty Type: {prop.PropertyType}";
+                    $"Full Name: {prop.ImplementingClass.FullName}.{prop.Name}\nBinding Flags: {prop.BindingFlags}\nProperty Type: {prop.PropertyType}";
             }
             else
             {
@@ -340,5 +348,6 @@ namespace XLang.TokenExplorer
 
 
         }
+        
     }
 }

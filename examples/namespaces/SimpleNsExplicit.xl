@@ -1,0 +1,24 @@
+namespace MyNs
+{
+	public static class C
+	{
+		public static string F()
+		{
+			return "YEET";
+		}
+	}
+}
+
+
+
+namespace DEFAULT
+{
+	using MyNs;
+	public static class Program
+	{
+		public static void Main()
+		{
+			Console.WriteLine(C.F());
+		}
+	}
+}

@@ -15,7 +15,7 @@ namespace XLang.Runtime
 
         private readonly XLangRuntimeNamespace parent;
         private readonly XLangSettings settings;
-        private readonly List<string> usingDirectives = new List<string>();
+        private readonly List<string> usingDirectives = new List<string>{"XL"};
 
         public XLangRuntimeNamespace(
             string name, XLangRuntimeNamespace parent, List<XLangRuntimeType> types, XLangSettings settings)
@@ -43,7 +43,8 @@ namespace XLang.Runtime
 
         public void AddUsing(string nsName)
         {
-            usingDirectives.Add(nsName);
+            if (!usingDirectives.Contains(nsName))
+                usingDirectives.Add(nsName);
         }
 
         public virtual bool HasType(XLangBindingQuery query)
@@ -78,9 +79,15 @@ namespace XLang.Runtime
             Types.Add(typeDef);
         }
 
+        public XLangRuntimeNamespace[] GetVisibleNamespaces(XLangContext context)
+        {
+            return context.GetNamespaces().SelectMany(x => x.GetAllNamespacesRecursive())
+                .Where(x => x == this || usingDirectives.Contains(x.FullName)).ToArray();
+        }
+
         public XLangRuntimeNamespace[] GetAllNamespacesRecursive()
         {
-            List<XLangRuntimeNamespace> types = new List<XLangRuntimeNamespace> {this};
+            List<XLangRuntimeNamespace> types = new List<XLangRuntimeNamespace> { this };
             foreach (XLangRuntimeNamespace xLangRuntimeNamespace in Children)
             {
                 types.AddRange(xLangRuntimeNamespace.GetAllNamespacesRecursive());

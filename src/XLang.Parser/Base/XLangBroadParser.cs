@@ -124,8 +124,13 @@ namespace XLang.Parser.Base
                 {
                     IXLangToken namespaceKey = tokens[i];
                     IXLangToken name = XLangParsingTools.ReadOne(tokens, i + 1, XLangTokenType.OpWord);
-                    tokens.RemoveRange(i, 2);
-                    tokens.Insert(i, new NamespaceDefinitionToken(namespaceKey, name, new[] {namespaceKey, name}));
+                    IXLangToken block = XLangParsingTools.ReadOne(tokens, i + 2, XLangTokenType.OpBlockToken);
+
+                    tokens.RemoveRange(i, 3);
+
+
+
+                    tokens.Insert(i, new NamespaceDefinitionToken(namespaceKey, name, block.GetChildren().ToArray()));
                 }
             }
         }
@@ -135,7 +140,8 @@ namespace XLang.Parser.Base
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
             {
-                if (tokens[i].Type == XLangTokenType.OpBlockToken)
+                if (tokens[i].Type == XLangTokenType.OpBlockToken ||
+                    tokens[i].Type == XLangTokenType.OpNamespaceDefinition)
                 {
                     ElevateClass(settings, tokens[i].GetChildren());
                 }
@@ -187,7 +193,7 @@ namespace XLang.Parser.Base
                             block.GetChildren().ToArray()
                         )
                     );
-                    i = start - 1;
+                    i = start;
                 }
             }
         }
@@ -197,7 +203,8 @@ namespace XLang.Parser.Base
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
             {
-                if (tokens[i].Type == XLangTokenType.OpClassDefinition)
+                if (tokens[i].Type == XLangTokenType.OpClassDefinition ||
+                    tokens[i].Type == XLangTokenType.OpNamespaceDefinition)
                 {
                     ElevateStatements(settings, tokens[i].GetChildren());
                 }
@@ -209,8 +216,9 @@ namespace XLang.Parser.Base
                         tokens,
                         i - 1,
                         -1,
-                        new[] {XLangTokenType.OpSemicolon}
+                        new[] {XLangTokenType.OpSemicolon , XLangTokenType.OpNamespaceDefinition , XLangTokenType.OpClassDefinition}
                     ).Reverse().ToList();
+
                     if (found.FirstOrDefault()?.Type == XLangTokenType.OpUsing)
                     {
                         continue;
@@ -346,7 +354,8 @@ namespace XLang.Parser.Base
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
             {
-                if (tokens[i].Type == XLangTokenType.OpClassDefinition)
+                if (tokens[i].Type == XLangTokenType.OpClassDefinition ||
+                    tokens[i].Type == XLangTokenType.OpNamespaceDefinition)
                 {
                     ElevateFunctionDef(settings, tokens[i].GetChildren(), tokens[i]);
                 }
