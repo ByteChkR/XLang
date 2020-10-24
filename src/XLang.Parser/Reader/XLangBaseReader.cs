@@ -32,7 +32,7 @@ namespace XLang.Parser.Reader
                 else if (IsSpace(Input[currentIndex]))
                 {
                     currentToken = ReadSpace();
-                    currentToken = Advance();
+                    //currentToken = Advance();
                 }
                 else if (IsSymbol(Input[currentIndex]))
                 {

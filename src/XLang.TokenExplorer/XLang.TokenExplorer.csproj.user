@@ -3,4 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartArguments>D:\Desktop\XL\examples\namespaces\AmbigousNs.xl</StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartArguments>D:\Users\Tim\Documents\XLang\examples</StartArguments>
+  </PropertyGroup>
 </Project>

@@ -37,6 +37,9 @@ namespace XLang.Parser
 
 
             XLangBroadParser.ElevateOneLineString(Context.Settings, tokenStream);
+
+            tokenStream = tokenStream.Where(x => x.Type != XLangTokenType.OpSpace).ToList();
+
             XLangBroadParser.ElevateReservedKeys(Context.Settings, tokenStream);
             XLangBroadParser.ElevateBlocks(Context.Settings, tokenStream);
             XLangBroadParser.ElevateNamespace(Context.Settings, tokenStream);
