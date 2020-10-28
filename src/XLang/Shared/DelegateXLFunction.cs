@@ -51,5 +51,10 @@ namespace XLang.Shared
         {
             return onInvoke(instance, arguments);
         }
+
+        public override string ToString()
+        {
+            return ImplementingClass.FullName + "." + Name;
+        }
     }
 }

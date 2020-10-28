@@ -11,14 +11,14 @@ namespace XLang.Runtime.Implementations
         public readonly IXLangRuntimeTypeInstance Instance;
 
         public XLangFunctionAccessInstance(
-            IXLangRuntimeItem member, IXLangRuntimeTypeInstance instance, XLangRuntimeType functionType)
+            IXLangRuntimeItem[] member, IXLangRuntimeTypeInstance instance, XLangRuntimeType functionType)
         {
             Instance = instance;
             Member = member;
             FunctionType = functionType;
         }
 
-        public IXLangRuntimeItem Member { get; private set; }
+        public IXLangRuntimeItem[] Member { get; private set; }
 
         public XLangRuntimeType Type => FunctionType;
 
@@ -40,7 +40,7 @@ namespace XLang.Runtime.Implementations
 
             if (type.InheritsFrom(Type))
             {
-                Member = (IXLangRuntimeMember) value;
+                Member[0] = (IXLangRuntimeMember) value;
             }
             else
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using XLang.Queries;
 using XLang.Runtime.Binding;
@@ -100,9 +101,11 @@ namespace XLang.Runtime.Types
             return this.GetMembers(name, query).FirstOrDefault();
         }
 
+        public IXLangRuntimeMember[] GetMembers(string name) => GetAllMembers().Where(x => x.Name == name).ToArray();
+
         public IXLangRuntimeMember GetMember(string name)
         {
-            return members.FirstOrDefault(x => x.Name == name);
+            return GetAllMembers().FirstOrDefault(x => x.Name == name);
         }
 
         public IXLangRuntimeMember GetMember(XLangBindingQuery query)
@@ -125,6 +128,11 @@ namespace XLang.Runtime.Types
         internal void InjectMember(IXLangRuntimeMember member)
         {
             members = members.Concat(new[] {member}).ToArray();
+        }
+
+        public override string ToString()
+        {
+            return FullName;
         }
     }
 }

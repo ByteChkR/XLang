@@ -49,7 +49,7 @@ namespace XLang.Parser.Token.Expressions.Operands
                 //return new XLangFunctionTypeInstance((IXLangRuntimeMember)
                 //                                     acVar, var.GetValue(), Context.GetType("XL.function"));
             }
-            IXLangRuntimeItem ac =
+            IXLangRuntimeItem[] ac =
                 XLangRuntimeResolver.ResolveItem(scope, Value.GetValue(), null, scope.OwnerType);
 
             if (ac == null)

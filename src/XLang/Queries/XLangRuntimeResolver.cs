@@ -74,7 +74,7 @@ namespace XLang.Queries
             return start.DefinedTypes.FirstOrDefault(x => x.Name == name);
         }
 
-        public static IXLangRuntimeItem ResolveItem(XLangRuntimeScope scope, string name, IXLangRuntimeItem start,
+        public static IXLangRuntimeItem[] ResolveItem(XLangRuntimeScope scope, string name, IXLangRuntimeItem start,
             XLangRuntimeType caller)
         {
             if (start == null)
@@ -87,22 +87,22 @@ namespace XLang.Queries
                     {
                         if (caller == type)
                         {
-                            return type;
+                            return new []{ type };
                         }
                         throw new Exception($"Type '{type}' is not accessible from caller '{caller}'");
                     }
 
-                    return type;
+                    return new []{ type };
                 }
 
                 XLangRuntimeNamespace ns = GetNamespace(scope.Context, null, name);
                 if (ns != null)
                 {
-                    return ns;
+                    return new []{ ns };
                 }
 
 
-                IXLangRuntimeMember member = caller.GetMember(
+                IXLangRuntimeMember[] member = caller.GetMembers(
                     name,
                     XLangBindingQuery.Static |
                     XLangBindingQuery.Private |
@@ -112,7 +112,7 @@ namespace XLang.Queries
                     XLangBindingQuery.Property |
                     XLangBindingQuery.Inclusive
                 );
-                if (member != null)
+                if (member != null && member.Length!=0)
                 {
                     return member;
                 }
@@ -125,13 +125,13 @@ namespace XLang.Queries
                 XLangRuntimeType type = GetType(scope, nSpace, name, caller);
                 if (type != null)
                 {
-                    return type;
+                    return new []{ type };
                 }
 
                 XLangRuntimeNamespace ns = GetNamespace(scope.Context, nSpace, name);
                 if (ns != null)
                 {
-                    return ns;
+                    return new []{ ns };
                 }
 
                 throw new Exception("Can not find Type or namespace: " + name);
@@ -156,7 +156,7 @@ namespace XLang.Queries
                           XLangBindingQuery.Property |
                           XLangBindingQuery.Function |
                           XLangBindingQuery.Inclusive;
-                IXLangRuntimeMember member = rType.GetMember(name, query);
+                IXLangRuntimeMember[] member = rType.GetMembers(name, query);
                 if (member != null)
                 {
                     return member;

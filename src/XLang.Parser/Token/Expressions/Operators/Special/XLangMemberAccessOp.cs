@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 using XLang.Queries;
 using XLang.Runtime.Implementations;
 using XLang.Runtime.Members;
@@ -38,20 +40,20 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
             IXLangRuntimeTypeInstance inst = Left.Process(scope, instance); //TODO: Return Member of Return Instance
             if (inst is XLangFunctionAccessInstance acI)
             {
-                if (acI.Member is IXLangRuntimeProperty prop)
+                if (acI.Member.All(x => x is IXLangRuntimeProperty))
                 {
-
+                    IXLangRuntimeProperty prop = (IXLangRuntimeProperty)acI.Member.First();
                     return new XLangFunctionAccessInstance(
-                        prop.PropertyType.GetMember(MemberName),
-                        acI.Instance,
+                        prop.PropertyType.GetMembers(MemberName),
+                        prop.GetValue(acI.Instance),
                         Context.GetType("XL.function")
                     );
                 }
 
-                if (acI.Member is XLangRuntimeType type)
+                if (acI.Member.First() is XLangRuntimeType type)
                 {
                     return new XLangFunctionAccessInstance(
-                        type.GetMember(MemberName),
+                        type.GetMembers(MemberName),
                         acI.Instance,
                         Context.GetType("XL.function")
                     );
@@ -59,14 +61,20 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
 
                 throw new Exception("Invalid Access");
             }
+
+            IXLangRuntimeMember[] rm = XLangRuntimeResolver.ResolveItem(
+                scope,
+                MemberName,
+                inst.Type,
+                scope
+                    .OwnerType
+            ).Cast<IXLangRuntimeMember>().ToArray();
+
+            if (rm == null)
+                throw new Exception("Invalid Access.");
+
             return new XLangFunctionAccessInstance(
-                (IXLangRuntimeMember) XLangRuntimeResolver.ResolveItem(
-                    scope,
-                    MemberName,
-                    inst.Type,
-                    scope
-                        .OwnerType
-                ),
+                rm,
                 inst,
                 Context.GetType("XL.function")
             );

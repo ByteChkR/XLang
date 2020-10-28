@@ -1,4 +1,5 @@
-﻿using XLang.Parser.Token.Combined;
+﻿using System.Linq;
+using XLang.Parser.Token.Combined;
 using XLang.Queries;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
@@ -29,7 +30,7 @@ namespace XLang.Parser.Token.Expressions.Operands
                             .TypeName.GetValue(),
                         null,
                         scope.OwnerType
-                    )
+                    ).First()
             );
             if (value.InitializerExpression != null)
             {

@@ -6,6 +6,7 @@ using XLang.Runtime;
 using XLang.Runtime.Binding;
 using XLang.Runtime.Implementations;
 using XLang.Runtime.Members;
+using XLang.Runtime.Members.Functions;
 using XLang.Runtime.Types;
 using XLang.Shared;
 using XLang.Shared.Enum;
@@ -32,15 +33,22 @@ namespace XLang.CSharp
                 (instance, instances) => FuncLoadAll(context, instance, instances), voidType,
                 XLangMemberFlags.Public | XLangMemberFlags.Static, tunnelType,
                 new XLangFunctionArgument("targetNs", strType));
-            tunnelType.SetMembers(new []{loadAll, loadNs, loadType});
+            tunnelType.SetMembers(new[] { loadAll, loadNs, loadType });
             tns.AddType(tunnelType);
         }
 
 
+        private static Type GetType(string qualifiedName)
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
+                  .FirstOrDefault(x => x.FullName == qualifiedName);
+        }
+
         private static IXLangRuntimeTypeInstance FuncLoadType(XLangContext context, IXLangRuntimeTypeInstance instance,
             IXLangRuntimeTypeInstance[] args)
         {
-            Type t = Type.GetType(args[0].GetRaw().ToString());
+            Type t = GetType(args[0].GetRaw().ToString());
+
             XLangBindingQuery q = XLangBindingQuery.Public;
             if (t.IsAbstract && t.IsSealed)
                 q |= XLangBindingQuery.Static;
@@ -103,21 +111,11 @@ namespace XLang.CSharp
                     return false;
             }
         }
-
-        private static void AddStaticClass(XLangContext context, Type type, XLangRuntimeNamespace targetNs)
-        {
-            GetType(context, type, targetNs);
-        }
-
-        private static void AddInstanceClass(XLangContext context, Type type, XLangRuntimeNamespace targetNs)
-        {
-            GetType(context, type, targetNs, XLangBindingQuery.Public | XLangBindingQuery.Instance);
-        }
-
+        
 
         private static XLangRuntimeType GetType(XLangContext context, Type type, XLangRuntimeNamespace targetNs, XLangBindingQuery flags = XLangBindingQuery.Public | XLangBindingQuery.Static)
         {
-            if (type.IsArray) return null;
+            if (type.IsArray) return context.GetType("XL.Array");
             if (type == typeof(object)) return context.GetType("XL.object");
             if (type == typeof(string)) return context.GetType("XL.string");
             if (type.IsNumericType()) return context.GetType("XL.number");
@@ -166,7 +164,13 @@ namespace XLang.CSharp
         {
             XLangRuntimeType type = GetType(context, mi.ReturnType, targetNs, flags & ~XLangBindingQuery.Static);
             if (type == null) return null;
-            return new DelegateXLFunction(mi.Name, (x, y) => InvokeFunc(context, mi, targetNs, x, y), type, (XLangMemberFlags)flags, implClass);
+            return new DelegateXLFunction(mi.Name, (x, y) => InvokeFunc(context, mi, targetNs, x, y), type, (XLangMemberFlags)flags, implClass, ProcessArgs(mi, context, targetNs, flags));
+        }
+
+        private static IXLangRuntimeFunctionArgument[] ProcessArgs(MethodInfo mi, XLangContext context, XLangRuntimeNamespace targetNs, XLangBindingQuery flags)
+        {
+            return mi.GetParameters().Select(x =>
+                new XLangFunctionArgument(x.Name, GetType(context, x.ParameterType, targetNs, flags))).ToArray();
         }
 
         private static IXLangRuntimeTypeInstance InvokeFunc(XLangContext context, MethodInfo mi, XLangRuntimeNamespace targetNs, IXLangRuntimeTypeInstance arg1, IXLangRuntimeTypeInstance[] arg2)

@@ -16,7 +16,7 @@ namespace XLang.Parser.Token.Expressions
 
         public abstract int StartIndex { get; }
 
-        public XLangTokenType Type => XLangTokenType.OpExpression;
+        public virtual XLangTokenType Type => XLangTokenType.OpExpression;
 
         public abstract List<IXLangToken> GetChildren();
 

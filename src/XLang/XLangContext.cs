@@ -29,7 +29,7 @@ namespace XLang
             Settings = settings;
             DefaultNamespace = new XLangRuntimeNamespace("DEFAULT", null, new List<XLangRuntimeType>(), settings);
             LoadNamespace(DefaultNamespace);
-            XLangRuntimeNamespace coreNs = XLCoreNamespace.CreateNamespace(settings);
+            XLangRuntimeNamespace coreNs = XLCoreNamespace.CreateNamespace(this);
             LoadNamespace(coreNs);
 
         }

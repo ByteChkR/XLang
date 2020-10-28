@@ -15,6 +15,7 @@ namespace XLang.Shared
             string name, Func<IXLangRuntimeTypeInstance, IXLangRuntimeTypeInstance> getValue,
             XLangRuntimeType propertyType, XLangMemberFlags flags, XLangRuntimeType implementingClass)
         {
+            BindingFlags = flags;
             ImplementingClass = implementingClass;
             Name = name;
             PropertyType = propertyType;
@@ -60,6 +61,11 @@ namespace XLang.Shared
         public void SetValue(IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance value)
         {
             throw new XLangRuntimeTypeException($"Property: {ImplementingClass.FullName}.{Name} has no Setter");
+        }
+
+        public override string ToString()
+        {
+            return ImplementingClass.FullName + "." + Name;
         }
     }
 }

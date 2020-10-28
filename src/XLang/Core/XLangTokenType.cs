@@ -19,6 +19,7 @@
         OpBlockBracketClose,
         OpIndexerBracketOpen,
         OpIndexerBracketClose,
+
         OpSemicolon,
         OpComma,
         OpColon,
@@ -82,7 +83,7 @@
         OpBlockToken,
         OpReturn,
         OpInvocation,
-
+        OpArrayAccess,
         OpRuntimeNamespace,
         OpOperatorImpl,
         OpRuntimeMember,

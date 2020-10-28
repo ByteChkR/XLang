@@ -14,6 +14,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
     {
         public readonly XLangExpression Left;
         public readonly XLangExpression[] ParameterList;
+        public override XLangTokenType Type => XLangTokenType.OpInvocation;
 
         public XLangInvocationOp(
             XLangContext context, XLangExpression left, XLangExpression[] parameterList) : base(context)

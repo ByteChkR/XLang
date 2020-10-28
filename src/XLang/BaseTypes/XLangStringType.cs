@@ -113,7 +113,7 @@ namespace XLang.BaseTypes
                 ObjectToString,
                 stringType,
                 XLangMemberFlags.Public | XLangMemberFlags.Instance,
-                stringType
+                objectType
             );
 
             stringType.SetMembers(new IXLangRuntimeMember[] {stringLengthFunction, stringLengthProperty});

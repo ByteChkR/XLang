@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Schema;
 using XLang.Core;
+using XLang.Runtime.Implementations;
 using XLang.Runtime.Members.Functions;
+using XLang.Runtime.Members.Properties;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
 using XLang.Shared;
@@ -67,7 +71,13 @@ namespace XLang.Parser.Token.Expressions.Operators
         {
             IXLangRuntimeTypeInstance left = Left.Process(scope, instance);
             IXLangRuntimeTypeInstance right = Right.Process(scope, instance);
-            return GetOperatorImpl(left, right, scope).Invoke(null, new[] {left, right});
+
+            if (right is XLangFunctionAccessInstance aci && aci.Member.First() is IXLangRuntimeProperty prop)
+            {
+                right = prop.GetValue(aci.Instance);
+            }
+
+            return GetOperatorImpl(left, right, scope).Invoke(null, new[] { left, right });
         }
     }
 }

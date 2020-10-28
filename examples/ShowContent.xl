@@ -1,0 +1,37 @@
+using CSharp;
+
+using System.IO;
+
+public static class Program
+{
+	public static void Main()
+	{
+		SetupTunnel(); //Setting up C Sharp Class Tunnel API
+
+		RecurseSubDir("D:/Users/Tim/Documents/XLang/examples");
+	}
+
+	private static void SetupTunnel()
+	{
+		Tunnel.LoadType("System.IO.Directory", "System.IO");
+	}
+
+	private static void RecurseSubDir(string dir)
+	{
+		PrintFiles(dir);
+		Array dirs = Directory.GetDirectories(dir, "*");
+		for(number i = 0; i < dirs.Length; i = i + 1)
+		{
+			RecurseSubDir(dirs[i]);
+		}
+	}
+
+	private static void PrintFiles(string dir)
+	{
+		Array fs = Directory.GetFiles(dir, "*");
+		for(number i = 0; i < fs.Length; i = i + 1)
+		{
+			Console.WriteLine(fs[i]);
+		}
+	}
+}

@@ -13,6 +13,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
     {
         public readonly XLangExpression Left;
         public readonly XLangExpression[] ParameterList;
+        public override XLangTokenType Type => XLangTokenType.OpArrayAccess;
 
         public XLangArrayAccessorOp(
             XLangContext context, XLangExpression list, List<XLangExpression> parameterList) : base(context)
@@ -32,8 +33,9 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         private IXLangRuntimeFunction GetOperatorImpl(IXLangRuntimeTypeInstance left)
         {
             return left.Type.GetMembers(
-                    XLangTokenType.OpInvocation.ToString(),
-                    XLangBindingQuery.Public |
+                    XLangTokenType.OpArrayAccess.ToString(),
+                    XLangBindingQuery.Private |
+                    XLangBindingQuery.Static |
                     XLangBindingQuery.Override |
                     XLangBindingQuery.Operator
                 ).Cast<IXLangRuntimeFunction>()
@@ -48,7 +50,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         public override IXLangRuntimeTypeInstance Process(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
         {
             IXLangRuntimeTypeInstance left = Left.Process(scope, instance);
-            return GetOperatorImpl(left).Invoke(left, ParameterList.Select(x => x.Process(scope, instance)).ToArray());
+            return GetOperatorImpl(left).Invoke(left, ParameterList.Select(x => x.Process(scope, left)).ToArray());
         }
     }
 }
