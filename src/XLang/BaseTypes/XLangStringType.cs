@@ -28,6 +28,7 @@ namespace XLang.BaseTypes
             );
             DelegateXLFunction printLnFunc = new DelegateXLFunction("WriteLine", (x, y) => PrintLnImpl(ns, x, y),
                 stringType, XLangMemberFlags.Public | XLangMemberFlags.Static,
+                cmdType,
                 new XLangFunctionArgument("message", stringType));
 
             cmdType.SetMembers(new[] {printLnFunc});
@@ -96,20 +97,23 @@ namespace XLang.BaseTypes
                     "GetLength",
                     GetStringLength,
                     numberType,
-                    XLangMemberFlags.Instance | XLangMemberFlags.Public
+                    XLangMemberFlags.Instance | XLangMemberFlags.Public,
+                    stringType
                 );
             DelegateXLProperty stringLengthProperty =
                 new DelegateXLProperty(
                     "Length",
                     GetStringLengthProperty,
                     numberType,
-                    XLangMemberFlags.Public | XLangMemberFlags.Instance
+                    XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                    stringType
                 );
             DelegateXLFunction toString = new DelegateXLFunction(
                 "ToString",
                 ObjectToString,
                 stringType,
-                XLangMemberFlags.Public | XLangMemberFlags.Instance
+                XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                stringType
             );
 
             stringType.SetMembers(new IXLangRuntimeMember[] {stringLengthFunction, stringLengthProperty});

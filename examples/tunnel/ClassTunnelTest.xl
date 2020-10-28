@@ -1,0 +1,43 @@
+using CSharp;
+
+using System.IO;
+
+public static class Program
+{
+	public static void Main()
+	{
+		SetupTunnel(); //Setting up C Sharp Class Tunnel API
+
+		string srcFile = "./test.txt";
+		CreateFile(srcFile);
+
+		string cpy = "./test_cpy.txt";
+		CopyFile(srcFile, cpy);
+
+		DeleteFile(srcFile);
+	}
+
+	private static void SetupTunnel()
+	{
+		//Loads all Types that are "connected to" the CSharp Type "System.IO.File" and expose those types in namespace "System.IO"
+		Tunnel.LoadType("System.IO.File", "System.IO");
+	}
+
+	private static void CreateFile(string fileName)
+	{
+		//Uses CSharp Tunnel to Call System.IO.File.WriteAllText from XL
+		File.WriteAllText(fileName, "This is a Text File");
+	}
+
+	private static void DeleteFile(string fileName)
+	{
+		//Uses CSharp Tunnel to Call System.IO.File.Delete from XL
+		File.Delete(fileName);
+	}
+
+	private static void CopyFile(string fileName, string target)
+	{
+		//Uses CSharp Tunnel to Call System.IO.File.Copy from XL
+		File.Copy(fileName, target);
+	}
+}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using XLang.CSharp;
 using XLang.Parser;
 using XLang.Runtime.Binding;
 using XLang.Runtime.Members;
@@ -120,6 +121,9 @@ namespace XLang.Console
                 }
 
                 string src = File.ReadAllText(InputFile);
+
+                CSharpClassTunnel.LoadTunnel(xlC);
+
                 xlP.Parse(src);
 
                 int lastDot = FuncTarget.LastIndexOf('.');

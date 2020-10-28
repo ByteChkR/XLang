@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using XLang.BaseTypes;
+using XLang.CSharp;
 using XLang.Parser;
 using XLang.Parser.Runtime;
 using XLang.Parser.Token.Expressions;
@@ -34,6 +36,7 @@ namespace XLang.TokenExplorer
                     {
                         XLangContext c = new XLangContext(new XLangSettings(), "XL", "Test");
                         MakeMsgBoxInterface(c);
+                        CSharpClassTunnel.LoadTunnel(c);
                         XLangParser parser = new XLangParser(c);
                         parser.Parse(File.ReadAllText(s));
                         CreateView(c, Path.GetFileName(s));
@@ -43,6 +46,9 @@ namespace XLang.TokenExplorer
                 {
                     XLangContext c = new XLangContext(new XLangSettings(), "XL", "Test");
                     MakeMsgBoxInterface(c);
+                    CSharpClassTunnel.LoadTunnel(c);
+
+
                     XLangParser parser = new XLangParser(c);
                     parser.Parse(File.ReadAllText(file));
                     CreateView(c, Path.GetFileName(file));
@@ -329,6 +335,7 @@ namespace XLang.TokenExplorer
             {
                 XLangContext c = new XLangContext(new XLangSettings(), "XL", "Test");
                 MakeMsgBoxInterface(c);
+                CSharpClassTunnel.LoadTunnel(c);
                 XLangParser parser = new XLangParser(c);
                 parser.Parse(le.Code);
                 IXLangRuntimeFunction func = c.GetType("DEFAULT.Program")?.GetMember("Main") as IXLangRuntimeFunction;
@@ -348,6 +355,6 @@ namespace XLang.TokenExplorer
 
 
         }
-        
+
     }
 }

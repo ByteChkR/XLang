@@ -5,6 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using XLang.BaseTypes;
 using XLang.Core;
+using XLang.CSharp;
 using XLang.Parser.Reader;
 using XLang.Parser.Token;
 using XLang.Runtime;
@@ -56,6 +57,8 @@ namespace XLang.Parser.Tests
             XLCoreNamespace coreNs = (XLCoreNamespace) cNs;
 
             coreNs.SetWritelineImpl(x => sb.AppendLine(x));
+
+            CSharpClassTunnel.LoadTunnel(c);
 
             XLangParser parser = new XLangParser(c);
             parser.Parse(File.ReadAllText(file));

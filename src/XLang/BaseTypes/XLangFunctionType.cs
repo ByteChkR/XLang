@@ -37,7 +37,8 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Static |
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
-                    XLangMemberFlags.Override
+                    XLangMemberFlags.Override,
+                    functionType
                 );
 
 

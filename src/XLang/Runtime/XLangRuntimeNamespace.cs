@@ -23,6 +23,7 @@ namespace XLang.Runtime
             Name = name;
             children = new List<XLangRuntimeNamespace>();
             this.parent = parent;
+            if(parent != null)parent.AddChildNamespace(this);
             Types = types;
             this.settings = settings;
         }
@@ -95,5 +96,7 @@ namespace XLang.Runtime
 
             return types.ToArray();
         }
+
+        public void AddChildNamespace(XLangRuntimeNamespace ns) => children.Add(ns);
     }
 }

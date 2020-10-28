@@ -14,8 +14,9 @@ namespace XLang.Shared
 
         public DelegateXLFunction(
             string name, Func<IXLangRuntimeTypeInstance, IXLangRuntimeTypeInstance[], IXLangRuntimeTypeInstance> invoke,
-            XLangRuntimeType returnType, XLangMemberFlags flags, params IXLangRuntimeFunctionArgument[] parameters)
+            XLangRuntimeType returnType, XLangMemberFlags flags, XLangRuntimeType implementingClass, params IXLangRuntimeFunctionArgument[] parameters)
         {
+            ImplementingClass = implementingClass;
             Name = name;
             ReturnType = returnType;
             ParameterList = parameters;

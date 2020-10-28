@@ -59,6 +59,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    objectType,
                     new XLangFunctionArgument("a", objectType),
                     new XLangFunctionArgument("b", objectType)
                 );
@@ -71,6 +72,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    objectType,
                     new XLangFunctionArgument("a", objectType),
                     new XLangFunctionArgument("b", objectType)
                 );

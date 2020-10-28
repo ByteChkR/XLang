@@ -296,6 +296,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -309,6 +310,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -321,6 +323,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -333,6 +336,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -345,6 +349,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -357,6 +362,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -369,6 +375,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -381,6 +388,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -393,6 +401,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -406,6 +415,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType)
                 );
             DelegateXLFunction unPlusFunc =
@@ -417,6 +427,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType)
                 );
             DelegateXLFunction unMinusFunc =
@@ -428,6 +439,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType)
                 );
             DelegateXLFunction andFunc =
@@ -439,6 +451,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -452,6 +465,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -465,6 +479,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -478,6 +493,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -490,6 +506,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType),
                     new XLangFunctionArgument("b", numberType)
                 );
@@ -502,6 +519,7 @@ namespace XLang.BaseTypes
                     XLangMemberFlags.Private |
                     XLangMemberFlags.Operator |
                     XLangMemberFlags.Override,
+                    numberType,
                     new XLangFunctionArgument("a", numberType)
                 );
 

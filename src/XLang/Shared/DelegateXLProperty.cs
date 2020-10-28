@@ -13,8 +13,9 @@ namespace XLang.Shared
 
         public DelegateXLProperty(
             string name, Func<IXLangRuntimeTypeInstance, IXLangRuntimeTypeInstance> getValue,
-            XLangRuntimeType propertyType, XLangMemberFlags flags)
+            XLangRuntimeType propertyType, XLangMemberFlags flags, XLangRuntimeType implementingClass)
         {
+            ImplementingClass = implementingClass;
             Name = name;
             PropertyType = propertyType;
             onGet = getValue;
