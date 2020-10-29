@@ -8,7 +8,7 @@ public static class Program
 	{
 		SetupTunnel(); //Setting up C Sharp Class Tunnel API
 
-		RecurseSubDir("D:/Users/Tim/Documents/XLang/examples");
+		RecurseSubDir("../../../../../examples");
 	}
 
 	private static void SetupTunnel()

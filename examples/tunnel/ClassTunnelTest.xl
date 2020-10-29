@@ -15,6 +15,7 @@ public static class Program
 		CopyFile(srcFile, cpy);
 
 		DeleteFile(srcFile);
+		DeleteFile(cpy);
 	}
 
 	private static void SetupTunnel()
