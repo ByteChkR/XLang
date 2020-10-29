@@ -3,7 +3,7 @@
 ## Status
 [![Build Status](https://travis-ci.com/ByteChkR/XLang.svg?branch=main)](https://travis-ci.com/ByteChkR/XLang)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/686539719ae04408a281110610176d39)](https://www.codacy.com/gh/ByteChkR/XLang/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ByteChkR/XLang&amp;utm_campaign=Badge_Grade)
-[![codecov](https://codecov.io/gh/ByteChkR/XLang/branch/main/graph/badge.svg?token=IRXADCIHYW)](undefined)
+[![codecov](https://codecov.io/gh/ByteChkR/XLang/branch/main/graph/badge.svg?token=IRXADCIHYW)](https://codecov.io/gh/ByteChkR/XLang)
 
 
 ## Documentation
