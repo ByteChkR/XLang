@@ -11,8 +11,18 @@ using XLang.Shared.Enum;
 
 namespace XLang.Queries
 {
+    /// <summary>
+    ///     Runtime Resolver that Resolves Namespaces/Types and Properties
+    /// </summary>
     public static class XLangRuntimeResolver
     {
+        /// <summary>
+        ///     Resolves a Dynamic Member Item
+        /// </summary>
+        /// <param name="context">Context of this Execution</param>
+        /// <param name="name">Search Name</param>
+        /// <param name="type">"Start Type"</param>
+        /// <returns>Member that fits the Search Criteria.</returns>
         public static IXLangRuntimeMember ResolveDynamicItem(XLangContext context, string name, XLangRuntimeType type)
         {
             string[] parts = name.Split('.');
@@ -49,6 +59,13 @@ namespace XLang.Queries
             return currentMember;
         }
 
+        /// <summary>
+        ///     Returns a Namespace with the specified name
+        /// </summary>
+        /// <param name="context">Context of Execution</param>
+        /// <param name="start">Start Namespace</param>
+        /// <param name="name">Name of the Next Namespace</param>
+        /// <returns>Found Namespace</returns>
         private static XLangRuntimeNamespace GetNamespace(XLangContext context, XLangRuntimeNamespace start,
             string name)
         {
@@ -60,6 +77,14 @@ namespace XLang.Queries
             return start.Children.FirstOrDefault(x => x.Name == name);
         }
 
+        /// <summary>
+        ///     Returns a Type
+        /// </summary>
+        /// <param name="scope">Scope of Execution</param>
+        /// <param name="start">Start Namespace</param>
+        /// <param name="name">Name of the Type</param>
+        /// <param name="caller">Caller that initiated the search</param>
+        /// <returns>The Found Type</returns>
         private static XLangRuntimeType GetType(XLangRuntimeScope scope, XLangRuntimeNamespace start, string name,
             XLangRuntimeType caller)
         {
@@ -74,6 +99,14 @@ namespace XLang.Queries
             return start.DefinedTypes.FirstOrDefault(x => x.Name == name);
         }
 
+        /// <summary>
+        ///     Resolves items
+        /// </summary>
+        /// <param name="scope">Scope of Execution</param>
+        /// <param name="name">Name of the item</param>
+        /// <param name="start">Start Item Hint</param>
+        /// <param name="caller">Search Initiator.</param>
+        /// <returns>Resolved Items</returns>
         public static IXLangRuntimeItem[] ResolveItem(XLangRuntimeScope scope, string name, IXLangRuntimeItem start,
             XLangRuntimeType caller)
         {
@@ -87,18 +120,18 @@ namespace XLang.Queries
                     {
                         if (caller == type)
                         {
-                            return new []{ type };
+                            return new[] {type};
                         }
                         throw new Exception($"Type '{type}' is not accessible from caller '{caller}'");
                     }
 
-                    return new []{ type };
+                    return new[] {type};
                 }
 
                 XLangRuntimeNamespace ns = GetNamespace(scope.Context, null, name);
                 if (ns != null)
                 {
-                    return new []{ ns };
+                    return new[] {ns};
                 }
 
 
@@ -112,7 +145,7 @@ namespace XLang.Queries
                     XLangBindingQuery.Property |
                     XLangBindingQuery.Inclusive
                 );
-                if (member != null && member.Length!=0)
+                if (member != null && member.Length != 0)
                 {
                     return member;
                 }
@@ -125,13 +158,13 @@ namespace XLang.Queries
                 XLangRuntimeType type = GetType(scope, nSpace, name, caller);
                 if (type != null)
                 {
-                    return new []{ type };
+                    return new[] {type};
                 }
 
                 XLangRuntimeNamespace ns = GetNamespace(scope.Context, nSpace, name);
                 if (ns != null)
                 {
-                    return new []{ ns };
+                    return new[] {ns};
                 }
 
                 throw new Exception("Can not find Type or namespace: " + name);
@@ -180,99 +213,12 @@ namespace XLang.Queries
             );
         }
 
-
-        public static IXLangScopeAccess ResolveStaticItem(
-            XLangContext context, string name, IXLangScopeAccess start, IXLangRuntimeTypeInstance instance,
-            params XLangRuntimeNamespace[] visibleNamespaces)
-        {
-            string[] parts = name.Split('.');
-            int current = 0;
-            IXLangScopeAccess currentItem = start;
-
-            (XLangRuntimeNamespace ns, Exception ex) = GetClosestNamespace(context, parts);
-
-            if (start != null)
-            {
-                current++;
-            }
-            else if (ex != null)
-            {
-                if (instance != null && parts.Length == 1)
-                {
-                    currentItem = instance.Type.GetMember(name);
-                }
-
-                if (currentItem == null)
-                {
-                    currentItem = context.GetVisibleTypes(visibleNamespaces)
-                        .FirstOrDefault(x => x.Name == parts.First());
-                }
-
-                if (currentItem == null)
-                {
-                    throw ex;
-                }
-
-                current++;
-            }
-
-            while (current < parts.Length)
-            {
-                if (currentItem == null)
-                {
-                    currentItem = ns.GetType(
-                        parts[current],
-                        XLangBindingQuery.Public |
-                        XLangBindingQuery.Private |
-                        XLangBindingQuery.Instance |
-                        XLangBindingQuery.Static |
-                        XLangBindingQuery.Inclusive
-                    );
-                }
-                else if (currentItem is XLangRuntimeType type)
-                {
-                    currentItem = type.GetMember(
-                        parts[current],
-                        XLangBindingQuery.Public |
-                        XLangBindingQuery.Private |
-                        XLangBindingQuery.Instance |
-                        XLangBindingQuery.Static |
-                        XLangBindingQuery.Inclusive
-                    );
-                }
-                else if (currentItem is IXLangRuntimeFunction func)
-                {
-                    currentItem = func.ReturnType;
-                }
-                else if (currentItem is IXLangRuntimeProperty prop)
-                {
-                    currentItem = prop.PropertyType;
-                }
-                else
-                {
-                    throw new Exception("F");
-                }
-
-                current++;
-            }
-
-            return currentItem;
-        }
-
-
-        private static (IXLangRuntimeMember, Exception) GetMember(XLangContext context, string[] parts)
-        {
-            string[] typeParts = parts.Take(parts.Length - 1).ToArray();
-
-            (XLangRuntimeType type, Exception ex) = GetType(context, typeParts);
-            if (ex != null)
-            {
-                return (null, ex);
-            }
-
-            return (type.GetMember(parts.Last()), null);
-        }
-
+        /// <summary>
+        ///     Finds a Type based on context and parts
+        /// </summary>
+        /// <param name="context">Context of Execution</param>
+        /// <param name="parts">Name Parts</param>
+        /// <returns>Type or Exception</returns>
         private static (XLangRuntimeType, Exception) GetType(XLangContext context, string[] parts)
         {
             (XLangRuntimeNamespace nameSpace, Exception ex) = GetClosestNamespace(context, parts);
@@ -304,6 +250,12 @@ namespace XLang.Queries
                     : null);
         }
 
+        /// <summary>
+        ///     Returns the Exact or Closest namespace that matches the provided parts.
+        /// </summary>
+        /// <param name="context">Context of Execution</param>
+        /// <param name="parts">Name Parts.</param>
+        /// <returns>Namespace or Exception</returns>
         private static (XLangRuntimeNamespace, Exception) GetClosestNamespace(XLangContext context, string[] parts)
         {
             XLangRuntimeNamespace current =

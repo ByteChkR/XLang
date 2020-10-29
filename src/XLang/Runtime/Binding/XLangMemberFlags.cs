@@ -3,6 +3,9 @@ using XLang.Shared.Enum;
 
 namespace XLang.Runtime.Binding
 {
+    /// <summary>
+    ///     Member Flags Enum used to Modify Member Accessibilty and Functionality.
+    /// </summary>
     [Flags]
     public enum XLangMemberFlags
     {

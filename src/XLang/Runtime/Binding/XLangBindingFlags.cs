@@ -3,6 +3,9 @@ using XLang.Shared.Enum;
 
 namespace XLang.Runtime.Binding
 {
+    /// <summary>
+    ///     The XLang Binding Flags for classes/types.
+    /// </summary>
     [Flags]
     public enum XLangBindingFlags
     {

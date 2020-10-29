@@ -3,6 +3,9 @@ using XLang.Shared.Enum;
 
 namespace XLang.Runtime.Members
 {
+    /// <summary>
+    ///     Member Type Enum
+    /// </summary>
     [Flags]
     public enum XLangMemberType
     {

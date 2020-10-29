@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using XLang.Core;
+using XLang.Exceptions;
+using XLang.Parser.Exceptions;
 using XLang.Parser.Expressions;
 using XLang.Parser.Reader;
 using XLang.Parser.Runtime;
@@ -21,11 +23,21 @@ using XLang.Runtime.Members.Properties;
 using XLang.Runtime.Types;
 using XLang.Shared;
 
+/// <summary>
+/// Contains the Board Phase Parser that prepares the source for the Expression Parser
+/// </summary>
 namespace XLang.Parser.Base
 {
+    /// <summary>
+    ///     Broad Phase Parser implementing Tokenization on Context level
+    /// </summary>
     public static class XLangBroadParser
     {
-        //Step 1
+        /// <summary>
+        ///     Removes all One line Comment Token Sequences
+        /// </summary>
+        /// <param name="settings">XL Settings</param>
+        /// <param name="tokens">Token Stream</param>
         public static void ElevateOneLineComment(XLangSettings settings, List<IXLangToken> tokens)
         {
             for (int i = 0; i < tokens.Count; i++)
@@ -45,6 +57,11 @@ namespace XLang.Parser.Base
             }
         }
 
+        /// <summary>
+        ///     Replaces all One Line Strings with a StringLiteral Token
+        /// </summary>
+        /// <param name="settings">XL Settings</param>
+        /// <param name="tokens">Token Stream</param>
         public static void ElevateOneLineString(XLangSettings settings, List<IXLangToken> tokens)
         {
             for (int i = 0; i < tokens.Count; i++)
@@ -93,7 +110,11 @@ namespace XLang.Parser.Base
             }
         }
 
-        //Step 2
+        /// <summary>
+        ///     Replaces all Reserved Keys with the Correct Token
+        /// </summary>
+        /// <param name="settings">XL Settings</param>
+        /// <param name="tokens">Token Stream</param>
         public static void ElevateReservedKeys(XLangSettings settings, List<IXLangToken> tokens)
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
@@ -111,6 +132,11 @@ namespace XLang.Parser.Base
         }
 
 
+        /// <summary>
+        ///     Replaces all Namespace Tokens and following Block tokens with a Namespace Definition Token
+        /// </summary>
+        /// <param name="settings">XL Settings</param>
+        /// <param name="tokens">Token Stream</param>
         public static void ElevateNamespace(XLangSettings settings, List<IXLangToken> tokens)
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
@@ -129,13 +155,17 @@ namespace XLang.Parser.Base
                     tokens.RemoveRange(i, 3);
 
 
-
                     tokens.Insert(i, new NamespaceDefinitionToken(namespaceKey, name, block.GetChildren().ToArray()));
                 }
             }
         }
 
-        //Step 4
+
+        /// <summary>
+        ///     Replaces all Class Keys and Surrounding Modifiers with a Class Definition Token
+        /// </summary>
+        /// <param name="settings">XL Settings</param>
+        /// <param name="tokens">Token Stream</param>
         public static void ElevateClass(XLangSettings settings, List<IXLangToken> tokens)
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
@@ -198,7 +228,11 @@ namespace XLang.Parser.Base
             }
         }
 
-        //Step 5
+        /// <summary>
+        ///     Replaces all Sequences that end with OpSemicolon (;) with a Statement Token
+        /// </summary>
+        /// <param name="settings">XL Settings</param>
+        /// <param name="tokens">Token Stream</param>
         public static void ElevateStatements(XLangSettings settings, List<IXLangToken> tokens)
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
@@ -216,7 +250,11 @@ namespace XLang.Parser.Base
                         tokens,
                         i - 1,
                         -1,
-                        new[] {XLangTokenType.OpSemicolon , XLangTokenType.OpNamespaceDefinition , XLangTokenType.OpClassDefinition}
+                        new[]
+                        {
+                            XLangTokenType.OpSemicolon, XLangTokenType.OpNamespaceDefinition,
+                            XLangTokenType.OpClassDefinition
+                        }
                     ).Reverse().ToList();
 
                     if (found.FirstOrDefault()?.Type == XLangTokenType.OpUsing)
@@ -231,14 +269,15 @@ namespace XLang.Parser.Base
                     tokens.Insert(start, new StatementToken(saveStart, found.ToArray()));
                     i = start;
                 }
-                //else if (tokens[i].Type == XLangTokenType.OpBlockToken)
-                //{
-                //    ElevateStatements(settings, tokens[i].GetChildren());
-                //}
             }
         }
 
 
+        /// <summary>
+        ///     Replaces all Block Brackets(and the content inbetween) with a Block Token
+        /// </summary>
+        /// <param name="settings">XL Settings</param>
+        /// <param name="tokens">Token Stream</param>
         public static void ElevateBlocks(XLangSettings settings, List<IXLangToken> tokens)
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
@@ -273,6 +312,11 @@ namespace XLang.Parser.Base
         }
 
 
+        /// <summary>
+        ///     Replaces all Statement Tokens that are Variable Definitions(All statements in Class Level)
+        /// </summary>
+        /// <param name="context">XL Context</param>
+        /// <param name="tokens">Token Stream</param>
         public static void ElevateTypeDef(XLangContext context, List<IXLangToken> tokens)
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
@@ -349,6 +393,13 @@ namespace XLang.Parser.Base
             }
         }
 
+
+        /// <summary>
+        ///     Replaces all Function Block tokens inside classes with function definitions
+        /// </summary>
+        /// <param name="settings">XL Settings</param>
+        /// <param name="tokens">Token Stream</param>
+        /// <param name="classDef">The Containing Class Definition</param>
         public static void ElevateFunctionDef(
             XLangSettings settings, List<IXLangToken> tokens, IXLangToken classDef = null)
         {
@@ -452,6 +503,11 @@ namespace XLang.Parser.Base
             }
         }
 
+        /// <summary>
+        ///     Parses the Argument list of functions
+        /// </summary>
+        /// <param name="tokens">Argument List</param>
+        /// <returns>Parsed Argument List</returns>
         private static VariableDefinitionToken[] ParseArgumentList(List<IXLangToken> tokens)
         {
             XLangExpressionReader reader = new XLangExpressionReader(tokens);
@@ -497,6 +553,11 @@ namespace XLang.Parser.Base
         }
 
 
+        /// <summary>
+        ///     Replaces all Statements that are in function scope with Expressions from the XLExpression Parser
+        /// </summary>
+        /// <param name="context">XL Context</param>
+        /// <param name="tokens">Token Stream</param>
         public static void ElevateExpressions(XLangContext context, List<IXLangToken> tokens)
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
@@ -527,6 +588,11 @@ namespace XLang.Parser.Base
             }
         }
 
+        /// <summary>
+        ///     Creates Expressions from Function Token Bodies
+        /// </summary>
+        /// <param name="context">XL Context</param>
+        /// <param name="tokens">Token Body</param>
         private static void ElevateFunctionExpressions(XLangContext context, List<IXLangToken> tokens)
         {
             XLangExpressionParser parser = XLangExpressionParser.Create(
@@ -541,15 +607,21 @@ namespace XLang.Parser.Base
 
         }
 
+        /// <summary>
+        ///     Turns the Token Stream into a AST/Runtime Tree that can be queried and executed.
+        /// </summary>
+        /// <param name="tokens">Token Stream</param>
+        /// <param name="context">XL Context</param>
+        /// <returns>List of Tokens</returns>
         public static List<IXLangRuntimeItem> ElevateToRuntimeTokens(
             List<IXLangToken> tokens,
-            XLangContext nsCollection)
+            XLangContext context)
         {
             List<IXLangRuntimeItem> ret = new List<IXLangRuntimeItem>();
 
 
             List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)> cDefMap =
-                CreateCdefMap(tokens, nsCollection);
+                CreateCdefMap(tokens, context);
 
 
             XLangBroadNameLookup<XLangRuntimeType> GetView(XLangRuntimeNamespace ns)
@@ -557,12 +629,12 @@ namespace XLang.Parser.Base
                 XLangBroadNameLookup<XLangRuntimeType> typeNameLookup = new XLangBroadNameLookup<XLangRuntimeType>();
                 List<XLangRuntimeNamespace> close = new List<XLangRuntimeNamespace> {ns};
                 close.AddRange(
-                    nsCollection.GetNamespaces().Where(
-                        x => nsCollection.DefaultImports.Contains(x.FullName) &&
+                    context.GetNamespaces().Where(
+                        x => context.DefaultImports.Contains(x.FullName) &&
                              !close.Contains(x)
                     )
                 );
-                foreach (XLangRuntimeNamespace xLangRuntimeNamespace in nsCollection.GetNamespaces()
+                foreach (XLangRuntimeNamespace xLangRuntimeNamespace in context.GetNamespaces()
                     .SelectMany(x => x.GetAllNamespacesRecursive()))
                 {
                     foreach (XLangRuntimeType xLangRuntimeType in xLangRuntimeNamespace.GetAllTypes())
@@ -590,9 +662,8 @@ namespace XLang.Parser.Base
                     {
                         XLangRuntimeType newt = ElevateRuntimeType(
                             cDefMap[i].cDefinition,
-                            nsCollection.Settings,
                             cDefMap[i].localNs,
-                            nsCollection,
+                            context,
                             null
                         );
                         typeNameLookup.AddResolved(
@@ -608,9 +679,8 @@ namespace XLang.Parser.Base
                     {
                         XLangRuntimeType newt = ElevateRuntimeType(
                             cDefMap[i].cDefinition,
-                            nsCollection.Settings,
                             cDefMap[i].localNs,
-                            nsCollection,
+                            context,
                             typeNameLookup.Resolve(
                                 cDefMap[i]
                                     .cDefinition.BaseClass
@@ -633,63 +703,34 @@ namespace XLang.Parser.Base
             }
 
             return ret;
-            //for (int i = 0; i < tokens.Count; i++)
-            //{
-            //    if (tokens[i] is NamespaceDefinitionToken nst)
-            //    {
-            //        XLangRuntimeNamespace ixLangNs = nsCollection.CreateOrGet(nst.Name.GetValue());
-
-            //        List<IXLangRuntimeItem> children =
-            //            ElevateToRuntimeTokens(tokens[i].GetChildren(), nsCollection, ixLangNs);
-
-            //        foreach (IXLangRuntimeItem xlRuntimeToken in children)
-            //        {
-            //            if (xlRuntimeToken is XLangRuntimeType tDef)
-            //            {
-            //                ixLangNs.AddType(tDef);
-            //            }
-            //            else
-            //            {
-            //                throw new XLangTokenParseException($"Unexpected Type: '{xlRuntimeToken.GetType()}'");
-            //            }
-            //        }
-
-
-            //        ret.Add(ixLangNs);
-            //    }
-            //    else if (tokens[i] is ClassDefinitionToken cDef)
-            //    {
-            //        XLangRuntimeNamespace localns = ns ?? nsCollection.DefaultNamespace;
-            //        cDefMap.Add((cDef, localns));
-            //    }
-            //    else
-            //    {
-            //        throw new XLangTokenParseException($"Unexpected Token: '{tokens[i]}'");
-            //    }
-            //}
-
-
         }
 
+        /// <summary>
+        ///     Creates a Mapping of Classes to their Namespaces.
+        /// </summary>
+        /// <param name="tokens">Token Stream</param>
+        /// <param name="context"></param>
+        /// <param name="ns">Current Namespace</param>
+        /// <returns>List of Class/Namespace Mappings</returns>
         private static List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)> CreateCdefMap(
             List<IXLangToken> tokens,
-            XLangContext nsCollection,
+            XLangContext context,
             XLangRuntimeNamespace ns = null)
         {
 
             List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)> cDefMap =
                 new List<(ClassDefinitionToken cDefinition, XLangRuntimeNamespace localNs)>();
-            ProcessUsings(nsCollection.DefaultNamespace, tokens);
+            ProcessUsings(context.DefaultNamespace, tokens);
             for (int i = 0; i < tokens.Count; i++)
             {
                 if (tokens[i] is NamespaceDefinitionToken nst)
                 {
-                    XLangRuntimeNamespace ixLangNs = nsCollection.CreateOrGet(nst.Name.GetValue());
+                    XLangRuntimeNamespace ixLangNs = context.CreateOrGet(nst.Name.GetValue());
                     //List<IXLangRuntimeItem> children =
-                    //    ElevateToRuntimeTokens(tokens[i].GetChildren(), nsCollection, ixLangNs);
+                    //    ElevateToRuntimeTokens(tokens[i].GetChildren(), context, ixLangNs);
 
                     ProcessUsings(ixLangNs, tokens[i].GetChildren());
-                    cDefMap.AddRange(CreateCdefMap(tokens[i].GetChildren(), nsCollection, ixLangNs));
+                    cDefMap.AddRange(CreateCdefMap(tokens[i].GetChildren(), context, ixLangNs));
                     //foreach (IXLangRuntimeItem xlRuntimeToken in children)
                     //{
                     //    if (xlRuntimeToken is XLangRuntimeType tDef)
@@ -707,7 +748,7 @@ namespace XLang.Parser.Base
                 }
                 else if (tokens[i] is ClassDefinitionToken cDef)
                 {
-                    XLangRuntimeNamespace localns = ns ?? nsCollection.DefaultNamespace;
+                    XLangRuntimeNamespace localns = ns ?? context.DefaultNamespace;
                     cDefMap.Add((cDef, localns));
                 }
                 else
@@ -719,6 +760,11 @@ namespace XLang.Parser.Base
             return cDefMap;
         }
 
+        /// <summary>
+        ///     Processes the Using Statements inside Namespace Definition Tokens
+        /// </summary>
+        /// <param name="ns">Current Namespace</param>
+        /// <param name="tokens">Token Stream</param>
         private static void ProcessUsings(XLangRuntimeNamespace ns, List<IXLangToken> tokens)
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
@@ -744,20 +790,32 @@ namespace XLang.Parser.Base
             }
         }
 
+        /// <summary>
+        ///     Returns the Runtime Type from the Class Definition Token
+        /// </summary>
+        /// <param name="input">CDef token</param>
+        /// <param name="ns">Containing Namespace</param>
+        /// <param name="context">XL Context</param>
+        /// <param name="baseClass">Base Class</param>
+        /// <returns>Runtime Type</returns>
         public static XLangRuntimeType ElevateRuntimeType(
             ClassDefinitionToken input,
-            XLangSettings settings,
             XLangRuntimeNamespace ns,
-            XLangContext nsCollection,
+            XLangContext context,
             XLangRuntimeType baseClass)
         {
             XLangRuntimeType ret =
                 new XLangRuntimeType(input.Name.GetValue(), ns, baseClass, ParseTypeBindingFlags(input));
             ns.AddType(ret);
-            ret.SetMembers(ElevateMembers(input.GetChildren(), ret, settings, ns, nsCollection).ToArray());
+            ret.SetMembers(ElevateMembers(input.GetChildren(), ret, ns, context).ToArray());
             return ret;
         }
 
+        /// <summary>
+        ///     Parses Binding Flags from class Definition Tokens
+        /// </summary>
+        /// <param name="input">Input Token</param>
+        /// <returns>Binding Flags</returns>
         public static XLangBindingFlags ParseTypeBindingFlags(ClassDefinitionToken input)
         {
             XLangBindingFlags current = 0;
@@ -810,6 +868,11 @@ namespace XLang.Parser.Base
             return current;
         }
 
+        /// <summary>
+        ///     Parses Function Binding Flags from Function Definition Tokens
+        /// </summary>
+        /// <param name="input">Input Token</param>
+        /// <returns>Binding Flags for this Function</returns>
         public static XLangMemberFlags ParseFunctionBindingFlags(FunctionDefinitionToken input)
         {
             XLangMemberFlags current = 0;
@@ -867,6 +930,11 @@ namespace XLang.Parser.Base
             return current;
         }
 
+        /// <summary>
+        ///     Parses Property Binding Flags from XLangVarDef Definition Tokens
+        /// </summary>
+        /// <param name="input">Input Token</param>
+        /// <returns>Binding Flags for this Property</returns>
         public static XLangMemberFlags ParsePropertyBindingFlags(XLangVarDefOperand input)
         {
             XLangMemberFlags current = 0;
@@ -926,23 +994,30 @@ namespace XLang.Parser.Base
             return current;
         }
 
+        /// <summary>
+        ///     Elevates Members from the children of a Class Token
+        /// </summary>
+        /// <param name="children">Class Token Children</param>
+        /// <param name="input">Type of the Class</param>
+        /// <param name="ns">Containing Namespace</param>
+        /// <param name="context">XL Context</param>
+        /// <returns></returns>
         public static List<IXLangRuntimeMember> ElevateMembers(
             List<IXLangToken> children,
             XLangRuntimeType input,
-            XLangSettings settings,
             XLangRuntimeNamespace ns,
-            XLangContext nsCollection)
+            XLangContext context)
         {
             List<IXLangRuntimeMember> ret = new List<IXLangRuntimeMember>();
             foreach (IXLangToken xlParserToken in children)
             {
                 if (xlParserToken is FunctionDefinitionToken fDef)
                 {
-                    ret.Add(ElevateFunction(input, fDef, ns, nsCollection));
+                    ret.Add(ElevateFunction(input, fDef, ns, context));
                 }
                 else if (xlParserToken is XLangVarDefOperand pDef)
                 {
-                    ret.Add(ElevateProperty(input, pDef, ns, nsCollection));
+                    ret.Add(ElevateProperty(input, pDef, ns, context));
                 }
                 else
                 {
@@ -953,27 +1028,42 @@ namespace XLang.Parser.Base
             return ret;
         }
 
+        /// <summary>
+        ///     Elevates a Property Token into a Runtime Property
+        /// </summary>
+        /// <param name="tDef">Type Definition</param>
+        /// <param name="pDef">Property Definition</param>
+        /// <param name="ns">Containing Namespace</param>
+        /// <param name="context">XL Context</param>
+        /// <returns>Parsed Runtime Property</returns>
         public static IXLangRuntimeProperty ElevateProperty(
             XLangRuntimeType tDef,
             XLangVarDefOperand pDef,
             XLangRuntimeNamespace ns,
-            XLangContext nsCollection)
+            XLangContext context)
         {
             XLangProperty ret = new XLangProperty(
                 pDef.value.Name.GetValue(),
                 FindType(
-                    nsCollection.GetVisibleTypes(ns),
+                    context.GetVisibleTypes(ns),
                     pDef.value.TypeName.GetValue()
                 ),
                 tDef,
                 ParsePropertyBindingFlags(pDef),
-                nsCollection,
+                context,
                 pDef.value.InitializerExpression
             );
 
             return ret;
         }
 
+
+        /// <summary>
+        ///     Finds the Type in a collection of Types
+        /// </summary>
+        /// <param name="types">Type Collection</param>
+        /// <param name="name">Type Name</param>
+        /// <returns>Search Result</returns>
         private static XLangRuntimeType FindType(IEnumerable<XLangRuntimeType> types, string name)
         {
             XLangRuntimeType ret = types.FirstOrDefault(x => x.Name == name);
@@ -985,11 +1075,20 @@ namespace XLang.Parser.Base
             return ret;
         }
 
+
+        /// <summary>
+        ///     Elevates a Function Token into a Runtime Function
+        /// </summary>
+        /// <param name="tDef">Type Definition</param>
+        /// <param name="fDef">Function Definition</param>
+        /// <param name="ns">Containing Namespace</param>
+        /// <param name="context">XL Context</param>
+        /// <returns>Parsed Runtime Function</returns>
         public static IXLangRuntimeFunction ElevateFunction(
             XLangRuntimeType tDef,
             FunctionDefinitionToken fDef,
             XLangRuntimeNamespace ns,
-            XLangContext nsCollection)
+            XLangContext context)
         {
             XLangMemberFlags flags = ParseFunctionBindingFlags(fDef);
 
@@ -1000,13 +1099,13 @@ namespace XLang.Parser.Base
 
             return new XLangFunction(
                 fDef.Name.GetValue(),
-                FindType(nsCollection.GetVisibleTypes(ns), fDef.TypeName.GetValue()),
+                FindType(context.GetVisibleTypes(ns), fDef.TypeName.GetValue()),
                 tDef,
                 fDef.Arguments.Select(
                     x => new XLangFunctionArgument(
                         x.Name.GetValue(),
                         FindType(
-                            nsCollection
+                            context
                                 .GetVisibleTypes(
                                     ns
                                 ),
@@ -1017,15 +1116,21 @@ namespace XLang.Parser.Base
                 ).Cast<IXLangRuntimeFunctionArgument>().ToArray(),
                 flags,
                 fDef.SubTokens.Cast<XLangExpression>().ToArray(),
-                nsCollection
+                context
             );
         }
 
+        /// <summary>
+        ///     Delegate for Elevating Type Tokens to Runtime Types
+        /// </summary>
+        /// <param name="input">Class Definition Input</param>
+        /// <param name="ns">Containing Namespace</param>
+        /// <param name="context">XL Context</param>
+        /// <returns></returns>
         private delegate XLangRuntimeType ElevateTypeDel(
             ClassDefinitionToken input,
-            XLangSettings settings,
             XLangRuntimeNamespace ns,
-            XLangContext nsCollection);
+            XLangContext context);
 
         //Step 6
         //Parse if/try/while/for/foreach definitions

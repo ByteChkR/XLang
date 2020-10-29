@@ -6,14 +6,34 @@ using XLang.Runtime.Types;
 
 namespace XLang.Parser.Token.Expressions.Operators.Special
 {
+    /// <summary>
+    ///     If/Else Operator Implementation
+    /// </summary>
     public class XLangIfOp : XLangExpression
     {
+        /// <summary>
+        ///     Condition Map
+        /// </summary>
         private readonly List<(XLangExpression, Action<XLangRuntimeScope, IXLangRuntimeTypeInstance>)> conditionMap;
 
+        /// <summary>
+        ///     Else Branch Block
+        /// </summary>
         private readonly Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> elseBranch;
 
+        /// <summary>
+        ///     Operation Type
+        /// </summary>
         public readonly XLangTokenType OperationType;
 
+
+        /// <summary>
+        ///     Public Constructor
+        /// </summary>
+        /// <param name="context">XL Context</param>
+        /// <param name="operationType">Operation Type</param>
+        /// <param name="conditionMap">Condition Map</param>
+        /// <param name="elseBranch">Else Branch Block</param>
         public XLangIfOp(
             XLangContext context, XLangTokenType operationType,
             List<(XLangExpression, Action<XLangRuntimeScope, IXLangRuntimeTypeInstance>)> conditionMap,
@@ -24,18 +44,35 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
             OperationType = operationType;
         }
 
+        /// <summary>
+        ///     Start index in source
+        /// </summary>
         public override int StartIndex { get; }
 
+        /// <summary>
+        ///     Returns Child Tokens of this Token
+        /// </summary>
+        /// <returns></returns>
         public override List<IXLangToken> GetChildren()
         {
             return new List<IXLangToken>();
         }
 
+        /// <summary>
+        ///     Returns String representation of this Token
+        /// </summary>
+        /// <returns></returns>
         public override string GetValue()
         {
             return $"({OperationType})";
         }
 
+        /// <summary>
+        ///     Processes this Expression
+        /// </summary>
+        /// <param name="scope">Execution Scope</param>
+        /// <param name="instance">Expression Type Instance</param>
+        /// <returns></returns>
         public override IXLangRuntimeTypeInstance Process(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
         {
             for (int i = 0; i < conditionMap.Count; i++)

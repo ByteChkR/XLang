@@ -9,8 +9,16 @@ using XLang.Parser.Token.Expressions.Operators.Special;
 
 namespace XLang.Parser.Expressions
 {
+    /// <summary>
+    ///     Implements AXLangExpressionValueCreator
+    /// </summary>
     public class XLangExpressionValueCreator : AXLangExpressionValueCreator
     {
+        /// <summary>
+        ///     Creates a Value based on the Current State of the Expression Parser
+        /// </summary>
+        /// <param name="parser">The Parser</param>
+        /// <returns>Parsed Expression</returns>
         public override XLangExpression CreateValue(XLangExpressionParser parser)
         {
             if (parser.CurrentToken.Type == XLangTokenType.OpNew)
@@ -119,9 +127,5 @@ namespace XLang.Parser.Expressions
 
             throw new Exception("Invalid Token: " + parser.CurrentToken.Type);
         }
-
-        #region Specials
-
-        #endregion
     }
 }

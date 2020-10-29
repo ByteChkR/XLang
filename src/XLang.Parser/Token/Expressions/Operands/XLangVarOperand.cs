@@ -6,34 +6,70 @@ using XLang.Runtime.Implementations;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
 
+/// <summary>
+/// Contains XLangExpression Implementations for Operand Values.
+/// </summary>
 namespace XLang.Parser.Token.Expressions.Operands
 {
+    /// <summary>
+    ///     Implements a Variable Operand
+    /// </summary>
     public class XLangVarOperand : XLangExpression
     {
+        /// <summary>
+        ///     Protected Constructor
+        /// </summary>
+        /// <param name="context">XL Context</param>
         protected XLangVarOperand(XLangContext context) : base(context)
         {
         }
 
+        /// <summary>
+        ///     Public Constructor
+        /// </summary>
+        /// <param name="context">XL Context</param>
+        /// <param name="value">Variable Value</param>
         public XLangVarOperand(XLangContext context, IXLangToken value) : base(context)
         {
             Value = value;
         }
 
+        /// <summary>
+        ///     The Token Value
+        /// </summary>
         public virtual IXLangToken Value { get; }
 
 
+        /// <summary>
+        ///     Start Index in source
+        /// </summary>
         public override int StartIndex { get; }
 
+        /// <summary>
+        ///     Returns all Child Tokens of this Token
+        /// </summary>
+        /// <returns></returns>
         public override List<IXLangToken> GetChildren()
         {
             return new List<IXLangToken> {Value};
         }
 
+        /// <summary>
+        ///     Returns the String Representation of this Token
+        /// </summary>
+        /// <returns></returns>
         public override string GetValue()
         {
             return Value.GetValue();
         }
 
+
+        /// <summary>
+        ///     Processes this Expression
+        /// </summary>
+        /// <param name="scope">Execution Scope</param>
+        /// <param name="instance">Expression Type Instance</param>
+        /// <returns></returns>
         public override IXLangRuntimeTypeInstance Process(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
         {
             //string[] parts = Value.GetValue().Split('.');

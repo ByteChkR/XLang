@@ -5,21 +5,41 @@ using XLang.Parser.Base;
 using XLang.Parser.Reader;
 using XLang.Parser.Token;
 
+/// <summary>
+/// Contains the XLang Parser Implementations
+/// </summary>
 namespace XLang.Parser
 {
+    /// <summary>
+    ///     XLang Parser Implementation
+    /// </summary>
     public class XLangParser
     {
+        /// <summary>
+        ///     Execution Context.
+        /// </summary>
         private readonly XLangContext Context;
 
+        /// <summary>
+        ///     Public Constructor
+        /// </summary>
         public XLangParser() : this(new XLangContext(new XLangSettings(), "XL"))
         {
         }
 
+        /// <summary>
+        ///     Public Constructor
+        /// </summary>
+        /// <param name="context">Execution Context.</param>
         public XLangParser(XLangContext context)
         {
             Context = context;
         }
 
+        /// <summary>
+        ///     Parses the Source
+        /// </summary>
+        /// <param name="source">Source</param>
         public void Parse(string source)
         {
             XLangBaseReader lx = new XLangBaseReader(Context.Settings, source);

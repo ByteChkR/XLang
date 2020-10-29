@@ -1,11 +1,11 @@
-# Cross Language 0.0.1.5-prototype (XLang)
+# Cross Language 0.1.0.0-prototype (XLang)
 
 ## XLC
 Console Interpreter which allows for execution of XL Scripts.
 
 ### Arguments:
 ```
-XLang Parser Console(xlc) Version: 0.0.1.5-prototype
+XLang Parser Console(xlc) Version: 0.1.0.0-prototype
 
 Commandline Argument Help:
 Syntax

@@ -154,7 +154,7 @@ namespace XLang.Console
 
                 if (mbmr is IXLangRuntimeFunction func)
                 {
-                    if (func.MemberType == XLangMemberType.Constructor)
+                    if (func.ItemType == XLangMemberType.Constructor)
                     {
                         IXLangRuntimeTypeInstance inst = target.CreateEmptyBase();
                         func.Invoke(inst, func.ParameterList.Select(x => x.Type.CreateEmptyBase()).ToArray());

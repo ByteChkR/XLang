@@ -11,10 +11,18 @@ using XLang.Runtime.Types;
 
 namespace XLang.Parser.Expressions
 {
+    /// <summary>
+    ///     Implements Special Expressions that do require some custom parsing steps
+    /// </summary>
     public static class XLangSpecialOps
     {
         #region For Parser
 
+        /// <summary>
+        ///     Parses a For Expression from the Parser
+        /// </summary>
+        /// <param name="parser">The Parser</param>
+        /// <returns>Parsed Expression</returns>
         public static XLangExpression ReadFor(XLangExpressionParser parser)
         {
             parser.Eat(XLangTokenType.OpFor);
@@ -50,6 +58,11 @@ namespace XLang.Parser.Expressions
 
         #region While Parser
 
+        /// <summary>
+        ///     Parses a While Expression from the Parser
+        /// </summary>
+        /// <param name="parser">The Parser</param>
+        /// <returns>Parsed Expression</returns>
         public static XLangExpression ReadWhile(XLangExpressionParser parser)
         {
             parser.Eat(XLangTokenType.OpWhile);
@@ -123,6 +136,11 @@ namespace XLang.Parser.Expressions
 
         #region If Parser
 
+        /// <summary>
+        ///     Parses an If Expression from the Parser
+        /// </summary>
+        /// <param name="parser">The Parser</param>
+        /// <returns>Parsed Condition Expression and Expression Block</returns>
         private static (XLangExpression, Action<XLangRuntimeScope, IXLangRuntimeTypeInstance>) ReadIfStatement(
             XLangExpressionParser parser)
         {
@@ -135,6 +153,11 @@ namespace XLang.Parser.Expressions
             return (condition, (scope, instance) => RunMulti(content, scope, instance, false));
         }
 
+        /// <summary>
+        ///     Parses an If Expression block from the Parser
+        /// </summary>
+        /// <param name="parser">The Parser</param>
+        /// <returns>Parsed Expression Block</returns>
         private static List<XLangExpression> ReadIfBlockContent(XLangExpressionParser parser)
         {
             if (parser.CurrentToken.Type != XLangTokenType.OpBlockToken)
@@ -151,13 +174,12 @@ namespace XLang.Parser.Expressions
                 .Parse().ToList();
         }
 
-        //if(a == b)
-        //  return a;
-        //else
-        //{
-        //  return b;
-        //}
 
+        /// <summary>
+        ///     Parses an If Expression from the Parser
+        /// </summary>
+        /// <param name="parser">The Parser</param>
+        /// <returns>Parsed If Expression</returns>
         public static XLangExpression ReadIf(XLangExpressionParser parser)
         {
             List<(XLangExpression, Action<XLangRuntimeScope, IXLangRuntimeTypeInstance>)> conditions =
@@ -180,14 +202,6 @@ namespace XLang.Parser.Expressions
                     break;
                 }
             }
-
-            //if (parser.CurrentToken.Type == XLangTokenType.OpElse)
-            //{
-            //    parser.Eat(XLangTokenType.OpElse);
-            //    if (parser.CurrentToken.Type == XLangTokenType.OpSemicolon) parser.Eat(XLangTokenType.OpSemicolon);
-            //    List<XLangExpression> content = ReadBlockContent();
-            //    elseBranch = (scope, instance) => RunMulti(content, scope, instance, false);
-            //}
 
 
             return new XLangIfOp(parser.Context, XLangTokenType.OpIf, conditions, elseBranch);

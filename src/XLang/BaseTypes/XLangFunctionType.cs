@@ -11,16 +11,32 @@ using XLang.Shared.Enum;
 
 namespace XLang.BaseTypes
 {
+    /// <summary>
+    ///     Implements "XL.function"
+    /// </summary>
     public class XLangFunctionType
     {
+        /// <summary>
+        ///     The Containing Namespace
+        /// </summary>
         private readonly XLCoreNamespace containingNamespace;
 
 
+        /// <summary>
+        ///     Public constructor
+        /// </summary>
+        /// <param name="core">Core Namespace</param>
         public XLangFunctionType(XLCoreNamespace core)
         {
             containingNamespace = core;
         }
 
+
+        /// <summary>
+        ///     Creates the Runtime Type
+        /// </summary>
+        /// <param name="objectType">Type "XL.object"</param>
+        /// <returns>"XL.function" type</returns>
         public XLangRuntimeType GetObject(XLangRuntimeType objectType)
         {
             XLangRuntimeType functionType = new XLangRuntimeType(
@@ -43,22 +59,29 @@ namespace XLang.BaseTypes
                 );
 
 
-            functionType.SetMembers(new IXLangRuntimeMember[] { funcInvocation });
+            functionType.SetMembers(new IXLangRuntimeMember[] {funcInvocation});
             return functionType;
         }
 
+        /// <summary>
+        ///     Invocation Operator override for XL.function
+        /// </summary>
+        /// <param name="instance">Function Instance</param>
+        /// <param name="args">Function Arguments</param>
+        /// <returns>Function Return</returns>
         private IXLangRuntimeTypeInstance InvokeFunction(
             IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
         {
-            XLangFunctionAccessInstance ts = (XLangFunctionAccessInstance)instance;
+            XLangFunctionAccessInstance ts = (XLangFunctionAccessInstance) instance;
             if (ts.Member.All(x => x is IXLangRuntimeFunction))
             {
-                return ts.Member.Cast<IXLangRuntimeFunction>().First(x => x.ParameterList.Length == args.Length).Invoke(ts.Instance, args);
+                return ts.Member.Cast<IXLangRuntimeFunction>().First(x => x.ParameterList.Length == args.Length)
+                    .Invoke(ts.Instance, args);
             }
             if (ts.Member.First() is XLangRuntimeType type)
             {
                 IXLangRuntimeTypeInstance newItem = type.CreateEmptyBase();
-                ((IXLangRuntimeFunction)type.GetMember(XLangBindingQuery.Constructor)).Invoke(
+                ((IXLangRuntimeFunction) type.GetMember(XLangBindingQuery.Constructor)).Invoke(
                     newItem,
                     args
                 );

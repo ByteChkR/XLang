@@ -1,7 +1,13 @@
 ﻿using System;
 
+/// <summary>
+/// Contains Shared Enums
+/// </summary>
 namespace XLang.Shared.Enum
 {
+    /// <summary>
+    ///     Binding Flag Queries for Search of Members and Scope Accessible Items.
+    /// </summary>
     [Flags]
     public enum XLangBindingQuery
     {

@@ -1,5 +1,11 @@
-﻿namespace XLang.Core
+﻿/// <summary>
+/// Contains Core Logic and Enums
+/// </summary>
+namespace XLang.Core
 {
+    /// <summary>
+    ///     Token Type Enum containing all tokens used inside XL
+    /// </summary>
     public enum XLangTokenType
     {
         Any,

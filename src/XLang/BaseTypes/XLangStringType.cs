@@ -7,16 +7,33 @@ using XLang.Shared.Enum;
 
 namespace XLang.BaseTypes
 {
+    /// <summary>
+    ///     Implements XL.string
+    /// </summary>
     public class XLangStringType
     {
+        /// <summary>
+        ///     Core Namespace
+        /// </summary>
         private readonly XLCoreNamespace containingNamespace;
 
+        /// <summary>
+        ///     Public constructor
+        /// </summary>
+        /// <param name="core">Core Namespace</param>
         public XLangStringType(XLCoreNamespace core)
         {
             containingNamespace = core;
         }
 
 
+        /// <summary>
+        ///     Creates the Console Type for Writing to console.
+        /// </summary>
+        /// <param name="ns">Core Namespace</param>
+        /// <param name="voidType">Void Type ("XL.void")</param>
+        /// <param name="stringType">String Type ("XL.string")</param>
+        /// <returns>Console Type</returns>
         public static XLangRuntimeType CreateConsole(XLCoreNamespace ns, XLangRuntimeType voidType,
             XLangRuntimeType stringType)
         {
@@ -35,6 +52,14 @@ namespace XLang.BaseTypes
             return cmdType;
         }
 
+
+        /// <summary>
+        ///     Implements Console.WriteLine
+        /// </summary>
+        /// <param name="ns">Core Namespace</param>
+        /// <param name="instance">Console Instance(null)</param>
+        /// <param name="parameters">Parameters</param>
+        /// <returns>Function Return(null)</returns>
         private static IXLangRuntimeTypeInstance PrintLnImpl(XLCoreNamespace ns, IXLangRuntimeTypeInstance instance,
             IXLangRuntimeTypeInstance[] parameters)
         {
@@ -49,6 +74,12 @@ namespace XLang.BaseTypes
             );
         }
 
+        /// <summary>
+        ///     XL.object.ToString() implementation
+        /// </summary>
+        /// <param name="arg1">Object Instance</param>
+        /// <param name="arg2">Arguments</param>
+        /// <returns>String representation of the instance.</returns>
         private IXLangRuntimeTypeInstance ObjectToString(
             IXLangRuntimeTypeInstance arg1, IXLangRuntimeTypeInstance[] arg2)
         {
@@ -62,6 +93,11 @@ namespace XLang.BaseTypes
             );
         }
 
+        /// <summary>
+        ///     XL.string.Length Property
+        /// </summary>
+        /// <param name="instance">String Instance</param>
+        /// <returns>String Length</returns>
         private IXLangRuntimeTypeInstance GetStringLengthProperty(IXLangRuntimeTypeInstance instance)
         {
             XLangRuntimeType type = containingNamespace.GetType(
@@ -71,6 +107,12 @@ namespace XLang.BaseTypes
             return new CSharpTypeInstance(type, instance.GetRaw().ToString().Length);
         }
 
+        /// <summary>
+        ///     XL.string.GetLength()
+        /// </summary>
+        /// <param name="instance">String Instance</param>
+        /// <param name="args">Arguments</param>
+        /// <returns>String Length</returns>
         private IXLangRuntimeTypeInstance GetStringLength(
             IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
         {
@@ -81,6 +123,12 @@ namespace XLang.BaseTypes
             return new CSharpTypeInstance(type, instance.GetRaw().ToString().Length);
         }
 
+        /// <summary>
+        ///     Creates the Runtime Type
+        /// </summary>
+        /// <param name="objectType">Type "XL.object"</param>
+        /// <param name="numberType">Type "XL.number"</param>
+        /// <returns>"XL.string" type</returns>
         public XLangRuntimeType GetObject(XLangRuntimeType objectType, XLangRuntimeType numberType)
         {
             XLangRuntimeType stringType = new XLangRuntimeType(

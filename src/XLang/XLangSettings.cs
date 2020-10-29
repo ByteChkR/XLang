@@ -2,12 +2,21 @@
 using System.Linq;
 using XLang.Core;
 
+/// <summary>
+/// Contains the XLang Language Parser/Runtime
+/// </summary>
 namespace XLang
 {
+    /// <summary>
+    ///     XL Parser Settings and Symbol Mappings
+    /// </summary>
     public class XLangSettings
     {
         #region Keys
 
+        /// <summary>
+        ///     Reserved Key Map
+        /// </summary>
         public Dictionary<string, XLangTokenType> ReservedKeys =>
             new Dictionary<string, XLangTokenType>
             {
@@ -45,6 +54,9 @@ namespace XLang
             };
 
 
+        /// <summary>
+        ///     Valid Member Modifiers.
+        /// </summary>
         public Dictionary<string, XLangTokenType> MemberModifiers =>
             new Dictionary<string, XLangTokenType>
             {
@@ -59,6 +71,9 @@ namespace XLang
             };
 
 
+        /// <summary>
+        ///     Valid Class Modifiers
+        /// </summary>
         public Dictionary<string, XLangTokenType> ClassModifiers =>
             new Dictionary<string, XLangTokenType>
             {
@@ -68,6 +83,8 @@ namespace XLang
                 {AbstractModifier, XLangTokenType.OpAbstractMod},
                 {StaticModifier, XLangTokenType.OpStaticMod}
             };
+
+        #region Keys / Modifiers
 
         public string PublicModifier = "public";
         public string PrivateModifier = "private";
@@ -103,10 +120,10 @@ namespace XLang
 
         #endregion
 
+        #endregion
+
         #region Symbols
 
-        //public char OperatorNewLine = '\n';
-        //public char OperatorCRNewLine = '\r';
         public char OperatorDoubleQuote = '"';
         public char OperatorSingleQuote = '\'';
         public char OperatorBlockOpen = '{';
@@ -133,16 +150,19 @@ namespace XLang
         public char OperatorGreaterThan = '>';
         public char OperatorTilde = '~';
 
-        //public XLangTokenType[] WhiteSpaceTypes => new []{XLangTokenType.OpSpace, XLangTokenType.OpNewLine, XLangTokenType.OpCRNewLine};
 
+        /// <summary>
+        ///     Reverse Reserved Symbols (XLangToken - char)
+        /// </summary>
         public Dictionary<XLangTokenType, char> ReverseReservedSymbols =>
             ReservedSymbols.ToDictionary(pair => pair.Value, pair => pair.Key);
 
+        /// <summary>
+        ///     Reserved Symbols (char -  XLangToken)
+        /// </summary>
         public Dictionary<char, XLangTokenType> ReservedSymbols =>
             new Dictionary<char, XLangTokenType>
             {
-                //{OperatorCRNewLine, XLangTokenType.OpCRNewLine },
-                //{OperatorNewLine, XLangTokenType.OpNewLine },
                 {OperatorSingleQuote, XLangTokenType.OpSingleQuote},
                 {OperatorDoubleQuote, XLangTokenType.OpDoubleQuote},
                 {OperatorBlockOpen, XLangTokenType.OpBlockBracketOpen},

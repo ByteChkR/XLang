@@ -1,0 +1,16 @@
+language: csharp
+mono: latest
+dist: xenial
+
+jobs:
+  include:
+    - dotnet: 2.2
+      env:
+        - BUILDCONFIG="Release"
+        - TESTPROJ="XLang.Parser.Tests/XLang.Parser.Tests.csproj"
+#Restore the Submodules and the Project
+#Build the projects
+script:
+  - dotnet test $TESTPROJ --collect:"XPlat Code Coverage" -c $BUILDCONFIG
+  - bash <(curl -s https://codecov.io/bash) #Uploading the coverage report to Codecov.
+

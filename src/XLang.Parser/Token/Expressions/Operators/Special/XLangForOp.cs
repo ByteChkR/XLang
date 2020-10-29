@@ -6,16 +6,47 @@ using XLang.Runtime.Types;
 
 namespace XLang.Parser.Token.Expressions.Operators.Special
 {
+    /// <summary>
+    ///     For Operator Implementation
+    /// </summary>
     public class XLangForOp : XLangExpression
     {
+        /// <summary>
+        ///     Continue Condition
+        /// </summary>
         public readonly XLangExpression Condition;
+
+        /// <summary>
+        ///     The Expression Body
+        /// </summary>
         private readonly Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> ExprBody;
+
+        /// <summary>
+        ///     Expression Body
+        /// </summary>
         public readonly XLangTokenType OperationType;
 
 
+        /// <summary>
+        ///     Variable Declaration
+        /// </summary>
         public readonly XLangExpression VDecl;
+
+        /// <summary>
+        ///     Variable Change Expression
+        /// </summary>
         public readonly XLangExpression VInc;
 
+
+        /// <summary>
+        ///     Public Constructor
+        /// </summary>
+        /// <param name="context">XL Context</param>
+        /// <param name="vDecl">Variable Declaration</param>
+        /// <param name="condition">For Continue Condition</param>
+        /// <param name="vInc">Variable Change Expression</param>
+        /// <param name="operationType">Operation Type</param>
+        /// <param name="exprBody">The Expression Body</param>
         public XLangForOp(
             XLangContext context, XLangExpression vDecl, XLangExpression condition, XLangExpression vInc,
             XLangTokenType operationType,
@@ -28,18 +59,35 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
             ExprBody = exprBody;
         }
 
+        /// <summary>
+        ///     Start index in source
+        /// </summary>
         public override int StartIndex { get; }
 
+        /// <summary>
+        ///     Returns Child Tokens of this Token
+        /// </summary>
+        /// <returns></returns>
         public override List<IXLangToken> GetChildren()
         {
             return new List<IXLangToken>();
         }
 
+        /// <summary>
+        ///     Returns String representation of this Token
+        /// </summary>
+        /// <returns></returns>
         public override string GetValue()
         {
-            return $"({OperationType} ({Condition}) {ExprBody})";
+            return $"for ({OperationType} ({Condition}) {ExprBody})";
         }
 
+        /// <summary>
+        ///     Processes this Expression
+        /// </summary>
+        /// <param name="scope">Execution Scope</param>
+        /// <param name="instance">Expression Type Instance</param>
+        /// <returns></returns>
         public override IXLangRuntimeTypeInstance Process(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
         {
             VDecl.Process(scope, instance);

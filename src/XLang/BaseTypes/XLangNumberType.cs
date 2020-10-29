@@ -8,276 +8,30 @@ using XLang.Shared.Enum;
 
 namespace XLang.BaseTypes
 {
+    /// <summary>
+    ///     Implements "XL.number"
+    /// </summary>
     public class XLangNumberType
     {
+        /// <summary>
+        ///     The Containing Namespace
+        /// </summary>
         private readonly XLCoreNamespace containingNamespace;
 
-
+        /// <summary>
+        ///     Public constructor
+        /// </summary>
+        /// <param name="core">Core Namespace</param>
         public XLangNumberType(XLCoreNamespace core)
         {
             containingNamespace = core;
         }
 
-        private IXLangRuntimeTypeInstance MulNum(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() * (decimal) args[1].GetRaw());
-        }
-
-        private IXLangRuntimeTypeInstance PlusNum(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() + (decimal) args[1].GetRaw());
-        }
-
-        private IXLangRuntimeTypeInstance ModNum(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() % (decimal) args[1].GetRaw());
-        }
-
-        private IXLangRuntimeTypeInstance UnPlusNum(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw());
-        }
-
-        private IXLangRuntimeTypeInstance UnMinusNum(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(type, -(decimal) args[0].GetRaw());
-        }
-
-
-        private IXLangRuntimeTypeInstance DivNum(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() / (decimal) args[1].GetRaw());
-        }
-
-
-        private IXLangRuntimeTypeInstance SubNum(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() - (decimal) args[1].GetRaw());
-        }
-
-        private IXLangRuntimeTypeInstance NotValue(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-            decimal v = (decimal) args[0].GetRaw();
-            return new CSharpTypeInstance(type, v == 0 ? (decimal) 1 : (decimal) 0);
-        }
-
-        private IXLangRuntimeTypeInstance LessThan(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-            decimal a = (decimal) args[0].GetRaw();
-            decimal b = (decimal) args[1].GetRaw();
-            return new CSharpTypeInstance(type, a < b ? (decimal) 1 : (decimal) 0);
-        }
-
-        private IXLangRuntimeTypeInstance GreaterThan(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-            decimal a = (decimal) args[0].GetRaw();
-            decimal b = (decimal) args[1].GetRaw();
-            return new CSharpTypeInstance(type, a > b ? (decimal) 1 : (decimal) 0);
-        }
-
-
-        private IXLangRuntimeTypeInstance LessOrEqual(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-            decimal a = (decimal) args[0].GetRaw();
-            decimal b = (decimal) args[1].GetRaw();
-            return new CSharpTypeInstance(type, a <= b ? (decimal) 1 : (decimal) 0);
-        }
-
-        private IXLangRuntimeTypeInstance GreaterOrEqual(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-            decimal a = (decimal) args[0].GetRaw();
-            decimal b = (decimal) args[1].GetRaw();
-            return new CSharpTypeInstance(type, a >= b ? (decimal) 1 : (decimal) 0);
-        }
-
-
-        private IXLangRuntimeTypeInstance AndValue(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(
-                type,
-                (decimal) ((int) (decimal) args[0].GetRaw() &
-                           (int) (decimal) args[1].GetRaw())
-            );
-        }
-
-        private IXLangRuntimeTypeInstance OrValue(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(
-                type,
-                (decimal) ((int) (decimal) args[0].GetRaw() |
-                           (int) (decimal) args[1].GetRaw())
-            );
-        }
-
-        private IXLangRuntimeTypeInstance LogicalOrValue(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(
-                type,
-                (decimal) ((int) (decimal) args[0].GetRaw() != 0 || (int) (decimal) args[0].GetRaw() != 0 ? 0 : 1)
-            );
-        }
-
-        private IXLangRuntimeTypeInstance LogicalAndValue(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(
-                type,
-                (decimal) ((int) (decimal) args[0].GetRaw() != 0 && (int) (decimal) args[0].GetRaw() != 0 ? 0 : 1)
-            );
-        }
-
-        private IXLangRuntimeTypeInstance XOrValue(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(
-                type,
-                (decimal) ((int) (decimal) args[0].GetRaw() ^
-                           (int) (decimal) args[1].GetRaw())
-            );
-        }
-
-        private IXLangRuntimeTypeInstance FlipBitsValue(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(type, (decimal) ~(int) (decimal) args[0].GetRaw());
-        }
-
+        /// <summary>
+        ///     Creates the Runtime Type
+        /// </summary>
+        /// <param name="objectType">Type "XL.object"</param>
+        /// <returns>"XL.number" type</returns>
         public XLangRuntimeType GetObject(XLangRuntimeType objectType)
         {
             XLangRuntimeType numberType = new XLangRuntimeType(
@@ -549,5 +303,269 @@ namespace XLang.BaseTypes
             );
             return numberType;
         }
+
+        #region Number Operators
+
+        private IXLangRuntimeTypeInstance MulNum(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() * (decimal) args[1].GetRaw());
+        }
+
+        private IXLangRuntimeTypeInstance PlusNum(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() + (decimal) args[1].GetRaw());
+        }
+
+        private IXLangRuntimeTypeInstance ModNum(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() % (decimal) args[1].GetRaw());
+        }
+
+        private IXLangRuntimeTypeInstance UnPlusNum(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw());
+        }
+
+        private IXLangRuntimeTypeInstance UnMinusNum(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(type, -(decimal) args[0].GetRaw());
+        }
+
+
+        private IXLangRuntimeTypeInstance DivNum(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() / (decimal) args[1].GetRaw());
+        }
+
+
+        private IXLangRuntimeTypeInstance SubNum(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() - (decimal) args[1].GetRaw());
+        }
+
+        private IXLangRuntimeTypeInstance NotValue(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+            decimal v = (decimal) args[0].GetRaw();
+            return new CSharpTypeInstance(type, v == 0 ? (decimal) 1 : (decimal) 0);
+        }
+
+        private IXLangRuntimeTypeInstance LessThan(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+            decimal a = (decimal) args[0].GetRaw();
+            decimal b = (decimal) args[1].GetRaw();
+            return new CSharpTypeInstance(type, a < b ? (decimal) 1 : (decimal) 0);
+        }
+
+        private IXLangRuntimeTypeInstance GreaterThan(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+            decimal a = (decimal) args[0].GetRaw();
+            decimal b = (decimal) args[1].GetRaw();
+            return new CSharpTypeInstance(type, a > b ? (decimal) 1 : (decimal) 0);
+        }
+
+
+        private IXLangRuntimeTypeInstance LessOrEqual(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+            decimal a = (decimal) args[0].GetRaw();
+            decimal b = (decimal) args[1].GetRaw();
+            return new CSharpTypeInstance(type, a <= b ? (decimal) 1 : (decimal) 0);
+        }
+
+        private IXLangRuntimeTypeInstance GreaterOrEqual(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+            decimal a = (decimal) args[0].GetRaw();
+            decimal b = (decimal) args[1].GetRaw();
+            return new CSharpTypeInstance(type, a >= b ? (decimal) 1 : (decimal) 0);
+        }
+
+
+        private IXLangRuntimeTypeInstance AndValue(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(
+                type,
+                (decimal) ((int) (decimal) args[0].GetRaw() &
+                           (int) (decimal) args[1].GetRaw())
+            );
+        }
+
+        private IXLangRuntimeTypeInstance OrValue(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(
+                type,
+                (decimal) ((int) (decimal) args[0].GetRaw() |
+                           (int) (decimal) args[1].GetRaw())
+            );
+        }
+
+        private IXLangRuntimeTypeInstance LogicalOrValue(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(
+                type,
+                (decimal) ((int) (decimal) args[0].GetRaw() != 0 || (int) (decimal) args[0].GetRaw() != 0 ? 0 : 1)
+            );
+        }
+
+        private IXLangRuntimeTypeInstance LogicalAndValue(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(
+                type,
+                (decimal) ((int) (decimal) args[0].GetRaw() != 0 && (int) (decimal) args[0].GetRaw() != 0 ? 0 : 1)
+            );
+        }
+
+        private IXLangRuntimeTypeInstance XOrValue(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(
+                type,
+                (decimal) ((int) (decimal) args[0].GetRaw() ^
+                           (int) (decimal) args[1].GetRaw())
+            );
+        }
+
+        private IXLangRuntimeTypeInstance FlipBitsValue(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(type, (decimal) ~(int) (decimal) args[0].GetRaw());
+        }
+
+        #endregion
     }
 }

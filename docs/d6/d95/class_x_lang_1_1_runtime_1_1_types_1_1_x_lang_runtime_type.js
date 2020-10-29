@@ -1,0 +1,27 @@
+var class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type =
+[
+    [ "XLangRuntimeType", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a43a2e99379008e8a290e6363bdfc948d", null ],
+    [ "AddStatics", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a9a874f22226e323fe15db4fa599d0fbc", null ],
+    [ "BuildMemberList", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a6fa318a10ee0e618a5e6894ab2795c1e", null ],
+    [ "CreateEmptyBase", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a4d9f54421e9d467d235ae9fc2f86c861", null ],
+    [ "GetAllMembers", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a40ee706e5fdb49e8ae8b0f18f5d20b92", null ],
+    [ "GetMember", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#aa723c061fb2afe2b268c85984270f1f1", null ],
+    [ "GetMember", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a63099be31f294d535ea45c8ceda26f8b", null ],
+    [ "GetMember", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a19b8442d421743060c1609a988cd645c", null ],
+    [ "GetMembers", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a37c0b44fc457d262eb6604927279416e", null ],
+    [ "HasMember", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#aa1a5767dd852c4312ab806f4e8dc7b1b", null ],
+    [ "HasMember", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#aa24e0e4cda5ba68f01c691d69a8f66de", null ],
+    [ "InheritsFrom", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a5a11241525ffa301521c476b8bc7fd2b", null ],
+    [ "InjectMember", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#aa5407f7f0135810f45bb72e49cdefb0e", null ],
+    [ "SetMembers", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a5ee199d9435350325b2344d7b1e340bb", null ],
+    [ "ToString", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#abb2a5e3391f78464d3b2c50c827cffa5", null ],
+    [ "AccessibilityLevel", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a339a56b8e7ef1ffb1a6d5cd607980803", null ],
+    [ "createBase", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a18b1e592a686ea5853b4178818113955", null ],
+    [ "FullName", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#abb4319165a92f5d19d3c18bb910847ce", null ],
+    [ "ItemType", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a2408a9cbd040d8bc9a4f0dd1a68e9b8a", null ],
+    [ "members", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a5570df8f90691ad4aede9ac429c6fa58", null ],
+    [ "BaseType", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#af6c14170d0af7cad33b8f33a3c0c0c79", null ],
+    [ "BindingFlags", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a2c38ddc337eb559e32abc6a8dae3ba69", null ],
+    [ "Name", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a82f0bd85d6b0ba5827b00a4570e07bf7", null ],
+    [ "Namespace", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a489f3a8877cc6f1af6c34037e324bf97", null ]
+];

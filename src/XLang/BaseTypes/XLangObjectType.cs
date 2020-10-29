@@ -7,6 +7,9 @@ using XLang.Shared.Enum;
 
 namespace XLang.BaseTypes
 {
+    /// <summary>
+    /// Implements "XL.object"
+    /// </summary>
     public class XLangObjectType
     {
         private readonly XLCoreNamespace containingNamespace;
@@ -16,32 +19,10 @@ namespace XLang.BaseTypes
             containingNamespace = core;
         }
 
-        private IXLangRuntimeTypeInstance EquValue(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            args[0].SetRaw(args[1].Type, args[1].GetRaw());
-            return args[0];
-        }
-
-        private IXLangRuntimeTypeInstance CmpValue(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
-        {
-            XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
-
-            return new CSharpTypeInstance(
-                type,
-                (decimal) args[0].GetRaw() == (decimal) args[1].GetRaw()
-                    ? (decimal) 1
-                    : (decimal) 0
-            );
-        }
-
-
+        /// <summary>
+        ///     Creates the Runtime Type
+        /// </summary>
+        /// <returns>"XL.object" type</returns>
         public XLangRuntimeType GetObject()
         {
             XLangRuntimeType objectType = new XLangRuntimeType(
@@ -82,5 +63,34 @@ namespace XLang.BaseTypes
 
             return objectType;
         }
+
+        #region Operator Implementations
+
+        private IXLangRuntimeTypeInstance EquValue(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            args[0].SetRaw(args[1].Type, args[1].GetRaw());
+            return args[0];
+        }
+
+        private IXLangRuntimeTypeInstance CmpValue(
+            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                "number",
+                XLangBindingQuery.Public |
+                XLangBindingQuery.Instance |
+                XLangBindingQuery.Inclusive
+            );
+
+            return new CSharpTypeInstance(
+                type,
+                (decimal) args[0].GetRaw() == (decimal) args[1].GetRaw()
+                    ? (decimal) 1
+                    : (decimal) 0
+            );
+        }
+
+        #endregion
     }
 }

@@ -6,19 +6,39 @@ using XLang.Runtime.Types;
 
 namespace XLang.Parser.Token.Expressions.Operands
 {
+    /// <summary>
+    ///     Implements a Variable Operand that is also a Variable Definition
+    /// </summary>
     public class XLangVarDefOperand : XLangVarOperand
     {
+        /// <summary>
+        ///     The Definition Token
+        /// </summary>
         public readonly VariableDefinitionToken value;
 
 
+        /// <summary>
+        ///     Public Constructor
+        /// </summary>
+        /// <param name="context">XL Context</param>
+        /// <param name="value">Variable Value</param>
         public XLangVarDefOperand(XLangContext context, VariableDefinitionToken value) : base(context)
         {
             this.value = value;
         }
 
+        /// <summary>
+        ///     The Variable Value
+        /// </summary>
         public override IXLangToken Value => value.Name;
 
 
+        /// <summary>
+        ///     Processes this Expression
+        /// </summary>
+        /// <param name="scope">Execution Scope</param>
+        /// <param name="instance">Expression Type Instance</param>
+        /// <returns></returns>
         public override IXLangRuntimeTypeInstance Process(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
         {
             XLangRuntimeScope.XLangRuntimeScopedVar var = scope.Declare(

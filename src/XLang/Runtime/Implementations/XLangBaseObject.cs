@@ -8,13 +8,26 @@ using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
 using XLang.Shared.Enum;
 
+/// <summary>
+/// Contains Runtime Item Internal Implementations
+/// </summary>
 namespace XLang.Runtime.Implementations
 {
+    /// <summary>
+    ///     XLang base Object implementation
+    /// </summary>
     public class XLangBaseObject : IXLangRuntimeTypeInstance
     {
+        /// <summary>
+        ///     Instance Vars
+        /// </summary>
         private Dictionary<IXLangRuntimeMember, IXLangRuntimeTypeInstance> instanceVars =
             new Dictionary<IXLangRuntimeMember, IXLangRuntimeTypeInstance>();
 
+        /// <summary>
+        ///     Public Constructor
+        /// </summary>
+        /// <param name="type">Type of the Instance</param>
         public XLangBaseObject(XLangRuntimeType type)
         {
             Type = type;
@@ -26,8 +39,15 @@ namespace XLang.Runtime.Implementations
             }
         }
 
+        /// <summary>
+        ///     Type of this Instance
+        /// </summary>
         public XLangRuntimeType Type { get; private set; }
 
+        /// <summary>
+        ///     Adds all Local Defined Vars inside this Object
+        /// </summary>
+        /// <param name="scope">The Scope to add to.</param>
         public void AddLocals(XLangRuntimeScope scope)
         {
             scope.Declare("this", Type).SetValue(this);
@@ -44,11 +64,20 @@ namespace XLang.Runtime.Implementations
             }
         }
 
+        /// <summary>
+        ///     Gets the Raw Object Value
+        /// </summary>
+        /// <returns></returns>
         public object GetRaw()
         {
             return this;
         }
 
+        /// <summary>
+        ///     Sets the raw object value
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="value"></param>
         public void SetRaw(XLangRuntimeType type, object value)
         {
             if (value == null)
