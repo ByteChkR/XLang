@@ -1,5 +1,4 @@
 language: csharp
-mono: latest
 dist: xenial
 
 jobs:
@@ -7,7 +6,7 @@ jobs:
     - dotnet: 2.2
       env:
         - BUILDCONFIG="Release"
-        - TESTPROJ="XLang.Parser.Tests/XLang.Parser.Tests.csproj"
+        - TESTPROJ="./src/XLang.Parser.Tests/XLang.Parser.Tests.csproj"
 #Restore the Submodules and the Project
 #Build the projects
 script:
