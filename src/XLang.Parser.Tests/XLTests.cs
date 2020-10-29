@@ -18,7 +18,7 @@ namespace XLang.Parser.Tests
     {
         private static string[] GetExampleFiles()
         {
-            return Directory.GetFiles("..\\..\\..\\..\\..\\examples", "*.xl", SearchOption.AllDirectories)
+            return Directory.GetFiles("../../../../../examples", "*.xl", SearchOption.AllDirectories)
                 .Select(Path.GetFullPath).ToArray();
         }
 
