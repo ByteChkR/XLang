@@ -86,37 +86,37 @@ namespace XLang
 
         #region Keys / Modifiers
 
-        private string PublicModifier = "public";
-        private string PrivateModifier = "private";
-        private string ProtectedModifier = "protected";
-        private string VirtualModifier = "virtual";
-        private string AbstractModifier = "abstract";
-        private string OverrideModifier = "override";
-        private string StaticModifier = "static";
-        private string IfKey = "if";
-        private string ElseKey = "else";
-        private string ForKey = "for";
-        private string ForEachKey = "foreach";
-        private string InKey = "in";
-        private string IsKey = "is";
-        private string AsKey = "as";
-        private string DoKey = "do";
-        private string WhileKey = "while";
-        private string SwitchKey = "switch";
-        private string TryKey = "try";
-        private string CatchKey = "catch";
-        private string FinallyKey = "finally";
-        private string UsingKey = "using";
-        private string NamespaceKey = "namespace";
-        private string ClassKey = "class";
-        private string ContinueKey = "continue";
-        private string BreakKey = "break";
-        private string NewKey = "new";
-        private string BaseKey = "base";
-        private string ThisKey = "this";
-        private string VoidKey = "void";
-        private string ReturnKey = "return";
-        private string OperatorKey = "operator";
+        private readonly string PublicModifier = "public";
+        private readonly string PrivateModifier = "private";
+        private readonly string ProtectedModifier = "protected";
+        private readonly string VirtualModifier = "virtual";
+        private readonly string AbstractModifier = "abstract";
+        private readonly string OverrideModifier = "override";
+        private readonly string StaticModifier = "static";
+        private readonly string IfKey = "if";
+        private readonly string ElseKey = "else";
+        private readonly string ForKey = "for";
+        private readonly string ForEachKey = "foreach";
+        private readonly string InKey = "in";
+        private readonly string IsKey = "is";
+        private readonly string AsKey = "as";
+        private readonly string DoKey = "do";
+        private readonly string WhileKey = "while";
+        private readonly string SwitchKey = "switch";
+        private readonly string TryKey = "try";
+        private readonly string CatchKey = "catch";
+        private readonly string FinallyKey = "finally";
+        private readonly string UsingKey = "using";
+        private readonly string NamespaceKey = "namespace";
+        private readonly string ClassKey = "class";
+        private readonly string ContinueKey = "continue";
+        private readonly string BreakKey = "break";
+        private readonly string NewKey = "new";
+        private readonly string BaseKey = "base";
+        private readonly string ThisKey = "this";
+        private readonly string VoidKey = "void";
+        private readonly string ReturnKey = "return";
+        private readonly string OperatorKey = "operator";
 
         #endregion
 
@@ -124,32 +124,32 @@ namespace XLang
 
         #region Symbols
 
-        private char OperatorDoubleQuote = '"';
-        private char OperatorSingleQuote = '\'';
-        private char OperatorBlockOpen = '{';
-        private char OperatorBlockClose = '}';
-        private char OperatorBracketsOpen = '(';
-        private char OperatorBracketsClose = ')';
-        private char OperatorIndexAccessorOpen = '[';
-        private char OperatorIndexAccessorClose = ']';
-        private char OperatorAsterisk = '*';
-        private char OperatorFwdSlash = '/';
-        private char OperatorBackSlash = '\\';
-        private char OperatorSemicolon = ';';
-        private char OperatorComma = ',';
-        private char OperatorColon = ':';
-        private char OperatorDot = '.';
-        private char OperatorPlus = '+';
-        private char OperatorMinus = '-';
-        private char OperatorPercent = '%';
-        private char OperatorEquality = '=';
-        private char OperatorAnd = '&';
-        private char OperatorPipe = '|';
-        private char OperatorCap = '^';
-        private char OperatorBang = '!';
-        private char OperatorLessThan = '<';
-        private char OperatorGreaterThan = '>';
-        private char OperatorTilde = '~';
+        private readonly char OperatorDoubleQuote = '"';
+        private readonly char OperatorSingleQuote = '\'';
+        private readonly char OperatorBlockOpen = '{';
+        private readonly char OperatorBlockClose = '}';
+        private readonly char OperatorBracketsOpen = '(';
+        private readonly char OperatorBracketsClose = ')';
+        private readonly char OperatorIndexAccessorOpen = '[';
+        private readonly char OperatorIndexAccessorClose = ']';
+        private readonly char OperatorAsterisk = '*';
+        private readonly char OperatorFwdSlash = '/';
+        private readonly char OperatorBackSlash = '\\';
+        private readonly char OperatorSemicolon = ';';
+        private readonly char OperatorComma = ',';
+        private readonly char OperatorColon = ':';
+        private readonly char OperatorDot = '.';
+        private readonly char OperatorPlus = '+';
+        private readonly char OperatorMinus = '-';
+        private readonly char OperatorPercent = '%';
+        private readonly char OperatorEquality = '=';
+        private readonly char OperatorAnd = '&';
+        private readonly char OperatorPipe = '|';
+        private readonly char OperatorCap = '^';
+        private readonly char OperatorBang = '!';
+        private readonly char OperatorLessThan = '<';
+        private readonly char OperatorGreaterThan = '>';
+        private readonly char OperatorTilde = '~';
 
 
         /// <summary>
