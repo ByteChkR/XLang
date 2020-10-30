@@ -88,7 +88,6 @@ namespace XLang
             {
                 nameSpace.AddUsing(nameSpace.FullName);
                 allNamespaces.Add(nameSpace);
-                //loadedNamespaces.ForEach(x=>nameSpace.AddUsing(x.FullName));
             }
         }
 

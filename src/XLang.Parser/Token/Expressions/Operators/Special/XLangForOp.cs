@@ -14,7 +14,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <summary>
         ///     Continue Condition
         /// </summary>
-        public readonly XLangExpression Condition;
+        private readonly XLangExpression Condition;
 
         /// <summary>
         ///     The Expression Body
@@ -24,18 +24,18 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <summary>
         ///     Expression Body
         /// </summary>
-        public readonly XLangTokenType OperationType;
+        private readonly XLangTokenType OperationType = XLangTokenType.OpFor;
 
 
         /// <summary>
         ///     Variable Declaration
         /// </summary>
-        public readonly XLangExpression VDecl;
+        private readonly XLangExpression VDecl;
 
         /// <summary>
         ///     Variable Change Expression
         /// </summary>
-        public readonly XLangExpression VInc;
+        private readonly XLangExpression VInc;
 
 
         /// <summary>
@@ -49,13 +49,11 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <param name="exprBody">The Expression Body</param>
         public XLangForOp(
             XLangContext context, XLangExpression vDecl, XLangExpression condition, XLangExpression vInc,
-            XLangTokenType operationType,
             Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> exprBody, int sourceIdx) : base(context,sourceIdx )
         {
             Condition = condition;
             VDecl = vDecl;
             VInc = vInc;
-            OperationType = operationType;
             ExprBody = exprBody;
         }
 

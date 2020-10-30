@@ -38,11 +38,11 @@ namespace XLang.CSharp
                 XLangMemberFlags.Public | XLangMemberFlags.Static, tunnelType,
                 new XLangFunctionArgument("typeName", strType), new XLangFunctionArgument("targetNs", strType));
             DelegateXLFunction loadNs = new DelegateXLFunction("LoadNamespace",
-                (instance, instances) => FuncLoadNamespace(context, instance, instances), voidType,
+                (instance, instances) => FuncLoadNamespace(context, instances), voidType,
                 XLangMemberFlags.Public | XLangMemberFlags.Static, tunnelType,
                 new XLangFunctionArgument("targetNs", strType));
             DelegateXLFunction loadAll = new DelegateXLFunction("LoadAll",
-                (instance, instances) => FuncLoadAll(context, instance, instances), voidType,
+                (instance, instances) => FuncLoadAll(context, instances), voidType,
                 XLangMemberFlags.Public | XLangMemberFlags.Static, tunnelType,
                 new XLangFunctionArgument("targetNs", strType));
             tunnelType.SetMembers(new[] {loadAll, loadNs, loadType});
@@ -90,7 +90,6 @@ namespace XLang.CSharp
         /// <param name="args">Function arguments (0: Target namespace.</param>
         /// <returns>The Return instance.(null)</returns>
         private static IXLangRuntimeTypeInstance FuncLoadNamespace(XLangContext context,
-            IXLangRuntimeTypeInstance instance,
             IXLangRuntimeTypeInstance[] args)
         {
             Type[] ts = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
@@ -116,7 +115,7 @@ namespace XLang.CSharp
         /// <param name="instance">Instance of the Implementing Class</param>
         /// <param name="args">Function Arguments</param>
         /// <returns>Return Value (null)</returns>
-        private static IXLangRuntimeTypeInstance FuncLoadAll(XLangContext context, IXLangRuntimeTypeInstance instance,
+        private static IXLangRuntimeTypeInstance FuncLoadAll(XLangContext context,
             IXLangRuntimeTypeInstance[] args)
         {
             Type[] ts = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).ToArray();

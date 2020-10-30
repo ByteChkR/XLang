@@ -80,7 +80,6 @@ namespace XLang.Parser.Token.Expressions.Operands
                 {
                     numTypeCache = numberType;
                 }
-                //if (valueCache != null) return new CSharpTypeInstance(numTypeCache, valueCache);
                 return new CSharpTypeInstance(numTypeCache, decimal.Parse(Value.GetValue()));
             }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using XLang.Core;
+using XLang.Exceptions;
 using XLang.Parser.Token;
 using XLang.Parser.Token.Combined;
 using XLang.Parser.Token.Expressions;
@@ -128,7 +129,7 @@ namespace XLang.Parser.Expressions
             }
 
 
-            throw new Exception("Invalid Token: " + parser.CurrentToken.Type);
+            throw new XLangTokenParseException("Invalid Token: " + parser.CurrentToken.Type);
         }
     }
 }

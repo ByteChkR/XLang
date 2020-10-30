@@ -23,7 +23,7 @@ namespace XLang.Parser.Expressions
         /// <summary>
         ///     Operator Collection
         /// </summary>
-        public readonly XLangExpressionOperatorCollection OpCollection;
+        private readonly XLangExpressionOperatorCollection OpCollection;
 
         /// <summary>
         ///     Token Reader
@@ -33,7 +33,7 @@ namespace XLang.Parser.Expressions
         /// <summary>
         ///     Value Creator
         /// </summary>
-        public readonly AXLangExpressionValueCreator ValueCreator;
+        private readonly AXLangExpressionValueCreator ValueCreator;
 
         /// <summary>
         ///     Public Constructor
@@ -128,7 +128,7 @@ namespace XLang.Parser.Expressions
             }
             else
             {
-                throw new XLangTokenReadException(Reader.tokens, type, CurrentToken.Type, CurrentToken.SourceIndex);
+                throw new XLangTokenReadException(Reader.Tokens, type, CurrentToken.Type, CurrentToken.SourceIndex);
             }
         }
 

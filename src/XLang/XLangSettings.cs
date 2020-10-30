@@ -86,37 +86,37 @@ namespace XLang
 
         #region Keys / Modifiers
 
-        public string PublicModifier = "public";
-        public string PrivateModifier = "private";
-        public string ProtectedModifier = "protected";
-        public string VirtualModifier = "virtual";
-        public string AbstractModifier = "abstract";
-        public string OverrideModifier = "override";
-        public string StaticModifier = "static";
-        public string IfKey = "if";
-        public string ElseKey = "else";
-        public string ForKey = "for";
-        public string ForEachKey = "foreach";
-        public string InKey = "in";
-        public string IsKey = "is";
-        public string AsKey = "as";
-        public string DoKey = "do";
-        public string WhileKey = "while";
-        public string SwitchKey = "switch";
-        public string TryKey = "try";
-        public string CatchKey = "catch";
-        public string FinallyKey = "finally";
-        public string UsingKey = "using";
-        public string NamespaceKey = "namespace";
-        public string ClassKey = "class";
-        public string ContinueKey = "continue";
-        public string BreakKey = "break";
-        public string NewKey = "new";
-        public string BaseKey = "base";
-        public string ThisKey = "this";
-        public string VoidKey = "void";
-        public string ReturnKey = "return";
-        public string OperatorKey = "operator";
+        private string PublicModifier = "public";
+        private string PrivateModifier = "private";
+        private string ProtectedModifier = "protected";
+        private string VirtualModifier = "virtual";
+        private string AbstractModifier = "abstract";
+        private string OverrideModifier = "override";
+        private string StaticModifier = "static";
+        private string IfKey = "if";
+        private string ElseKey = "else";
+        private string ForKey = "for";
+        private string ForEachKey = "foreach";
+        private string InKey = "in";
+        private string IsKey = "is";
+        private string AsKey = "as";
+        private string DoKey = "do";
+        private string WhileKey = "while";
+        private string SwitchKey = "switch";
+        private string TryKey = "try";
+        private string CatchKey = "catch";
+        private string FinallyKey = "finally";
+        private string UsingKey = "using";
+        private string NamespaceKey = "namespace";
+        private string ClassKey = "class";
+        private string ContinueKey = "continue";
+        private string BreakKey = "break";
+        private string NewKey = "new";
+        private string BaseKey = "base";
+        private string ThisKey = "this";
+        private string VoidKey = "void";
+        private string ReturnKey = "return";
+        private string OperatorKey = "operator";
 
         #endregion
 
@@ -124,32 +124,32 @@ namespace XLang
 
         #region Symbols
 
-        public char OperatorDoubleQuote = '"';
-        public char OperatorSingleQuote = '\'';
-        public char OperatorBlockOpen = '{';
-        public char OperatorBlockClose = '}';
-        public char OperatorBracketsOpen = '(';
-        public char OperatorBracketsClose = ')';
-        public char OperatorIndexAccessorOpen = '[';
-        public char OperatorIndexAccessorClose = ']';
-        public char OperatorAsterisk = '*';
-        public char OperatorFwdSlash = '/';
-        public char OperatorBackSlash = '\\';
-        public char OperatorSemicolon = ';';
-        public char OperatorComma = ',';
-        public char OperatorColon = ':';
-        public char OperatorDot = '.';
-        public char OperatorPlus = '+';
-        public char OperatorMinus = '-';
-        public char OperatorPercent = '%';
-        public char OperatorEquality = '=';
-        public char OperatorAnd = '&';
-        public char OperatorPipe = '|';
-        public char OperatorCap = '^';
-        public char OperatorBang = '!';
-        public char OperatorLessThan = '<';
-        public char OperatorGreaterThan = '>';
-        public char OperatorTilde = '~';
+        private char OperatorDoubleQuote = '"';
+        private char OperatorSingleQuote = '\'';
+        private char OperatorBlockOpen = '{';
+        private char OperatorBlockClose = '}';
+        private char OperatorBracketsOpen = '(';
+        private char OperatorBracketsClose = ')';
+        private char OperatorIndexAccessorOpen = '[';
+        private char OperatorIndexAccessorClose = ']';
+        private char OperatorAsterisk = '*';
+        private char OperatorFwdSlash = '/';
+        private char OperatorBackSlash = '\\';
+        private char OperatorSemicolon = ';';
+        private char OperatorComma = ',';
+        private char OperatorColon = ':';
+        private char OperatorDot = '.';
+        private char OperatorPlus = '+';
+        private char OperatorMinus = '-';
+        private char OperatorPercent = '%';
+        private char OperatorEquality = '=';
+        private char OperatorAnd = '&';
+        private char OperatorPipe = '|';
+        private char OperatorCap = '^';
+        private char OperatorBang = '!';
+        private char OperatorLessThan = '<';
+        private char OperatorGreaterThan = '>';
+        private char OperatorTilde = '~';
 
 
         /// <summary>

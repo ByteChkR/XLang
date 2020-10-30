@@ -14,7 +14,7 @@ namespace XLang.Parser.Token.Combined
         /// <summary>
         ///     Namespace Key
         /// </summary>
-        public readonly IXLangToken NamespaceKey;
+        private readonly IXLangToken NamespaceKey;
 
         /// <summary>
         ///     Public Constructor

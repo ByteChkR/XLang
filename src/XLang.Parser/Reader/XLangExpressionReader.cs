@@ -13,7 +13,7 @@ namespace XLang.Parser.Reader
         /// <summary>
         ///     Input Token Stream
         /// </summary>
-        public readonly List<IXLangToken> tokens;
+        public readonly List<IXLangToken> Tokens;
 
         /// <summary>
         ///     The Current Position inside the token Stream
@@ -26,7 +26,7 @@ namespace XLang.Parser.Reader
         /// <param name="tokens">Token Stream</param>
         public XLangExpressionReader(List<IXLangToken> tokens)
         {
-            this.tokens = tokens.ToList();
+            this.Tokens = tokens.ToList();
         }
 
         /// <summary>
@@ -34,10 +34,19 @@ namespace XLang.Parser.Reader
         /// </summary>
         /// <param name="advance">Relative offset to the current position</param>
         /// <returns>Token at the specified Position</returns>
-        public IXLangToken PeekNext(int advance = 1)
+        public IXLangToken PeekNext(int advance)
         {
-            XLangParsingTools.ReadAnyOrNone(tokens, currentIdx + advance - 1, out IXLangToken result);
+            XLangParsingTools.ReadAnyOrNone(Tokens, currentIdx + advance - 1, out IXLangToken result);
             return result;
+        }
+
+        /// <summary>
+        ///     Peeks into the next (or specified) position relative to the current position
+        /// </summary>
+        /// <returns>Token at the specified Position</returns>
+        public IXLangToken PeekNext()
+        {
+            return PeekNext(1);
         }
 
         /// <summary>
@@ -46,7 +55,7 @@ namespace XLang.Parser.Reader
         /// <returns></returns>
         public IXLangToken GetNext()
         {
-            XLangParsingTools.ReadAnyOrNone(tokens, currentIdx, out IXLangToken result);
+            XLangParsingTools.ReadAnyOrNone(Tokens, currentIdx, out IXLangToken result);
             currentIdx++;
             return result;
         }

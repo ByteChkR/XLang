@@ -81,8 +81,6 @@ namespace XLang.Parser.Runtime
         /// </summary>
         public XLangRuntimeType ImplementingClass { get; }
 
-        //public XLangMemberType MemberType => XLangMemberType.Property;
-
         /// <summary>
         ///     The Type of the Property.
         /// </summary>
@@ -179,7 +177,6 @@ namespace XLang.Parser.Runtime
             if (IsStatic)
             {
 
-                //ImplementingClass.AddStatics(scope);
                 return staticValue ??
                        (staticValue = InitExpr?.Process(scope, instance) ?? PropertyType.CreateEmptyBase());
             }

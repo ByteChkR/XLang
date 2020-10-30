@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace XLang.Parser.Expressions.Operators
@@ -66,7 +67,7 @@ namespace XLang.Parser.Expressions.Operators
         /// <summary>
         ///     Precedence Bucket
         /// </summary>
-        private struct PrecedenceBucket
+        private struct PrecedenceBucket : IEquatable<PrecedenceBucket>
         {
             /// <summary>
             ///     Operators in this Precedence Bucket
@@ -80,6 +81,11 @@ namespace XLang.Parser.Expressions.Operators
             public PrecedenceBucket(List<XLangExpressionOperator> operators)
             {
                 bucket = operators;
+            }
+
+            public bool Equals(PrecedenceBucket other)
+            {
+                throw new NotImplementedException();
             }
         }
     }

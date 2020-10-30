@@ -74,8 +74,7 @@ namespace XLang.Shared
         /// </summary>
         public XLangRuntimeType ImplementingClass { get; }
 
-        //public XLangMemberType MemberType => XLangMemberType.Function;
-
+        
         /// <summary>
         ///     The Return type of this function
         /// </summary>

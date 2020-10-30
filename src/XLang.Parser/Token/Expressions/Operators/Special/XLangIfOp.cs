@@ -24,7 +24,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <summary>
         ///     Operation Type
         /// </summary>
-        public readonly XLangTokenType OperationType;
+        public readonly XLangTokenType OperationType = XLangTokenType.OpIf;
 
 
         /// <summary>
@@ -35,13 +35,12 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <param name="conditionMap">Condition Map</param>
         /// <param name="elseBranch">Else Branch Block</param>
         public XLangIfOp(
-            XLangContext context, XLangTokenType operationType,
+            XLangContext context,
             List<(XLangExpression, Action<XLangRuntimeScope, IXLangRuntimeTypeInstance>)> conditionMap,
             Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> elseBranch, int sourceIdx) : base(context, sourceIdx)
         {
             this.conditionMap = conditionMap;
             this.elseBranch = elseBranch;
-            OperationType = operationType;
         }
 
         /// <summary>

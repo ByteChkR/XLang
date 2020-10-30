@@ -47,7 +47,7 @@ namespace XLang.Parser.Expressions
                     .Create(parser.Context, new XLangExpressionReader(parser.CurrentToken.GetChildren())).Parse()
                     .ToList();
             }
-            token = new XLangForOp(parser.Context, vDecl, condition, vInc, XLangTokenType.OpFor,
+            token = new XLangForOp(parser.Context, vDecl, condition, vInc,
                 (x, y) => RunMulti(block, x, y), ft.SourceIndex);
 
 
@@ -84,7 +84,7 @@ namespace XLang.Parser.Expressions
                     .Create(parser.Context, new XLangExpressionReader(parser.CurrentToken.GetChildren())).Parse()
                     .ToList();
             }
-            token = new XLangWhileOp(parser.Context, condition, XLangTokenType.OpWhile, RunMulti, wT.SourceIndex);
+            token = new XLangWhileOp(parser.Context, condition, RunMulti, wT.SourceIndex);
 
             void RunMulti(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
             {
@@ -206,7 +206,7 @@ namespace XLang.Parser.Expressions
             }
 
 
-            return new XLangIfOp(parser.Context, XLangTokenType.OpIf, conditions, elseBranch, it.SourceIndex);
+            return new XLangIfOp(parser.Context, conditions, elseBranch, it.SourceIndex);
         }
 
         #endregion

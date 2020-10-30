@@ -5,14 +5,13 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/686539719ae04408a281110610176d39)](https://www.codacy.com/gh/ByteChkR/XLang/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ByteChkR/XLang&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/ByteChkR/XLang/branch/main/graph/badge.svg?token=IRXADCIHYW)](https://codecov.io/gh/ByteChkR/XLang)
 
-
 ## Documentation
 [Documentation Page](https://bytechkr.github.io/XLang/index.html)
 
 ## XLC
 Console Interpreter which allows for execution of XL Scripts.
 
-### Arguments:
+### Arguments
 ```
 XLang Parser Console(xlc) Version: 0.1.0.0-prototype
 
@@ -30,7 +29,7 @@ XL Token Explorer Application. Useful for browsing the output of the Parser.
 Either Specify File and browse AST.
 Or Write script inside the Program and directly execute it.
 
-### Arguments:
+### Arguments
 ```
 Syntax
 		xle.exe <file or folder>

@@ -393,15 +393,25 @@ namespace XLang.Parser.Base
             }
         }
 
-
         /// <summary>
         ///     Replaces all Function Block tokens inside classes with function definitions
         /// </summary>
         /// <param name="settings">XL Settings</param>
         /// <param name="tokens">Token Stream</param>
-        /// <param name="classDef">The Containing Class Definition</param>
         public static void ElevateFunctionDef(
-            XLangSettings settings, List<IXLangToken> tokens, IXLangToken classDef = null)
+            XLangSettings settings, List<IXLangToken> tokens)
+        {
+            ElevateFunctionDef(settings, tokens, null);
+        }
+
+        /// <summary>
+            ///     Replaces all Function Block tokens inside classes with function definitions
+            /// </summary>
+            /// <param name="settings">XL Settings</param>
+            /// <param name="tokens">Token Stream</param>
+            /// <param name="classDef">The Containing Class Definition</param>
+            public static void ElevateFunctionDef(
+            XLangSettings settings, List<IXLangToken> tokens, IXLangToken classDef)
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
             {
@@ -470,7 +480,7 @@ namespace XLang.Parser.Base
                     {
                         if (classDef == null)
                         {
-                            throw new Exception("Can not declare a constructor in global namespace");
+                            throw new XLangRuntimeTypeException("Can not declare a constructor in global namespace");
                         }
 
                         typeName = funcName;
@@ -576,7 +586,6 @@ namespace XLang.Parser.Base
 
                 if (tokens[i].Type == XLangTokenType.OpStatement)
                 {
-                    IXLangToken token = tokens[i];
                     XLangExpressionParser parser = XLangExpressionParser.Create(context,
                         new XLangExpressionReader(
                             tokens[i]
@@ -726,25 +735,9 @@ namespace XLang.Parser.Base
                 if (tokens[i] is NamespaceDefinitionToken nst)
                 {
                     XLangRuntimeNamespace ixLangNs = context.CreateOrGet(nst.Name.GetValue());
-                    //List<IXLangRuntimeItem> children =
-                    //    ElevateToRuntimeTokens(tokens[i].GetChildren(), context, ixLangNs);
-
+                   
                     ProcessUsings(ixLangNs, tokens[i].GetChildren());
                     cDefMap.AddRange(CreateCdefMap(tokens[i].GetChildren(), context, ixLangNs));
-                    //foreach (IXLangRuntimeItem xlRuntimeToken in children)
-                    //{
-                    //    if (xlRuntimeToken is XLangRuntimeType tDef)
-                    //    {
-                    //        ixLangNs.AddType(tDef);
-                    //    }
-                    //    else
-                    //    {
-                    //        throw new XLangTokenParseException($"Unexpected Type: '{xlRuntimeToken.GetType()}'");
-                    //    }
-                    //}
-
-
-                    //ret.Add(ixLangNs);
                 }
                 else if (tokens[i] is ClassDefinitionToken cDef)
                 {
@@ -774,7 +767,7 @@ namespace XLang.Parser.Base
                     int idx = tokens.FindIndex(i, x => x.Type == XLangTokenType.OpSemicolon);
                     if (idx == -1)
                     {
-                        throw new Exception("Expected Semicolon after Using Directive.");
+                        throw new XLangRuntimeTypeException("Expected Semicolon after Using Directive.");
                     }
                     IXLangToken[] name = tokens.GetRange(i + 1, idx - i - 1).ToArray();
 

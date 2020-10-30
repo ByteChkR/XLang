@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using XLang.Core;
+using XLang.Exceptions;
 using XLang.Runtime.Binding;
 using XLang.Runtime.Implementations;
 using XLang.Runtime.Members;
@@ -88,7 +89,7 @@ namespace XLang.BaseTypes
                 return newItem;
             }
 
-            throw new Exception("Invocation Failure");
+            throw new XLangRuntimeTypeException("Invocation Failure");
         }
     }
 }

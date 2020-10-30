@@ -14,7 +14,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <summary>
         ///     Continue Expression
         /// </summary>
-        public readonly XLangExpression Condition;
+        private readonly XLangExpression Condition;
 
         /// <summary>
         ///     Expression Body
@@ -24,7 +24,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <summary>
         ///     Operation Type
         /// </summary>
-        public readonly XLangTokenType OperationType;
+        private readonly XLangTokenType OperationType = XLangTokenType.OpWhile;
 
 
         /// <summary>
@@ -35,11 +35,10 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <param name="operationType">Operation Type</param>
         /// <param name="exprBody">Expression Body</param>
         public XLangWhileOp(
-            XLangContext context, XLangExpression condition, XLangTokenType operationType,
+            XLangContext context, XLangExpression condition,
             Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> exprBody, int sourceIdx) : base(context,sourceIdx )
         {
             Condition = condition;
-            OperationType = operationType;
             ExprBody = exprBody;
         }
         

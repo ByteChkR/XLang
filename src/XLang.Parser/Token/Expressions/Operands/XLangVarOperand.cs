@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using XLang.Exceptions;
 using XLang.Queries;
 using XLang.Runtime;
 using XLang.Runtime.Implementations;
@@ -67,25 +68,18 @@ namespace XLang.Parser.Token.Expressions.Operands
         /// <returns></returns>
         public override IXLangRuntimeTypeInstance Process(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
         {
-            //string[] parts = Value.GetValue().Split('.');
-            XLangRuntimeScope.XLangRuntimeScopedVar var = scope.ResolveVar(Value.GetValue());
+           XLangRuntimeScope.XLangRuntimeScopedVar var = scope.ResolveVar(Value.GetValue());
             if (var != null)
             {
 
                 return var.GetValue();
-
-
-                //IXLangScopeAccess acVar =
-                //    XLangRuntimeResolver.ResolveDynamicItem(Context, Value.GetValue(), var.GetValue().Type);
-                //return new XLangFunctionTypeInstance((IXLangRuntimeMember)
-                //                                     acVar, var.GetValue(), Context.GetType("XL.function"));
             }
             IXLangRuntimeItem[] ac =
                 XLangRuntimeResolver.ResolveItem(scope, Value.GetValue(), null, scope.OwnerType);
 
             if (ac == null)
             {
-                throw new Exception("Can not find Item: " + Value.GetValue());
+                throw new XLangRuntimeTypeException("Can not find Item: " + Value.GetValue());
             }
 
             return new XLangFunctionAccessInstance(ac, instance, Context.GetType("XL.function"));

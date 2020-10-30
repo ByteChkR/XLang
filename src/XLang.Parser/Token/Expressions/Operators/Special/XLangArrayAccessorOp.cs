@@ -88,7 +88,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <returns></returns>
         public override IXLangRuntimeTypeInstance Process(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
         {
-            IXLangRuntimeTypeInstance left = Left.Process(scope, instance);
+            IXLangRuntimeTypeInstance left = this.Left.Process(scope, instance);
             return GetOperatorImpl(left).Invoke(left, ParameterList.Select(x => x.Process(scope, left)).ToArray());
         }
     }

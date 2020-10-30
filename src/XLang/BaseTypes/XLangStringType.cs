@@ -81,7 +81,7 @@ namespace XLang.BaseTypes
         /// <param name="arg2">Arguments</param>
         /// <returns>String representation of the instance.</returns>
         private IXLangRuntimeTypeInstance ObjectToString(
-            IXLangRuntimeTypeInstance arg1, IXLangRuntimeTypeInstance[] arg2)
+            IXLangRuntimeTypeInstance arg1)
         {
             return new CSharpTypeInstance(
                 containingNamespace.GetType(
@@ -114,7 +114,7 @@ namespace XLang.BaseTypes
         /// <param name="args">Arguments</param>
         /// <returns>String Length</returns>
         private IXLangRuntimeTypeInstance GetStringLength(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+            IXLangRuntimeTypeInstance instance)
         {
             XLangRuntimeType type = containingNamespace.GetType(
                 "number",
@@ -142,8 +142,8 @@ namespace XLang.BaseTypes
 
             DelegateXLFunction stringLengthFunction =
                 new DelegateXLFunction(
-                    "GetLength",
-                    GetStringLength,
+                    "GetLength", 
+                    (instance, args) => GetStringLength(instance),
                     numberType,
                     XLangMemberFlags.Instance | XLangMemberFlags.Public,
                     stringType
@@ -158,7 +158,7 @@ namespace XLang.BaseTypes
                 );
             DelegateXLFunction toString = new DelegateXLFunction(
                 "ToString",
-                ObjectToString,
+                (instance, args) => ObjectToString(instance),
                 stringType,
                 XLangMemberFlags.Public | XLangMemberFlags.Instance,
                 objectType

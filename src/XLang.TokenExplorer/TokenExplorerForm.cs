@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using XLang.BaseTypes;
 using XLang.CSharp;
@@ -65,12 +66,6 @@ namespace XLang.TokenExplorer
             }
         }
 
-        private IXLangRuntimeTypeInstance ShowMsgBox(IXLangRuntimeTypeInstance arg1, IXLangRuntimeTypeInstance[] arg2)
-        {
-            MessageBox.Show(arg2.First().GetRaw().ToString(), "XL SAYS:");
-            return null;
-        }
-
         private void TvNodeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             PopulateInfo(e.Node.FullPath);
@@ -129,13 +124,13 @@ namespace XLang.TokenExplorer
                 }
                 else if (xLangRuntimeMember is IXLangRuntimeProperty prop)
                 {
-                    CreateView(context, tn, prop);
+                    CreateView(tn, prop);
                 }
             }
 
         }
 
-        private void CreateView(XLangContext context, TreeNode parent, IXLangRuntimeProperty member)
+        private void CreateView(TreeNode parent, IXLangRuntimeProperty member)
         {
             TreeNode tn = new TreeNode($"Property '{member.Name}' of type '{member.PropertyType.FullName}'");
             parent.Nodes.Add(tn);
@@ -224,7 +219,7 @@ namespace XLang.TokenExplorer
 
         private void PopulateInfo(string path)
         {
-            string cData;
+            StringBuilder sb = new StringBuilder();
             string cTitle;
             IXLangRuntimeItem item = null;
             if (itemMap.ContainsKey(path))
@@ -235,94 +230,94 @@ namespace XLang.TokenExplorer
             if (item is XLangRuntimeType type)
             {
                 cTitle = $"Type: {type.Name}";
-                cData =
-                    $"Full Name: {type.FullName}\nBinding Flags: {type.BindingFlags}\nBase Type: {type.BaseType?.FullName}\nMembers: \n";
+                sb.Append(
+                    $"Full Name: {type.FullName}\nBinding Flags: {type.BindingFlags}\nBase Type: {type.BaseType?.FullName}\nMembers: \n");
                 IXLangRuntimeMember[] members = type.GetAllMembers();
                 if (members.Length != 0)
                 {
-                    cData += "\t";
+                    sb.Append('\t');
                     for (int i = 0; i < members.Length; i++)
                     {
                         IXLangRuntimeMember xLangRuntimeMember = members[i];
-                        cData += xLangRuntimeMember.Name;
+                        sb.Append(xLangRuntimeMember.Name);
                         if (i != members.Length - 1)
                         {
-                            cData += ", \n\t";
+                            sb.Append(", \n\t");
                         }
                     }
                 }
 
-                cData += "\n";
+                sb.AppendLine();
             }
             else if (item is XLangRuntimeNamespace ns)
             {
                 cTitle = $"Namespace: {ns.Name}";
-                cData = $"Full Name: {ns.FullName}\nNamespaces: \n";
+                sb.Append($"Full Name: {ns.FullName}\nNamespaces: \n");
+               
                 if (ns.Children.Count != 0)
                 {
-                    cData += "\t";
+                    sb.Append('\t');
                     for (int i = 0; i < ns.Children.Count; i++)
                     {
                         XLangRuntimeNamespace cns = ns.Children[i];
-                        cData += cns.Name;
+                        sb.Append(cns.Name);
                         if (i != ns.Children.Count - 1)
                         {
-                            cData += ", \n\t";
+                            sb.Append(", \n\t");
                         }
                     }
                 }
-                cData += "\n";
+                sb.AppendLine();
 
-                cData += "Types: \n\t";
+                sb.Append("Types: \n\t");
                 if (ns.DefinedTypes.Count != 0)
                 {
                     for (int i = 0; i < ns.DefinedTypes.Count; i++)
                     {
                         XLangRuntimeType langRuntimeType = ns.DefinedTypes[i];
-                        cData += langRuntimeType.Name;
+                        sb.Append(langRuntimeType.Name);
                         if (i != ns.DefinedTypes.Count - 1)
                         {
-                            cData += ", \n\t";
+                            sb.Append(", \n\t");
                         }
                     }
                 }
-                cData += "\n";
+                sb.AppendLine();
             }
             else if (item is IXLangRuntimeFunction func)
             {
                 cTitle = $"Function: {func.Name}";
-                cData =
-                    $"Full Name: {func.ImplementingClass.FullName}.{func.Name}\nBinding Flags: {func.BindingFlags}\nReturn Type: {func.ReturnType}\nArguments: \n";
+                sb.Append(
+                    $"Full Name: {func.ImplementingClass.FullName}.{func.Name}\nBinding Flags: {func.BindingFlags}\nReturn Type: {func.ReturnType}\nArguments: \n");
 
                 if (func.ParameterList.Length != 0)
                 {
-                    cData += "\t";
+                    sb.Append("\t");
                     for (int i = 0; i < func.ParameterList.Length; i++)
                     {
                         IXLangRuntimeFunctionArgument fa = func.ParameterList[i];
-                        cData += fa.Name + $"(type:{fa.Type.FullName})";
+                        sb.Append(fa.Name + $"(type:{fa.Type.FullName})");
                         if (i != func.ParameterList.Length - 1)
                         {
-                            cData += ", \n\t";
+                            sb.Append(", \n\t");
                         }
                     }
                 }
-                cData += "\n";
+                sb.AppendLine();
             }
             else if (item is IXLangRuntimeProperty prop)
             {
                 cTitle = $"Function: {prop.Name}";
-                cData =
-                    $"Full Name: {prop.ImplementingClass.FullName}.{prop.Name}\nBinding Flags: {prop.BindingFlags}\nProperty Type: {prop.PropertyType}";
+               sb.Append($"Full Name: {prop.ImplementingClass.FullName}.{prop.Name}\nBinding Flags: {prop.BindingFlags}\nProperty Type: {prop.PropertyType}");
             }
             else
             {
-                cData = "NO DATA";
+                sb.Append("NO DATA");
                 cTitle = path;
             }
 
             lblName.Text = cTitle;
-            rtbCustomData.Text = cData;
+            rtbCustomData.Text = sb.ToString();
         }
 
         private void btnOpenLiveEditor_Click(object sender, EventArgs e)

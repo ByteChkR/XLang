@@ -18,16 +18,16 @@ namespace XLang.Parser.Exceptions
         /// <summary>
         /// The Expected Tokens
         /// </summary>
-        public readonly XLangTokenType[] Expected;
+        private readonly XLangTokenType[] expected;
 
         /// <summary>
         /// The Sequence that was unexpected
         /// </summary>
-        public readonly IEnumerable<IXLangToken> Sequence;
+        private readonly IEnumerable<IXLangToken> sequence;
         /// <summary>
         /// The Token that led to the Exception
         /// </summary>
-        public readonly XLangTokenType Unmatched;
+        private readonly XLangTokenType unmatched;
 
         /// <summary>
         /// Public Constructor
@@ -40,9 +40,9 @@ namespace XLang.Parser.Exceptions
             IEnumerable<IXLangToken> tokenSequence, XLangTokenType[] expected, XLangTokenType unmatched, int start) :
             base($"Expected '{GetExpectedTokenString(expected)}' but got '{unmatched} at index {start}'")
         {
-            Sequence = tokenSequence;
-            Expected = expected;
-            Unmatched = unmatched;
+            sequence = tokenSequence;
+            this.expected = expected;
+            this.unmatched = unmatched;
         }
 
         /// <summary>

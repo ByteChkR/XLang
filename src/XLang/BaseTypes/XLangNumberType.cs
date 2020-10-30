@@ -123,7 +123,7 @@ namespace XLang.BaseTypes
             DelegateXLFunction modNumFunc =
                 new DelegateXLFunction(
                     XLangTokenType.OpPercent.ToString(),
-                    ModNum,
+                    (instance, args) => ModNum(args),
                     numberType,
                     XLangMemberFlags.Static |
                     XLangMemberFlags.Private |
@@ -332,8 +332,7 @@ namespace XLang.BaseTypes
             return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() + (decimal) args[1].GetRaw());
         }
 
-        private IXLangRuntimeTypeInstance ModNum(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        private IXLangRuntimeTypeInstance ModNum(IXLangRuntimeTypeInstance[] args)
         {
             XLangRuntimeType type = containingNamespace.GetType(
                 "number",
@@ -516,7 +515,7 @@ namespace XLang.BaseTypes
 
             return new CSharpTypeInstance(
                 type,
-                (decimal) ((int) (decimal) args[0].GetRaw() != 0 || (int) (decimal) args[0].GetRaw() != 0 ? 0 : 1)
+                (decimal) ((int) (decimal) args[0].GetRaw() != 0 || (int) (decimal) args[1].GetRaw() != 0 ? 0 : 1)
             );
         }
 
@@ -532,7 +531,7 @@ namespace XLang.BaseTypes
 
             return new CSharpTypeInstance(
                 type,
-                (decimal) ((int) (decimal) args[0].GetRaw() != 0 && (int) (decimal) args[0].GetRaw() != 0 ? 0 : 1)
+                (decimal) ((int) (decimal) args[0].GetRaw() != 0 && (int) (decimal) args[1].GetRaw() != 0 ? 0 : 1)
             );
         }
 

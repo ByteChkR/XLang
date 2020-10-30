@@ -1,4 +1,5 @@
 ﻿using System;
+using XLang.Exceptions;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
 
@@ -39,6 +40,7 @@ namespace XLang.Shared
         /// <param name="scope">The Scope to add to.</param>
         public void AddLocals(XLangRuntimeScope scope)
         {
+            //No Locals on Value Types.(Types exposed through C# Tunneling)
         }
 
         /// <summary>
@@ -64,7 +66,7 @@ namespace XLang.Shared
             }
             else
             {
-                throw new Exception("Type Mismatch");
+                throw new XLangRuntimeTypeException("Type Mismatch");
             }
         }
     }

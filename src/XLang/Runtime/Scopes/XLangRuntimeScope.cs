@@ -125,7 +125,7 @@ namespace XLang.Runtime.Scopes
         {
             if (Check(errorMask))
             {
-                throw new Exception($"Flag: '{errorMask}' is not valid for this scope");
+                throw new XLangRuntimeTypeException($"Flag: '{errorMask}' is not valid for this scope");
             }
         }
 

@@ -36,14 +36,28 @@ namespace XLang.Runtime.Types
         /// <param name="createBase">Create Base Function used to create empty type instances of this type.</param>
         public XLangRuntimeType(
             string name, XLangRuntimeNamespace nameSpace, XLangRuntimeType baseType, XLangBindingFlags bindingFlags,
-            Func<XLangRuntimeType, IXLangRuntimeTypeInstance> createBase = null)
+            Func<XLangRuntimeType, IXLangRuntimeTypeInstance> createBase)
         {
             this.createBase = createBase ?? (x => new XLangBaseObject(x));
             Name = name;
             Namespace = nameSpace;
             BaseType = baseType;
-            ;
+
             BindingFlags = bindingFlags;
+        }
+
+        /// <summary>
+        ///     Public Constructor
+        /// </summary>
+        /// <param name="name">Type name</param>
+        /// <param name="nameSpace">Containing Namespace</param>
+        /// <param name="baseType">Base Type ( Can be null for no base type )</param>
+        /// <param name="bindingFlags">Binding Flags of this type</param>
+        public XLangRuntimeType(
+            string name, XLangRuntimeNamespace nameSpace, XLangRuntimeType baseType, XLangBindingFlags bindingFlags) :
+            this(name, nameSpace, baseType, bindingFlags, null)
+        {
+
         }
 
         /// <summary>
@@ -76,7 +90,7 @@ namespace XLang.Runtime.Types
         ///     Accessibilty Level of this Type
         /// </summary>
         public XLangAccessibilityLevel AccessibilityLevel =>
-            (XLangAccessibilityLevel) (BindingFlags &
+            (XLangAccessibilityLevel)(BindingFlags &
                                        (XLangBindingFlags.Public |
                                         XLangBindingFlags.Private |
                                         XLangBindingFlags.Protected));
@@ -229,7 +243,7 @@ namespace XLang.Runtime.Types
         /// <param name="member">Member to Inject</param>
         internal void InjectMember(IXLangRuntimeMember member)
         {
-            members = members.Concat(new[] {member}).ToArray();
+            members = members.Concat(new[] { member }).ToArray();
         }
 
         /// <summary>

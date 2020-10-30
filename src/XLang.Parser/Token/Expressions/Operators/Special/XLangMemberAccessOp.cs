@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using XLang.Exceptions;
 using XLang.Queries;
 using XLang.Runtime.Implementations;
 using XLang.Runtime.Members;
@@ -85,7 +86,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
                     );
                 }
 
-                throw new Exception("Invalid Access");
+                throw new XLangRuntimeTypeException("Invalid Access");
             }
 
             IXLangRuntimeMember[] rm = XLangRuntimeResolver.ResolveItem(
@@ -98,7 +99,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
 
             if (rm == null)
             {
-                throw new Exception("Invalid Access.");
+                throw new XLangRuntimeTypeException("Invalid Access.");
             }
 
             return new XLangFunctionAccessInstance(

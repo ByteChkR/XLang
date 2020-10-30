@@ -33,8 +33,8 @@ namespace XLang.BaseTypes
             );
             DelegateXLFunction eqFunc =
                 new DelegateXLFunction(
-                    XLangTokenType.OpEquality.ToString(),
-                    EquValue,
+                    XLangTokenType.OpEquality.ToString(), 
+                    (instance, args) => EquValue(args),
                     objectType,
                     XLangMemberFlags.Static |
                     XLangMemberFlags.Private |
@@ -66,8 +66,7 @@ namespace XLang.BaseTypes
 
         #region Operator Implementations
 
-        private IXLangRuntimeTypeInstance EquValue(
-            IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        private IXLangRuntimeTypeInstance EquValue(IXLangRuntimeTypeInstance[] args)
         {
             args[0].SetRaw(args[1].Type, args[1].GetRaw());
             return args[0];

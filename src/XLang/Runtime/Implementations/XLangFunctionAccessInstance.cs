@@ -1,4 +1,5 @@
 ﻿using System;
+using XLang.Exceptions;
 using XLang.Runtime.Members;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
@@ -46,6 +47,7 @@ namespace XLang.Runtime.Implementations
         /// <param name="scope"></param>
         public void AddLocals(XLangRuntimeScope scope)
         {
+            //Functions do not have local variables
         }
 
         /// <summary>
@@ -75,7 +77,7 @@ namespace XLang.Runtime.Implementations
             }
             else
             {
-                throw new Exception("Type Mismatch");
+                throw new XLangRuntimeTypeException("Type Mismatch");
             }
 
         }

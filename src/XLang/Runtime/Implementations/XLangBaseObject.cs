@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using XLang.Exceptions;
 using XLang.Queries;
 using XLang.Runtime.Members;
 using XLang.Runtime.Members.Properties;
@@ -82,7 +83,7 @@ namespace XLang.Runtime.Implementations
         {
             if (value == null)
             {
-                throw new Exception("look at this");
+                throw new XLangRuntimeTypeException("look at this");
             }
 
             if (type.InheritsFrom(Type))
@@ -92,7 +93,7 @@ namespace XLang.Runtime.Implementations
             }
             else
             {
-                throw new Exception("Type mismatch");
+                throw new XLangRuntimeTypeException("Type mismatch");
             }
         }
     }

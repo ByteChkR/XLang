@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using XLang.Exceptions;
 using XLang.Runtime;
 using XLang.Runtime.Binding;
 using XLang.Runtime.Members;
@@ -92,8 +93,6 @@ namespace XLang.Queries
             {
                 return caller.Namespace.GetVisibleNamespaces(scope.Context).Distinct().SelectMany(x => x.DefinedTypes)
                     .FirstOrDefault(x => x.Name == name);
-                //return scope.GetAllVisible().Concat(new[] {caller.Namespace}).Distinct().SelectMany(x => x.DefinedTypes)
-                //    .FirstOrDefault(x => x.Name == name);
             }
 
             return start.DefinedTypes.FirstOrDefault(x => x.Name == name);
@@ -122,7 +121,7 @@ namespace XLang.Queries
                         {
                             return new[] {type};
                         }
-                        throw new Exception($"Type '{type}' is not accessible from caller '{caller}'");
+                        throw new XLangRuntimeTypeException($"Type '{type}' is not accessible from caller '{caller}'");
                     }
 
                     return new[] {type};
@@ -150,7 +149,7 @@ namespace XLang.Queries
                     return member;
                 }
 
-                throw new Exception("Can not find Type or namespace: " + name);
+                throw new XLangRuntimeTypeException("Can not find Type or namespace: " + name);
             }
 
             if (start is XLangRuntimeNamespace nSpace)
@@ -167,7 +166,7 @@ namespace XLang.Queries
                     return new[] {ns};
                 }
 
-                throw new Exception("Can not find Type or namespace: " + name);
+                throw new XLangRuntimeTypeException("Can not find Type or namespace: " + name);
             }
 
             if (start is XLangRuntimeType rType)
@@ -194,7 +193,7 @@ namespace XLang.Queries
                 {
                     return member;
                 }
-                throw new Exception(
+                throw new XLangRuntimeTypeException(
                     $"Can not find Property or Function: {name} or it is not accessible from this scope"
                 );
             }
@@ -208,7 +207,7 @@ namespace XLang.Queries
             {
                 return ResolveItem(scope, name, prop.PropertyType, caller);
             }
-            throw new Exception(
+            throw new XLangRuntimeTypeException(
                 $"Invalid Input: {name}"
             );
         }

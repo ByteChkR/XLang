@@ -18,7 +18,7 @@ namespace XLang.Parser.Reader
         /// <summary>
         ///     Input Source
         /// </summary>
-        public readonly string Input;
+        private readonly string input;
         /// <summary>
         ///     XL Settings
         /// </summary>
@@ -39,13 +39,16 @@ namespace XLang.Parser.Reader
         /// <param name="input">Source</param>
         public XLangBaseReader(XLangSettings settings, string input)
         {
-            Input = input;
+            this.input = input;
             this.settings = settings;
         }
 
         public List<IXLangToken> ReadToEnd()
         {
-            if (currentToken == null) Advance();
+            if (currentToken == null)
+            {
+                Advance();
+            }
             List<IXLangToken> ret = new List<IXLangToken>();
             while (currentToken.Type != XLangTokenType.EOF)
             {
@@ -61,40 +64,38 @@ namespace XLang.Parser.Reader
         /// <returns></returns>
         public IXLangToken Advance()
         {
-            if (currentIndex < Input.Length)
+            if (currentIndex < input.Length)
             {
-                if (IsNewLine(Input[currentIndex]))
+                if (IsNewLine(input[currentIndex]))
                 {
                     currentToken = ReadNewLine();
                 }
-                else if (IsSpace(Input[currentIndex]))
+                else if (IsSpace(input[currentIndex]))
                 {
                     currentToken = ReadSpace();
-                    //currentToken = Advance();
                 }
-                else if (IsSymbol(Input[currentIndex]))
+                else if (IsSymbol(input[currentIndex]))
                 {
                     currentToken = ReadSymbol();
                 }
-                else if (IsNumber(Input[currentIndex]))
+                else if (IsNumber(input[currentIndex]))
                 {
                     currentToken = ReadNumber();
                 }
-                else if (IsLetter(Input[currentIndex]))
+                else if (IsLetter(input[currentIndex]))
                 {
                     currentToken = ReadWord();
                 }
                 else
                 {
-                    currentToken = new TextToken(XLangTokenType.Unknown, Input[currentIndex].ToString(), currentIndex);
+                    currentToken = new TextToken(XLangTokenType.Unknown, input[currentIndex].ToString(), currentIndex);
                     currentIndex++;
-                    //throw new Exception($"Unknown Character '{Input[currentIndex]}' at index: {currentIndex}");
                 }
 
                 return currentToken;
             }
 
-            currentToken = new TextToken(XLangTokenType.EOF, "", Input.Length);
+            currentToken = new TextToken(XLangTokenType.EOF, "", input.Length);
 
             return currentToken;
         }
@@ -143,7 +144,7 @@ namespace XLang.Parser.Reader
             {
                 len++;
                 currentIndex++;
-            } while (currentIndex < Input.Length && IsSpace(Input[currentIndex]));
+            } while (currentIndex < input.Length && IsSpace(input[currentIndex]));
 
             return new TextToken(XLangTokenType.OpSpace, new StringBuilder().Append(' ', len).ToString(), start);
         }
@@ -160,7 +161,7 @@ namespace XLang.Parser.Reader
             {
                 len++;
                 currentIndex++;
-            } while (currentIndex < Input.Length && IsNewLine(Input[currentIndex]));
+            } while (currentIndex < input.Length && IsNewLine(input[currentIndex]));
 
             return new TextToken(XLangTokenType.OpNewLine, new StringBuilder().Append('\n', len).ToString(), start);
         }
@@ -175,9 +176,9 @@ namespace XLang.Parser.Reader
             StringBuilder sb = new StringBuilder();
             do
             {
-                sb.Append(Input[currentIndex]);
+                sb.Append(input[currentIndex]);
                 currentIndex++;
-            } while (currentIndex < Input.Length && (IsNumber(Input[currentIndex]) || IsLetter(Input[currentIndex])));
+            } while (currentIndex < input.Length && (IsNumber(input[currentIndex]) || IsLetter(input[currentIndex])));
 
             return new TextToken(XLangTokenType.OpWord, sb.ToString(), start);
         }
@@ -192,9 +193,9 @@ namespace XLang.Parser.Reader
             StringBuilder sb = new StringBuilder();
             do
             {
-                sb.Append(Input[currentIndex]);
+                sb.Append(input[currentIndex]);
                 currentIndex++;
-            } while (currentIndex < Input.Length && IsNumber(Input[currentIndex]));
+            } while (currentIndex < input.Length && IsNumber(input[currentIndex]));
 
             return new TextToken(XLangTokenType.OpNumber, sb.ToString(), start);
         }
@@ -205,7 +206,7 @@ namespace XLang.Parser.Reader
         /// <returns></returns>
         private IXLangToken ReadSymbol()
         {
-            char val = Input[currentIndex];
+            char val = input[currentIndex];
             int start = currentIndex;
             currentIndex++;
             return new TextToken(settings.ReservedSymbols[val], val.ToString(), start);

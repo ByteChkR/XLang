@@ -14,7 +14,7 @@ using XLang.Shared.Enum;
 
 namespace XLang.Console
 {
-    internal class Program
+    internal static class Program
     {
         private static string InputFile;
         private static string FuncTarget;
