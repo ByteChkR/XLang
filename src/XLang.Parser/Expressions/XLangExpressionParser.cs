@@ -128,7 +128,7 @@ namespace XLang.Parser.Expressions
             }
             else
             {
-                throw new XLangTokenReadException(Reader.tokens, type, CurrentToken.Type, CurrentToken.StartIndex);
+                throw new XLangTokenReadException(Reader.tokens, type, CurrentToken.Type, CurrentToken.SourceIndex);
             }
         }
 

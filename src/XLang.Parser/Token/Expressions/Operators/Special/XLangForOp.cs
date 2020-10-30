@@ -50,7 +50,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         public XLangForOp(
             XLangContext context, XLangExpression vDecl, XLangExpression condition, XLangExpression vInc,
             XLangTokenType operationType,
-            Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> exprBody) : base(context)
+            Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> exprBody, int sourceIdx) : base(context,sourceIdx )
         {
             Condition = condition;
             VDecl = vDecl;
@@ -58,11 +58,6 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
             OperationType = operationType;
             ExprBody = exprBody;
         }
-
-        /// <summary>
-        ///     Start index in source
-        /// </summary>
-        public override int StartIndex { get; }
 
         /// <summary>
         ///     Returns Child Tokens of this Token

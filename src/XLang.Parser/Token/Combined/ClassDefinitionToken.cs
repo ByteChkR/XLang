@@ -39,7 +39,7 @@ namespace XLang.Parser.Token.Combined
                 .OpClassDefinition,
             subtokens,
             classKey
-                .StartIndex
+                .SourceIndex
         )
         {
             BaseClass = baseClass;

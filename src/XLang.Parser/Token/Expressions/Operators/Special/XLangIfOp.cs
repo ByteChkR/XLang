@@ -37,17 +37,12 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         public XLangIfOp(
             XLangContext context, XLangTokenType operationType,
             List<(XLangExpression, Action<XLangRuntimeScope, IXLangRuntimeTypeInstance>)> conditionMap,
-            Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> elseBranch) : base(context)
+            Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> elseBranch, int sourceIdx) : base(context, sourceIdx)
         {
             this.conditionMap = conditionMap;
             this.elseBranch = elseBranch;
             OperationType = operationType;
         }
-
-        /// <summary>
-        ///     Start index in source
-        /// </summary>
-        public override int StartIndex { get; }
 
         /// <summary>
         ///     Returns Child Tokens of this Token

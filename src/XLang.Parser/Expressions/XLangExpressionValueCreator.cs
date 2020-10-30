@@ -30,23 +30,26 @@ namespace XLang.Parser.Expressions
 
             if (parser.CurrentToken.Type == XLangTokenType.OpReturn)
             {
+                IXLangToken rt = parser.CurrentToken;
                 parser.Eat(XLangTokenType.OpReturn);
                 if (parser.CurrentToken.Type == XLangTokenType.OpSemicolon)
                 {
-                    return new XLangReturnOp(parser.Context, null);
+                    return new XLangReturnOp(parser.Context, null, rt.SourceIndex);
                 }
-                return new XLangReturnOp(parser.Context, parser.ParseExpr(0));
+                return new XLangReturnOp(parser.Context, parser.ParseExpr(0), rt.SourceIndex);
             }
 
             if (parser.CurrentToken.Type == XLangTokenType.OpContinue)
             {
+                IXLangToken ct = parser.CurrentToken;
                 parser.Eat(XLangTokenType.OpContinue);
-                return new XLangContinueOp(parser.Context);
+                return new XLangContinueOp(parser.Context, ct.SourceIndex);
             }
             if (parser.CurrentToken.Type == XLangTokenType.OpBreak)
             {
+                IXLangToken bt = parser.CurrentToken;
                 parser.Eat(XLangTokenType.OpBreak);
-                return new XLangBreakOp(parser.Context);
+                return new XLangBreakOp(parser.Context, bt.SourceIndex);
             }
 
             if (parser.CurrentToken.Type == XLangTokenType.OpIf)
@@ -75,7 +78,7 @@ namespace XLang.Parser.Expressions
             if (parser.CurrentToken.Type == XLangTokenType.OpThis ||
                 parser.CurrentToken.Type == XLangTokenType.OpBase)
             {
-                XLangExpression token = new XLangVarOperand(parser.Context, parser.CurrentToken);
+                XLangExpression token = new XLangVarOperand(parser.Context, parser.CurrentToken, parser.CurrentToken.SourceIndex);
                 parser.Eat(parser.CurrentToken.Type);
 
                 return token;
@@ -102,7 +105,7 @@ namespace XLang.Parser.Expressions
                 }
                 else
                 {
-                    token = new XLangVarOperand(parser.Context, item);
+                    token = new XLangVarOperand(parser.Context, item, item.SourceIndex);
                 }
 
                 return token;

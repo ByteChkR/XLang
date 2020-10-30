@@ -27,16 +27,11 @@ namespace XLang.Parser.Token.Expressions.Operators
         /// <param name="context">XL Context</param>
         /// <param name="left">Left Side</param>
         /// <param name="operationType">Operation Type</param>
-        public XLangUnaryOp(XLangContext context, XLangExpression left, XLangTokenType operationType) : base(context)
+        public XLangUnaryOp(XLangContext context, XLangExpression left, XLangTokenType operationType) : base(context, left.SourceIndex)
         {
             Left = left;
             OperationType = operationType;
         }
-
-        /// <summary>
-        ///     Start Index in source
-        /// </summary>
-        public override int StartIndex => Left.StartIndex;
 
         /// <summary>
         ///     Returns Child Tokens of this Token

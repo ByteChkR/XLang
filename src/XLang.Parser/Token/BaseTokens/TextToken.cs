@@ -21,7 +21,7 @@ namespace XLang.Parser.Token.BaseTokens
         {
             Type = type;
             Value = value;
-            StartIndex = startIndex;
+            SourceIndex = startIndex;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace XLang.Parser.Token.BaseTokens
         /// <summary>
         ///     The Start index in the source stream
         /// </summary>
-        public int StartIndex { get; }
+        public int SourceIndex { get; }
 
         /// <summary>
         ///     returns the Value of the token

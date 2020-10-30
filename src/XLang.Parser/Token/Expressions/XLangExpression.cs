@@ -22,7 +22,7 @@ namespace XLang.Parser.Token.Expressions
         ///     Protected Constructor
         /// </summary>
         /// <param name="context">XL Context</param>
-        protected XLangExpression(XLangContext context)
+        protected XLangExpression(XLangContext context, int sourceIndex)
         {
             Context = context;
         }
@@ -30,7 +30,7 @@ namespace XLang.Parser.Token.Expressions
         /// <summary>
         ///     Start index in source
         /// </summary>
-        public abstract int StartIndex { get; }
+        public int SourceIndex { get; }
 
         /// <summary>
         ///     The Token Type (OpExpression)

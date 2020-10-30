@@ -82,7 +82,7 @@ namespace XLang.Parser.Base
                             tokens,
                             XLangTokenType.OpDoubleQuote,
                             XLangTokenType.OpNewLine,
-                            tokens[i].StartIndex
+                            tokens[i].SourceIndex
                         );
                     }
 
@@ -102,7 +102,7 @@ namespace XLang.Parser.Base
                     IXLangToken newToken = new TextToken(
                         XLangTokenType.OpStringLiteral,
                         ConcatContent(),
-                        tokens[i].StartIndex
+                        tokens[i].SourceIndex
                     );
                     tokens.RemoveRange(i, endQuote - i + 1);
                     tokens.Insert(i, newToken);
@@ -125,7 +125,7 @@ namespace XLang.Parser.Base
                     tokens[i] = new TextToken(
                         settings.ReservedKeys[token.GetValue()],
                         token.GetValue(),
-                        token.StartIndex
+                        token.SourceIndex
                     );
                 }
             }
@@ -261,7 +261,7 @@ namespace XLang.Parser.Base
                     {
                         continue;
                     }
-                    int saveStart = tokens[i].StartIndex;
+                    int saveStart = tokens[i].SourceIndex;
                     int start = end - found.Count;
                     tokens.RemoveRange(start, found.Count + 1);
                     found.Where(x => x.Type == XLangTokenType.OpBlockToken).ToList()
@@ -545,7 +545,7 @@ namespace XLang.Parser.Base
             {
                 if (current.Type != type)
                 {
-                    throw new XLangTokenReadException(tokens, type, current.Type, current.StartIndex);
+                    throw new XLangTokenReadException(tokens, type, current.Type, current.SourceIndex);
                 }
 
                 current = reader.GetNext();

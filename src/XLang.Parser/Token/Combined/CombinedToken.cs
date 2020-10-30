@@ -27,14 +27,14 @@ namespace XLang.Parser.Token.Combined
         protected CombinedToken(XLangTokenType type, IXLangToken[] subtokens, int start)
         {
             SubTokens = subtokens.ToList();
-            StartIndex = start;
+            SourceIndex = start;
             Type = type;
         }
 
         /// <summary>
         ///     Start index in the source
         /// </summary>
-        public int StartIndex { get; }
+        public int SourceIndex { get; }
 
         /// <summary>
         ///     The Token Type

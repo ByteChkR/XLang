@@ -46,17 +46,12 @@ namespace XLang.Parser.Token.Expressions.Operators
         /// <param name="right">Right Side</param>
         public XLangBinaryOp(
             XLangContext context, XLangExpression left, XLangTokenType operationType,
-            XLangExpression right) : base(context)
+            XLangExpression right) : base(context, left.SourceIndex)
         {
             Left = left;
             OperationType = operationType;
             Right = right;
         }
-
-        /// <summary>
-        ///     Start index in source
-        /// </summary>
-        public override int StartIndex { get; }
 
 
         /// <summary>

@@ -22,7 +22,7 @@ namespace XLang.Parser.Token.Expressions.Operands
         /// </summary>
         /// <param name="context">XL Context</param>
         /// <param name="value">Variable Value</param>
-        public XLangVarDefOperand(XLangContext context, VariableDefinitionToken value) : base(context)
+        public XLangVarDefOperand(XLangContext context, VariableDefinitionToken value) : base(context, value.SourceIndex)
         {
             this.value = value;
         }

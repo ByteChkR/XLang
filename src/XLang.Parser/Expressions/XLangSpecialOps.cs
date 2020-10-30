@@ -25,6 +25,7 @@ namespace XLang.Parser.Expressions
         /// <returns>Parsed Expression</returns>
         public static XLangExpression ReadFor(XLangExpressionParser parser)
         {
+            IXLangToken ft = parser.CurrentToken;
             parser.Eat(XLangTokenType.OpFor);
             parser.Eat(XLangTokenType.OpBracketOpen);
             XLangExpression vDecl = parser.ParseExpr(0);
@@ -47,7 +48,7 @@ namespace XLang.Parser.Expressions
                     .ToList();
             }
             token = new XLangForOp(parser.Context, vDecl, condition, vInc, XLangTokenType.OpFor,
-                (x, y) => RunMulti(block, x, y));
+                (x, y) => RunMulti(block, x, y), ft.SourceIndex);
 
 
             return token;
@@ -65,6 +66,7 @@ namespace XLang.Parser.Expressions
         /// <returns>Parsed Expression</returns>
         public static XLangExpression ReadWhile(XLangExpressionParser parser)
         {
+            IXLangToken wT = parser.CurrentToken;
             parser.Eat(XLangTokenType.OpWhile);
             parser.Eat(XLangTokenType.OpBracketOpen);
             XLangExpression condition = parser.ParseExpr(0);
@@ -82,7 +84,7 @@ namespace XLang.Parser.Expressions
                     .Create(parser.Context, new XLangExpressionReader(parser.CurrentToken.GetChildren())).Parse()
                     .ToList();
             }
-            token = new XLangWhileOp(parser.Context, condition, XLangTokenType.OpWhile, RunMulti);
+            token = new XLangWhileOp(parser.Context, condition, XLangTokenType.OpWhile, RunMulti, wT.SourceIndex);
 
             void RunMulti(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
             {
@@ -185,7 +187,7 @@ namespace XLang.Parser.Expressions
             List<(XLangExpression, Action<XLangRuntimeScope, IXLangRuntimeTypeInstance>)> conditions =
                 new List<(XLangExpression, Action<XLangRuntimeScope, IXLangRuntimeTypeInstance>)>();
             Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> elseBranch = null;
-
+            IXLangToken it = parser.CurrentToken;
             conditions.Add(ReadIfStatement(parser));
 
             while (parser.CurrentToken.Type == XLangTokenType.OpElse)
@@ -204,7 +206,7 @@ namespace XLang.Parser.Expressions
             }
 
 
-            return new XLangIfOp(parser.Context, XLangTokenType.OpIf, conditions, elseBranch);
+            return new XLangIfOp(parser.Context, XLangTokenType.OpIf, conditions, elseBranch, it.SourceIndex);
         }
 
         #endregion

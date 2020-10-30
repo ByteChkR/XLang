@@ -19,15 +19,11 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// </summary>
         /// <param name="context">XL Context</param>
         /// <param name="right">Right side Expression</param>
-        public XLangReturnOp(XLangContext context, XLangExpression right) : base(context)
+        public XLangReturnOp(XLangContext context, XLangExpression right, int sourceIdx) : base(context, sourceIdx)
         {
             this.right = right;
         }
-
-        /// <summary>
-        ///     Start index in source
-        /// </summary>
-        public override int StartIndex { get; }
+        
 
         /// <summary>
         ///     Returns Child Tokens of this Token

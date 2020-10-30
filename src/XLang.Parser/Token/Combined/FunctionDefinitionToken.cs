@@ -44,7 +44,7 @@ namespace XLang.Parser.Token.Combined
             IXLangToken[] subtokens, bool isConstructor = false) : base(
             XLangTokenType.OpFunctionDefinition,
             subtokens,
-            name.StartIndex
+            name.SourceIndex
         )
         {
             Modifiers = modifiers;

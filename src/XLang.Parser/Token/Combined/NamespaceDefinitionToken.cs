@@ -27,7 +27,7 @@ namespace XLang.Parser.Token.Combined
                 .OpNamespaceDefinition,
             subtokens,
             nameSpace
-                .StartIndex
+                .SourceIndex
         )
         {
             Name = name;

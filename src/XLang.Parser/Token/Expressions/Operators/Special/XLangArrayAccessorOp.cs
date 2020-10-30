@@ -33,10 +33,9 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <param name="list">Left Side Array</param>
         /// <param name="parameterList">Array Accessor Parameters</param>
         public XLangArrayAccessorOp(
-            XLangContext context, XLangExpression list, List<XLangExpression> parameterList) : base(context)
+            XLangContext context, XLangExpression list, List<XLangExpression> parameterList) : base(context, list.SourceIndex)
         {
             Left = list;
-            StartIndex = Left.StartIndex;
             ParameterList = parameterList.ToArray();
         }
 
@@ -44,12 +43,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         ///     The Operator Token
         /// </summary>
         public override XLangTokenType Type => XLangTokenType.OpArrayAccess;
-
-        /// <summary>
-        ///     Start index in source
-        /// </summary>
-        public override int StartIndex { get; }
-
+        
 
         /// <summary>
         ///     Returns Child Tokens of this Token

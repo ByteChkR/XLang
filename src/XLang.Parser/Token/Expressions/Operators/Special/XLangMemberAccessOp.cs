@@ -30,16 +30,11 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <param name="context">XL Context</param>
         /// <param name="left">Left Side Expression</param>
         /// <param name="memberName"></param>
-        public XLangMemberAccessOp(XLangContext context, XLangExpression left, string memberName) : base(context)
+        public XLangMemberAccessOp(XLangContext context, XLangExpression left, string memberName) : base(context, left.SourceIndex)
         {
             Left = left;
             MemberName = memberName;
         }
-
-        /// <summary>
-        ///     Start index in source
-        /// </summary>
-        public override int StartIndex { get; }
 
         /// <summary>
         ///     Returns Child Tokens of this Token

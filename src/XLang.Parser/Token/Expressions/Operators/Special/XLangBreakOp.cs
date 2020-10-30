@@ -13,14 +13,10 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         ///     Public Constructor
         /// </summary>
         /// <param name="context">XL Context</param>
-        public XLangBreakOp(XLangContext context) : base(context)
+        public XLangBreakOp(XLangContext context, int sourceIdx) : base(context, sourceIdx)
         {
         }
-
-        /// <summary>
-        ///     Start index in source
-        /// </summary>
-        public override int StartIndex { get; }
+        
 
         /// <summary>
         ///     Returns Child Tokens of this Token

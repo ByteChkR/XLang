@@ -32,7 +32,7 @@ namespace XLang.Parser.Token.Expressions.Operands
         /// </summary>
         /// <param name="context">The XL Context</param>
         /// <param name="value">The Value of this Token</param>
-        public XLangValueOperand(XLangContext context, IXLangToken value) : base(context)
+        public XLangValueOperand(XLangContext context, IXLangToken value) : base(context, value.SourceIndex)
         {
             Value = value;
         }
@@ -47,11 +47,6 @@ namespace XLang.Parser.Token.Expressions.Operands
         ///     StringType Property
         /// </summary>
         private XLangRuntimeType stringType => Context.GetType("XL.string");
-
-        /// <summary>
-        ///     Start Index in source
-        /// </summary>
-        public override int StartIndex { get; }
 
         /// <summary>
         ///     Returns all Child Tokens of this Token

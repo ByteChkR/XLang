@@ -36,17 +36,13 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <param name="exprBody">Expression Body</param>
         public XLangWhileOp(
             XLangContext context, XLangExpression condition, XLangTokenType operationType,
-            Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> exprBody) : base(context)
+            Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> exprBody, int sourceIdx) : base(context,sourceIdx )
         {
             Condition = condition;
             OperationType = operationType;
             ExprBody = exprBody;
         }
-
-        /// <summary>
-        ///     Start index in source
-        /// </summary>
-        public override int StartIndex { get; }
+        
 
         /// <summary>
         ///     Returns Child Tokens of this Token

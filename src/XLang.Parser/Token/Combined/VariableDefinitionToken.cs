@@ -39,7 +39,7 @@ namespace XLang.Parser.Token.Combined
             XLangExpression initializerExpression) : base(
             XLangTokenType.OpVariableDefinition,
             subtokens,
-            typeName.StartIndex
+            typeName.SourceIndex
         )
         {
             Modifiers = modifiers;

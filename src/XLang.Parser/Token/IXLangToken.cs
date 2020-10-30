@@ -19,7 +19,7 @@ namespace XLang.Parser.Token
         /// <summary>
         ///     The Start index in the source code.
         /// </summary>
-        int StartIndex { get; }
+        int SourceIndex { get; }
 
         /// <summary>
         ///     Returns the Child Tokens

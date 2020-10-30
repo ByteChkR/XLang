@@ -20,7 +20,7 @@ namespace XLang.Parser.Token.Expressions.Operands
         ///     Protected Constructor
         /// </summary>
         /// <param name="context">XL Context</param>
-        protected XLangVarOperand(XLangContext context) : base(context)
+        protected XLangVarOperand(XLangContext context, int sourceIdx) : base(context, sourceIdx)
         {
         }
 
@@ -29,7 +29,7 @@ namespace XLang.Parser.Token.Expressions.Operands
         /// </summary>
         /// <param name="context">XL Context</param>
         /// <param name="value">Variable Value</param>
-        public XLangVarOperand(XLangContext context, IXLangToken value) : base(context)
+        public XLangVarOperand(XLangContext context, IXLangToken value, int sourceIdx) : base(context, sourceIdx)
         {
             Value = value;
         }
@@ -38,12 +38,7 @@ namespace XLang.Parser.Token.Expressions.Operands
         ///     The Token Value
         /// </summary>
         public virtual IXLangToken Value { get; }
-
-
-        /// <summary>
-        ///     Start Index in source
-        /// </summary>
-        public override int StartIndex { get; }
+        
 
         /// <summary>
         ///     Returns all Child Tokens of this Token
