@@ -23,7 +23,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         {
             this.right = right;
         }
-        
+
 
         /// <summary>
         ///     Returns Child Tokens of this Token

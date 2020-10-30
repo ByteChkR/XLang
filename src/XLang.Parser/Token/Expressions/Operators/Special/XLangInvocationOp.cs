@@ -31,7 +31,8 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <param name="left">Left Side Expression</param>
         /// <param name="parameterList">Parameter list</param>
         public XLangInvocationOp(
-            XLangContext context, XLangExpression left, XLangExpression[] parameterList) : base(context, left.SourceIndex)
+            XLangContext context, XLangExpression left, XLangExpression[] parameterList) : base(context,
+            left.SourceIndex)
         {
             Left = left;
             ParameterList = parameterList;
@@ -41,7 +42,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         ///     Operation Type
         /// </summary>
         public override XLangTokenType Type => XLangTokenType.OpInvocation;
-        
+
 
         /// <summary>
         ///     Returns Child Tokens of this Token

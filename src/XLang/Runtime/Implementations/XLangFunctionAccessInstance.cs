@@ -1,5 +1,4 @@
-﻿using System;
-using XLang.Exceptions;
+﻿using XLang.Exceptions;
 using XLang.Runtime.Members;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;

@@ -4,7 +4,6 @@ using XLang.Core;
 using XLang.Parser.Exceptions;
 using XLang.Parser.Expressions.Operators;
 using XLang.Parser.Reader;
-using XLang.Parser.Shared;
 using XLang.Parser.Token;
 using XLang.Parser.Token.Expressions;
 

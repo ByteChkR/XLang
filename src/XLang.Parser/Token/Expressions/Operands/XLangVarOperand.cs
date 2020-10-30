@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using XLang.Exceptions;
 using XLang.Queries;
 using XLang.Runtime;
@@ -39,7 +38,7 @@ namespace XLang.Parser.Token.Expressions.Operands
         ///     The Token Value
         /// </summary>
         public virtual IXLangToken Value { get; }
-        
+
 
         /// <summary>
         ///     Returns all Child Tokens of this Token
@@ -68,7 +67,7 @@ namespace XLang.Parser.Token.Expressions.Operands
         /// <returns></returns>
         public override IXLangRuntimeTypeInstance Process(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
         {
-           XLangRuntimeScope.XLangRuntimeScopedVar var = scope.ResolveVar(Value.GetValue());
+            XLangRuntimeScope.XLangRuntimeScopedVar var = scope.ResolveVar(Value.GetValue());
             if (var != null)
             {
 

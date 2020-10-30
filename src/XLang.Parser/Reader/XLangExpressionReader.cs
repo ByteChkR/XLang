@@ -26,7 +26,7 @@ namespace XLang.Parser.Reader
         /// <param name="tokens">Token Stream</param>
         public XLangExpressionReader(List<IXLangToken> tokens)
         {
-            this.Tokens = tokens.ToList();
+            Tokens = tokens.ToList();
         }
 
         /// <summary>

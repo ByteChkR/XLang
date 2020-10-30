@@ -2,7 +2,6 @@
 using System.Text;
 using XLang.Core;
 using XLang.Exceptions;
-using XLang.Parser.Shared;
 using XLang.Parser.Token;
 
 /// <summary>
@@ -11,26 +10,26 @@ using XLang.Parser.Token;
 namespace XLang.Parser.Exceptions
 {
     /// <summary>
-    /// Occurs if the Parser Encounters a Token that is unexpected
+    ///     Occurs if the Parser Encounters a Token that is unexpected
     /// </summary>
     public class XLangTokenReadException : XLangTokenParseException
     {
         /// <summary>
-        /// The Expected Tokens
+        ///     The Expected Tokens
         /// </summary>
         private readonly XLangTokenType[] expected;
 
         /// <summary>
-        /// The Sequence that was unexpected
+        ///     The Sequence that was unexpected
         /// </summary>
         private readonly IEnumerable<IXLangToken> sequence;
         /// <summary>
-        /// The Token that led to the Exception
+        ///     The Token that led to the Exception
         /// </summary>
         private readonly XLangTokenType unmatched;
 
         /// <summary>
-        /// Public Constructor
+        ///     Public Constructor
         /// </summary>
         /// <param name="tokenSequence">Token Sequence</param>
         /// <param name="expected">Expected Tokens</param>
@@ -46,7 +45,7 @@ namespace XLang.Parser.Exceptions
         }
 
         /// <summary>
-        /// Public Constructor
+        ///     Public Constructor
         /// </summary>
         /// <param name="tokenSequence">Token Sequence</param>
         /// <param name="expected">Expected Token</param>
@@ -64,7 +63,7 @@ namespace XLang.Parser.Exceptions
         }
 
         /// <summary>
-        /// Returns the string representation of the expected tokens
+        ///     Returns the string representation of the expected tokens
         /// </summary>
         /// <param name="expected">Expected Tokens</param>
         /// <returns></returns>

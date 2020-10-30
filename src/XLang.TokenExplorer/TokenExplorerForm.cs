@@ -253,7 +253,7 @@ namespace XLang.TokenExplorer
             {
                 cTitle = $"Namespace: {ns.Name}";
                 sb.Append($"Full Name: {ns.FullName}\nNamespaces: \n");
-               
+
                 if (ns.Children.Count != 0)
                 {
                     sb.Append('\t');
@@ -308,7 +308,8 @@ namespace XLang.TokenExplorer
             else if (item is IXLangRuntimeProperty prop)
             {
                 cTitle = $"Function: {prop.Name}";
-               sb.Append($"Full Name: {prop.ImplementingClass.FullName}.{prop.Name}\nBinding Flags: {prop.BindingFlags}\nProperty Type: {prop.PropertyType}");
+                sb.Append(
+                    $"Full Name: {prop.ImplementingClass.FullName}.{prop.Name}\nBinding Flags: {prop.BindingFlags}\nProperty Type: {prop.PropertyType}");
             }
             else
             {

@@ -6,12 +6,12 @@
 namespace XLang.Exceptions
 {
     /// <summary>
-    /// Gets Thrown if a redefinition of a Symbol occurs
+    ///     Gets Thrown if a redefinition of a Symbol occurs
     /// </summary>
     public class XLangNameAmbiguityException : Exception
     {
         /// <summary>
-        /// Public Constructor
+        ///     Public Constructor
         /// </summary>
         /// <param name="message">Message</param>
         public XLangNameAmbiguityException(string message) : base(message)

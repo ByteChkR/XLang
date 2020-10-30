@@ -27,7 +27,8 @@ namespace XLang.Parser.Token.Expressions.Operators
         /// <param name="context">XL Context</param>
         /// <param name="left">Left Side</param>
         /// <param name="operationType">Operation Type</param>
-        public XLangUnaryOp(XLangContext context, XLangExpression left, XLangTokenType operationType) : base(context, left.SourceIndex)
+        public XLangUnaryOp(XLangContext context, XLangExpression left, XLangTokenType operationType) : base(context,
+            left.SourceIndex)
         {
             Left = left;
             OperationType = operationType;

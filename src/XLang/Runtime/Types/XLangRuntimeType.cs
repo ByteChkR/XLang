@@ -90,7 +90,7 @@ namespace XLang.Runtime.Types
         ///     Accessibilty Level of this Type
         /// </summary>
         public XLangAccessibilityLevel AccessibilityLevel =>
-            (XLangAccessibilityLevel)(BindingFlags &
+            (XLangAccessibilityLevel) (BindingFlags &
                                        (XLangBindingFlags.Public |
                                         XLangBindingFlags.Private |
                                         XLangBindingFlags.Protected));
@@ -243,7 +243,7 @@ namespace XLang.Runtime.Types
         /// <param name="member">Member to Inject</param>
         internal void InjectMember(IXLangRuntimeMember member)
         {
-            members = members.Concat(new[] { member }).ToArray();
+            members = members.Concat(new[] {member}).ToArray();
         }
 
         /// <summary>

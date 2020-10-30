@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using XLang.Core;
@@ -21,7 +20,6 @@ using XLang.Runtime.Members;
 using XLang.Runtime.Members.Functions;
 using XLang.Runtime.Members.Properties;
 using XLang.Runtime.Types;
-using XLang.Shared;
 
 /// <summary>
 /// Contains the Board Phase Parser that prepares the source for the Expression Parser
@@ -405,12 +403,12 @@ namespace XLang.Parser.Base
         }
 
         /// <summary>
-            ///     Replaces all Function Block tokens inside classes with function definitions
-            /// </summary>
-            /// <param name="settings">XL Settings</param>
-            /// <param name="tokens">Token Stream</param>
-            /// <param name="classDef">The Containing Class Definition</param>
-            public static void ElevateFunctionDef(
+        ///     Replaces all Function Block tokens inside classes with function definitions
+        /// </summary>
+        /// <param name="settings">XL Settings</param>
+        /// <param name="tokens">Token Stream</param>
+        /// <param name="classDef">The Containing Class Definition</param>
+        public static void ElevateFunctionDef(
             XLangSettings settings, List<IXLangToken> tokens, IXLangToken classDef)
         {
             for (int i = tokens.Count - 1; i >= 0; i--)
@@ -735,7 +733,7 @@ namespace XLang.Parser.Base
                 if (tokens[i] is NamespaceDefinitionToken nst)
                 {
                     XLangRuntimeNamespace ixLangNs = context.CreateOrGet(nst.Name.GetValue());
-                   
+
                     ProcessUsings(ixLangNs, tokens[i].GetChildren());
                     cDefMap.AddRange(CreateCdefMap(tokens[i].GetChildren(), context, ixLangNs));
                 }

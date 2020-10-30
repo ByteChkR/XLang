@@ -4,7 +4,6 @@ using System.Linq;
 using XLang.Exceptions;
 using XLang.Runtime.Members;
 using XLang.Runtime.Types;
-using XLang.Shared;
 
 namespace XLang.Runtime.Scopes
 {
@@ -105,7 +104,10 @@ namespace XLang.Runtime.Scopes
             return localVars.FirstOrDefault(x => x.Name == name);
         }
 
-        public bool HasVar(string name) => localVars.Any(x => x.Name == name);
+        public bool HasVar(string name)
+        {
+            return localVars.Any(x => x.Name == name);
+        }
 
         /// <summary>
         ///     Returns all Visible Namespaces inside this Scope

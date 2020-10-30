@@ -7,7 +7,6 @@ using XLang.Runtime.Members.Functions;
 using XLang.Runtime.Members.Properties;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
-using XLang.Shared;
 
 /// <summary>
 /// Contains XLangExpression Implementations

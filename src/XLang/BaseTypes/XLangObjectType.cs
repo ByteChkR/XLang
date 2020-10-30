@@ -8,7 +8,7 @@ using XLang.Shared.Enum;
 namespace XLang.BaseTypes
 {
     /// <summary>
-    /// Implements "XL.object"
+    ///     Implements "XL.object"
     /// </summary>
     public class XLangObjectType
     {
@@ -33,7 +33,7 @@ namespace XLang.BaseTypes
             );
             DelegateXLFunction eqFunc =
                 new DelegateXLFunction(
-                    XLangTokenType.OpEquality.ToString(), 
+                    XLangTokenType.OpEquality.ToString(),
                     (instance, args) => EquValue(args),
                     objectType,
                     XLangMemberFlags.Static |

@@ -142,7 +142,7 @@ namespace XLang.BaseTypes
 
             DelegateXLFunction stringLengthFunction =
                 new DelegateXLFunction(
-                    "GetLength", 
+                    "GetLength",
                     (instance, args) => GetStringLength(instance),
                     numberType,
                     XLangMemberFlags.Instance | XLangMemberFlags.Public,

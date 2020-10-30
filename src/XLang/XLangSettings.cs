@@ -164,7 +164,7 @@ namespace XLang
         public Dictionary<char, XLangTokenType> ReservedSymbols =>
             new Dictionary<char, XLangTokenType>
             {
-                {OperatorBackSlash, XLangTokenType.OpBackSlash },
+                {OperatorBackSlash, XLangTokenType.OpBackSlash},
                 {OperatorSingleQuote, XLangTokenType.OpSingleQuote},
                 {OperatorDoubleQuote, XLangTokenType.OpDoubleQuote},
                 {OperatorBlockOpen, XLangTokenType.OpBlockBracketOpen},

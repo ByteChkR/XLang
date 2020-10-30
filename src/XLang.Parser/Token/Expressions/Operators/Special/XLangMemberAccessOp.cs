@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using XLang.Exceptions;
 using XLang.Queries;
@@ -31,7 +30,8 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <param name="context">XL Context</param>
         /// <param name="left">Left Side Expression</param>
         /// <param name="memberName"></param>
-        public XLangMemberAccessOp(XLangContext context, XLangExpression left, string memberName) : base(context, left.SourceIndex)
+        public XLangMemberAccessOp(XLangContext context, XLangExpression left, string memberName) : base(context,
+            left.SourceIndex)
         {
             Left = left;
             MemberName = memberName;

@@ -49,7 +49,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <param name="exprBody">The Expression Body</param>
         public XLangForOp(
             XLangContext context, XLangExpression vDecl, XLangExpression condition, XLangExpression vInc,
-            Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> exprBody, int sourceIdx) : base(context,sourceIdx )
+            Action<XLangRuntimeScope, IXLangRuntimeTypeInstance> exprBody, int sourceIdx) : base(context, sourceIdx)
         {
             Condition = condition;
             VDecl = vDecl;

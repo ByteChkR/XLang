@@ -9,7 +9,6 @@ using XLang.Runtime;
 using XLang.Runtime.Members.Functions;
 using XLang.Runtime.Scopes;
 using XLang.Runtime.Types;
-using XLang.Shared;
 using XLang.Shared.Enum;
 
 namespace XLang

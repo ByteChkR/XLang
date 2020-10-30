@@ -1,6 +1,7 @@
 ﻿/// <summary>
 /// Contains Core Logic and Enums
 /// </summary>
+
 namespace XLang.Core
 {
     /// <summary>

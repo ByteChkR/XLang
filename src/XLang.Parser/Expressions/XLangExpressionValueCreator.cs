@@ -1,5 +1,4 @@
-﻿using System;
-using XLang.Core;
+﻿using XLang.Core;
 using XLang.Exceptions;
 using XLang.Parser.Token;
 using XLang.Parser.Token.Combined;
@@ -79,7 +78,8 @@ namespace XLang.Parser.Expressions
             if (parser.CurrentToken.Type == XLangTokenType.OpThis ||
                 parser.CurrentToken.Type == XLangTokenType.OpBase)
             {
-                XLangExpression token = new XLangVarOperand(parser.Context, parser.CurrentToken, parser.CurrentToken.SourceIndex);
+                XLangExpression token = new XLangVarOperand(parser.Context, parser.CurrentToken,
+                    parser.CurrentToken.SourceIndex);
                 parser.Eat(parser.CurrentToken.Type);
 
                 return token;

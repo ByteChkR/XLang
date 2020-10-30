@@ -16,7 +16,7 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         public XLangBreakOp(XLangContext context, int sourceIdx) : base(context, sourceIdx)
         {
         }
-        
+
 
         /// <summary>
         ///     Returns Child Tokens of this Token
