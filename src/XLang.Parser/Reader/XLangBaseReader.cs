@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using XLang.Core;
 using XLang.Parser.Token;
@@ -42,6 +43,17 @@ namespace XLang.Parser.Reader
             this.settings = settings;
         }
 
+        public List<IXLangToken> ReadToEnd()
+        {
+            if (currentToken == null) Advance();
+            List<IXLangToken> ret = new List<IXLangToken>();
+            while (currentToken.Type != XLangTokenType.EOF)
+            {
+                ret.Add(currentToken);
+                Advance();
+            }
+            return ret;
+        }
 
         /// <summary>
         ///     Advances the reader by one position inside the source tokens
@@ -74,7 +86,9 @@ namespace XLang.Parser.Reader
                 }
                 else
                 {
-                    throw new Exception($"Unknown Character '{Input[currentIndex]}' at index: {currentIndex}");
+                    currentToken = new TextToken(XLangTokenType.Unknown, Input[currentIndex].ToString(), currentIndex);
+                    currentIndex++;
+                    //throw new Exception($"Unknown Character '{Input[currentIndex]}' at index: {currentIndex}");
                 }
 
                 return currentToken;

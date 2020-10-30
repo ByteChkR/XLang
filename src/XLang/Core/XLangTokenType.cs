@@ -9,12 +9,14 @@ namespace XLang.Core
     public enum XLangTokenType
     {
         Any,
+        Unknown,
         OpNone,
         OpNewLine,
         OpPlus,
         OpMinus,
         OpAsterisk,
         OpFwdSlash,
+        OpBackSlash,
         OpPercent,
         OpSpace,
         OpNumber,

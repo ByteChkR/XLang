@@ -178,7 +178,8 @@ namespace XLang.Parser.Runtime
             XLangRuntimeScope scope = new XLangRuntimeScope(context, this);
             if (IsStatic)
             {
-                ImplementingClass.AddStatics(scope);
+
+                //ImplementingClass.AddStatics(scope);
                 return staticValue ??
                        (staticValue = InitExpr?.Process(scope, instance) ?? PropertyType.CreateEmptyBase());
             }

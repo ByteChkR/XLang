@@ -105,6 +105,8 @@ namespace XLang.Runtime.Scopes
             return localVars.FirstOrDefault(x => x.Name == name);
         }
 
+        public bool HasVar(string name) => localVars.Any(x => x.Name == name);
+
         /// <summary>
         ///     Returns all Visible Namespaces inside this Scope
         /// </summary>

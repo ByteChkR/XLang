@@ -134,6 +134,7 @@ namespace XLang
         public char OperatorIndexAccessorClose = ']';
         public char OperatorAsterisk = '*';
         public char OperatorFwdSlash = '/';
+        public char OperatorBackSlash = '\\';
         public char OperatorSemicolon = ';';
         public char OperatorComma = ',';
         public char OperatorColon = ':';
@@ -163,6 +164,7 @@ namespace XLang
         public Dictionary<char, XLangTokenType> ReservedSymbols =>
             new Dictionary<char, XLangTokenType>
             {
+                {OperatorBackSlash, XLangTokenType.OpBackSlash },
                 {OperatorSingleQuote, XLangTokenType.OpSingleQuote},
                 {OperatorDoubleQuote, XLangTokenType.OpDoubleQuote},
                 {OperatorBlockOpen, XLangTokenType.OpBlockBracketOpen},

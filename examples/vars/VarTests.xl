@@ -1,0 +1,17 @@
+public static class Program
+{
+	private static string TestVar1 = "This is a test variable containing a string";
+	private static number TestVar2 = 1;
+	private static number TestVar3 = 9;
+	private static number TestVar4;
+
+
+	public static void Main()
+	{
+		Console.WriteLine(TestVar1);
+		TestVar4 = TestVar2 + TestVar3;
+		Console.WriteLine(TestVar2.ToString());
+		Console.WriteLine(TestVar3.ToString());
+		Console.WriteLine(TestVar4.ToString());
+	}
+}
