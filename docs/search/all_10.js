@@ -13,13 +13,13 @@ var searchData=
   ['statementtoken_443',['StatementToken',['../d3/d08/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_statement_token.html',1,'XLang.Parser.Token.Combined.StatementToken'],['../d3/d08/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_statement_token.html#add1842bb62cd12ff43212af36daa1479',1,'XLang.Parser.Token.Combined.StatementToken.StatementToken()']]],
   ['statementtoken_2ecs_444',['StatementToken.cs',['../dc/d9f/_statement_token_8cs.html',1,'']]],
   ['static_445',['Static',['../df/d4a/namespace_x_lang_1_1_runtime_1_1_binding.html#a5f7592e252b9ffca795e3447bb210492a84a8921b25f505d0d2077aeb5db4bc16',1,'XLang.Runtime.Binding.Static()'],['../dd/d62/namespace_x_lang_1_1_shared_1_1_enum.html#a604b6e1d6db3071201aee40da2e47ccca84a8921b25f505d0d2077aeb5db4bc16',1,'XLang.Shared.Enum.Static()'],['../df/d4a/namespace_x_lang_1_1_runtime_1_1_binding.html#a86180e4a91f4dfb6ac2fe9683cdf7905a84a8921b25f505d0d2077aeb5db4bc16',1,'XLang.Runtime.Binding.Static()']]],
-  ['staticmodifier_446',['StaticModifier',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#acd847ed2a7254dfd5863d4945ed621c1',1,'XLang::XLangSettings']]],
+  ['staticmodifier_446',['StaticModifier',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#abf81e637108c064f59692e809f479ad3',1,'XLang::XLangSettings']]],
   ['staticvalue_447',['staticValue',['../de/dd7/class_x_lang_1_1_parser_1_1_runtime_1_1_x_lang_property.html#a0e85172a6bf0dc9f9a0f86fcf0d6d6cb',1,'XLang::Parser::Runtime::XLangProperty']]],
-  ['stringliteralcode_448',['StringLiteralCode',['../d6/db8/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_broad_phase_tests.html#ab0f74b9c14c813a2df85cdcfc6312ff9',1,'XLang::Parser::Tests::XLBroadPhaseTests']]],
-  ['stringparsing_449',['StringParsing',['../d6/db8/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_broad_phase_tests.html#a6700d7732f1624f1f7305841f4bddaaa',1,'XLang::Parser::Tests::XLBroadPhaseTests']]],
+  ['stringliteralcode_448',['StringLiteralCode',['../d5/d06/class_x_lang_1_1_parser_1_1_tests_1_1_xl_broad_phase_tests.html#aa230917f26d772c4563aaa4e833f9f62',1,'XLang::Parser::Tests::XlBroadPhaseTests']]],
+  ['stringparsing_449',['StringParsing',['../d5/d06/class_x_lang_1_1_parser_1_1_tests_1_1_xl_broad_phase_tests.html#a8229866a30110c5e93d5bf9bda28b7ff',1,'XLang::Parser::Tests::XlBroadPhaseTests']]],
   ['stringtype_450',['stringType',['../d2/d3e/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operands_1_1_x_lang_value_operand.html#a335419722f122371b06e1c488f7329d0',1,'XLang::Parser::Token::Expressions::Operands::XLangValueOperand']]],
   ['stringtypecache_451',['stringTypeCache',['../d2/d3e/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operands_1_1_x_lang_value_operand.html#a0e3bfc0ebcac5a35ca7aad8cbea89f1d',1,'XLang::Parser::Token::Expressions::Operands::XLangValueOperand']]],
   ['subnum_452',['SubNum',['../d8/d0e/class_x_lang_1_1_base_types_1_1_x_lang_number_type.html#aab39367ddd1e53859d589c0cd3aee9cf',1,'XLang::BaseTypes::XLangNumberType']]],
   ['subtokens_453',['SubTokens',['../d0/db1/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_combined_token.html#a94233b74e1eafd1324d5a15ca22dc581',1,'XLang::Parser::Token::Combined::CombinedToken']]],
-  ['switchkey_454',['SwitchKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#abe3b5d0ca1e310339aa15b3e41ec6055',1,'XLang::XLangSettings']]]
+  ['switchkey_454',['SwitchKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#ae53c1f2a338ff03a9f43aa273b2282fc',1,'XLang::XLangSettings']]]
 ];

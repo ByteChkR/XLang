@@ -1,5 +1,9 @@
 var NAVTREEINDEX4 =
 {
+"de/d7e/interface_x_lang_1_1_runtime_1_1_i_x_lang_runtime_item.html":[1,0,0,6,4],
+"de/d93/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_continue_op.html":[1,0,0,4,7,2,1,0,2],
+"de/d93/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_continue_op.html#a6451ada1d0d0583119fa4252db449926":[1,0,0,4,7,2,1,0,2,1],
+"de/d93/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_continue_op.html#a989056f6d7a366920ddef4ef5a8625b0":[1,0,0,4,7,2,1,0,2,0],
 "de/d93/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_continue_op.html#abf5a95ff8fb2f21cd6a39500fc796856":[1,0,0,4,7,2,1,0,2,2],
 "de/d93/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_continue_op.html#af6dd21d3747b597b835ee65a138d9e7e":[1,0,0,4,7,2,1,0,2,3],
 "de/d9c/_x_lang_binding_query_8cs.html":[2,0,0,0,6,0,0],
@@ -72,8 +76,8 @@ var NAVTREEINDEX4 =
 "df/d50/_x_lang_array_subscript_operator_8cs_source.html":[2,0,0,2,2,0,0],
 "df/d7a/_token_explorer_form_8cs.html":[2,0,0,4,2],
 "df/d7a/_token_explorer_form_8cs_source.html":[2,0,0,4,2],
-"df/d85/namespace_x_lang_1_1_runtime_1_1_types.html":[0,0,0,7,4],
 "df/d85/namespace_x_lang_1_1_runtime_1_1_types.html":[1,0,0,6,3],
+"df/d85/namespace_x_lang_1_1_runtime_1_1_types.html":[0,0,0,7,4],
 "df/d8e/_x_lang_number_type_8cs.html":[2,0,0,0,0,1],
 "df/d8e/_x_lang_number_type_8cs_source.html":[2,0,0,0,0,1],
 "df/d9d/_x_lang_runtime_type_8cs.html":[2,0,0,0,5,4,1],
@@ -245,9 +249,5 @@ var NAVTREEINDEX4 =
 "functions_vars_r.html":[1,3,2,13],
 "functions_vars_s.html":[1,3,2,14],
 "functions_vars_t.html":[1,3,2,15],
-"functions_vars_u.html":[1,3,2,16],
-"functions_vars_v.html":[1,3,2,17],
-"functions_vars_w.html":[1,3,2,18],
-"functions_vars_x.html":[1,3,2,19],
-"functions_w.html":[1,3,0,20]
+"functions_vars_u.html":[1,3,2,16]
 };

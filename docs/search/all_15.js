@@ -164,11 +164,13 @@ var searchData=
   ['xlangvaroperand_2ecs_653',['XLangVarOperand.cs',['../d0/de4/_x_lang_var_operand_8cs.html',1,'']]],
   ['xlangwhileop_654',['XLangWhileOp',['../d7/d71/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_while_op.html',1,'XLang.Parser.Token.Expressions.Operators.Special.XLangWhileOp'],['../d7/d71/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_while_op.html#ab08a59ccc1d7baa53a71b56a21412a0e',1,'XLang.Parser.Token.Expressions.Operators.Special.XLangWhileOp.XLangWhileOp()']]],
   ['xlangwhileop_2ecs_655',['XLangWhileOp.cs',['../dc/d06/_x_lang_while_op_8cs.html',1,'']]],
-  ['xlbroadphasetests_656',['XLBroadPhaseTests',['../d6/db8/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_broad_phase_tests.html',1,'XLang::Parser::Tests']]],
-  ['xlcorenamespace_657',['XLCoreNamespace',['../df/deb/class_x_lang_1_1_base_types_1_1_x_l_core_namespace.html',1,'XLang.BaseTypes.XLCoreNamespace'],['../df/deb/class_x_lang_1_1_base_types_1_1_x_l_core_namespace.html#a6082a22961bafbff03535c4684fc0573',1,'XLang.BaseTypes.XLCoreNamespace.XLCoreNamespace()']]],
-  ['xlcorenamespace_2ecs_658',['XLCoreNamespace.cs',['../d6/d14/_x_l_core_namespace_8cs.html',1,'']]],
-  ['xlparsingtooltests_659',['XLParsingToolTests',['../dc/d3b/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_parsing_tool_tests.html',1,'XLang::Parser::Tests']]],
-  ['xltests_660',['XLTests',['../d6/d44/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_tests.html',1,'XLang::Parser::Tests']]],
-  ['xltests_2ecs_661',['XLTests.cs',['../d7/d50/_x_l_tests_8cs.html',1,'']]],
-  ['xorvalue_662',['XOrValue',['../d8/d0e/class_x_lang_1_1_base_types_1_1_x_lang_number_type.html#a6c9f61e903b9d6aa6ad2e83ed6bf7b1c',1,'XLang::BaseTypes::XLangNumberType']]]
+  ['xlbroadphasetests_656',['XlBroadPhaseTests',['../d5/d06/class_x_lang_1_1_parser_1_1_tests_1_1_xl_broad_phase_tests.html',1,'XLang::Parser::Tests']]],
+  ['xlbroadphasetests_2ecs_657',['XlBroadPhaseTests.cs',['../d0/d14/_xl_broad_phase_tests_8cs.html',1,'']]],
+  ['xlcorenamespace_658',['XLCoreNamespace',['../df/deb/class_x_lang_1_1_base_types_1_1_x_l_core_namespace.html',1,'XLang.BaseTypes.XLCoreNamespace'],['../df/deb/class_x_lang_1_1_base_types_1_1_x_l_core_namespace.html#a6082a22961bafbff03535c4684fc0573',1,'XLang.BaseTypes.XLCoreNamespace.XLCoreNamespace()']]],
+  ['xlcorenamespace_2ecs_659',['XLCoreNamespace.cs',['../d6/d14/_x_l_core_namespace_8cs.html',1,'']]],
+  ['xlparsingtooltests_660',['XLParsingToolTests',['../dc/d3b/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_parsing_tool_tests.html',1,'XLang::Parser::Tests']]],
+  ['xlparsingtooltests_2ecs_661',['XLParsingToolTests.cs',['../d9/d48/_x_l_parsing_tool_tests_8cs.html',1,'']]],
+  ['xltests_662',['XLTests',['../d6/d44/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_tests.html',1,'XLang::Parser::Tests']]],
+  ['xltests_2ecs_663',['XLTests.cs',['../d7/d50/_x_l_tests_8cs.html',1,'']]],
+  ['xorvalue_664',['XOrValue',['../d8/d0e/class_x_lang_1_1_base_types_1_1_x_lang_number_type.html#a6c9f61e903b9d6aa6ad2e83ed6bf7b1c',1,'XLang::BaseTypes::XLangNumberType']]]
 ];

@@ -7,8 +7,8 @@ var searchData=
   ['vdecl_482',['VDecl',['../d7/d73/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_for_op.html#af2515466e8570b1bde023bf3c796aefd',1,'XLang::Parser::Token::Expressions::Operators::Special::XLangForOp']]],
   ['vinc_483',['VInc',['../d7/d73/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_for_op.html#a2ae8c3f90a8c19a2e6d1f2c8c1f76e8c',1,'XLang::Parser::Token::Expressions::Operators::Special::XLangForOp']]],
   ['virtual_484',['Virtual',['../df/d4a/namespace_x_lang_1_1_runtime_1_1_binding.html#a5f7592e252b9ffca795e3447bb210492a615e6f9baca5553d44683a098d342b70',1,'XLang.Runtime.Binding.Virtual()'],['../dd/d62/namespace_x_lang_1_1_shared_1_1_enum.html#a604b6e1d6db3071201aee40da2e47ccca615e6f9baca5553d44683a098d342b70',1,'XLang.Shared.Enum.Virtual()']]],
-  ['virtualmodifier_485',['VirtualModifier',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#a860b9da8f4913092351d14f2f9d566c0',1,'XLang::XLangSettings']]],
+  ['virtualmodifier_485',['VirtualModifier',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#aa34f00eda17f62e01e16399a774d55a2',1,'XLang::XLangSettings']]],
   ['visiblelist_486',['visibleList',['../d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#ab16a0360d2d4eee8a6879bd933fdca2a',1,'XLang::Runtime::Scopes::XLangRuntimeScope']]],
   ['visitrecursive_487',['VisitRecursive',['../d9/d33/class_x_lang_1_1_x_lang_context.html#a66011299ccc7e46a0fb68bff7be23f02',1,'XLang::XLangContext']]],
-  ['voidkey_488',['VoidKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#a85d429951baa7fdbe0a9d386e52e7bfa',1,'XLang::XLangSettings']]]
+  ['voidkey_488',['VoidKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#aa151ed40f6fb28f6457426f6fecbd577',1,'XLang::XLangSettings']]]
 ];

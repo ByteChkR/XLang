@@ -110,7 +110,7 @@ var hierarchy =
     [ "XLang.XLangSettings", "d8/d0e/class_x_lang_1_1_x_lang_settings.html", null ],
     [ "XLang.Parser.Expressions.XLangSpecialOps", "d2/db0/class_x_lang_1_1_parser_1_1_expressions_1_1_x_lang_special_ops.html", null ],
     [ "XLang.BaseTypes.XLangStringType", "d3/d1e/class_x_lang_1_1_base_types_1_1_x_lang_string_type.html", null ],
-    [ "XLang.Parser.Tests.XLBroadPhaseTests", "d6/db8/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_broad_phase_tests.html", null ],
+    [ "XLang.Parser.Tests.XlBroadPhaseTests", "d5/d06/class_x_lang_1_1_parser_1_1_tests_1_1_xl_broad_phase_tests.html", null ],
     [ "XLang.Parser.Tests.XLParsingToolTests", "dc/d3b/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_parsing_tool_tests.html", null ],
     [ "XLang.Parser.Tests.XLTests", "d6/d44/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_tests.html", null ]
 ];

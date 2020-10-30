@@ -9,5 +9,5 @@ var searchData=
   ['delegatexlproperty_79',['DelegateXLProperty',['../da/d92/class_x_lang_1_1_shared_1_1_delegate_x_l_property.html',1,'XLang.Shared.DelegateXLProperty'],['../da/d92/class_x_lang_1_1_shared_1_1_delegate_x_l_property.html#ac36b238a85f6c61c0df14080167a426c',1,'XLang.Shared.DelegateXLProperty.DelegateXLProperty()']]],
   ['delegatexlproperty_2ecs_80',['DelegateXLProperty.cs',['../df/db4/_delegate_x_l_property_8cs.html',1,'']]],
   ['divnum_81',['DivNum',['../d8/d0e/class_x_lang_1_1_base_types_1_1_x_lang_number_type.html#a7b54f537db50d30c0f0f42f047baedfd',1,'XLang::BaseTypes::XLangNumberType']]],
-  ['dokey_82',['DoKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#ae35188829f8014a4b41bdccd4d044fe4',1,'XLang::XLangSettings']]]
+  ['dokey_82',['DoKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#a4278f40c88f81f31ff009f082d093339',1,'XLang::XLangSettings']]]
 ];

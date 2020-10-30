@@ -34,7 +34,7 @@ namespace XLang.Console
         {
 
             System.Console.WriteLine(
-                $"XLang Parser Console({Path.GetFileNameWithoutExtension(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath)}) Version: {Assembly.GetExecutingAssembly().GetName().Version}-prototype");
+                $"XLang Parser Console({Path.GetFileNameWithoutExtension(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath)}) Version: {Assembly.GetExecutingAssembly().GetName().Version}");
             System.Console.WriteLine("");
 
         }

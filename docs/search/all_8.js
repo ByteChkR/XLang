@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ifkey_164',['IfKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#aef8b6329b0c3ec6c8c66c4fac86b4ca7',1,'XLang::XLangSettings']]],
+  ['ifkey_164',['IfKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#ab14d6e5d8f5b7dc58a5ea539dacc393a',1,'XLang::XLangSettings']]],
   ['implementingclass_165',['ImplementingClass',['../d3/d38/interface_x_lang_1_1_runtime_1_1_members_1_1_i_x_lang_runtime_member.html#a2f6582e8ee8752b6c991ba2da9fd85e0',1,'XLang.Runtime.Members.IXLangRuntimeMember.ImplementingClass()'],['../db/d19/class_x_lang_1_1_shared_1_1_delegate_x_l_function.html#acb7e07bfb3217bcd94c9e87015321339',1,'XLang.Shared.DelegateXLFunction.ImplementingClass()'],['../da/d92/class_x_lang_1_1_shared_1_1_delegate_x_l_property.html#aa537ed525b71a389c3b3eb11b672f60f',1,'XLang.Shared.DelegateXLProperty.ImplementingClass()'],['../df/da9/class_x_lang_1_1_parser_1_1_runtime_1_1_x_lang_function.html#ad4c0369393f4eb261ae456687e015ec0',1,'XLang.Parser.Runtime.XLangFunction.ImplementingClass()'],['../de/dd7/class_x_lang_1_1_parser_1_1_runtime_1_1_x_lang_property.html#a191b98ccac836267ed1165ee6395011e',1,'XLang.Parser.Runtime.XLangProperty.ImplementingClass()']]],
   ['imports_166',['Imports',['../dd/d51/class_x_lang_1_1_console_1_1_program.html#a75bb21cf008e4e0efcfcd4e31a4d09b8',1,'XLang::Console::Program']]],
   ['inclusive_167',['Inclusive',['../dd/d62/namespace_x_lang_1_1_shared_1_1_enum.html#a604b6e1d6db3071201aee40da2e47ccca0c360307205b1a3951226cbbbce15c16',1,'XLang::Shared::Enum']]],
@@ -8,7 +8,7 @@ var searchData=
   ['initexpr_169',['InitExpr',['../de/dd7/class_x_lang_1_1_parser_1_1_runtime_1_1_x_lang_property.html#a38c2bbfc728d112fe9bf4919ae2892a7',1,'XLang::Parser::Runtime::XLangProperty']]],
   ['initializerexpression_170',['InitializerExpression',['../d9/dad/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_variable_definition_token.html#a573a62dbfbcdeab217a941c7dc792a88',1,'XLang::Parser::Token::Combined::VariableDefinitionToken']]],
   ['injectmember_171',['InjectMember',['../d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#aa5407f7f0135810f45bb72e49cdefb0e',1,'XLang::Runtime::Types::XLangRuntimeType']]],
-  ['inkey_172',['InKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#ad23916de463dd368b772239cca050e5a',1,'XLang::XLangSettings']]],
+  ['inkey_172',['InKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#af8a7de1b6b9289a58f207f0ca3fc9480',1,'XLang::XLangSettings']]],
   ['input_173',['input',['../d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#adc5ed827b7b35ca89924a9713d5a1c67',1,'XLang::Parser::Reader::XLangBaseReader']]],
   ['inputfile_174',['InputFile',['../dd/d51/class_x_lang_1_1_console_1_1_program.html#a6c24f6fe0e517a5e5eb4cc1a1dbf0302',1,'XLang::Console::Program']]],
   ['inspectblock_175',['InspectBlock',['../df/da9/class_x_lang_1_1_parser_1_1_runtime_1_1_x_lang_function.html#a2df0dd12a6a99b5931753f33a3b5a379',1,'XLang::Parser::Runtime::XLangFunction']]],
@@ -20,7 +20,7 @@ var searchData=
   ['invokefunction_181',['InvokeFunction',['../d3/dd9/class_x_lang_1_1_base_types_1_1_x_lang_function_type.html#a9f8455a1d3e8be03b4b3a8fdcd0685ce',1,'XLang::BaseTypes::XLangFunctionType']]],
   ['invokewriteline_182',['InvokeWriteLine',['../df/deb/class_x_lang_1_1_base_types_1_1_x_l_core_namespace.html#aa7a277714f9efc6a85959c728baf9e2a',1,'XLang::BaseTypes::XLCoreNamespace']]],
   ['isconstructor_183',['IsConstructor',['../d1/d4c/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_function_definition_token.html#a6c06f794a70aaa8a85fc0a75bb1001ed',1,'XLang::Parser::Token::Combined::FunctionDefinitionToken']]],
-  ['iskey_184',['IsKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#a8e5857e932b0bdee586c6947a7f28168',1,'XLang::XLangSettings']]],
+  ['iskey_184',['IsKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#af61c5f2bd7798e6215f850d9abcbe29e',1,'XLang::XLangSettings']]],
   ['isletter_185',['IsLetter',['../d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#a33b4f0e0da5f2fabab6fa5429856430f',1,'XLang::Parser::Reader::XLangBaseReader']]],
   ['isnewline_186',['IsNewLine',['../d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#af20d36b2b4af4edcb8fc8bb1f343f2e5',1,'XLang::Parser::Reader::XLangBaseReader']]],
   ['isnumber_187',['IsNumber',['../d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#a8e5db3f99245509255eb4ec5dc10f3ea',1,'XLang::Parser::Reader::XLangBaseReader']]],
