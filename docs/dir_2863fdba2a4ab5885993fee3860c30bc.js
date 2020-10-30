@@ -18,9 +18,6 @@ var dir_2863fdba2a4ab5885993fee3860c30bc =
     [ "StatementToken.cs", "dc/d9f/_statement_token_8cs.html", [
       [ "StatementToken", "d3/d08/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_statement_token.html", "d3/d08/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_statement_token" ]
     ] ],
-    [ "UsingDefinitionToken.cs", "d4/d91/_using_definition_token_8cs.html", [
-      [ "UsingDefinitionToken", "d0/d2e/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_using_definition_token.html", "d0/d2e/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_using_definition_token" ]
-    ] ],
     [ "VariableDefinitionToken.cs", "d2/d32/_variable_definition_token_8cs.html", [
       [ "VariableDefinitionToken", "d9/dad/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_variable_definition_token.html", "d9/dad/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_variable_definition_token" ]
     ] ]

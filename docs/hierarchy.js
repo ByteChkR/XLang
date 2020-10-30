@@ -15,6 +15,9 @@ var hierarchy =
       [ "XLang.TokenExplorer.LiveEdit", "d8/dac/class_x_lang_1_1_token_explorer_1_1_live_edit.html", null ],
       [ "XLang.TokenExplorer.TokenExplorerForm", "d6/d27/class_x_lang_1_1_token_explorer_1_1_token_explorer_form.html", null ]
     ] ],
+    [ "IEquatable", null, [
+      [ "XLang.Parser.Expressions.Operators.XLangExpressionOperatorCollection.PrecedenceBucket", "d3/d56/struct_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_expression_operator_collection_1_1_precedence_bucket.html", null ]
+    ] ],
     [ "XLang.Runtime.Members.Functions.IXLangRuntimeFunctionArgument", "da/df8/interface_x_lang_1_1_runtime_1_1_members_1_1_functions_1_1_i_x_lang_runtime_function_argument.html", [
       [ "XLang.Runtime.Implementations.XLangFunctionArgument", "de/dd4/class_x_lang_1_1_runtime_1_1_implementations_1_1_x_lang_function_argument.html", null ]
     ] ],
@@ -42,7 +45,6 @@ var hierarchy =
       [ "XLang.Shared.CSharpTypeInstance", "d0/d87/class_x_lang_1_1_shared_1_1_c_sharp_type_instance.html", null ]
     ] ],
     [ "XLang.Parser.Token.IXLangToken", "d3/d76/interface_x_lang_1_1_parser_1_1_token_1_1_i_x_lang_token.html", [
-      [ "XLang.Parser.Runtime.XLangMemberDefinitionToken", "d7/dd0/class_x_lang_1_1_parser_1_1_runtime_1_1_x_lang_member_definition_token.html", null ],
       [ "XLang.Parser.Token.BaseTokens.TextToken", "da/d6f/class_x_lang_1_1_parser_1_1_token_1_1_base_tokens_1_1_text_token.html", null ],
       [ "XLang.Parser.Token.Combined.CombinedToken", "d0/db1/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_combined_token.html", [
         [ "XLang.Parser.Token.Combined.BlockToken", "d3/d16/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_block_token.html", null ],
@@ -50,7 +52,6 @@ var hierarchy =
         [ "XLang.Parser.Token.Combined.FunctionDefinitionToken", "d1/d4c/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_function_definition_token.html", null ],
         [ "XLang.Parser.Token.Combined.NamespaceDefinitionToken", "df/d30/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_namespace_definition_token.html", null ],
         [ "XLang.Parser.Token.Combined.StatementToken", "d3/d08/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_statement_token.html", null ],
-        [ "XLang.Parser.Token.Combined.UsingDefinitionToken", "d0/d2e/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_using_definition_token.html", null ],
         [ "XLang.Parser.Token.Combined.VariableDefinitionToken", "d9/dad/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_variable_definition_token.html", null ]
       ] ],
       [ "XLang.Parser.Token.Expressions.XLangExpression", "d3/d47/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_x_lang_expression.html", [
@@ -71,7 +72,6 @@ var hierarchy =
         [ "XLang.Parser.Token.Expressions.Operators.XLangUnaryOp", "d7/d45/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_x_lang_unary_op.html", null ]
       ] ]
     ] ],
-    [ "XLang.Parser.Expressions.Operators.XLangExpressionOperatorCollection.PrecedenceBucket", "d3/d56/struct_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_expression_operator_collection_1_1_precedence_bucket.html", null ],
     [ "XLang.TokenExplorer.Program", "db/d35/class_x_lang_1_1_token_explorer_1_1_program.html", null ],
     [ "XLang.Console.Program", "dd/d51/class_x_lang_1_1_console_1_1_program.html", null ],
     [ "XLang.Parser.Reader.XLangBaseReader", "d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html", null ],
@@ -110,5 +110,7 @@ var hierarchy =
     [ "XLang.XLangSettings", "d8/d0e/class_x_lang_1_1_x_lang_settings.html", null ],
     [ "XLang.Parser.Expressions.XLangSpecialOps", "d2/db0/class_x_lang_1_1_parser_1_1_expressions_1_1_x_lang_special_ops.html", null ],
     [ "XLang.BaseTypes.XLangStringType", "d3/d1e/class_x_lang_1_1_base_types_1_1_x_lang_string_type.html", null ],
+    [ "XLang.Parser.Tests.XLBroadPhaseTests", "d6/db8/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_broad_phase_tests.html", null ],
+    [ "XLang.Parser.Tests.XLParsingToolTests", "dc/d3b/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_parsing_tool_tests.html", null ],
     [ "XLang.Parser.Tests.XLTests", "d6/d44/class_x_lang_1_1_parser_1_1_tests_1_1_x_l_tests.html", null ]
 ];

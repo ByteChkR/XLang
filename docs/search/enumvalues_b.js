@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['virtual_1363',['Virtual',['../df/d4a/namespace_x_lang_1_1_runtime_1_1_binding.html#a5f7592e252b9ffca795e3447bb210492a615e6f9baca5553d44683a098d342b70',1,'XLang.Runtime.Binding.Virtual()'],['../dd/d62/namespace_x_lang_1_1_shared_1_1_enum.html#a604b6e1d6db3071201aee40da2e47ccca615e6f9baca5553d44683a098d342b70',1,'XLang.Shared.Enum.Virtual()']]]
+  ['unknown_1371',['Unknown',['../da/d12/namespace_x_lang_1_1_core.html#ae84e1253359f4d31f3b8c985b3fb2728a88183b946cc5f0e8c96b2e66e1c74a7e',1,'XLang::Core']]]
 ];

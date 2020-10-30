@@ -1,6 +1,7 @@
 var class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type =
 [
-    [ "XLangRuntimeType", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a43a2e99379008e8a290e6363bdfc948d", null ],
+    [ "XLangRuntimeType", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#af13c5229b026333fb6a0c0ec52a4e73b", null ],
+    [ "XLangRuntimeType", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a5c909525736bbe3bd4e1856605194347", null ],
     [ "AddStatics", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a9a874f22226e323fe15db4fa599d0fbc", null ],
     [ "BuildMemberList", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a6fa318a10ee0e618a5e6894ab2795c1e", null ],
     [ "CreateEmptyBase", "d6/d95/class_x_lang_1_1_runtime_1_1_types_1_1_x_lang_runtime_type.html#a4d9f54421e9d467d235ae9fc2f86c861", null ],

@@ -8,6 +8,5 @@ var class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operands_1_1_x_lang_va
     [ "numTypeCache", "d2/d3e/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operands_1_1_x_lang_value_operand.html#a7d49165c6d601180b9816abb0c565e02", null ],
     [ "stringType", "d2/d3e/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operands_1_1_x_lang_value_operand.html#a335419722f122371b06e1c488f7329d0", null ],
     [ "stringTypeCache", "d2/d3e/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operands_1_1_x_lang_value_operand.html#a0e3bfc0ebcac5a35ca7aad8cbea89f1d", null ],
-    [ "Value", "d2/d3e/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operands_1_1_x_lang_value_operand.html#ad75a6b312741a9d9af2acdb43ec57c58", null ],
-    [ "StartIndex", "d2/d3e/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operands_1_1_x_lang_value_operand.html#a774ca73306f5ea650496bdcac52859cd", null ]
+    [ "Value", "d2/d3e/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operands_1_1_x_lang_value_operand.html#ad75a6b312741a9d9af2acdb43ec57c58", null ]
 ];

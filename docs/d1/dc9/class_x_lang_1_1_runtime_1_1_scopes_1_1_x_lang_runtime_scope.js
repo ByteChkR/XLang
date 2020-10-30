@@ -12,6 +12,7 @@ var class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope =
     [ "Declare", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#aaf044280bc100bd402912dd508c47c80", null ],
     [ "Error", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a0aee52287b320b1acf364ae1fb26ae65", null ],
     [ "GetAllVisible", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a6d35924198f4658290f99e75477aa6d4", null ],
+    [ "HasVar", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a7a0e0ba19f2b860b0eda4a9f2eb55f89", null ],
     [ "ResolveVar", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a3725d9e95065c39c3f5f165868de962d", null ],
     [ "SetFlag", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a059a3ea9479c1415016407c0d9757723", null ],
     [ "SetReturn", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#acaf29afa08294d07fcc9978ad2a1ccb7", null ],

@@ -7,6 +7,5 @@ var class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_
     [ "Process", "d5/d03/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_invocation_op.html#a08d51622f082c351b0eced46b5708428", null ],
     [ "Left", "d5/d03/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_invocation_op.html#acdd738d2e8bd645951b47e379190c861", null ],
     [ "ParameterList", "d5/d03/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_invocation_op.html#af5f806094dda4997d0c591cb65803cb8", null ],
-    [ "Type", "d5/d03/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_invocation_op.html#a375d68b8715a64c6cd9925708e913d56", null ],
-    [ "StartIndex", "d5/d03/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_invocation_op.html#a99144bd1f5ffec9e620ab075a155615e", null ]
+    [ "Type", "d5/d03/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_special_1_1_x_lang_invocation_op.html#a375d68b8715a64c6cd9925708e913d56", null ]
 ];

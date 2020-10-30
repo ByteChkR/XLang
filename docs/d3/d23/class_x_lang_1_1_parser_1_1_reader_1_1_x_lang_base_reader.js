@@ -11,9 +11,10 @@ var class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader =
     [ "ReadNumber", "d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#a8ec3fe24c9ecf637b7cad895a59d3a0e", null ],
     [ "ReadSpace", "d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#aa8ede3714f6555658f26c3816040c76c", null ],
     [ "ReadSymbol", "d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#a4fa9e2086715c32a4a452a56bd17be3a", null ],
+    [ "ReadToEnd", "d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#a07eff5f0d0cf5f39bfbaeb9cf959c3ef", null ],
     [ "ReadWord", "d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#a74adcfb39c3bb4877ae5cdee00ef07cc", null ],
     [ "currentIndex", "d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#a2e1c0dfe8c172e765cddcc2dabc8fb1a", null ],
     [ "currentToken", "d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#a7734e6f2845f3d53018d214c371d7bd7", null ],
-    [ "Input", "d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#a7ca8c6d1b0f319ab77d2fdd2c7b4600e", null ],
+    [ "input", "d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#adc5ed827b7b35ca89924a9713d5a1c67", null ],
     [ "settings", "d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#af53ada6ec5d17c71fef26f40dcf09845", null ]
 ];

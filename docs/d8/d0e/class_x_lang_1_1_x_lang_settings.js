@@ -21,6 +21,7 @@ var class_x_lang_1_1_x_lang_settings =
     [ "NewKey", "d8/d0e/class_x_lang_1_1_x_lang_settings.html#a71c37f514682d29d5e0ca7e81c63f2f1", null ],
     [ "OperatorAnd", "d8/d0e/class_x_lang_1_1_x_lang_settings.html#a982a446c5d3afc6ed55a29b067f2e6ea", null ],
     [ "OperatorAsterisk", "d8/d0e/class_x_lang_1_1_x_lang_settings.html#ade408e48c835438e69d4c1815bf96aab", null ],
+    [ "OperatorBackSlash", "d8/d0e/class_x_lang_1_1_x_lang_settings.html#a661be488c4264f610d0654231883ed08", null ],
     [ "OperatorBang", "d8/d0e/class_x_lang_1_1_x_lang_settings.html#ae18acd16d2af7054ff363134cbcac9a8", null ],
     [ "OperatorBlockClose", "d8/d0e/class_x_lang_1_1_x_lang_settings.html#a94a08cda7180f7a859adaeb94d194839", null ],
     [ "OperatorBlockOpen", "d8/d0e/class_x_lang_1_1_x_lang_settings.html#a13c822f02b769a7a75ece70267b31c53", null ],
