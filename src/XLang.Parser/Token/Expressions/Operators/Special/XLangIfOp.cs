@@ -69,16 +69,29 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <returns></returns>
         public override IXLangRuntimeTypeInstance Process(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
         {
+            XLangRuntimeScope lScope = scope.Clone();
             for (int i = 0; i < conditionMap.Count; i++)
             {
-                if ((decimal) conditionMap[i].Item1.Process(scope, instance).GetRaw() != 0)
+                if ((decimal)conditionMap[i].Item1.Process(lScope, instance).GetRaw() != 0)
                 {
-                    conditionMap[i].Item2(scope, instance);
+                    conditionMap[i].Item2(lScope, instance);
+
+                    if (lScope.Check(XLangRuntimeScope.ScopeFlags.Return))
+                    {
+                        scope.SetReturn(lScope.Return);
+                    }
+                    scope.SetFlag(lScope.Flags);
+
                     return null;
                 }
             }
 
-            elseBranch?.Invoke(scope, instance);
+            elseBranch?.Invoke(lScope, instance);
+
+            if (lScope.Check(XLangRuntimeScope.ScopeFlags.Return))
+            {
+                scope.SetReturn(lScope.Return);
+            }
             return null;
         }
     }

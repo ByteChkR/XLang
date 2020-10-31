@@ -97,6 +97,16 @@ namespace XLang.Core
         OpOperatorImpl,
         OpRuntimeMember,
 
+        OpUnaryIncrement,
+        OpUnaryDecrement,
+        OpSumAssign,
+        OpDifAssign,
+        OpProdAssign,
+        OpQuotAssign,
+        OpRemAssign,
+        OpOrAssign,
+        OpXOrAssign,
+        OpAndAssign,
 
         //End Of File
         EOF

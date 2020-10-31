@@ -80,8 +80,9 @@ namespace XLang.Parser.Expressions
                 new XLangMulDivModOperators(),
                 new XLangPlusMinusOperators(),
                 new XLangRelationOperators(),
-                new XLangUnaryOperators()
-
+                new XLangUnaryOperators(),
+                new XLangAssignmentPlusMinusOperators(),
+                new XLangAssignmentByOperators(),
             };
             XLangExpressionValueCreator valueCreator = new XLangExpressionValueCreator();
             return new XLangExpressionParser(context, reader, valueCreator, operators);

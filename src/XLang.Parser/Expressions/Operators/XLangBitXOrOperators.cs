@@ -22,7 +22,8 @@ namespace XLang.Parser.Expressions.Operators
         /// <returns>True if this Expression operator can create an expression</returns>
         public override bool CanCreate(XLangExpressionParser parser, XLangExpression currentNode)
         {
-            return parser.CurrentToken.Type == XLangTokenType.OpCap;
+            return parser.CurrentToken.Type == XLangTokenType.OpCap &&
+                   parser.Reader.PeekNext().Type != XLangTokenType.OpEquality;
         }
 
         /// <summary>

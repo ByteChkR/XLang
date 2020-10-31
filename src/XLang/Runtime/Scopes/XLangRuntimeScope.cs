@@ -57,6 +57,21 @@ namespace XLang.Runtime.Scopes
         }
 
         /// <summary>
+        ///     Public constructor
+        /// </summary>
+        /// <param name="context">Context of this Scope</param>
+        /// <param name="owner">Owner Member</param>
+        private XLangRuntimeScope(XLangContext context, IXLangRuntimeMember owner, List<XLangRuntimeScopedVar> locals, List<string> visibleList, ScopeFlags flags)
+        {
+            this.owner = owner;
+            Context = context;
+            localVars = locals;
+            this.visibleList = visibleList;
+            Continue = true;
+            Flags = flags;
+        }
+
+        /// <summary>
         ///     The Type of the Owner
         /// </summary>
         public XLangRuntimeType OwnerType => owner.ImplementingClass;
@@ -163,6 +178,11 @@ namespace XLang.Runtime.Scopes
         public bool Check(ScopeFlags checkMask)
         {
             return (Flags & checkMask) != 0;
+        }
+
+        public XLangRuntimeScope Clone()
+        {
+            return new XLangRuntimeScope(Context, owner, new List<XLangRuntimeScopedVar>(localVars), new List<string>(visibleList), Flags);
         }
 
         /// <summary>

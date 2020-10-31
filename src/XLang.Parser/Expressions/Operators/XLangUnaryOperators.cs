@@ -22,8 +22,10 @@ namespace XLang.Parser.Expressions.Operators
         /// <returns>True if this Expression operator can create an expression</returns>
         public override bool CanCreate(XLangExpressionParser parser, XLangExpression currentNode)
         {
-            return parser.CurrentToken.Type == XLangTokenType.OpMinus ||
-                   parser.CurrentToken.Type == XLangTokenType.OpPlus ||
+            return parser.CurrentToken.Type == XLangTokenType.OpMinus &&
+                   parser.Reader.PeekNext().Type != XLangTokenType.OpMinus||
+                   parser.CurrentToken.Type == XLangTokenType.OpPlus &&
+                   parser.Reader.PeekNext().Type != XLangTokenType.OpPlus ||
                    parser.CurrentToken.Type == XLangTokenType.OpBang ||
                    parser.CurrentToken.Type == XLangTokenType.OpTilde;
         }

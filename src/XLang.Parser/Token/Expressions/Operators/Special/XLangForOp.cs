@@ -83,28 +83,34 @@ namespace XLang.Parser.Token.Expressions.Operators.Special
         /// <returns></returns>
         public override IXLangRuntimeTypeInstance Process(XLangRuntimeScope scope, IXLangRuntimeTypeInstance instance)
         {
-            VDecl.Process(scope, instance);
-            IXLangRuntimeTypeInstance condReturn = Condition.Process(scope, instance);
+            XLangRuntimeScope lScope = scope.Clone();
+            VDecl.Process(lScope, instance);
+            IXLangRuntimeTypeInstance condReturn = Condition.Process(lScope, instance);
             while ((decimal) condReturn.GetRaw() != 0)
             {
-                if (!scope.Check(XLangRuntimeScope.ScopeFlags.Continue))
+                if (!lScope.Check(XLangRuntimeScope.ScopeFlags.Continue))
                 {
-                    ExprBody(scope, instance);
-                    if (scope.Check(XLangRuntimeScope.ScopeFlags.Break | XLangRuntimeScope.ScopeFlags.Return))
+                    ExprBody(lScope, instance);
+                    if (lScope.Check(XLangRuntimeScope.ScopeFlags.Break))
                     {
+                        break;
+                    }
+                    if (lScope.Check(XLangRuntimeScope.ScopeFlags.Return))
+                    {
+                        scope.SetReturn(lScope.Return);
                         break;
                     }
                 }
                 else
                 {
-                    scope.ClearFlag(XLangRuntimeScope.ScopeFlags.Continue);
+                    lScope.ClearFlag(XLangRuntimeScope.ScopeFlags.Continue);
                 }
 
-                VInc.Process(scope, instance);
-                condReturn = Condition.Process(scope, instance);
+                VInc.Process(lScope, instance);
+                condReturn = Condition.Process(lScope, instance);
             }
 
-            scope.ClearFlag(XLangRuntimeScope.ScopeFlags.Break);
+            lScope.ClearFlag(XLangRuntimeScope.ScopeFlags.Break);
             return null;
         }
     }

@@ -1,4 +1,6 @@
-﻿using XLang.Core;
+﻿using System.ComponentModel;
+
+using XLang.Core;
 using XLang.Runtime.Binding;
 using XLang.Runtime.Implementations;
 using XLang.Runtime.Members;
@@ -39,7 +41,7 @@ namespace XLang.BaseTypes
                 containingNamespace,
                 objectType,
                 XLangBindingFlags.Public | XLangBindingFlags.Instance,
-                x => new CSharpTypeInstance(x, (decimal) 0)
+                x => new CSharpTypeInstance(x, (decimal)0)
             );
             DelegateXLFunction mulNumFunc =
                 new DelegateXLFunction(
@@ -174,16 +176,40 @@ namespace XLang.BaseTypes
                 );
             DelegateXLFunction unPlusFunc =
                 new DelegateXLFunction(
-                    XLangTokenType.OpPlus.ToString(),
-                    UnPlusNum,
-                    numberType,
-                    XLangMemberFlags.Static |
-                    XLangMemberFlags.Private |
-                    XLangMemberFlags.Operator |
-                    XLangMemberFlags.Override,
-                    numberType,
-                    new XLangFunctionArgument("a", numberType)
-                );
+                                       XLangTokenType.OpPlus.ToString(),
+                                       UnPlusNum,
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType)
+                                      );
+            DelegateXLFunction unIncFunc =
+                new DelegateXLFunction(
+                                       XLangTokenType.OpUnaryIncrement.ToString(), (instance, args) => UnaryInc(args),
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType)
+                                      );
+
+            DelegateXLFunction unDecFunc =
+                new DelegateXLFunction(
+                                       XLangTokenType.OpUnaryDecrement.ToString(), (instance, args) => UnaryDec(args),
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType)
+                                      );
+
             DelegateXLFunction unMinusFunc =
                 new DelegateXLFunction(
                     XLangTokenType.OpMinus.ToString(),
@@ -198,17 +224,117 @@ namespace XLang.BaseTypes
                 );
             DelegateXLFunction andFunc =
                 new DelegateXLFunction(
-                    XLangTokenType.OpAnd.ToString(),
-                    AndValue,
-                    numberType,
-                    XLangMemberFlags.Static |
-                    XLangMemberFlags.Private |
-                    XLangMemberFlags.Operator |
-                    XLangMemberFlags.Override,
-                    numberType,
-                    new XLangFunctionArgument("a", numberType),
-                    new XLangFunctionArgument("b", numberType)
-                );
+                                       XLangTokenType.OpAnd.ToString(),
+                                       AndValue,
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType),
+                                       new XLangFunctionArgument("b", numberType)
+                                      );
+
+            DelegateXLFunction sumAssignFunc =
+                new DelegateXLFunction(
+                                       XLangTokenType.OpSumAssign.ToString(), (instance, args) => SumAssignNum(args),
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType),
+                                       new XLangFunctionArgument("b", numberType)
+                                      );
+
+            DelegateXLFunction difAssignFunc =
+                new DelegateXLFunction(
+                                       XLangTokenType.OpDifAssign.ToString(), (instance, args) => DifAssignNum(args),
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType),
+                                       new XLangFunctionArgument("b", numberType)
+                                      );
+
+            DelegateXLFunction prodAssignFunc =
+                new DelegateXLFunction(
+                                       XLangTokenType.OpProdAssign.ToString(), (instance, args) => ProdAssignNum(args),
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType),
+                                       new XLangFunctionArgument("b", numberType)
+                                      );
+            DelegateXLFunction quotAssignFunc =
+                new DelegateXLFunction(
+                                       XLangTokenType.OpQuotAssign.ToString(), (instance, args) => QuotAssignNum(args),
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType),
+                                       new XLangFunctionArgument("b", numberType)
+                                      );
+
+            DelegateXLFunction remAssignFunc =
+                new DelegateXLFunction(
+                                       XLangTokenType.OpRemAssign.ToString(), (instance, args) => RemAssignNum(args),
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType),
+                                       new XLangFunctionArgument("b", numberType)
+                                      );
+            DelegateXLFunction orAssignFunc =
+                new DelegateXLFunction(
+                                       XLangTokenType.OpOrAssign.ToString(), (instance, args) => OrAssignValue(args),
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType),
+                                       new XLangFunctionArgument("b", numberType)
+                                      );
+            DelegateXLFunction andAssignFunc =
+                new DelegateXLFunction(
+                                       XLangTokenType.OpAndAssign.ToString(), (instance, args) => AndAssignValue(args),
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType),
+                                       new XLangFunctionArgument("b", numberType)
+                                      );
+            DelegateXLFunction xorAssignFunc =
+                new DelegateXLFunction(
+                                       XLangTokenType.OpXOrAssign.ToString(), (instance, args) => XOrAssignValue(args),
+                                       numberType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       numberType,
+                                       new XLangFunctionArgument("a", numberType),
+                                       new XLangFunctionArgument("b", numberType)
+                                      );
 
             DelegateXLFunction orFunc =
                 new DelegateXLFunction(
@@ -298,7 +424,17 @@ namespace XLang.BaseTypes
                     gtNumFunc,
                     modNumFunc,
                     logicAndFunc,
-                    logicOrFunc
+                    logicOrFunc,
+                    unIncFunc,
+                    unDecFunc,
+                    sumAssignFunc,
+                    difAssignFunc,
+                    prodAssignFunc,
+                    quotAssignFunc,
+                    remAssignFunc,
+                    andAssignFunc,
+                    orAssignFunc,
+                    xorAssignFunc
                 }
             );
             return numberType;
@@ -316,33 +452,174 @@ namespace XLang.BaseTypes
                 XLangBindingQuery.Inclusive
             );
 
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() * (decimal) args[1].GetRaw());
+            return new CSharpTypeInstance(type, (decimal)args[0].GetRaw() * (decimal)args[1].GetRaw());
         }
 
         private IXLangRuntimeTypeInstance PlusNum(
             IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
         {
             XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
 
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() + (decimal) args[1].GetRaw());
+            return new CSharpTypeInstance(type, (decimal)args[0].GetRaw() + (decimal)args[1].GetRaw());
         }
+
+        private IXLangRuntimeTypeInstance UnaryInc(IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
+
+            args[0].SetRaw(type, (decimal)args[0].GetRaw() + 1);
+            return args[0];
+        }
+
+        private IXLangRuntimeTypeInstance UnaryDec(IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
+
+            args[0].SetRaw(type, (decimal)args[0].GetRaw() - 1);
+            return args[0];
+        }
+
+
 
         private IXLangRuntimeTypeInstance ModNum(IXLangRuntimeTypeInstance[] args)
         {
             XLangRuntimeType type = containingNamespace.GetType(
-                "number",
-                XLangBindingQuery.Public |
-                XLangBindingQuery.Instance |
-                XLangBindingQuery.Inclusive
-            );
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
 
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() % (decimal) args[1].GetRaw());
+            return new CSharpTypeInstance(type, (decimal)args[0].GetRaw() % (decimal)args[1].GetRaw());
         }
+
+        private IXLangRuntimeTypeInstance SumAssignNum(IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
+            args[0].SetRaw(type, (decimal)args[0].GetRaw() + (decimal)args[1].GetRaw());
+            return args[0];
+        }
+
+        private IXLangRuntimeTypeInstance DifAssignNum(IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
+            args[0].SetRaw(type, (decimal)args[0].GetRaw() - (decimal)args[1].GetRaw());
+            return args[0];
+        }
+
+        private IXLangRuntimeTypeInstance ProdAssignNum(IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
+            args[0].SetRaw(type, (decimal)args[0].GetRaw() * (decimal)args[1].GetRaw());
+            return args[0];
+        }
+
+
+        private IXLangRuntimeTypeInstance QuotAssignNum(IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
+            args[0].SetRaw(type, (decimal)args[0].GetRaw() / (decimal)args[1].GetRaw());
+            return args[0];
+        }
+
+        private IXLangRuntimeTypeInstance RemAssignNum(IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
+            args[0].SetRaw(type, (decimal)args[0].GetRaw() % (decimal)args[1].GetRaw());
+            return args[0];
+        }
+
+        private IXLangRuntimeTypeInstance OrAssignValue(IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
+
+            args[0].SetRaw(
+                           type,
+                           (decimal)((int)(decimal)args[0].GetRaw() |
+                                     (int)(decimal)args[1].GetRaw())
+                          );
+            return args[0];
+        }
+
+        private IXLangRuntimeTypeInstance AndAssignValue(IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
+
+            args[0].SetRaw(
+                           type,
+                           (decimal)((int)(decimal)args[0].GetRaw() &
+                                     (int)(decimal)args[1].GetRaw())
+                          );
+            return args[0];
+        }
+
+        private IXLangRuntimeTypeInstance XOrAssignValue(IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                                                                "number",
+                                                                XLangBindingQuery.Public |
+                                                                XLangBindingQuery.Instance |
+                                                                XLangBindingQuery.Inclusive
+                                                               );
+
+            args[0].SetRaw(
+                           type,
+                           (decimal)((int)(decimal)args[0].GetRaw() ^
+                                     (int)(decimal)args[1].GetRaw())
+                          );
+            return args[0];
+        }
+
 
         private IXLangRuntimeTypeInstance UnPlusNum(
             IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
@@ -354,7 +631,7 @@ namespace XLang.BaseTypes
                 XLangBindingQuery.Inclusive
             );
 
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw());
+            return new CSharpTypeInstance(type, (decimal)args[0].GetRaw());
         }
 
         private IXLangRuntimeTypeInstance UnMinusNum(
@@ -367,7 +644,7 @@ namespace XLang.BaseTypes
                 XLangBindingQuery.Inclusive
             );
 
-            return new CSharpTypeInstance(type, -(decimal) args[0].GetRaw());
+            return new CSharpTypeInstance(type, -(decimal)args[0].GetRaw());
         }
 
 
@@ -381,7 +658,7 @@ namespace XLang.BaseTypes
                 XLangBindingQuery.Inclusive
             );
 
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() / (decimal) args[1].GetRaw());
+            return new CSharpTypeInstance(type, (decimal)args[0].GetRaw() / (decimal)args[1].GetRaw());
         }
 
 
@@ -395,7 +672,7 @@ namespace XLang.BaseTypes
                 XLangBindingQuery.Inclusive
             );
 
-            return new CSharpTypeInstance(type, (decimal) args[0].GetRaw() - (decimal) args[1].GetRaw());
+            return new CSharpTypeInstance(type, (decimal)args[0].GetRaw() - (decimal)args[1].GetRaw());
         }
 
         private IXLangRuntimeTypeInstance NotValue(
@@ -407,8 +684,8 @@ namespace XLang.BaseTypes
                 XLangBindingQuery.Instance |
                 XLangBindingQuery.Inclusive
             );
-            decimal v = (decimal) args[0].GetRaw();
-            return new CSharpTypeInstance(type, v == 0 ? (decimal) 1 : (decimal) 0);
+            decimal v = (decimal)args[0].GetRaw();
+            return new CSharpTypeInstance(type, v == 0 ? (decimal)1 : (decimal)0);
         }
 
         private IXLangRuntimeTypeInstance LessThan(
@@ -420,9 +697,9 @@ namespace XLang.BaseTypes
                 XLangBindingQuery.Instance |
                 XLangBindingQuery.Inclusive
             );
-            decimal a = (decimal) args[0].GetRaw();
-            decimal b = (decimal) args[1].GetRaw();
-            return new CSharpTypeInstance(type, a < b ? (decimal) 1 : (decimal) 0);
+            decimal a = (decimal)args[0].GetRaw();
+            decimal b = (decimal)args[1].GetRaw();
+            return new CSharpTypeInstance(type, a < b ? (decimal)1 : (decimal)0);
         }
 
         private IXLangRuntimeTypeInstance GreaterThan(
@@ -434,9 +711,9 @@ namespace XLang.BaseTypes
                 XLangBindingQuery.Instance |
                 XLangBindingQuery.Inclusive
             );
-            decimal a = (decimal) args[0].GetRaw();
-            decimal b = (decimal) args[1].GetRaw();
-            return new CSharpTypeInstance(type, a > b ? (decimal) 1 : (decimal) 0);
+            decimal a = (decimal)args[0].GetRaw();
+            decimal b = (decimal)args[1].GetRaw();
+            return new CSharpTypeInstance(type, a > b ? (decimal)1 : (decimal)0);
         }
 
 
@@ -449,9 +726,9 @@ namespace XLang.BaseTypes
                 XLangBindingQuery.Instance |
                 XLangBindingQuery.Inclusive
             );
-            decimal a = (decimal) args[0].GetRaw();
-            decimal b = (decimal) args[1].GetRaw();
-            return new CSharpTypeInstance(type, a <= b ? (decimal) 1 : (decimal) 0);
+            decimal a = (decimal)args[0].GetRaw();
+            decimal b = (decimal)args[1].GetRaw();
+            return new CSharpTypeInstance(type, a <= b ? (decimal)1 : (decimal)0);
         }
 
         private IXLangRuntimeTypeInstance GreaterOrEqual(
@@ -463,9 +740,9 @@ namespace XLang.BaseTypes
                 XLangBindingQuery.Instance |
                 XLangBindingQuery.Inclusive
             );
-            decimal a = (decimal) args[0].GetRaw();
-            decimal b = (decimal) args[1].GetRaw();
-            return new CSharpTypeInstance(type, a >= b ? (decimal) 1 : (decimal) 0);
+            decimal a = (decimal)args[0].GetRaw();
+            decimal b = (decimal)args[1].GetRaw();
+            return new CSharpTypeInstance(type, a >= b ? (decimal)1 : (decimal)0);
         }
 
 
@@ -481,8 +758,8 @@ namespace XLang.BaseTypes
 
             return new CSharpTypeInstance(
                 type,
-                (decimal) ((int) (decimal) args[0].GetRaw() &
-                           (int) (decimal) args[1].GetRaw())
+                (decimal)((int)(decimal)args[0].GetRaw() &
+                           (int)(decimal)args[1].GetRaw())
             );
         }
 
@@ -498,8 +775,8 @@ namespace XLang.BaseTypes
 
             return new CSharpTypeInstance(
                 type,
-                (decimal) ((int) (decimal) args[0].GetRaw() |
-                           (int) (decimal) args[1].GetRaw())
+                (decimal)((int)(decimal)args[0].GetRaw() |
+                           (int)(decimal)args[1].GetRaw())
             );
         }
 
@@ -515,7 +792,7 @@ namespace XLang.BaseTypes
 
             return new CSharpTypeInstance(
                 type,
-                (decimal) ((int) (decimal) args[0].GetRaw() != 0 || (int) (decimal) args[1].GetRaw() != 0 ? 0 : 1)
+                (decimal)((int)(decimal)args[0].GetRaw() != 0 || (int)(decimal)args[1].GetRaw() != 0 ? 0 : 1)
             );
         }
 
@@ -531,7 +808,7 @@ namespace XLang.BaseTypes
 
             return new CSharpTypeInstance(
                 type,
-                (decimal) ((int) (decimal) args[0].GetRaw() != 0 && (int) (decimal) args[1].GetRaw() != 0 ? 0 : 1)
+                (decimal)((int)(decimal)args[0].GetRaw() != 0 && (int)(decimal)args[1].GetRaw() != 0 ? 0 : 1)
             );
         }
 
@@ -547,8 +824,8 @@ namespace XLang.BaseTypes
 
             return new CSharpTypeInstance(
                 type,
-                (decimal) ((int) (decimal) args[0].GetRaw() ^
-                           (int) (decimal) args[1].GetRaw())
+                (decimal)((int)(decimal)args[0].GetRaw() ^
+                           (int)(decimal)args[1].GetRaw())
             );
         }
 
@@ -562,7 +839,7 @@ namespace XLang.BaseTypes
                 XLangBindingQuery.Inclusive
             );
 
-            return new CSharpTypeInstance(type, (decimal) ~(int) (decimal) args[0].GetRaw());
+            return new CSharpTypeInstance(type, (decimal)~(int)(decimal)args[0].GetRaw());
         }
 
         #endregion

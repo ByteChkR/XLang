@@ -1,0 +1,97 @@
+public static class Program
+{
+	public static void Main()
+	{
+		Console.WriteLine("Unary Increment");
+		UnaryIncrementTest();
+		Console.WriteLine("Unary Decrement");
+		UnaryDecrementTest();
+
+		Console.WriteLine("Assignment by Sum");
+		AssignIncTest(2);
+		Console.WriteLine("Assignment by Difference");
+		AssignDecTest(2);
+		Console.WriteLine("Assignment by Product");
+		AssignMulTest(2);
+		Console.WriteLine("Assignment by Quotient");
+		AssignDivTest(2);
+		Console.WriteLine("Assignment by Remainder");
+		AssignModTest(2);
+
+		Console.WriteLine("Assignment by BitAnd");
+		AssignAndTest(2);
+		Console.WriteLine("Assignment by BitOr");
+		AssignOrTest(2);
+		Console.WriteLine("Assignment by BitXOr");
+		AssignXOrTest(2);
+	}
+
+
+	private static void UnaryIncrementTest()
+	{
+		number a = 1;
+		a++;
+		Console.WriteLine(a.ToString());
+	}
+
+	private static void UnaryDecrementTest()
+	{
+		number a = 1;
+		a--;
+		Console.WriteLine(a.ToString());
+	}
+
+	private static void AssignIncTest(number other)
+	{
+		number a = 1;
+		a += other;
+		Console.WriteLine(a.ToString());
+	}
+
+	private static void AssignDecTest(number other)
+	{
+		number a = 1;
+		a-=other;
+		Console.WriteLine(a.ToString());
+	}
+
+	private static void AssignMulTest(number other)
+	{
+		number a = 1;
+		a *= other;
+		Console.WriteLine(a.ToString());
+	}
+
+	private static void AssignDivTest(number other)
+	{
+		number a = 1;
+		a/=other;
+		Console.WriteLine(a.ToString());
+	}
+
+	private static void AssignModTest(number other)
+	{
+		number a = 1;
+		a%=other;
+		Console.WriteLine(a.ToString());
+	}
+
+	private static void AssignOrTest(number other)
+	{
+		number a = 1;
+		a|=other;
+		Console.WriteLine(a.ToString());
+	}
+	private static void AssignXOrTest(number other)
+	{
+		number a = 1;
+		a^=other;
+		Console.WriteLine(a.ToString());
+	}
+	private static void AssignAndTest(number other)
+	{
+		number a = 1;
+		a&=other;
+		Console.WriteLine(a.ToString());
+	}
+}

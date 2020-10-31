@@ -5,14 +5,14 @@ using XLang.Parser.Token.Expressions.Operators;
 namespace XLang.Parser.Expressions.Operators
 {
     /// <summary>
-    ///     Implements Bitwise OR Operator
+    ///     Implements Unary Plus/Minus by Assignment Operators
     /// </summary>
-    public class XLangBitOrOperators : XLangExpressionOperator
+    public class XLangAssignmentPlusMinusOperators : XLangExpressionOperator
     {
         /// <summary>
         ///     Precedence Level of the Operators
         /// </summary>
-        public override int PrecedenceLevel => 6;
+        public override int PrecedenceLevel => 14;
 
         /// <summary>
         ///     Returns true if the parser is in a state that allows the creation of an implemented operator
@@ -22,9 +22,10 @@ namespace XLang.Parser.Expressions.Operators
         /// <returns>True if this Expression operator can create an expression</returns>
         public override bool CanCreate(XLangExpressionParser parser, XLangExpression currentNode)
         {
-            return parser.CurrentToken.Type == XLangTokenType.OpPipe &&
-                   parser.Reader.PeekNext().Type != XLangTokenType.OpPipe &&
-                   parser.Reader.PeekNext().Type != XLangTokenType.OpEquality;
+            return parser.CurrentToken.Type == XLangTokenType.OpPlus &&
+                   parser.Reader.PeekNext().Type == XLangTokenType.OpPlus ||
+                   parser.CurrentToken.Type == XLangTokenType.OpMinus &&
+                   parser.Reader.PeekNext().Type == XLangTokenType.OpMinus;
         }
 
         /// <summary>
@@ -35,9 +36,15 @@ namespace XLang.Parser.Expressions.Operators
         /// <returns></returns>
         public override XLangExpression Create(XLangExpressionParser parser, XLangExpression currentNode)
         {
-            parser.Eat(XLangTokenType.OpPipe);
-            return new XLangBinaryOp(parser.Context, currentNode, XLangTokenType.OpPipe,
-                parser.ParseExpr(PrecedenceLevel));
+            XLangTokenType tt = parser.CurrentToken.Type == XLangTokenType.OpPlus
+                                    ? XLangTokenType.OpUnaryIncrement
+                                    : XLangTokenType.OpUnaryDecrement;
+            XLangTokenType type = parser.CurrentToken.Type;
+            parser.Eat(parser.CurrentToken.Type);
+            parser.Eat(parser.CurrentToken.Type);
+            XLangExpression token =
+                new XLangUnaryOp(parser.Context, currentNode, tt);
+            return token;
         }
     }
 }

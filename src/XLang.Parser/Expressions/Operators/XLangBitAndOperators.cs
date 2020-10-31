@@ -23,7 +23,8 @@ namespace XLang.Parser.Expressions.Operators
         public override bool CanCreate(XLangExpressionParser parser, XLangExpression currentNode)
         {
             return parser.CurrentToken.Type == XLangTokenType.OpAnd &&
-                   parser.Reader.PeekNext().Type != XLangTokenType.OpAnd;
+                   parser.Reader.PeekNext().Type != XLangTokenType.OpAnd &&
+                   parser.Reader.PeekNext().Type != XLangTokenType.OpEquality;
         }
 
         /// <summary>
