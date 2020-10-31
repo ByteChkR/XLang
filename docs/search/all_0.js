@@ -11,11 +11,12 @@ var searchData=
   ['addusing_8',['AddUsing',['../d2/db1/class_x_lang_1_1_runtime_1_1_x_lang_runtime_namespace.html#a6fb44024d592581d21260b56fcd79fb0',1,'XLang::Runtime::XLangRuntimeNamespace']]],
   ['advance_9',['Advance',['../d3/d23/class_x_lang_1_1_parser_1_1_reader_1_1_x_lang_base_reader.html#ad9d86854e417606eedb90e94f4fe056e',1,'XLang::Parser::Reader::XLangBaseReader']]],
   ['allnamespaces_10',['allNamespaces',['../d9/d33/class_x_lang_1_1_x_lang_context.html#a8fc27fdd0748b4d8f5fe5b1c2f607e33',1,'XLang::XLangContext']]],
-  ['andvalue_11',['AndValue',['../d8/d0e/class_x_lang_1_1_base_types_1_1_x_lang_number_type.html#a9b12bd940fd1ee46b6328c781ce42653',1,'XLang::BaseTypes::XLangNumberType']]],
-  ['any_12',['Any',['../da/d12/namespace_x_lang_1_1_core.html#ae84e1253359f4d31f3b8c985b3fb2728aed36a1ef76a59ee3f15180e0441188ad',1,'XLang::Core']]],
-  ['arguments_13',['Arguments',['../d1/d4c/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_function_definition_token.html#aab4eecf691c162acedbe4e5863303a4e',1,'XLang::Parser::Token::Combined::FunctionDefinitionToken']]],
-  ['arraccess_14',['ArrAccess',['../df/deb/class_x_lang_1_1_base_types_1_1_x_l_core_namespace.html#addc8161b56e0630bd2b7aa898ad131ac',1,'XLang::BaseTypes::XLCoreNamespace']]],
-  ['askey_15',['AsKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#ae265eb0bcf04f1d678450e4686b866de',1,'XLang::XLangSettings']]],
-  ['axlangexpressionvaluecreator_16',['AXLangExpressionValueCreator',['../d0/dcb/class_x_lang_1_1_parser_1_1_expressions_1_1_a_x_lang_expression_value_creator.html',1,'XLang::Parser::Expressions']]],
-  ['axlangexpressionvaluecreator_2ecs_17',['AXLangExpressionValueCreator.cs',['../d9/dc0/_a_x_lang_expression_value_creator_8cs.html',1,'']]]
+  ['andassignvalue_11',['AndAssignValue',['../d8/d0e/class_x_lang_1_1_base_types_1_1_x_lang_number_type.html#a5f5386c44f57ffacb5b53b8c67a9b01b',1,'XLang::BaseTypes::XLangNumberType']]],
+  ['andvalue_12',['AndValue',['../d8/d0e/class_x_lang_1_1_base_types_1_1_x_lang_number_type.html#a9b12bd940fd1ee46b6328c781ce42653',1,'XLang::BaseTypes::XLangNumberType']]],
+  ['any_13',['Any',['../da/d12/namespace_x_lang_1_1_core.html#ae84e1253359f4d31f3b8c985b3fb2728aed36a1ef76a59ee3f15180e0441188ad',1,'XLang::Core']]],
+  ['arguments_14',['Arguments',['../d1/d4c/class_x_lang_1_1_parser_1_1_token_1_1_combined_1_1_function_definition_token.html#aab4eecf691c162acedbe4e5863303a4e',1,'XLang::Parser::Token::Combined::FunctionDefinitionToken']]],
+  ['arraccess_15',['ArrAccess',['../df/deb/class_x_lang_1_1_base_types_1_1_x_l_core_namespace.html#addc8161b56e0630bd2b7aa898ad131ac',1,'XLang::BaseTypes::XLCoreNamespace']]],
+  ['askey_16',['AsKey',['../d8/d0e/class_x_lang_1_1_x_lang_settings.html#ae265eb0bcf04f1d678450e4686b866de',1,'XLang::XLangSettings']]],
+  ['axlangexpressionvaluecreator_17',['AXLangExpressionValueCreator',['../d0/dcb/class_x_lang_1_1_parser_1_1_expressions_1_1_a_x_lang_expression_value_creator.html',1,'XLang::Parser::Expressions']]],
+  ['axlangexpressionvaluecreator_2ecs_18',['AXLangExpressionValueCreator.cs',['../d9/dc0/_a_x_lang_expression_value_creator_8cs.html',1,'']]]
 ];

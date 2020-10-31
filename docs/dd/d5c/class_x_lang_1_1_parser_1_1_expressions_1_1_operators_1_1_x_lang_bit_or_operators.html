@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">XLang
-   &#160;<span id="projectnumber">0.1.0.1</span>
+   &#160;<span id="projectnumber">0.1.0.2</span>
    </div>
   </td>
  </tr>
@@ -179,8 +179,9 @@ Additional Inherited Members</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../d7/d4e/_x_lang_bit_or_operators_8cs_source.html#l00023">23</a> of file <a class="el" href="../../d7/d4e/_x_lang_bit_or_operators_8cs_source.html">XLangBitOrOperators.cs</a>.</p>
 <div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        {</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keywordflow">return</span> parser.CurrentToken.Type == <a class="code" href="../../da/d12/namespace_x_lang_1_1_core.html#ae84e1253359f4d31f3b8c985b3fb2728">XLangTokenType</a>.OpPipe &amp;&amp;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                   parser.Reader.PeekNext().Type != <a class="code" href="../../da/d12/namespace_x_lang_1_1_core.html#ae84e1253359f4d31f3b8c985b3fb2728">XLangTokenType</a>.OpPipe;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                   parser.Reader.PeekNext().Type != <a class="code" href="../../da/d12/namespace_x_lang_1_1_core.html#ae84e1253359f4d31f3b8c985b3fb2728">XLangTokenType</a>.OpPipe &amp;&amp;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                   parser.Reader.PeekNext().Type != <a class="code" href="../../da/d12/namespace_x_lang_1_1_core.html#ae84e1253359f4d31f3b8c985b3fb2728">XLangTokenType</a>.OpEquality;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -230,12 +231,12 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="../../d8/d56/class_x_lang_1_1_parser_1_1_expressions_1_1_x_lang_expression_operator.html#a1760e9f5b6b6ba669a8e39115f3145c2">XLang.Parser.Expressions.XLangExpressionOperator</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d4e/_x_lang_bit_or_operators_8cs_source.html#l00035">35</a> of file <a class="el" href="../../d7/d4e/_x_lang_bit_or_operators_8cs_source.html">XLangBitOrOperators.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            parser.Eat(<a class="code" href="../../da/d12/namespace_x_lang_1_1_core.html#ae84e1253359f4d31f3b8c985b3fb2728">XLangTokenType</a>.OpPipe);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="../../d2/dae/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_x_lang_binary_op.html">XLangBinaryOp</a>(parser.Context, currentNode, <a class="code" href="../../da/d12/namespace_x_lang_1_1_core.html#ae84e1253359f4d31f3b8c985b3fb2728">XLangTokenType</a>.OpPipe,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                parser.ParseExpr(<a class="code" href="../../dd/d5c/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_or_operators.html#ae2e99953044f04b957594b8aac15c09d">PrecedenceLevel</a>));</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
+<p class="definition">Definition at line <a class="el" href="../../d7/d4e/_x_lang_bit_or_operators_8cs_source.html#l00036">36</a> of file <a class="el" href="../../d7/d4e/_x_lang_bit_or_operators_8cs_source.html">XLangBitOrOperators.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            parser.Eat(<a class="code" href="../../da/d12/namespace_x_lang_1_1_core.html#ae84e1253359f4d31f3b8c985b3fb2728">XLangTokenType</a>.OpPipe);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="../../d2/dae/class_x_lang_1_1_parser_1_1_token_1_1_expressions_1_1_operators_1_1_x_lang_binary_op.html">XLangBinaryOp</a>(parser.Context, currentNode, <a class="code" href="../../da/d12/namespace_x_lang_1_1_core.html#ae84e1253359f4d31f3b8c985b3fb2728">XLangTokenType</a>.OpPipe,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                parser.ParseExpr(<a class="code" href="../../dd/d5c/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_or_operators.html#ae2e99953044f04b957594b8aac15c09d">PrecedenceLevel</a>));</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        }</div>
 </div><!-- fragment -->
 </div>
 </div>

@@ -1,7 +1,9 @@
 var namespace_x_lang_1_1_parser_1_1_expressions_1_1_operators =
 [
     [ "XLangArraySubscriptOperator", "de/d42/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_array_subscript_operator.html", "de/d42/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_array_subscript_operator" ],
+    [ "XLangAssignmentByOperators", "de/dd6/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_by_operators.html", "de/dd6/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_by_operators" ],
     [ "XLangAssignmentOperators", "d6/d61/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_operators.html", "d6/d61/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_operators" ],
+    [ "XLangAssignmentPlusMinusOperators", "dd/da7/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_plus_minus_operators.html", "dd/da7/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_plus_minus_operators" ],
     [ "XLangBitAndOperators", "da/dc3/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_and_operators.html", "da/dc3/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_and_operators" ],
     [ "XLangBitOrOperators", "dd/d5c/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_or_operators.html", "dd/d5c/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_or_operators" ],
     [ "XLangBitXOrOperators", "dd/dbd/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_x_or_operators.html", "dd/dbd/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_x_or_operators" ],

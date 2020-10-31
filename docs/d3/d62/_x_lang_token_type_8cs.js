@@ -83,6 +83,16 @@ var _x_lang_token_type_8cs =
       [ "OpRuntimeNamespace", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728a18cdb894c3a33bdba91523ca5918f2da", null ],
       [ "OpOperatorImpl", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728a2532749169cd14e6cb833b6de731badc", null ],
       [ "OpRuntimeMember", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728abbbdf4c0ea8cb047fdb29c34553e3ce8", null ],
+      [ "OpUnaryIncrement", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728a7433b5207665d283b767fe735887d9b3", null ],
+      [ "OpUnaryDecrement", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728a9ce3580e97121a6e619f2c816800e5a4", null ],
+      [ "OpSumAssign", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728a6aca37a82d6eedac6cf9d1134cbec8d8", null ],
+      [ "OpDifAssign", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728af5169e789d5bc02ac51b8e1a49b24b2e", null ],
+      [ "OpProdAssign", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728ac51b9f650a93fb47472ec6d1b6cd261e", null ],
+      [ "OpQuotAssign", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728a1adfc1693be3c9326d35de0e4a0ef943", null ],
+      [ "OpRemAssign", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728a04ac16f32d3b3c65f890bb1ff07b2875", null ],
+      [ "OpOrAssign", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728a50a1332b3615ebdd3224fbdd4b559ee9", null ],
+      [ "OpXOrAssign", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728a4314feb10d7d8fc2f13551036f8cecb8", null ],
+      [ "OpAndAssign", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728a62fff16b867438a100a8312413815056", null ],
       [ "EOF", "d3/d62/_x_lang_token_type_8cs.html#ae84e1253359f4d31f3b8c985b3fb2728a4423718c61c4e8a4362d955bbc7b9711", null ]
     ] ]
 ];

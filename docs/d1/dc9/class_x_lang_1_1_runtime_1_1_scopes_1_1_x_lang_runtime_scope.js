@@ -7,8 +7,10 @@ var class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope =
       [ "Break", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a9e6d3057d4c49fe808156bec80701444ae4c38d6d45baf080943d323dd51a2ce8", null ]
     ] ],
     [ "XLangRuntimeScope", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a22d5b79a1fa579758320c397b3b5b5eb", null ],
+    [ "XLangRuntimeScope", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a999abe4f8b8f7ea2fd1d265f75b58865", null ],
     [ "Check", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a46d00a90b429658ecda554c86994449b", null ],
     [ "ClearFlag", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a43379471fb740e58b685faf71235e5c0", null ],
+    [ "Clone", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a93a4a15c02d58a9f80908256d3a1115e", null ],
     [ "Declare", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#aaf044280bc100bd402912dd508c47c80", null ],
     [ "Error", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a0aee52287b320b1acf364ae1fb26ae65", null ],
     [ "GetAllVisible", "d1/dc9/class_x_lang_1_1_runtime_1_1_scopes_1_1_x_lang_runtime_scope.html#a6d35924198f4658290f99e75477aa6d4", null ],

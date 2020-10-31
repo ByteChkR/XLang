@@ -81,7 +81,9 @@ var hierarchy =
     [ "XLang.XLangContext", "d9/d33/class_x_lang_1_1_x_lang_context.html", null ],
     [ "XLang.Parser.Expressions.XLangExpressionOperator", "d8/d56/class_x_lang_1_1_parser_1_1_expressions_1_1_x_lang_expression_operator.html", [
       [ "XLang.Parser.Expressions.Operators.XLangArraySubscriptOperator", "de/d42/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_array_subscript_operator.html", null ],
+      [ "XLang.Parser.Expressions.Operators.XLangAssignmentByOperators", "de/dd6/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_by_operators.html", null ],
       [ "XLang.Parser.Expressions.Operators.XLangAssignmentOperators", "d6/d61/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_operators.html", null ],
+      [ "XLang.Parser.Expressions.Operators.XLangAssignmentPlusMinusOperators", "dd/da7/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_plus_minus_operators.html", null ],
       [ "XLang.Parser.Expressions.Operators.XLangBitAndOperators", "da/dc3/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_and_operators.html", null ],
       [ "XLang.Parser.Expressions.Operators.XLangBitOrOperators", "dd/d5c/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_or_operators.html", null ],
       [ "XLang.Parser.Expressions.Operators.XLangBitXOrOperators", "dd/dbd/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_x_or_operators.html", null ],

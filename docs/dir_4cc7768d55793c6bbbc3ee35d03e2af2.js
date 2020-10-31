@@ -3,8 +3,14 @@ var dir_4cc7768d55793c6bbbc3ee35d03e2af2 =
     [ "XLangArraySubscriptOperator.cs", "df/d50/_x_lang_array_subscript_operator_8cs.html", [
       [ "XLangArraySubscriptOperator", "de/d42/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_array_subscript_operator.html", "de/d42/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_array_subscript_operator" ]
     ] ],
+    [ "XLangAssignmentByOperators.cs", "d1/d15/_x_lang_assignment_by_operators_8cs.html", [
+      [ "XLangAssignmentByOperators", "de/dd6/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_by_operators.html", "de/dd6/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_by_operators" ]
+    ] ],
     [ "XLangAssignmentOperators.cs", "d7/da0/_x_lang_assignment_operators_8cs.html", [
       [ "XLangAssignmentOperators", "d6/d61/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_operators.html", "d6/d61/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_operators" ]
+    ] ],
+    [ "XLangAssignmentPlusMinusOperators.cs", "d9/d90/_x_lang_assignment_plus_minus_operators_8cs.html", [
+      [ "XLangAssignmentPlusMinusOperators", "dd/da7/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_plus_minus_operators.html", "dd/da7/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_assignment_plus_minus_operators" ]
     ] ],
     [ "XLangBitAndOperators.cs", "d0/d2c/_x_lang_bit_and_operators_8cs.html", [
       [ "XLangBitAndOperators", "da/dc3/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_and_operators.html", "da/dc3/class_x_lang_1_1_parser_1_1_expressions_1_1_operators_1_1_x_lang_bit_and_operators" ]
