@@ -46,7 +46,7 @@ namespace XLang.Parser.Expressions.Operators
                 }
                 else
                 {
-                    parameterList.Add(parser.ParseExpr(PrecedenceLevel));
+                    parameterList.Add(parser.ParseExpr(0));
                     comma = true;
                 }
             }

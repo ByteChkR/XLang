@@ -1,4 +1,5 @@
-﻿using XLang.Runtime.Binding;
+﻿using XLang.Core;
+using XLang.Runtime.Binding;
 using XLang.Runtime.Implementations;
 using XLang.Runtime.Members;
 using XLang.Runtime.Types;
@@ -48,7 +49,7 @@ namespace XLang.BaseTypes
                 cmdType,
                 new XLangFunctionArgument("message", stringType));
 
-            cmdType.SetMembers(new[] {printLnFunc});
+            cmdType.SetMembers(new[] { printLnFunc });
             return cmdType;
         }
 
@@ -93,6 +94,17 @@ namespace XLang.BaseTypes
             );
         }
 
+        private IXLangRuntimeTypeInstance StringConcat(XLangRuntimeType rt, IXLangRuntimeTypeInstance[] args)
+        {
+            return new CSharpTypeInstance(rt, args[0].GetRaw().ToString() + args[1].GetRaw());
+        }
+
+        private IXLangRuntimeTypeInstance StringAssignConcat(IXLangRuntimeTypeInstance[] args)
+        {
+            args[0].SetRaw(args[0].Type, args[0].GetRaw().ToString() + args[1].GetRaw());
+            return args[0];
+        }
+
         /// <summary>
         ///     XL.string.Length Property
         /// </summary>
@@ -104,8 +116,68 @@ namespace XLang.BaseTypes
                 "number",
                 XLangBindingQuery.Public | XLangBindingQuery.Instance
             );
-            return new CSharpTypeInstance(type, instance.GetRaw().ToString().Length);
+            return new CSharpTypeInstance(type, (decimal)instance.GetRaw().ToString().Length);
         }
+
+        private IXLangRuntimeTypeInstance SubStrStartCount(XLangRuntimeType rt, IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            int start = (int)(decimal)args[0].GetRaw();
+            int count = (int)(decimal)args[1].GetRaw();
+            return new CSharpTypeInstance(rt, instance.GetRaw().ToString().Substring(start, count));
+        }
+
+        private IXLangRuntimeTypeInstance SubStrStart(XLangRuntimeType rt, IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            int start = (int)(decimal)args[0].GetRaw();
+            return new CSharpTypeInstance(rt, instance.GetRaw().ToString().Substring(start));
+        }
+
+        private IXLangRuntimeTypeInstance StrContains(IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            XLangRuntimeType type = containingNamespace.GetType(
+                                                                "number",
+                                                                XLangBindingQuery.Public | XLangBindingQuery.Instance
+                                                               );
+            bool contains = instance.GetRaw().ToString().Contains(args[0].GetRaw().ToString());
+            return new CSharpTypeInstance(type, (decimal)(contains ? 1 : 0));
+        }
+
+
+
+        private IXLangRuntimeTypeInstance StrRemoveStartCount(XLangRuntimeType rt, IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            int start = (int)(decimal)args[0].GetRaw();
+            int count = (int)(decimal)args[1].GetRaw();
+            return new CSharpTypeInstance(rt, instance.GetRaw().ToString().Remove(start, count));
+        }
+
+        private IXLangRuntimeTypeInstance StrRemoveStart(XLangRuntimeType rt, IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            int start = (int)(decimal)args[0].GetRaw();
+            return new CSharpTypeInstance(rt, instance.GetRaw().ToString().Remove(start));
+        }
+
+        private IXLangRuntimeTypeInstance StrTrim(XLangRuntimeType rt, IXLangRuntimeTypeInstance instance)
+        {
+            string contains = instance.GetRaw().ToString().Trim();
+            return new CSharpTypeInstance(rt, contains);
+        }
+        private IXLangRuntimeTypeInstance StrTrimStart(XLangRuntimeType rt, IXLangRuntimeTypeInstance instance)
+        {
+            string contains = instance.GetRaw().ToString().TrimStart();
+            return new CSharpTypeInstance(rt, contains);
+        }
+        private IXLangRuntimeTypeInstance StrTrimEnd(XLangRuntimeType rt, IXLangRuntimeTypeInstance instance)
+        {
+            string contains = instance.GetRaw().ToString().TrimEnd();
+            return new CSharpTypeInstance(rt, contains);
+        }
+        private IXLangRuntimeTypeInstance StrReplace(XLangRuntimeType rt, IXLangRuntimeTypeInstance instance, IXLangRuntimeTypeInstance[] args)
+        {
+            string contains = instance.GetRaw().ToString().Replace(args[0].GetRaw().ToString(), args[1].GetRaw().ToString());
+            return new CSharpTypeInstance(rt, contains);
+        }
+
 
         /// <summary>
         ///     XL.string.GetLength()
@@ -120,7 +192,7 @@ namespace XLang.BaseTypes
                 "number",
                 XLangBindingQuery.Public | XLangBindingQuery.Instance
             );
-            return new CSharpTypeInstance(type, instance.GetRaw().ToString().Length);
+            return new CSharpTypeInstance(type, (decimal)instance.GetRaw().ToString().Length);
         }
 
         /// <summary>
@@ -157,14 +229,139 @@ namespace XLang.BaseTypes
                     stringType
                 );
             DelegateXLFunction toString = new DelegateXLFunction(
-                "ToString",
-                (instance, args) => ObjectToString(instance),
-                stringType,
-                XLangMemberFlags.Public | XLangMemberFlags.Instance,
-                objectType
-            );
+                                                                 "ToString",
+                                                                 (instance, args) => ObjectToString(instance),
+                                                                 stringType,
+                                                                 XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                                                                 objectType
+                                                                );
 
-            stringType.SetMembers(new IXLangRuntimeMember[] {stringLengthFunction, stringLengthProperty});
+            DelegateXLFunction subStr = new DelegateXLFunction(
+                                                               "Substring",
+                                                               (instance, args) => SubStrStartCount(stringType, instance, args),
+                                                               stringType,
+                                                               XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                                                               stringType,
+                                                               new XLangFunctionArgument("start", numberType),
+                                                               new XLangFunctionArgument("count", numberType)
+                                                              );
+            DelegateXLFunction subStrS = new DelegateXLFunction(
+                                                                "Substring",
+                                                                (instance, args) => SubStrStart(stringType, instance, args),
+                                                                stringType,
+                                                                XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                                                                stringType,
+                                                                new XLangFunctionArgument("start", numberType)
+                                                               );
+            DelegateXLFunction remStr = new DelegateXLFunction(
+                                                               "Remove",
+                                                               (instance, args) => StrRemoveStartCount(stringType, instance, args),
+                                                               stringType,
+                                                               XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                                                               stringType,
+                                                               new XLangFunctionArgument("start", numberType),
+                                                               new XLangFunctionArgument("count", numberType)
+                                                              );
+            DelegateXLFunction remStrS = new DelegateXLFunction(
+                                                                "Remove",
+                                                                (instance, args) => StrRemoveStart(stringType, instance, args),
+                                                                stringType,
+                                                                XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                                                                stringType,
+                                                                new XLangFunctionArgument("start", numberType)
+                                                               );
+
+            DelegateXLFunction containsStr = new DelegateXLFunction(
+                                                                "Contains",
+                                                                StrContains,
+                                                                numberType,
+                                                                XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                                                                stringType,
+                                                                new XLangFunctionArgument("str", stringType)
+                                                               );
+
+            DelegateXLFunction replaceStr = new DelegateXLFunction(
+                                                                    "Replace",
+                                                                    (instance, args) => StrReplace(stringType, instance, args),
+                                                                    stringType,
+                                                                    XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                                                                    stringType,
+                                                                    new XLangFunctionArgument("old", stringType),
+                                                                    new XLangFunctionArgument("newStr", stringType)
+                                                                   );
+
+            DelegateXLFunction trimStr = new DelegateXLFunction(
+                                                                "Trim",
+                                                                (instance, args) => StrTrim(stringType, instance),
+                                                                stringType,
+                                                                XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                                                                stringType
+                                                               );
+
+            DelegateXLFunction trimStrS = new DelegateXLFunction(
+                                                                "TrimStart",
+                                                                (instance, args) => StrTrimStart(stringType, instance),
+                                                                stringType,
+                                                                XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                                                                stringType
+                                                               );
+            DelegateXLFunction trimStrE = new DelegateXLFunction(
+                                                                "TrimEnd",
+                                                                (instance, args) => StrTrimEnd(stringType, instance),
+                                                                stringType,
+                                                                XLangMemberFlags.Public | XLangMemberFlags.Instance,
+                                                                stringType
+                                                               );
+
+            DelegateXLFunction strConcat = new DelegateXLFunction(
+                                                                  "Concat",
+                                                                  (instance, args) => StringConcat(stringType, args),
+                                                                  stringType, XLangMemberFlags.Public | XLangMemberFlags.Static,
+                                                                  stringType,
+                                                                  new XLangFunctionArgument("a", stringType),
+                                                                  new XLangFunctionArgument("b", stringType));
+
+            DelegateXLFunction strOpConcat = new DelegateXLFunction(
+                                                                  XLangTokenType.OpPlus.ToString(),
+                                                                  (instance, args) => StringConcat(stringType, args),
+                                                                  stringType,
+                                                                  XLangMemberFlags.Static |
+                                                                  XLangMemberFlags.Private |
+                                                                  XLangMemberFlags.Operator |
+                                                                  XLangMemberFlags.Override,
+                                                                  stringType,
+                                                                  new XLangFunctionArgument("a", stringType),
+                                                                  new XLangFunctionArgument("b", stringType));
+            DelegateXLFunction sumAssignFunc =
+                new DelegateXLFunction(
+                                       XLangTokenType.OpSumAssign.ToString(), (instance, args) => StringAssignConcat(args),
+                                       stringType,
+                                       XLangMemberFlags.Static |
+                                       XLangMemberFlags.Private |
+                                       XLangMemberFlags.Operator |
+                                       XLangMemberFlags.Override,
+                                       stringType,
+                                       new XLangFunctionArgument("a", stringType),
+                                       new XLangFunctionArgument("b", stringType)
+                                      );
+
+            stringType.SetMembers(new IXLangRuntimeMember[]
+                                  {
+                                      stringLengthFunction,
+                                      stringLengthProperty,
+                                      strConcat,
+                                      strOpConcat,
+                                      sumAssignFunc,
+                                      subStr,
+                                      subStrS,
+                                      remStr,
+                                      remStrS,
+                                      containsStr,
+                                      replaceStr,
+                                      trimStr,
+                                      trimStrE,
+                                      trimStrS
+                                  });
             objectType.InjectMember(toString);
             return stringType;
         }

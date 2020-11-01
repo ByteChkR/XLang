@@ -39,7 +39,7 @@ namespace XLang.Parser.Expressions.Operators
             XLangTokenType type = parser.CurrentToken.Type;
             parser.Eat(parser.CurrentToken.Type);
             XLangExpression token =
-                new XLangBinaryOp(parser.Context, currentNode, type, parser.ParseExpr(PrecedenceLevel));
+                new XLangBinaryOp(parser.Context, currentNode, type, parser.ParseExpr(0));
             return token;
         }
     }

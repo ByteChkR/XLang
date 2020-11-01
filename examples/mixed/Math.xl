@@ -25,7 +25,8 @@ public class Program
 		Console.WriteLine(IsPrime(7).ToString());
 		Console.WriteLine(IsPrime(20).ToString());
 		Console.WriteLine(IsPrime(2).ToString());
-		Console.WriteLine(IsPrime(15632887).ToString());
+		Console.WriteLine(IsPrime(97).ToString());
+		//Console.WriteLine(IsPrime(15632887).ToString());
 
 	}
 
