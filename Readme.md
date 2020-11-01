@@ -1,4 +1,4 @@
-# Cross Language 0.1.0.2 (XLang)
+# Cross Language 0.1.0.4 (XLang)
 
 ## Status
 [![Build Status](https://travis-ci.com/ByteChkR/XLang.svg?branch=main)](https://travis-ci.com/ByteChkR/XLang)
@@ -13,7 +13,7 @@ Console Interpreter which allows for execution of XL Scripts.
 
 ### Arguments
 ```
-XLang Parser Console(xlc) Version: 0.1.0.2
+XLang Parser Console(xlc) Version: 0.1.0.4
 
 Commandline Argument Help:
 Syntax
