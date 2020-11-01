@@ -1,0 +1,9 @@
+public static class Program
+{
+	public static void Main()
+	{
+		string a = "This string + string overload ";
+		number x = 123;
+		Console.WriteLine(a + "Exists and even numbers like" + x.ToString() + " just work");
+	}
+}

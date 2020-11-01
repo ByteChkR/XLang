@@ -1,0 +1,11 @@
+public static class Program
+{
+	public static void Main()
+	{
+		string a = "[SUCCESS] String Content";
+		string b = a.Substring(1, 7);
+		Console.WriteLine(b);
+		string c = a.Substring(10, a.GetLength() - 10);
+		Console.WriteLine(c);
+	}
+}

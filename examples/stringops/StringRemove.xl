@@ -1,0 +1,8 @@
+public static class Program
+{
+	public static void Main()
+	{
+		string a = "[ERROR] String Content".Remove(0, 7);
+		Console.WriteLine(a);
+	}
+}

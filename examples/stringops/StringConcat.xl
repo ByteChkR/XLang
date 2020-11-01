@@ -1,0 +1,8 @@
+public static class Program
+{
+	public static void Main()
+	{
+		string a = "This string.Concat ";
+		Console.WriteLine(string.Concat(a, "Exists"));
+	}
+}

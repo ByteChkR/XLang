@@ -1,0 +1,8 @@
+public static class Program
+{
+	public static void Main()
+	{
+		string a = "This string + string overload ";
+		Console.WriteLine(a + "Exists" + " and" + string.Concat(" Its Even", " possible to") + " have multiple + and string.Concat");
+	}
+}

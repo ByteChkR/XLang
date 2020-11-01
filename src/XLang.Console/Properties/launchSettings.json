@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "XLang.Console": {
+      "commandName": "Project"
+    }
+  }
+}
