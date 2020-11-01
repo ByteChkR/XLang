@@ -63,6 +63,8 @@ namespace XLang.Parser.Tests
             XLangParser parser = new XLangParser(c);
             parser.Parse(File.ReadAllText(file));
 
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(Path.GetFullPath(file)));
+
             IXLangRuntimeFunction entry = c.GetType("DEFAULT.Program")?.GetMember("Main") as IXLangRuntimeFunction;
 
             Assert.True(entry != null);

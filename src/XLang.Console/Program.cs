@@ -122,6 +122,8 @@ namespace XLang.Console
 
                 string src = File.ReadAllText(InputFile);
 
+                Directory.SetCurrentDirectory(Path.GetDirectoryName(Path.GetFullPath(InputFile)));
+
                 CSharpClassTunnel.LoadTunnel(xlC);
 
                 xlP.Parse(src);
