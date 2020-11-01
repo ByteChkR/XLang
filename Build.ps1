@@ -20,7 +20,7 @@ if ($deploy) {
     #Upload to SRV
     if($username)
     {
-        scp -P 22  .\XLang-${platform}-bin.zip ${username}@${server}:/var/www/html/XLang-Install/XLang-${platform}-bin.zip
+        scp -P 22 .\XLang-${platform}-bin.zip ${username}@${server}:/var/www/html/XLang-Install/XLang-${platform}-bin.zip
 
     } else {
         echo "No Value Specified for parameter: -username"
